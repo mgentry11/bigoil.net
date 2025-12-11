@@ -16,11 +16,136 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             color: #fff;
+        }
+
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            color: #00d4ff;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background: #7c3aed;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .new-report-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .new-report-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .report-list {
+            list-style: none;
+        }
+
+        .report-item {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .report-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(124, 58, 237, 0.5);
+        }
+
+        .report-item.active {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.2);
+        }
+
+        .report-item-name {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .report-item-meta {
+            font-size: 0.75rem;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .report-item-score {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .report-item-delete {
+            color: #ff6b6b;
+            opacity: 0;
+            transition: opacity 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .report-item:hover .report-item-delete {
+            opacity: 1;
+        }
+
+        .no-reports {
+            color: #666;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
             padding: 2rem;
+            overflow-y: auto;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -40,6 +165,33 @@
             margin-bottom: 2rem;
         }
 
+        /* Metadata inputs */
+        .meta-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .meta-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        .meta-input::placeholder {
+            color: #666;
+        }
+
         .input-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -47,8 +199,30 @@
             margin-bottom: 1.5rem;
         }
 
-        @media (max-width: 768px) {
-            .input-section {
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding: 1rem;
+                padding-top: 4rem;
+            }
+
+            .input-section, .meta-inputs {
                 grid-template-columns: 1fr;
             }
         }
@@ -183,6 +357,23 @@
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .report-title-section h2 {
+            margin-bottom: 0.25rem;
+        }
+
+        .report-meta {
+            color: #888;
+            font-size: 0.9rem;
         }
 
         .fit-score {
@@ -333,14 +524,41 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Interview Analyzer</h1>
-        <p class="subtitle">Upload a transcript and job description to generate a candidate fit report</p>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+    </button>
 
-        <div class="input-section">
-            <div class="input-box">
-                <h3>Interview Transcript</h3>
-                <textarea id="transcript" placeholder="Paste the interview transcript here...
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <h2>
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Past Reports
+            </h2>
+            <button class="new-report-btn" onclick="newReport()">+ New Analysis</button>
+            <ul class="report-list" id="report-list">
+                <li class="no-reports">Loading reports...</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="container">
+                <h1>Interview Analyzer</h1>
+                <p class="subtitle">Upload a transcript and job description to generate a candidate fit report</p>
+
+                <div id="input-form">
+                    <div class="meta-inputs">
+                        <input type="text" class="meta-input" id="candidate-name" placeholder="Candidate Name (optional)">
+                        <input type="text" class="meta-input" id="job-title" placeholder="Job Title (optional)">
+                    </div>
+
+                    <div class="input-section">
+                        <div class="input-box">
+                            <h3>Interview Transcript</h3>
+                            <textarea id="transcript" placeholder="Paste the interview transcript here...
 
 Example format:
 Interviewer: Tell me about yourself.
@@ -348,16 +566,16 @@ Candidate: I have 5 years of experience in...
 
 Interviewer: Why do you want this role?
 Candidate: I'm excited about..."></textarea>
-                <div class="file-upload">
-                    <input type="file" id="transcript-file" accept=".txt,.pdf,.docx">
-                    <label for="transcript-file">Or drop a file here (.txt, .pdf, .docx)</label>
-                    <div class="file-name" id="transcript-file-name"></div>
-                </div>
-            </div>
+                            <div class="file-upload">
+                                <input type="file" id="transcript-file" accept=".txt,.pdf,.docx">
+                                <label for="transcript-file">Or drop a file here (.txt, .pdf, .docx)</label>
+                                <div class="file-name" id="transcript-file-name"></div>
+                            </div>
+                        </div>
 
-            <div class="input-box">
-                <h3>Job Description</h3>
-                <textarea id="job-description" placeholder="Paste the job description here...
+                        <div class="input-box">
+                            <h3>Job Description</h3>
+                            <textarea id="job-description" placeholder="Paste the job description here...
 
 Include:
 - Role title
@@ -365,80 +583,200 @@ Include:
 - Responsibilities
 - Qualifications
 - Nice-to-haves"></textarea>
-                <div class="file-upload">
-                    <input type="file" id="jd-file" accept=".txt,.pdf,.docx">
-                    <label for="jd-file">Or drop a file here (.txt, .pdf, .docx)</label>
-                    <div class="file-name" id="jd-file-name"></div>
+                            <div class="file-upload">
+                                <input type="file" id="jd-file" accept=".txt,.pdf,.docx">
+                                <label for="jd-file">Or drop a file here (.txt, .pdf, .docx)</label>
+                                <div class="file-name" id="jd-file-name"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="analyze-btn" id="analyze-btn" onclick="analyzeInterview()">
+                        Analyze Interview
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing transcript and generating report...</p>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">This may take 15-30 seconds</p>
+                </div>
+
+                <div class="error" id="error"></div>
+
+                <div class="report" id="report">
+                    <div class="report-header">
+                        <div class="report-title-section">
+                            <h2>Candidate Fit Report</h2>
+                            <p class="report-meta" id="report-meta"></p>
+                        </div>
+                    </div>
+
+                    <div class="fit-score">
+                        <div class="score-circle" id="score-circle" style="--score: 0%">
+                            <span class="score-value" id="score-value">--</span>
+                        </div>
+                        <div class="score-label">Overall Fit Score</div>
+                    </div>
+
+                    <div class="section" id="strengths-section">
+                        <h3>Key Strengths</h3>
+                        <ul id="strengths-list"></ul>
+                    </div>
+
+                    <div class="section" id="skills-section">
+                        <h3>Matching Skills & Experience</h3>
+                        <ul id="skills-list"></ul>
+                    </div>
+
+                    <div class="section concerns" id="concerns-section">
+                        <h3>Areas to Explore Further</h3>
+                        <ul id="concerns-list"></ul>
+                    </div>
+
+                    <div class="section" id="quotes-section">
+                        <h3>Notable Candidate Responses</h3>
+                        <div class="candidate-quotes" id="quotes-container"></div>
+                    </div>
+
+                    <div class="section" id="summary-section">
+                        <h3>Summary</h3>
+                        <p id="summary-text" style="color: #ccc; line-height: 1.6;"></p>
+                    </div>
+
+                    <div class="download-buttons">
+                        <button class="download-btn" onclick="downloadPDF()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Download PDF
+                        </button>
+                        <button class="download-btn" onclick="downloadText()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Download Text
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <button class="analyze-btn" id="analyze-btn" onclick="analyzeInterview()">
-            Analyze Interview
-        </button>
-
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Analyzing transcript and generating report...</p>
-            <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">This may take 15-30 seconds</p>
-        </div>
-
-        <div class="error" id="error"></div>
-
-        <div class="report" id="report">
-            <h2>Candidate Fit Report</h2>
-
-            <div class="fit-score">
-                <div class="score-circle" id="score-circle" style="--score: 0%">
-                    <span class="score-value" id="score-value">--</span>
-                </div>
-                <div class="score-label">Overall Fit Score</div>
-            </div>
-
-            <div class="section" id="strengths-section">
-                <h3>Key Strengths</h3>
-                <ul id="strengths-list"></ul>
-            </div>
-
-            <div class="section" id="skills-section">
-                <h3>Matching Skills & Experience</h3>
-                <ul id="skills-list"></ul>
-            </div>
-
-            <div class="section concerns" id="concerns-section">
-                <h3>Areas to Explore Further</h3>
-                <ul id="concerns-list"></ul>
-            </div>
-
-            <div class="section" id="quotes-section">
-                <h3>Notable Candidate Responses</h3>
-                <div class="candidate-quotes" id="quotes-container"></div>
-            </div>
-
-            <div class="section" id="summary-section">
-                <h3>Summary</h3>
-                <p id="summary-text" style="color: #ccc; line-height: 1.6;"></p>
-            </div>
-
-            <div class="download-buttons">
-                <button class="download-btn" onclick="downloadPDF()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Download PDF
-                </button>
-                <button class="download-btn" onclick="downloadText()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Download Text
-                </button>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
-        const API_URL = 'https://metabomaxpro1.onrender.com/api/analyze-interview';
+        const API_BASE = 'https://metabomaxpro1.onrender.com/api';
+        let currentReportData = null;
+        let currentReportId = null;
+
+        // Load reports on page load
+        document.addEventListener('DOMContentLoaded', loadReports);
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        async function loadReports() {
+            try {
+                const response = await fetch(`${API_BASE}/interview-reports`);
+                const data = await response.json();
+
+                const list = document.getElementById('report-list');
+
+                if (data.reports && data.reports.length > 0) {
+                    list.innerHTML = data.reports.map(r => `
+                        <li class="report-item" data-id="${r.id}" onclick="loadReport('${r.id}')">
+                            <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
+                            <div class="report-item-meta">
+                                <span>${r.job_title || 'Unknown Position'}</span>
+                                <span class="report-item-score">${r.fit_score}%</span>
+                            </div>
+                            <div class="report-item-meta">
+                                <span>${new Date(r.created_at).toLocaleDateString()}</span>
+                                <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
+                            </div>
+                        </li>
+                    `).join('');
+                } else {
+                    list.innerHTML = '<li class="no-reports">No reports yet. Create your first analysis!</li>';
+                }
+            } catch (err) {
+                console.error('Failed to load reports:', err);
+                document.getElementById('report-list').innerHTML = '<li class="no-reports">Failed to load reports</li>';
+            }
+        }
+
+        async function loadReport(reportId) {
+            try {
+                // Update sidebar selection
+                document.querySelectorAll('.report-item').forEach(el => el.classList.remove('active'));
+                document.querySelector(`[data-id="${reportId}"]`)?.classList.add('active');
+
+                const response = await fetch(`${API_BASE}/interview-reports/${reportId}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    return;
+                }
+
+                currentReportId = reportId;
+                currentReportData = {
+                    fit_score: data.fit_score,
+                    strengths: data.strengths || [],
+                    matching_skills: data.matching_skills || [],
+                    concerns: data.concerns || [],
+                    notable_quotes: data.notable_quotes || [],
+                    summary: data.summary,
+                    candidate_name: data.candidate_name,
+                    job_title: data.job_title,
+                    created_at: data.created_at
+                };
+
+                displayReport(currentReportData);
+
+                // Hide input form, show report
+                document.getElementById('input-form').style.display = 'none';
+                document.getElementById('report').classList.add('active');
+
+                // Close sidebar on mobile
+                document.getElementById('sidebar').classList.remove('open');
+
+            } catch (err) {
+                showError('Failed to load report');
+            }
+        }
+
+        async function deleteReport(reportId) {
+            if (!confirm('Are you sure you want to delete this report?')) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/interview-reports/${reportId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    loadReports();
+                    if (currentReportId === reportId) {
+                        newReport();
+                    }
+                }
+            } catch (err) {
+                alert('Failed to delete report');
+            }
+        }
+
+        function newReport() {
+            currentReportId = null;
+            currentReportData = null;
+            document.getElementById('input-form').style.display = 'block';
+            document.getElementById('report').classList.remove('active');
+            document.getElementById('candidate-name').value = '';
+            document.getElementById('job-title').value = '';
+            document.getElementById('transcript').value = '';
+            document.getElementById('job-description').value = '';
+            document.querySelectorAll('.report-item').forEach(el => el.classList.remove('active'));
+            document.getElementById('sidebar').classList.remove('open');
+        }
 
         // File upload handling
         document.getElementById('transcript-file').addEventListener('change', function(e) {
@@ -459,7 +797,6 @@ Include:
                 const text = await file.text();
                 document.getElementById(textareaId).value = text;
             } else {
-                // For PDF/DOCX, we'll send to server for processing
                 document.getElementById(fileNameId).textContent = file.name + ' (will be processed on server)';
             }
         }
@@ -467,6 +804,8 @@ Include:
         async function analyzeInterview() {
             const transcript = document.getElementById('transcript').value.trim();
             const jobDescription = document.getElementById('job-description').value.trim();
+            const candidateName = document.getElementById('candidate-name').value.trim();
+            const jobTitle = document.getElementById('job-title').value.trim();
 
             if (!transcript || !jobDescription) {
                 showError('Please provide both a transcript and job description.');
@@ -480,14 +819,16 @@ Include:
             document.getElementById('analyze-btn').disabled = true;
 
             try {
-                const response = await fetch(API_URL, {
+                const response = await fetch(`${API_BASE}/analyze-interview`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
                         transcript: transcript,
-                        job_description: jobDescription
+                        job_description: jobDescription,
+                        candidate_name: candidateName,
+                        job_title: jobTitle
                     })
                 });
 
@@ -496,7 +837,18 @@ Include:
                 }
 
                 const data = await response.json();
-                displayReport(data);
+                currentReportData = data;
+                currentReportData.candidate_name = candidateName;
+                currentReportData.job_title = jobTitle;
+                currentReportId = data.report_id;
+
+                displayReport(currentReportData);
+
+                // Hide input form
+                document.getElementById('input-form').style.display = 'none';
+
+                // Reload sidebar
+                loadReports();
 
             } catch (err) {
                 showError(err.message || 'An error occurred. Please try again.');
@@ -507,6 +859,13 @@ Include:
         }
 
         function displayReport(data) {
+            // Meta info
+            const meta = [];
+            if (data.candidate_name) meta.push(data.candidate_name);
+            if (data.job_title) meta.push(data.job_title);
+            if (data.created_at) meta.push(new Date(data.created_at).toLocaleDateString());
+            document.getElementById('report-meta').textContent = meta.join(' | ');
+
             // Score
             const score = data.fit_score || 0;
             document.getElementById('score-value').textContent = score + '%';
@@ -562,23 +921,13 @@ Include:
             errorEl.classList.add('active');
         }
 
-        // Store report data globally for downloads
-        let currentReportData = null;
-
-        // Modified displayReport to store data
-        const originalDisplayReport = displayReport;
-        displayReport = function(data) {
-            currentReportData = data;
-            originalDisplayReport(data);
-        };
-
         function generateTextReport() {
             if (!currentReportData) return '';
             const d = currentReportData;
             const date = new Date().toLocaleDateString();
 
             let text = `CANDIDATE FIT REPORT
-Generated: ${date}
+${d.candidate_name ? 'Candidate: ' + d.candidate_name + '\n' : ''}${d.job_title ? 'Position: ' + d.job_title + '\n' : ''}Generated: ${date}
 ${'='.repeat(50)}
 
 OVERALL FIT SCORE: ${d.fit_score}%
@@ -625,7 +974,8 @@ Generated by Interview Analyzer - bigoil.net
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `candidate-fit-report-${new Date().toISOString().split('T')[0]}.txt`;
+            const name = currentReportData.candidate_name || 'candidate';
+            a.download = `${name.replace(/\s+/g, '-')}-fit-report-${new Date().toISOString().split('T')[0]}.txt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -641,18 +991,17 @@ Generated by Interview Analyzer - bigoil.net
             const d = currentReportData;
             const date = new Date().toLocaleDateString();
 
-            // Create printable HTML
             const printContent = `
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Candidate Fit Report</title>
+    <title>Candidate Fit Report${d.candidate_name ? ' - ' + d.candidate_name : ''}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; color: #333; line-height: 1.6; }
         h1 { color: #7c3aed; margin-bottom: 5px; font-size: 28px; }
-        .date { color: #666; margin-bottom: 30px; }
+        .meta { color: #666; margin-bottom: 30px; }
         .score-section { text-align: center; margin: 30px 0; padding: 20px; background: #f8f7ff; border-radius: 12px; }
         .score { font-size: 48px; font-weight: bold; color: #7c3aed; }
         .score-label { color: #666; }
@@ -670,7 +1019,7 @@ Generated by Interview Analyzer - bigoil.net
 </head>
 <body>
     <h1>Candidate Fit Report</h1>
-    <p class="date">Generated: ${date}</p>
+    <p class="meta">${[d.candidate_name, d.job_title, date].filter(Boolean).join(' | ')}</p>
 
     <div class="score-section">
         <div class="score">${d.fit_score}%</div>
@@ -707,7 +1056,6 @@ Generated by Interview Analyzer - bigoil.net
 </body>
 </html>`;
 
-            // Open print dialog
             const printWindow = window.open('', '_blank');
             printWindow.document.write(printContent);
             printWindow.document.close();
