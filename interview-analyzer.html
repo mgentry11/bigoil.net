@@ -5,557 +5,207 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interview Analyzer - Candidate Fit Report</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             color: #fff;
         }
-
-        .app-layout {
-            display: flex;
-            min-height: 100vh;
-        }
+        .app-layout { display: flex; min-height: 100vh; }
 
         /* Sidebar */
         .sidebar {
-            width: 280px;
+            width: 320px;
             background: rgba(0, 0, 0, 0.3);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
             flex-shrink: 0;
         }
-
         .sidebar h2 {
             color: #00d4ff;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 1000;
-            background: #7c3aed;
-            border: none;
-            border-radius: 8px;
-            padding: 0.5rem;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .new-report-btn {
-            width: 100%;
-            padding: 0.75rem;
-            background: linear-gradient(90deg, #7c3aed, #00d4ff);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            transition: transform 0.2s;
-        }
-
-        .new-report-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .report-list {
-            list-style: none;
-        }
-
-        .report-item {
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .report-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(124, 58, 237, 0.5);
-        }
-
-        .report-item.active {
-            border-color: #7c3aed;
-            background: rgba(124, 58, 237, 0.2);
-        }
-
-        .report-item-name {
-            font-weight: 600;
-            color: #fff;
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .report-item-meta {
-            font-size: 0.75rem;
-            color: #888;
+        .sidebar-section { margin-bottom: 1.5rem; }
+        .section-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
         }
-
-        .report-item-score {
-            color: #00d4ff;
-            font-weight: 600;
+        .section-header h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
         }
-
-        .report-item-draft {
-            color: #fbbf24;
-            font-weight: 600;
+        .add-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #888;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
             font-size: 0.7rem;
+            cursor: pointer;
         }
+        .add-btn:hover { border-color: #7c3aed; color: #fff; }
 
-        .report-item.draft {
-            border-left: 3px solid #fbbf24;
+        /* Item lists */
+        .item-list { list-style: none; }
+        .item {
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 0.4rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
         }
-
-        .report-item-delete {
+        .item:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(124, 58, 237, 0.5); }
+        .item.selected { border-color: #7c3aed; background: rgba(124, 58, 237, 0.2); }
+        .item-checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: #7c3aed;
+        }
+        .item-name { flex: 1; color: #fff; }
+        .item-meta { font-size: 0.7rem; color: #888; }
+        .item-score { color: #00d4ff; font-weight: 600; font-size: 0.75rem; }
+        .item-draft { color: #fbbf24; font-size: 0.65rem; font-weight: 600; }
+        .item-delete {
             color: #ff6b6b;
-            opacity: 0;
-            transition: opacity 0.2s;
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.25rem;
+            opacity: 0;
+            font-size: 0.7rem;
+            padding: 0.2rem;
         }
+        .item:hover .item-delete { opacity: 1; }
 
-        .report-item:hover .report-item-delete {
-            opacity: 1;
+        /* Job items */
+        .job-item { border-left: 3px solid #10b981; }
+        .job-item.selected { border-left-color: #00d4ff; }
+
+        /* Draft items */
+        .draft-item { border-left: 3px solid #fbbf24; }
+
+        /* Completed items */
+        .completed-item { border-left: 3px solid #7c3aed; }
+
+        /* Action bar */
+        .action-bar {
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            bottom: 0;
         }
-
-        .no-reports {
-            color: #666;
-            text-align: center;
-            padding: 2rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        .bulk-upload-btn {
+        .action-bar select {
             width: 100%;
             padding: 0.5rem;
-            background: rgba(251, 191, 36, 0.2);
-            border: 1px solid #fbbf24;
-            border-radius: 8px;
-            color: #fbbf24;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .action-bar select option { background: #1a1a2e; }
+        .analyze-selected-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-
-        .bulk-upload-btn:hover {
-            background: rgba(251, 191, 36, 0.3);
-        }
-
-        .section-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: #666;
-            margin: 1rem 0 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Draft analysis panel */
-        .draft-panel {
-            display: none;
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .draft-panel.active {
-            display: block;
-        }
-
-        .draft-panel h3 {
-            color: #fbbf24;
-            margin-bottom: 1rem;
-        }
-
-        .draft-info {
-            color: #888;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
         }
+        .analyze-selected-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .selection-count { font-size: 0.75rem; color: #888; margin-bottom: 0.5rem; text-align: center; }
 
         /* Main content */
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+        .container { max-width: 900px; margin: 0 auto; }
         h1 {
             text-align: center;
             margin-bottom: 0.5rem;
-            font-size: 2.5rem;
+            font-size: 2rem;
             background: linear-gradient(90deg, #00d4ff, #7c3aed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
+        .subtitle { text-align: center; color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
 
-        .subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 2rem;
-        }
-
-        /* Metadata inputs */
-        .meta-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .meta-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.95rem;
-        }
-
-        .meta-input:focus {
-            outline: none;
-            border-color: #7c3aed;
-        }
-
-        .meta-input::placeholder {
-            color: #666;
-        }
-
-        .input-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 900px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                height: 100vh;
-                z-index: 999;
-                transition: left 0.3s;
-            }
-
-            .sidebar.open {
-                left: 0;
-            }
-
-            .sidebar-toggle {
-                display: block;
-            }
-
-            .main-content {
-                padding: 1rem;
-                padding-top: 4rem;
-            }
-
-            .input-section, .meta-inputs {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .input-box {
+        /* Panels */
+        .panel {
+            display: none;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .panel.active { display: block; }
+        .panel h2 { color: #00d4ff; margin-bottom: 1rem; font-size: 1.2rem; }
 
-        .input-box h3 {
-            margin-bottom: 1rem;
-            color: #00d4ff;
-            font-size: 1.1rem;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 1rem;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.9rem;
-            resize: vertical;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #7c3aed;
-        }
-
-        textarea::placeholder {
-            color: #666;
-        }
-
-        .file-upload {
-            margin-top: 1rem;
-            padding: 1rem;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-upload:hover {
-            border-color: #7c3aed;
-            background: rgba(124, 58, 237, 0.1);
-        }
-
-        .file-upload input {
-            display: none;
-        }
-
-        .file-upload label {
-            cursor: pointer;
-            color: #888;
-        }
-
-        .file-upload .file-name {
-            color: #00d4ff;
-            margin-top: 0.5rem;
-        }
-
-        .analyze-btn {
-            width: 100%;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            background: linear-gradient(90deg, #7c3aed, #00d4ff);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .analyze-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
-
-        .analyze-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .loading.active {
-            display: block;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #7c3aed;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .report {
-            display: none;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .report.active {
-            display: block;
-        }
-
-        .report h2 {
-            color: #00d4ff;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .report-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .report-title-section h2 {
-            margin-bottom: 0.25rem;
-        }
-
-        .report-meta {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .report-meta-editable {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .report-meta-editable .editable {
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .report-meta-editable .editable:hover {
-            background: rgba(124, 58, 237, 0.3);
-            color: #fff;
-        }
-
-        .report-meta-editable .editable::after {
-            content: ' ✎';
-            font-size: 0.7rem;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .report-meta-editable .editable:hover::after {
-            opacity: 1;
-        }
-
-        .meta-separator {
-            color: #555;
-        }
-
-        .edit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .edit-modal.active {
-            display: flex;
-        }
-
-        .edit-modal-content {
-            background: #1a1a2e;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .edit-modal h3 {
-            color: #00d4ff;
-            margin-bottom: 1rem;
-        }
-
-        .edit-modal input {
+        /* Form elements */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 0.75rem;
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             color: #fff;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            font-family: inherit;
+            font-size: 0.9rem;
         }
-
-        .edit-modal input:focus {
-            outline: none;
-            border-color: #7c3aed;
-        }
-
-        .edit-modal-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .edit-modal-buttons button {
-            flex: 1;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #7c3aed; }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: none;
+        }
+        .btn-primary { background: linear-gradient(90deg, #7c3aed, #00d4ff); color: #fff; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-row { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+        /* Upload area */
+        .upload-area {
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
             cursor: pointer;
             transition: all 0.2s;
         }
+        .upload-area:hover { border-color: #7c3aed; background: rgba(124,58,237,0.1); }
+        .upload-area input { display: none; }
 
-        .edit-modal-buttons .save-btn {
-            background: #7c3aed;
-            border: none;
-            color: #fff;
+        /* Report display */
+        .report-meta { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .report-meta .editable {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
-
-        .edit-modal-buttons .save-btn:hover {
-            background: #9333ea;
-        }
-
-        .edit-modal-buttons .cancel-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #888;
-        }
-
-        .edit-modal-buttons .cancel-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .fit-score {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
+        .report-meta .editable:hover { background: rgba(124,58,237,0.3); color: #fff; }
+        .fit-score { text-align: center; margin: 2rem 0; }
         .score-circle {
             width: 120px;
             height: 120px;
@@ -567,7 +217,6 @@
             margin: 0 auto 1rem;
             position: relative;
         }
-
         .score-circle::before {
             content: '';
             width: 90px;
@@ -576,919 +225,676 @@
             border-radius: 50%;
             position: absolute;
         }
-
-        .score-value {
-            position: relative;
-            z-index: 1;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .score-label {
-            color: #888;
-        }
-
-        .section {
-            margin-bottom: 1.5rem;
-        }
-
-        .section h3 {
-            color: #7c3aed;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
+        .score-value { position: relative; z-index: 1; font-size: 2rem; font-weight: bold; }
+        .score-label { color: #888; }
+        .section { margin-bottom: 1.5rem; }
+        .section h3 { color: #7c3aed; margin-bottom: 0.75rem; font-size: 1rem; }
+        .section ul { list-style: none; }
         .section li {
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
             color: #ccc;
+            font-size: 0.9rem;
         }
-
-        .section li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #00d4ff;
-        }
-
-        .section.concerns li::before {
-            content: '!';
-            color: #ff6b6b;
-        }
-
-        .candidate-quotes {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 0.5rem;
-        }
-
+        .section li::before { content: '✓'; position: absolute; left: 0; color: #00d4ff; }
+        .section.concerns li::before { content: '!'; color: #ff6b6b; }
         .quote {
             padding: 0.75rem;
             border-left: 3px solid #7c3aed;
             margin-bottom: 0.75rem;
             font-style: italic;
             color: #aaa;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0 8px 8px 0;
         }
-
-        .quote:last-child {
-            margin-bottom: 0;
-        }
-
-        .quote-context {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 0.25rem;
-            font-style: normal;
-        }
-
-        .error {
-            display: none;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid #ff6b6b;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            color: #ff6b6b;
-        }
-
-        .error.active {
-            display: block;
-        }
-
+        .quote-context { font-size: 0.75rem; color: #666; margin-top: 0.25rem; font-style: normal; }
         .download-buttons {
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
-
         .download-btn {
             flex: 1;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background: rgba(124, 58, 237, 0.3);
+            padding: 0.75rem;
+            background: rgba(124,58,237,0.3);
             border: 1px solid #7c3aed;
             border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .download-btn:hover { background: rgba(124,58,237,0.5); }
+
+        /* Loading */
+        .loading { display: none; text-align: center; padding: 3rem; }
+        .loading.active { display: block; }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #7c3aed;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #888; font-size: 0.9rem; }
+
+        /* Progress bar for batch */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            width: 0%;
+            transition: width 0.3s;
         }
 
-        .download-btn:hover {
-            background: rgba(124, 58, 237, 0.5);
-            transform: translateY(-1px);
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal h3 { color: #00d4ff; margin-bottom: 1rem; }
 
-        .download-btn svg {
-            width: 20px;
-            height: 20px;
+        /* Mobile */
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                left: -320px;
+                top: 0;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+            .sidebar.open { left: 0; }
+            .sidebar-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 1000;
+                background: #7c3aed;
+                border: none;
+                border-radius: 8px;
+                padding: 0.5rem;
+                color: #fff;
+                cursor: pointer;
+            }
+            .main-content { padding: 1rem; padding-top: 4rem; }
+        }
+        @media (min-width: 901px) {
+            .sidebar-toggle { display: none; }
         }
     </style>
 </head>
 <body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12h18M3 6h18M3 18h18"/>
-        </svg>
-    </button>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
     <div class="app-layout">
         <aside class="sidebar" id="sidebar">
-            <h2>
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                </svg>
-                Reports
-            </h2>
-            <button class="new-report-btn" onclick="newReport()">+ New Analysis</button>
-            <input type="file" id="bulk-upload-input" multiple accept=".txt" style="display:none" onchange="handleBulkUpload(event)">
-            <button class="bulk-upload-btn" onclick="document.getElementById('bulk-upload-input').click()">
-                Bulk Upload Transcripts
-            </button>
-            <ul class="report-list" id="report-list">
-                <li class="no-reports">Loading reports...</li>
-            </ul>
+            <!-- Jobs Section -->
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Job Descriptions</h3>
+                    <button class="add-btn" onclick="showAddJobModal()">+ Add</button>
+                </div>
+                <ul class="item-list" id="jobs-list"></ul>
+            </div>
+
+            <!-- Drafts Section -->
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Transcripts (Drafts)</h3>
+                    <button class="add-btn" onclick="document.getElementById('bulk-input').click()">+ Upload</button>
+                </div>
+                <input type="file" id="bulk-input" multiple accept=".txt" style="display:none" onchange="handleBulkUpload(event)">
+                <ul class="item-list" id="drafts-list"></ul>
+            </div>
+
+            <!-- Completed Section -->
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Completed Reports</h3>
+                </div>
+                <ul class="item-list" id="completed-list"></ul>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="selection-count" id="selection-count">Select drafts to analyze</div>
+                <select id="job-selector">
+                    <option value="">-- Select Job Description --</option>
+                </select>
+                <button class="analyze-selected-btn" id="analyze-btn" onclick="analyzeSelected()" disabled>
+                    Analyze Selected
+                </button>
+            </div>
         </aside>
 
         <main class="main-content">
             <div class="container">
                 <h1>Interview Analyzer</h1>
-                <p class="subtitle">Upload a transcript and job description to generate a candidate fit report</p>
+                <p class="subtitle">Upload transcripts, add job descriptions, then batch analyze candidates</p>
 
-                <div id="input-form">
-                    <div class="meta-inputs">
-                        <input type="text" class="meta-input" id="candidate-name" placeholder="Candidate Name (optional)">
-                        <input type="text" class="meta-input" id="job-title" placeholder="Job Title (optional)">
+                <!-- Welcome Panel -->
+                <div class="panel active" id="welcome-panel">
+                    <h2>Getting Started</h2>
+                    <p style="color:#888; margin-bottom:1rem;">1. Add job descriptions using the "+ Add" button</p>
+                    <p style="color:#888; margin-bottom:1rem;">2. Upload interview transcripts (.txt files)</p>
+                    <p style="color:#888; margin-bottom:1rem;">3. Select transcripts, choose a job, click "Analyze Selected"</p>
+                    <div class="upload-area" onclick="document.getElementById('bulk-input').click()">
+                        <p style="color:#888;">Click to upload transcript files</p>
+                        <p style="color:#666; font-size:0.8rem; margin-top:0.5rem;">Accepts multiple .txt files</p>
                     </div>
-
-                    <div class="input-section">
-                        <div class="input-box">
-                            <h3>Interview Transcript</h3>
-                            <textarea id="transcript" placeholder="Paste the interview transcript here...
-
-Example format:
-Interviewer: Tell me about yourself.
-Candidate: I have 5 years of experience in...
-
-Interviewer: Why do you want this role?
-Candidate: I'm excited about..."></textarea>
-                            <div class="file-upload">
-                                <input type="file" id="transcript-file" accept=".txt,.pdf,.docx">
-                                <label for="transcript-file">Or drop a file here (.txt, .pdf, .docx)</label>
-                                <div class="file-name" id="transcript-file-name"></div>
-                            </div>
-                        </div>
-
-                        <div class="input-box">
-                            <h3>Job Description</h3>
-                            <textarea id="job-description" placeholder="Paste the job description here...
-
-Include:
-- Role title
-- Required skills
-- Responsibilities
-- Qualifications
-- Nice-to-haves"></textarea>
-                            <div class="file-upload">
-                                <input type="file" id="jd-file" accept=".txt,.pdf,.docx">
-                                <label for="jd-file">Or drop a file here (.txt, .pdf, .docx)</label>
-                                <div class="file-name" id="jd-file-name"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="analyze-btn" id="analyze-btn" onclick="analyzeInterview()">
-                        Analyze Interview
-                    </button>
                 </div>
 
-                <div class="loading" id="loading">
+                <!-- Loading Panel -->
+                <div class="loading" id="loading-panel">
                     <div class="spinner"></div>
-                    <p>Analyzing transcript and generating report...</p>
-                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">This may take 15-30 seconds</p>
+                    <p class="loading-text" id="loading-text">Processing...</p>
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                    <p class="loading-text" id="progress-text"></p>
                 </div>
 
-                <div class="error" id="error"></div>
-
-                <!-- Draft Panel - shown when viewing a draft that needs job description -->
-                <div class="draft-panel" id="draft-panel">
-                    <h3>Draft: <span id="draft-candidate-name"></span></h3>
-                    <p class="draft-info">This transcript has been saved. Add a job description to run the analysis.</p>
-                    <div class="input-box" style="margin-bottom: 1rem;">
-                        <h3 style="color: #fbbf24;">Job Description</h3>
-                        <textarea id="draft-job-description" placeholder="Paste the job description here to analyze this candidate..."></textarea>
-                    </div>
-                    <input type="text" class="meta-input" id="draft-job-title" placeholder="Job Title" style="margin-bottom: 1rem;">
-                    <button class="analyze-btn" onclick="analyzeDraft()" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);">
-                        Run Analysis
-                    </button>
-                </div>
-
-                <div class="report" id="report">
-                    <div class="report-header">
-                        <div class="report-title-section">
-                            <h2>Candidate Fit Report</h2>
-                            <div class="report-meta-editable">
-                                <span id="report-meta-name" class="editable" onclick="editField('candidate_name')"></span>
-                                <span class="meta-separator"> | </span>
-                                <span id="report-meta-title" class="editable" onclick="editField('job_title')"></span>
-                                <span class="meta-separator"> | </span>
-                                <span id="report-meta-date"></span>
-                            </div>
-                        </div>
+                <!-- Report Panel -->
+                <div class="panel" id="report-panel">
+                    <h2>Candidate Fit Report</h2>
+                    <div class="report-meta">
+                        <span id="report-name" class="editable" onclick="editField('candidate_name')"></span> |
+                        <span id="report-job" class="editable" onclick="editField('job_title')"></span> |
+                        <span id="report-date"></span>
                     </div>
 
                     <div class="fit-score">
-                        <div class="score-circle" id="score-circle" style="--score: 0%">
+                        <div class="score-circle" id="score-circle" style="--score:0%">
                             <span class="score-value" id="score-value">--</span>
                         </div>
                         <div class="score-label">Overall Fit Score</div>
                     </div>
 
-                    <div class="section" id="strengths-section">
-                        <h3>Key Strengths</h3>
-                        <ul id="strengths-list"></ul>
-                    </div>
-
-                    <div class="section" id="skills-section">
-                        <h3>Matching Skills & Experience</h3>
-                        <ul id="skills-list"></ul>
-                    </div>
-
-                    <div class="section concerns" id="concerns-section">
-                        <h3>Areas to Explore Further</h3>
-                        <ul id="concerns-list"></ul>
-                    </div>
-
-                    <div class="section" id="quotes-section">
-                        <h3>Notable Candidate Responses</h3>
-                        <div class="candidate-quotes" id="quotes-container"></div>
-                    </div>
-
-                    <div class="section" id="summary-section">
-                        <h3>Summary</h3>
-                        <p id="summary-text" style="color: #ccc; line-height: 1.6;"></p>
-                    </div>
+                    <div class="section"><h3>Key Strengths</h3><ul id="strengths-list"></ul></div>
+                    <div class="section"><h3>Matching Skills</h3><ul id="skills-list"></ul></div>
+                    <div class="section concerns"><h3>Areas to Explore</h3><ul id="concerns-list"></ul></div>
+                    <div class="section"><h3>Notable Quotes</h3><div id="quotes-container"></div></div>
+                    <div class="section"><h3>Summary</h3><p id="summary-text" style="color:#ccc;line-height:1.6;"></p></div>
 
                     <div class="download-buttons">
-                        <button class="download-btn" onclick="downloadPDF()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            Download PDF
-                        </button>
-                        <button class="download-btn" onclick="downloadText()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            Download Text
-                        </button>
+                        <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+                        <button class="download-btn" onclick="downloadText()">Download Text</button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Add Job Modal -->
+    <div class="modal" id="add-job-modal" onclick="closeModal('add-job-modal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3>Add Job Description</h3>
+            <div class="form-group">
+                <label>Job Title *</label>
+                <input type="text" id="new-job-title" placeholder="e.g., Senior Software Engineer">
+            </div>
+            <div class="form-group">
+                <label>Company (optional)</label>
+                <input type="text" id="new-job-company" placeholder="e.g., Acme Corp">
+            </div>
+            <div class="form-group">
+                <label>Job Description *</label>
+                <textarea id="new-job-description" placeholder="Paste the full job description here..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" onclick="closeModal('add-job-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveJobDescription()">Save Job</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Edit Modal -->
-    <div class="edit-modal" id="edit-modal" onclick="closeEditModal(event)">
-        <div class="edit-modal-content" onclick="event.stopPropagation()">
+    <div class="modal" id="edit-modal" onclick="closeModal('edit-modal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
             <h3 id="edit-modal-title">Edit</h3>
-            <input type="text" id="edit-modal-input" placeholder="Enter value...">
-            <div class="edit-modal-buttons">
-                <button class="cancel-btn" onclick="closeEditModal()">Cancel</button>
-                <button class="save-btn" onclick="saveEdit()">Save</button>
+            <div class="form-group">
+                <input type="text" id="edit-modal-input">
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" onclick="closeModal('edit-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEdit()">Save</button>
             </div>
         </div>
     </div>
 
     <script>
-        const API_BASE = 'https://metabomaxpro1.onrender.com/api';
-        let currentReportData = null;
+        const API = 'https://metabomaxpro1.onrender.com/api';
+        let jobs = [];
+        let drafts = [];
+        let completed = [];
+        let selectedDrafts = new Set();
         let currentReportId = null;
+        let currentReportData = null;
+        let currentEditField = null;
 
-        // Load reports on page load
-        document.addEventListener('DOMContentLoaded', loadReports);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadJobs();
+            loadReports();
+        });
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
 
+        // Jobs
+        async function loadJobs() {
+            try {
+                const res = await fetch(`${API}/job-descriptions`);
+                const data = await res.json();
+                jobs = data.jobs || [];
+                renderJobs();
+                updateJobSelector();
+            } catch (e) {
+                console.error('Failed to load jobs:', e);
+            }
+        }
+
+        function renderJobs() {
+            const list = document.getElementById('jobs-list');
+            if (jobs.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No jobs yet. Click + Add</li>';
+                return;
+            }
+            list.innerHTML = jobs.map(j => `
+                <li class="item job-item" data-id="${j.id}">
+                    <span class="item-name">${j.title}</span>
+                    ${j.company ? `<span class="item-meta">${j.company}</span>` : ''}
+                    <button class="item-delete" onclick="event.stopPropagation();deleteJob('${j.id}')">×</button>
+                </li>
+            `).join('');
+        }
+
+        function updateJobSelector() {
+            const sel = document.getElementById('job-selector');
+            sel.innerHTML = '<option value="">-- Select Job Description --</option>' +
+                jobs.map(j => `<option value="${j.id}">${j.title}${j.company ? ' ('+j.company+')' : ''}</option>`).join('');
+        }
+
+        function showAddJobModal() {
+            document.getElementById('new-job-title').value = '';
+            document.getElementById('new-job-company').value = '';
+            document.getElementById('new-job-description').value = '';
+            document.getElementById('add-job-modal').classList.add('active');
+        }
+
+        async function saveJobDescription() {
+            const title = document.getElementById('new-job-title').value.trim();
+            const company = document.getElementById('new-job-company').value.trim();
+            const description = document.getElementById('new-job-description').value.trim();
+
+            if (!title || !description) {
+                alert('Title and description are required');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API}/job-descriptions`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ title, company, description })
+                });
+                if (res.ok) {
+                    closeModal('add-job-modal');
+                    loadJobs();
+                } else {
+                    alert('Failed to save job description');
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        async function deleteJob(id) {
+            if (!confirm('Delete this job description?')) return;
+            await fetch(`${API}/job-descriptions/${id}`, {method: 'DELETE'});
+            loadJobs();
+        }
+
+        // Reports
         async function loadReports() {
             try {
-                const response = await fetch(`${API_BASE}/interview-reports`);
-                const data = await response.json();
-
-                const list = document.getElementById('report-list');
-
-                if (data.reports && data.reports.length > 0) {
-                    // Separate drafts and completed reports
-                    const drafts = data.reports.filter(r => r.fit_score === null);
-                    const completed = data.reports.filter(r => r.fit_score !== null);
-
-                    let html = '';
-
-                    if (drafts.length > 0) {
-                        html += '<div class="section-label">Drafts (need job description)</div>';
-                        html += drafts.map(r => `
-                            <li class="report-item draft" data-id="${r.id}" onclick="loadReport('${r.id}')">
-                                <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
-                                <div class="report-item-meta">
-                                    <span class="report-item-draft">DRAFT</span>
-                                    <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
-                                </div>
-                            </li>
-                        `).join('');
-                    }
-
-                    if (completed.length > 0) {
-                        if (drafts.length > 0) {
-                            html += '<div class="section-label">Completed Reports</div>';
-                        }
-                        html += completed.map(r => `
-                            <li class="report-item" data-id="${r.id}" onclick="loadReport('${r.id}')">
-                                <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
-                                <div class="report-item-meta">
-                                    <span>${r.job_title || 'Unknown Position'}</span>
-                                    <span class="report-item-score">${r.fit_score}%</span>
-                                </div>
-                                <div class="report-item-meta">
-                                    <span>${new Date(r.created_at).toLocaleDateString()}</span>
-                                    <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
-                                </div>
-                            </li>
-                        `).join('');
-                    }
-
-                    list.innerHTML = html;
-                } else {
-                    list.innerHTML = '<li class="no-reports">No reports yet. Create your first analysis!</li>';
-                }
-            } catch (err) {
-                console.error('Failed to load reports:', err);
-                document.getElementById('report-list').innerHTML = '<li class="no-reports">Failed to load reports</li>';
+                const res = await fetch(`${API}/interview-reports`);
+                const data = await res.json();
+                const reports = data.reports || [];
+                drafts = reports.filter(r => r.fit_score === null);
+                completed = reports.filter(r => r.fit_score !== null);
+                renderDrafts();
+                renderCompleted();
+            } catch (e) {
+                console.error('Failed to load reports:', e);
             }
         }
 
-        async function loadReport(reportId) {
-            try {
-                // Update sidebar selection
-                document.querySelectorAll('.report-item').forEach(el => el.classList.remove('active'));
-                document.querySelector(`[data-id="${reportId}"]`)?.classList.add('active');
+        function renderDrafts() {
+            const list = document.getElementById('drafts-list');
+            if (drafts.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No drafts. Upload transcripts above.</li>';
+                return;
+            }
+            list.innerHTML = drafts.map(d => `
+                <li class="item draft-item ${selectedDrafts.has(d.id) ? 'selected' : ''}" data-id="${d.id}">
+                    <input type="checkbox" class="item-checkbox" ${selectedDrafts.has(d.id) ? 'checked' : ''}
+                           onchange="toggleDraftSelection('${d.id}', this.checked)" onclick="event.stopPropagation()">
+                    <span class="item-name">${d.candidate_name || 'Unknown'}</span>
+                    <span class="item-draft">DRAFT</span>
+                    <button class="item-delete" onclick="event.stopPropagation();deleteReport('${d.id}')">×</button>
+                </li>
+            `).join('');
+        }
 
-                const response = await fetch(`${API_BASE}/interview-reports/${reportId}`);
-                const data = await response.json();
+        function renderCompleted() {
+            const list = document.getElementById('completed-list');
+            if (completed.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No completed reports yet.</li>';
+                return;
+            }
+            list.innerHTML = completed.map(r => `
+                <li class="item completed-item" data-id="${r.id}" onclick="viewReport('${r.id}')">
+                    <span class="item-name">${r.candidate_name || 'Unknown'}</span>
+                    <span class="item-meta">${r.job_title || ''}</span>
+                    <span class="item-score">${r.fit_score}%</span>
+                    <button class="item-delete" onclick="event.stopPropagation();deleteReport('${r.id}')">×</button>
+                </li>
+            `).join('');
+        }
 
-                if (data.error) {
-                    showError(data.error);
-                    return;
-                }
+        function toggleDraftSelection(id, checked) {
+            if (checked) {
+                selectedDrafts.add(id);
+            } else {
+                selectedDrafts.delete(id);
+            }
+            updateSelectionUI();
+            renderDrafts();
+        }
 
-                currentReportId = reportId;
+        function updateSelectionUI() {
+            const count = selectedDrafts.size;
+            const jobId = document.getElementById('job-selector').value;
+            document.getElementById('selection-count').textContent =
+                count === 0 ? 'Select drafts to analyze' : `${count} draft(s) selected`;
+            document.getElementById('analyze-btn').disabled = count === 0 || !jobId;
+        }
 
-                // Check if this is a draft (no fit_score)
-                if (data.fit_score === null) {
-                    // Show draft panel
-                    document.getElementById('draft-candidate-name').textContent = data.candidate_name || 'Unknown';
-                    document.getElementById('draft-job-description').value = '';
-                    document.getElementById('draft-job-title').value = '';
-                    document.getElementById('input-form').style.display = 'none';
-                    document.getElementById('report').classList.remove('active');
-                    document.getElementById('draft-panel').classList.add('active');
-                } else {
-                    // Show completed report
-                    currentReportData = {
-                        fit_score: data.fit_score,
-                        strengths: data.strengths || [],
-                        matching_skills: data.matching_skills || [],
-                        concerns: data.concerns || [],
-                        notable_quotes: data.notable_quotes || [],
-                        summary: data.summary,
-                        candidate_name: data.candidate_name,
-                        job_title: data.job_title,
-                        created_at: data.created_at
-                    };
+        document.getElementById('job-selector').addEventListener('change', updateSelectionUI);
 
-                    displayReport(currentReportData);
-
-                    // Hide input form and draft panel, show report
-                    document.getElementById('input-form').style.display = 'none';
-                    document.getElementById('draft-panel').classList.remove('active');
-                    document.getElementById('report').classList.add('active');
-                }
-
-                // Close sidebar on mobile
-                document.getElementById('sidebar').classList.remove('open');
-
-            } catch (err) {
-                showError('Failed to load report');
+        async function deleteReport(id) {
+            if (!confirm('Delete this report?')) return;
+            await fetch(`${API}/interview-reports/${id}`, {method: 'DELETE'});
+            selectedDrafts.delete(id);
+            loadReports();
+            updateSelectionUI();
+            if (currentReportId === id) {
+                showPanel('welcome-panel');
             }
         }
 
-        async function deleteReport(reportId) {
-            if (!confirm('Are you sure you want to delete this report?')) return;
-
-            try {
-                const response = await fetch(`${API_BASE}/interview-reports/${reportId}`, {
-                    method: 'DELETE'
-                });
-
-                if (response.ok) {
-                    loadReports();
-                    if (currentReportId === reportId) {
-                        newReport();
-                    }
-                }
-            } catch (err) {
-                alert('Failed to delete report');
-            }
-        }
-
-        function newReport() {
-            currentReportId = null;
-            currentReportData = null;
-            document.getElementById('input-form').style.display = 'block';
-            document.getElementById('report').classList.remove('active');
-            document.getElementById('draft-panel').classList.remove('active');
-            document.getElementById('candidate-name').value = '';
-            document.getElementById('job-title').value = '';
-            document.getElementById('transcript').value = '';
-            document.getElementById('job-description').value = '';
-            document.querySelectorAll('.report-item').forEach(el => el.classList.remove('active'));
-            document.getElementById('sidebar').classList.remove('open');
-        }
-
-        // Bulk upload handling
+        // Bulk upload
         async function handleBulkUpload(event) {
             const files = event.target.files;
             if (!files.length) return;
 
-            const uploadResults = [];
+            showLoading('Uploading transcripts...');
+            let uploaded = 0;
 
             for (const file of files) {
                 try {
                     const text = await file.text();
-                    // Extract candidate name from filename (remove .txt extension)
-                    const candidateName = file.name.replace(/\.txt$/i, '').replace(/[_-]/g, ' ');
-
-                    const response = await fetch(`${API_BASE}/interview-drafts`, {
+                    const name = file.name.replace(/\.txt$/i, '').replace(/[_-]/g, ' ');
+                    await fetch(`${API}/interview-drafts`, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            transcript: text,
-                            candidate_name: candidateName
-                        })
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ transcript: text, candidate_name: name })
                     });
-
-                    if (response.ok) {
-                        uploadResults.push({ file: file.name, success: true });
-                    } else {
-                        uploadResults.push({ file: file.name, success: false });
-                    }
-                } catch (err) {
-                    uploadResults.push({ file: file.name, success: false, error: err.message });
+                    uploaded++;
+                    updateProgress(uploaded / files.length * 100, `Uploaded ${uploaded} of ${files.length}`);
+                } catch (e) {
+                    console.error('Upload failed:', e);
                 }
             }
 
-            // Reload the sidebar
-            loadReports();
-
-            // Show results
-            const successCount = uploadResults.filter(r => r.success).length;
-            const failCount = uploadResults.filter(r => !r.success).length;
-
-            if (failCount === 0) {
-                alert(`Successfully uploaded ${successCount} transcript(s) as drafts. Click on each draft to add a job description and run the analysis.`);
-            } else {
-                alert(`Uploaded ${successCount} transcript(s). ${failCount} failed.`);
-            }
-
-            // Clear the input
             event.target.value = '';
+            loadReports();
+            hideLoading();
+            alert(`Uploaded ${uploaded} transcript(s)`);
         }
 
-        // Analyze a draft
-        async function analyzeDraft() {
-            const jobDescription = document.getElementById('draft-job-description').value.trim();
-            const jobTitle = document.getElementById('draft-job-title').value.trim();
+        // Batch analyze
+        async function analyzeSelected() {
+            const jobId = document.getElementById('job-selector').value;
+            const draftIds = Array.from(selectedDrafts);
 
-            if (!jobDescription) {
-                alert('Please enter a job description to analyze the candidate.');
-                return;
-            }
+            if (!jobId || draftIds.length === 0) return;
 
-            if (!currentReportId) {
-                alert('No draft selected.');
-                return;
-            }
-
-            // Show loading
-            document.getElementById('loading').classList.add('active');
-            document.getElementById('draft-panel').classList.remove('active');
+            showLoading(`Analyzing ${draftIds.length} candidate(s)...`);
+            updateProgress(0, 'Starting analysis...');
 
             try {
-                const response = await fetch(`${API_BASE}/interview-reports/${currentReportId}/analyze`, {
+                const res = await fetch(`${API}/batch-analyze`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        job_description: jobDescription,
-                        job_title: jobTitle
-                    })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ job_id: jobId, draft_ids: draftIds })
                 });
 
-                if (!response.ok) {
-                    throw new Error('Analysis failed. Please try again.');
+                const data = await res.json();
+
+                if (data.results) {
+                    const success = data.results.filter(r => r.success).length;
+                    const failed = data.results.filter(r => !r.success).length;
+
+                    selectedDrafts.clear();
+                    loadReports();
+                    updateSelectionUI();
+                    hideLoading();
+
+                    if (failed === 0) {
+                        alert(`Successfully analyzed ${success} candidate(s)!`);
+                    } else {
+                        alert(`Analyzed ${success} candidate(s). ${failed} failed.`);
+                    }
                 }
-
-                const data = await response.json();
-                currentReportData = data;
-                currentReportData.job_title = jobTitle;
-
-                displayReport(currentReportData);
-
-                // Reload sidebar
-                loadReports();
-
-            } catch (err) {
-                showError(err.message || 'An error occurred. Please try again.');
-                document.getElementById('draft-panel').classList.add('active');
-            } finally {
-                document.getElementById('loading').classList.remove('active');
+            } catch (e) {
+                hideLoading();
+                alert('Analysis failed: ' + e.message);
             }
         }
 
-        // File upload handling
-        document.getElementById('transcript-file').addEventListener('change', function(e) {
-            handleFileUpload(e, 'transcript', 'transcript-file-name');
-        });
-
-        document.getElementById('jd-file').addEventListener('change', function(e) {
-            handleFileUpload(e, 'job-description', 'jd-file-name');
-        });
-
-        async function handleFileUpload(e, textareaId, fileNameId) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            document.getElementById(fileNameId).textContent = file.name;
-
-            if (file.type === 'text/plain') {
-                const text = await file.text();
-                document.getElementById(textareaId).value = text;
-            } else {
-                document.getElementById(fileNameId).textContent = file.name + ' (will be processed on server)';
-            }
-        }
-
-        async function analyzeInterview() {
-            const transcript = document.getElementById('transcript').value.trim();
-            const jobDescription = document.getElementById('job-description').value.trim();
-            const candidateName = document.getElementById('candidate-name').value.trim();
-            const jobTitle = document.getElementById('job-title').value.trim();
-
-            if (!transcript || !jobDescription) {
-                showError('Please provide both a transcript and job description.');
-                return;
-            }
-
-            // Show loading
-            document.getElementById('loading').classList.add('active');
-            document.getElementById('report').classList.remove('active');
-            document.getElementById('error').classList.remove('active');
-            document.getElementById('analyze-btn').disabled = true;
-
+        // View report
+        async function viewReport(id) {
             try {
-                const response = await fetch(`${API_BASE}/analyze-interview`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        transcript: transcript,
-                        job_description: jobDescription,
-                        candidate_name: candidateName,
-                        job_title: jobTitle
-                    })
-                });
+                const res = await fetch(`${API}/interview-reports/${id}`);
+                const data = await res.json();
 
-                if (!response.ok) {
-                    throw new Error('Analysis failed. Please try again.');
+                if (data.error) {
+                    alert(data.error);
+                    return;
                 }
 
-                const data = await response.json();
+                currentReportId = id;
                 currentReportData = data;
-                currentReportData.candidate_name = candidateName;
-                currentReportData.job_title = jobTitle;
-                currentReportId = data.report_id;
-
-                displayReport(currentReportData);
-
-                // Hide input form
-                document.getElementById('input-form').style.display = 'none';
-
-                // Reload sidebar
-                loadReports();
-
-            } catch (err) {
-                showError(err.message || 'An error occurred. Please try again.');
-            } finally {
-                document.getElementById('loading').classList.remove('active');
-                document.getElementById('analyze-btn').disabled = false;
+                displayReport(data);
+                showPanel('report-panel');
+                document.getElementById('sidebar').classList.remove('open');
+            } catch (e) {
+                alert('Failed to load report');
             }
         }
 
         function displayReport(data) {
-            // Meta info - editable fields
-            document.getElementById('report-meta-name').textContent = data.candidate_name || 'Unknown Candidate';
-            document.getElementById('report-meta-title').textContent = data.job_title || 'Unknown Position';
-            document.getElementById('report-meta-date').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : new Date().toLocaleDateString();
+            document.getElementById('report-name').textContent = data.candidate_name || 'Unknown';
+            document.getElementById('report-job').textContent = data.job_title || 'Unknown Position';
+            document.getElementById('report-date').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : '';
 
-            // Score
             const score = data.fit_score || 0;
             document.getElementById('score-value').textContent = score + '%';
             document.getElementById('score-circle').style.setProperty('--score', score + '%');
 
-            // Strengths
-            const strengthsList = document.getElementById('strengths-list');
-            strengthsList.innerHTML = '';
-            (data.strengths || []).forEach(s => {
-                const li = document.createElement('li');
-                li.textContent = s;
-                strengthsList.appendChild(li);
-            });
+            renderList('strengths-list', data.strengths || []);
+            renderList('skills-list', data.matching_skills || []);
+            renderList('concerns-list', data.concerns || []);
 
-            // Skills
-            const skillsList = document.getElementById('skills-list');
-            skillsList.innerHTML = '';
-            (data.matching_skills || []).forEach(s => {
-                const li = document.createElement('li');
-                li.textContent = s;
-                skillsList.appendChild(li);
-            });
+            const quotes = document.getElementById('quotes-container');
+            quotes.innerHTML = (data.notable_quotes || []).map(q => `
+                <div class="quote">"${q.quote}"<div class="quote-context">${q.context || ''}</div></div>
+            `).join('');
 
-            // Concerns
-            const concernsList = document.getElementById('concerns-list');
-            concernsList.innerHTML = '';
-            (data.concerns || []).forEach(c => {
-                const li = document.createElement('li');
-                li.textContent = c;
-                concernsList.appendChild(li);
-            });
-
-            // Quotes
-            const quotesContainer = document.getElementById('quotes-container');
-            quotesContainer.innerHTML = '';
-            (data.notable_quotes || []).forEach(q => {
-                const div = document.createElement('div');
-                div.className = 'quote';
-                div.innerHTML = `"${q.quote}"<div class="quote-context">${q.context || ''}</div>`;
-                quotesContainer.appendChild(div);
-            });
-
-            // Summary
             document.getElementById('summary-text').textContent = data.summary || '';
-
-            // Show report
-            document.getElementById('report').classList.add('active');
         }
 
-        function showError(message) {
-            const errorEl = document.getElementById('error');
-            errorEl.textContent = message;
-            errorEl.classList.add('active');
+        function renderList(id, items) {
+            document.getElementById(id).innerHTML = items.map(i => `<li>${i}</li>`).join('');
         }
 
-        function generateTextReport() {
-            if (!currentReportData) return '';
-            const d = currentReportData;
-            const date = new Date().toLocaleDateString();
-
-            let text = `CANDIDATE FIT REPORT
-${d.candidate_name ? 'Candidate: ' + d.candidate_name + '\n' : ''}${d.job_title ? 'Position: ' + d.job_title + '\n' : ''}Generated: ${date}
-${'='.repeat(50)}
-
-OVERALL FIT SCORE: ${d.fit_score}%
-
-${'='.repeat(50)}
-KEY STRENGTHS
-${'='.repeat(50)}
-${(d.strengths || []).map((s, i) => `${i + 1}. ${s}`).join('\n')}
-
-${'='.repeat(50)}
-MATCHING SKILLS & EXPERIENCE
-${'='.repeat(50)}
-${(d.matching_skills || []).map((s, i) => `${i + 1}. ${s}`).join('\n')}
-
-${'='.repeat(50)}
-AREAS TO EXPLORE FURTHER
-${'='.repeat(50)}
-${(d.concerns || []).map((c, i) => `${i + 1}. ${c}`).join('\n')}
-
-${'='.repeat(50)}
-NOTABLE CANDIDATE RESPONSES
-${'='.repeat(50)}
-${(d.notable_quotes || []).map((q, i) => `${i + 1}. "${q.quote}"\n   Context: ${q.context || 'N/A'}`).join('\n\n')}
-
-${'='.repeat(50)}
-SUMMARY
-${'='.repeat(50)}
-${d.summary || ''}
-
-${'='.repeat(50)}
-Generated by Interview Analyzer - bigoil.net
-`;
-            return text;
+        // UI helpers
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('loading-panel').classList.remove('active');
+            document.getElementById(panelId).classList.add('active');
         }
 
-        function downloadText() {
-            if (!currentReportData) {
-                alert('No report to download. Please analyze an interview first.');
-                return;
-            }
-
-            const text = generateTextReport();
-            const blob = new Blob([text], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            const name = currentReportData.candidate_name || 'candidate';
-            a.download = `${name.replace(/\s+/g, '-')}-fit-report-${new Date().toISOString().split('T')[0]}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        function showLoading(text) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('loading-text').textContent = text;
+            document.getElementById('loading-panel').classList.add('active');
         }
 
-        function downloadPDF() {
-            if (!currentReportData) {
-                alert('No report to download. Please analyze an interview first.');
-                return;
-            }
+        function hideLoading() {
+            document.getElementById('loading-panel').classList.remove('active');
+            showPanel('welcome-panel');
+        }
 
-            const d = currentReportData;
-            const date = new Date().toLocaleDateString();
+        function updateProgress(percent, text) {
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-text').textContent = text || '';
+        }
 
-            const printContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Candidate Fit Report${d.candidate_name ? ' - ' + d.candidate_name : ''}</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; color: #333; line-height: 1.6; }
-        h1 { color: #7c3aed; margin-bottom: 5px; font-size: 28px; }
-        .meta { color: #666; margin-bottom: 30px; }
-        .score-section { text-align: center; margin: 30px 0; padding: 20px; background: #f8f7ff; border-radius: 12px; }
-        .score { font-size: 48px; font-weight: bold; color: #7c3aed; }
-        .score-label { color: #666; }
-        h2 { color: #7c3aed; margin: 25px 0 15px; padding-bottom: 5px; border-bottom: 2px solid #e0e0e0; font-size: 18px; }
-        ul { list-style: none; padding: 0; }
-        li { padding: 8px 0; padding-left: 25px; position: relative; }
-        li::before { content: '✓'; position: absolute; left: 0; color: #00d4ff; font-weight: bold; }
-        .concerns li::before { content: '!'; color: #ff6b6b; }
-        .quote { padding: 12px 15px; border-left: 3px solid #7c3aed; margin: 10px 0; background: #f8f7ff; font-style: italic; }
-        .quote-context { font-size: 12px; color: #666; margin-top: 5px; font-style: normal; }
-        .summary { background: #f8f7ff; padding: 20px; border-radius: 8px; margin-top: 10px; }
-        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; text-align: center; color: #999; font-size: 12px; }
-        @media print { body { padding: 20px; } }
-    </style>
-</head>
-<body>
-    <h1>Candidate Fit Report</h1>
-    <p class="meta">${[d.candidate_name, d.job_title, date].filter(Boolean).join(' | ')}</p>
-
-    <div class="score-section">
-        <div class="score">${d.fit_score}%</div>
-        <div class="score-label">Overall Fit Score</div>
-    </div>
-
-    <h2>Key Strengths</h2>
-    <ul>
-        ${(d.strengths || []).map(s => `<li>${s}</li>`).join('')}
-    </ul>
-
-    <h2>Matching Skills & Experience</h2>
-    <ul>
-        ${(d.matching_skills || []).map(s => `<li>${s}</li>`).join('')}
-    </ul>
-
-    <h2>Areas to Explore Further</h2>
-    <ul class="concerns">
-        ${(d.concerns || []).map(c => `<li>${c}</li>`).join('')}
-    </ul>
-
-    <h2>Notable Candidate Responses</h2>
-    ${(d.notable_quotes || []).map(q => `
-        <div class="quote">
-            "${q.quote}"
-            <div class="quote-context">${q.context || ''}</div>
-        </div>
-    `).join('')}
-
-    <h2>Summary</h2>
-    <div class="summary">${d.summary || ''}</div>
-
-    <div class="footer">Generated by Interview Analyzer - bigoil.net</div>
-</body>
-</html>`;
-
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(printContent);
-            printWindow.document.close();
-            printWindow.onload = function() {
-                printWindow.print();
-            };
+        function closeModal(id, event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById(id).classList.remove('active');
         }
 
         // Edit functionality
-        let currentEditField = null;
-
         function editField(field) {
-            if (!currentReportId) {
-                alert('Please save the report first before editing.');
-                return;
-            }
-
+            if (!currentReportId) return;
             currentEditField = field;
             const title = field === 'candidate_name' ? 'Edit Candidate Name' : 'Edit Job Title';
-            const currentValue = currentReportData[field] || '';
-
+            const value = currentReportData[field] || '';
             document.getElementById('edit-modal-title').textContent = title;
-            document.getElementById('edit-modal-input').value = currentValue;
+            document.getElementById('edit-modal-input').value = value;
             document.getElementById('edit-modal').classList.add('active');
             document.getElementById('edit-modal-input').focus();
         }
 
-        function closeEditModal(event) {
-            if (event && event.target !== event.currentTarget) return;
-            document.getElementById('edit-modal').classList.remove('active');
-            currentEditField = null;
-        }
-
         async function saveEdit() {
-            const newValue = document.getElementById('edit-modal-input').value.trim();
-
-            if (!currentReportId || !currentEditField) {
-                closeEditModal();
-                return;
-            }
+            const value = document.getElementById('edit-modal-input').value.trim();
+            if (!currentReportId || !currentEditField) return;
 
             try {
-                const response = await fetch(`${API_BASE}/interview-reports/${currentReportId}`, {
+                await fetch(`${API}/interview-reports/${currentReportId}`, {
                     method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        [currentEditField]: newValue
-                    })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ [currentEditField]: value })
                 });
-
-                if (response.ok) {
-                    // Update local data
-                    currentReportData[currentEditField] = newValue;
-
-                    // Update display
-                    if (currentEditField === 'candidate_name') {
-                        document.getElementById('report-meta-name').textContent = newValue || 'Unknown Candidate';
-                    } else if (currentEditField === 'job_title') {
-                        document.getElementById('report-meta-title').textContent = newValue || 'Unknown Position';
-                    }
-
-                    // Reload sidebar to show updated name
-                    loadReports();
-
-                    closeEditModal();
-                } else {
-                    alert('Failed to save changes. Please try again.');
-                }
-            } catch (err) {
-                console.error('Error saving edit:', err);
-                alert('Failed to save changes. Please try again.');
+                currentReportData[currentEditField] = value;
+                displayReport(currentReportData);
+                loadReports();
+                closeModal('edit-modal');
+            } catch (e) {
+                alert('Failed to save');
             }
         }
 
-        // Handle Enter key in edit modal
-        document.getElementById('edit-modal-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                saveEdit();
-            } else if (e.key === 'Escape') {
-                closeEditModal();
-            }
-        });
+        // Downloads
+        function downloadText() {
+            if (!currentReportData) return;
+            const d = currentReportData;
+            const text = `CANDIDATE FIT REPORT
+${d.candidate_name ? 'Candidate: ' + d.candidate_name : ''}
+${d.job_title ? 'Position: ' + d.job_title : ''}
+Fit Score: ${d.fit_score}%
+
+STRENGTHS
+${(d.strengths || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+MATCHING SKILLS
+${(d.matching_skills || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+CONCERNS
+${(d.concerns || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+SUMMARY
+${d.summary || ''}
+`;
+            const blob = new Blob([text], {type: 'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${(d.candidate_name || 'report').replace(/\s+/g, '-')}-fit-report.txt`;
+            a.click();
+        }
+
+        function downloadPDF() {
+            if (!currentReportData) return;
+            const d = currentReportData;
+            const html = `<!DOCTYPE html><html><head><style>
+                body{font-family:sans-serif;padding:40px;color:#333;}
+                h1{color:#7c3aed;} h2{color:#7c3aed;margin-top:20px;border-bottom:2px solid #eee;padding-bottom:5px;}
+                .score{text-align:center;font-size:48px;color:#7c3aed;margin:30px 0;}
+                ul{list-style:none;padding:0;} li{padding:8px 0;padding-left:20px;position:relative;}
+                li::before{content:'✓';position:absolute;left:0;color:#00d4ff;}
+                .concerns li::before{content:'!';color:#ff6b6b;}
+                .quote{padding:10px;border-left:3px solid #7c3aed;margin:10px 0;background:#f8f7ff;font-style:italic;}
+            </style></head><body>
+                <h1>Candidate Fit Report</h1>
+                <p>${[d.candidate_name, d.job_title].filter(Boolean).join(' | ')}</p>
+                <div class="score">${d.fit_score}%</div>
+                <h2>Key Strengths</h2><ul>${(d.strengths||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Matching Skills</h2><ul>${(d.matching_skills||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Areas to Explore</h2><ul class="concerns">${(d.concerns||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Notable Quotes</h2>${(d.notable_quotes||[]).map(q=>'<div class="quote">"'+q.quote+'"</div>').join('')}
+                <h2>Summary</h2><p>${d.summary||''}</p>
+            </body></html>`;
+            const w = window.open('','_blank');
+            w.document.write(html);
+            w.document.close();
+            w.onload = () => w.print();
+        }
     </script>
 </body>
 </html>
