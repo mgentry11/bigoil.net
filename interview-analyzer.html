@@ -464,10 +464,10 @@
                 <ul class="item-list" id="jobs-list"></ul>
             </div>
 
-            <!-- Drafts Section -->
+            <!-- Transcripts Section - Permanent and Reusable -->
             <div class="sidebar-section">
                 <div class="section-header">
-                    <h3>Transcripts (Drafts)</h3>
+                    <h3>Transcripts</h3>
                     <div style="display:flex;gap:0.25rem;">
                         <button class="add-btn" onclick="showAddTranscriptModal()">+ Paste</button>
                         <button class="add-btn" onclick="document.getElementById('bulk-input').click()">+ Upload</button>
@@ -651,15 +651,16 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
     <script>
         const API = 'https://metabomaxpro1.onrender.com/api';
         let jobs = [];
-        let drafts = [];
-        let completed = [];
-        let selectedDrafts = new Set();
+        let transcripts = [];  // Permanent transcripts (can be re-analyzed)
+        let completed = [];    // Completed analysis reports
+        let selectedTranscripts = new Set();
         let currentReportId = null;
         let currentReportData = null;
         let currentEditField = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             loadJobs();
+            loadTranscripts();
             loadReports();
         });
 
@@ -741,7 +742,18 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             loadJobs();
         }
 
-        // Transcripts
+        // Transcripts - now permanent and reusable
+        async function loadTranscripts() {
+            try {
+                const res = await fetch(`${API}/transcripts`);
+                const data = await res.json();
+                transcripts = data.transcripts || [];
+                renderTranscripts();
+            } catch (e) {
+                console.error('Failed to load transcripts:', e);
+            }
+        }
+
         function showAddTranscriptModal() {
             document.getElementById('new-transcript-name').value = '';
             document.getElementById('new-transcript-text').value = '';
@@ -758,14 +770,14 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             }
 
             try {
-                const res = await fetch(`${API}/interview-drafts`, {
+                const res = await fetch(`${API}/transcripts`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ candidate_name: name, transcript: text })
+                    body: JSON.stringify({ candidate_name: name, transcript: text, source: 'paste' })
                 });
                 if (res.ok) {
                     closeModal('add-transcript-modal');
-                    loadReports();
+                    loadTranscripts();
                 } else {
                     alert('Failed to save transcript');
                 }
@@ -774,36 +786,53 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             }
         }
 
-        // Reports
+        function renderTranscripts() {
+            const list = document.getElementById('drafts-list');
+            if (transcripts.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No transcripts. Upload or paste above.</li>';
+                return;
+            }
+            list.innerHTML = transcripts.map(t => `
+                <li class="item draft-item ${selectedTranscripts.has(t.id) ? 'selected' : ''}" data-id="${t.id}">
+                    <input type="checkbox" class="item-checkbox" ${selectedTranscripts.has(t.id) ? 'checked' : ''}
+                           onchange="toggleTranscriptSelection('${t.id}', this.checked)" onclick="event.stopPropagation()">
+                    <span class="item-name">${t.candidate_name || 'Unknown'}</span>
+                    <span class="item-meta" style="color:#10b981;font-size:0.65rem;">${t.source || 'upload'}</span>
+                    <button class="item-delete" onclick="event.stopPropagation();deleteTranscript('${t.id}')">×</button>
+                </li>
+            `).join('');
+        }
+
+        function toggleTranscriptSelection(id, checked) {
+            if (checked) {
+                selectedTranscripts.add(id);
+            } else {
+                selectedTranscripts.delete(id);
+            }
+            updateSelectionUI();
+            renderTranscripts();
+        }
+
+        async function deleteTranscript(id) {
+            if (!confirm('Delete this transcript? This cannot be undone.')) return;
+            await fetch(`${API}/transcripts/${id}`, {method: 'DELETE'});
+            selectedTranscripts.delete(id);
+            loadTranscripts();
+            updateSelectionUI();
+        }
+
+        // Reports (completed analysis)
         async function loadReports() {
             try {
                 const res = await fetch(`${API}/interview-reports`);
                 const data = await res.json();
                 const reports = data.reports || [];
-                drafts = reports.filter(r => r.fit_score === null);
+                // Only show completed reports (with fit_score)
                 completed = reports.filter(r => r.fit_score !== null);
-                renderDrafts();
                 renderCompleted();
             } catch (e) {
                 console.error('Failed to load reports:', e);
             }
-        }
-
-        function renderDrafts() {
-            const list = document.getElementById('drafts-list');
-            if (drafts.length === 0) {
-                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No drafts. Upload transcripts above.</li>';
-                return;
-            }
-            list.innerHTML = drafts.map(d => `
-                <li class="item draft-item ${selectedDrafts.has(d.id) ? 'selected' : ''}" data-id="${d.id}">
-                    <input type="checkbox" class="item-checkbox" ${selectedDrafts.has(d.id) ? 'checked' : ''}
-                           onchange="toggleDraftSelection('${d.id}', this.checked)" onclick="event.stopPropagation()">
-                    <span class="item-name">${d.candidate_name || 'Unknown'}</span>
-                    <span class="item-draft">DRAFT</span>
-                    <button class="item-delete" onclick="event.stopPropagation();deleteReport('${d.id}')">×</button>
-                </li>
-            `).join('');
         }
 
         function renderCompleted() {
@@ -822,21 +851,11 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             `).join('');
         }
 
-        function toggleDraftSelection(id, checked) {
-            if (checked) {
-                selectedDrafts.add(id);
-            } else {
-                selectedDrafts.delete(id);
-            }
-            updateSelectionUI();
-            renderDrafts();
-        }
-
         function updateSelectionUI() {
-            const count = selectedDrafts.size;
+            const count = selectedTranscripts.size;
             const jobId = document.getElementById('job-selector').value;
             document.getElementById('selection-count').textContent =
-                count === 0 ? 'Select drafts to analyze' : `${count} draft(s) selected`;
+                count === 0 ? 'Select transcripts to analyze' : `${count} transcript(s) selected`;
             document.getElementById('analyze-btn').disabled = count === 0 || !jobId;
         }
 
@@ -845,15 +864,13 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
         async function deleteReport(id) {
             if (!confirm('Delete this report?')) return;
             await fetch(`${API}/interview-reports/${id}`, {method: 'DELETE'});
-            selectedDrafts.delete(id);
             loadReports();
-            updateSelectionUI();
             if (currentReportId === id) {
                 showPanel('welcome-panel');
             }
         }
 
-        // Bulk upload
+        // Bulk upload - now saves to transcripts table
         async function handleBulkUpload(event) {
             const files = event.target.files;
             if (!files.length) return;
@@ -865,10 +882,10 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
                 try {
                     const text = await file.text();
                     const name = file.name.replace(/\.txt$/i, '').replace(/[_-]/g, ' ');
-                    await fetch(`${API}/interview-drafts`, {
+                    await fetch(`${API}/transcripts`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ transcript: text, candidate_name: name })
+                        body: JSON.stringify({ transcript: text, candidate_name: name, source: 'upload', filename: file.name })
                     });
                     uploaded++;
                     updateProgress(uploaded / files.length * 100, `Uploaded ${uploaded} of ${files.length}`);
@@ -878,26 +895,26 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             }
 
             event.target.value = '';
-            loadReports();
+            loadTranscripts();
             hideLoading();
-            alert(`Uploaded ${uploaded} transcript(s)`);
+            alert(`Uploaded ${uploaded} transcript(s). They will remain available for re-analysis against different jobs.`);
         }
 
-        // Batch analyze
+        // Analyze selected transcripts - creates new reports, keeps transcripts
         async function analyzeSelected() {
             const jobId = document.getElementById('job-selector').value;
-            const draftIds = Array.from(selectedDrafts);
+            const transcriptIds = Array.from(selectedTranscripts);
 
-            if (!jobId || draftIds.length === 0) return;
+            if (!jobId || transcriptIds.length === 0) return;
 
-            showLoading(`Analyzing ${draftIds.length} candidate(s)...`);
+            showLoading(`Analyzing ${transcriptIds.length} candidate(s)...`);
             updateProgress(0, 'Starting analysis...');
 
             try {
-                const res = await fetch(`${API}/batch-analyze`, {
+                const res = await fetch(`${API}/analyze-transcripts`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ job_id: jobId, draft_ids: draftIds })
+                    body: JSON.stringify({ job_id: jobId, transcript_ids: transcriptIds })
                 });
 
                 const data = await res.json();
@@ -906,15 +923,16 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
                     const success = data.results.filter(r => r.success).length;
                     const failed = data.results.filter(r => !r.success).length;
 
-                    selectedDrafts.clear();
-                    loadReports();
+                    selectedTranscripts.clear();
+                    loadReports();  // Reload to show new completed reports
+                    renderTranscripts();  // Re-render to clear selection checkboxes
                     updateSelectionUI();
                     hideLoading();
 
                     if (failed === 0) {
-                        alert(`Successfully analyzed ${success} candidate(s)!`);
+                        alert(`Successfully analyzed ${success} candidate(s)! Transcripts remain available for re-analysis.`);
                     } else {
-                        alert(`Analyzed ${success} candidate(s). ${failed} failed.`);
+                        alert(`Analyzed ${success} candidate(s). ${failed} failed. Transcripts remain available.`);
                     }
                 }
             } catch (e) {
