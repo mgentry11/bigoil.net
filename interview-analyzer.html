@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Analyzer - Candidate Fit Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-box h3 {
+            margin-bottom: 1rem;
+            color: #00d4ff;
+            font-size: 1.1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        textarea::placeholder {
+            color: #666;
+        }
+
+        .file-upload {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload label {
+            cursor: pointer;
+            color: #888;
+        }
+
+        .file-upload .file-name {
+            color: #00d4ff;
+            margin-top: 0.5rem;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #7c3aed;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .report {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .report.active {
+            display: block;
+        }
+
+        .report h2 {
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fit-score {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#00d4ff var(--score), rgba(255,255,255,0.1) var(--score));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-value {
+            position: relative;
+            z-index: 1;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-label {
+            color: #888;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section h3 {
+            color: #7c3aed;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #ccc;
+        }
+
+        .section li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+        }
+
+        .section.concerns li::before {
+            content: '!';
+            color: #ff6b6b;
+        }
+
+        .candidate-quotes {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .quote {
+            padding: 0.75rem;
+            border-left: 3px solid #7c3aed;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #aaa;
+        }
+
+        .quote:last-child {
+            margin-bottom: 0;
+        }
+
+        .quote-context {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+            font-style: normal;
+        }
+
+        .error {
+            display: none;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #ff6b6b;
+        }
+
+        .error.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interview Analyzer</h1>
+        <p class="subtitle">Upload a transcript and job description to generate a candidate fit report</p>
+
+        <div class="input-section">
+            <div class="input-box">
+                <h3>Interview Transcript</h3>
+                <textarea id="transcript" placeholder="Paste the interview transcript here...
+
+Example format:
+Interviewer: Tell me about yourself.
+Candidate: I have 5 years of experience in...
+
+Interviewer: Why do you want this role?
+Candidate: I'm excited about..."></textarea>
+                <div class="file-upload">
+                    <input type="file" id="transcript-file" accept=".txt,.pdf,.docx">
+                    <label for="transcript-file">Or drop a file here (.txt, .pdf, .docx)</label>
+                    <div class="file-name" id="transcript-file-name"></div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <h3>Job Description</h3>
+                <textarea id="job-description" placeholder="Paste the job description here...
+
+Include:
+- Role title
+- Required skills
+- Responsibilities
+- Qualifications
+- Nice-to-haves"></textarea>
+                <div class="file-upload">
+                    <input type="file" id="jd-file" accept=".txt,.pdf,.docx">
+                    <label for="jd-file">Or drop a file here (.txt, .pdf, .docx)</label>
+                    <div class="file-name" id="jd-file-name"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="analyze-btn" id="analyze-btn" onclick="analyzeInterview()">
+            Analyze Interview
+        </button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing transcript and generating report...</p>
+            <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">This may take 15-30 seconds</p>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <div class="report" id="report">
+            <h2>Candidate Fit Report</h2>
+
+            <div class="fit-score">
+                <div class="score-circle" id="score-circle" style="--score: 0%">
+                    <span class="score-value" id="score-value">--</span>
+                </div>
+                <div class="score-label">Overall Fit Score</div>
+            </div>
+
+            <div class="section" id="strengths-section">
+                <h3>Key Strengths</h3>
+                <ul id="strengths-list"></ul>
+            </div>
+
+            <div class="section" id="skills-section">
+                <h3>Matching Skills & Experience</h3>
+                <ul id="skills-list"></ul>
+            </div>
+
+            <div class="section concerns" id="concerns-section">
+                <h3>Areas to Explore Further</h3>
+                <ul id="concerns-list"></ul>
+            </div>
+
+            <div class="section" id="quotes-section">
+                <h3>Notable Candidate Responses</h3>
+                <div class="candidate-quotes" id="quotes-container"></div>
+            </div>
+
+            <div class="section" id="summary-section">
+                <h3>Summary</h3>
+                <p id="summary-text" style="color: #ccc; line-height: 1.6;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://metabomaxpro1.onrender.com/api/analyze-interview';
+
+        // File upload handling
+        document.getElementById('transcript-file').addEventListener('change', function(e) {
+            handleFileUpload(e, 'transcript', 'transcript-file-name');
+        });
+
+        document.getElementById('jd-file').addEventListener('change', function(e) {
+            handleFileUpload(e, 'job-description', 'jd-file-name');
+        });
+
+        async function handleFileUpload(e, textareaId, fileNameId) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            document.getElementById(fileNameId).textContent = file.name;
+
+            if (file.type === 'text/plain') {
+                const text = await file.text();
+                document.getElementById(textareaId).value = text;
+            } else {
+                // For PDF/DOCX, we'll send to server for processing
+                document.getElementById(fileNameId).textContent = file.name + ' (will be processed on server)';
+            }
+        }
+
+        async function analyzeInterview() {
+            const transcript = document.getElementById('transcript').value.trim();
+            const jobDescription = document.getElementById('job-description').value.trim();
+
+            if (!transcript || !jobDescription) {
+                showError('Please provide both a transcript and job description.');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('report').classList.remove('active');
+            document.getElementById('error').classList.remove('active');
+            document.getElementById('analyze-btn').disabled = true;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        transcript: transcript,
+                        job_description: jobDescription
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Analysis failed. Please try again.');
+                }
+
+                const data = await response.json();
+                displayReport(data);
+
+            } catch (err) {
+                showError(err.message || 'An error occurred. Please try again.');
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('analyze-btn').disabled = false;
+            }
+        }
+
+        function displayReport(data) {
+            // Score
+            const score = data.fit_score || 0;
+            document.getElementById('score-value').textContent = score + '%';
+            document.getElementById('score-circle').style.setProperty('--score', score + '%');
+
+            // Strengths
+            const strengthsList = document.getElementById('strengths-list');
+            strengthsList.innerHTML = '';
+            (data.strengths || []).forEach(s => {
+                const li = document.createElement('li');
+                li.textContent = s;
+                strengthsList.appendChild(li);
+            });
+
+            // Skills
+            const skillsList = document.getElementById('skills-list');
+            skillsList.innerHTML = '';
+            (data.matching_skills || []).forEach(s => {
+                const li = document.createElement('li');
+                li.textContent = s;
+                skillsList.appendChild(li);
+            });
+
+            // Concerns
+            const concernsList = document.getElementById('concerns-list');
+            concernsList.innerHTML = '';
+            (data.concerns || []).forEach(c => {
+                const li = document.createElement('li');
+                li.textContent = c;
+                concernsList.appendChild(li);
+            });
+
+            // Quotes
+            const quotesContainer = document.getElementById('quotes-container');
+            quotesContainer.innerHTML = '';
+            (data.notable_quotes || []).forEach(q => {
+                const div = document.createElement('div');
+                div.className = 'quote';
+                div.innerHTML = `"${q.quote}"<div class="quote-context">${q.context || ''}</div>`;
+                quotesContainer.appendChild(div);
+            });
+
+            // Summary
+            document.getElementById('summary-text').textContent = data.summary || '';
+
+            // Show report
+            document.getElementById('report').classList.add('active');
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error');
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+        }
+    </script>
+</body>
+</html>
