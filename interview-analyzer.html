@@ -343,6 +343,50 @@
         .quote.positive { border-left-color: #10b981; }
         .quote.negative { border-left-color: #ff6b6b; }
         .quote-context { font-size: 0.75rem; color: #666; margin-top: 0.25rem; font-style: normal; }
+
+        /* Q&A Cards */
+        .qa-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #00d4ff;
+        }
+        .qa-card.excellent { border-left-color: #10b981; }
+        .qa-card.good { border-left-color: #22c55e; }
+        .qa-card.fair { border-left-color: #fbbf24; }
+        .qa-card.poor { border-left-color: #ff6b6b; }
+        .qa-question {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .qa-question::before { content: 'Q: '; color: #00d4ff; font-weight: 600; }
+        .qa-answer {
+            color: #fff;
+            font-size: 0.9rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+        .qa-answer::before { content: 'A: '; color: #7c3aed; font-weight: 600; }
+        .qa-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+        .qa-quality {
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .qa-quality.excellent { background: rgba(16,185,129,0.3); color: #6ee7b7; }
+        .qa-quality.good { background: rgba(34,197,94,0.3); color: #86efac; }
+        .qa-quality.fair { background: rgba(251,191,36,0.3); color: #fcd34d; }
+        .qa-quality.poor { background: rgba(255,107,107,0.3); color: #fca5a5; }
+        .qa-notes { color: #888; font-style: italic; }
         .download-buttons {
             display: flex;
             gap: 1rem;
@@ -546,6 +590,18 @@
                         <div id="score-breakdown" style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;"></div>
                     </div>
 
+                    <!-- Interview Q&A -->
+                    <div class="section" id="qa-section" style="display:none;">
+                        <h3>Interview Questions & Answers</h3>
+                        <div id="qa-list"></div>
+                    </div>
+
+                    <!-- Resume Analysis -->
+                    <div class="section" id="resume-section" style="display:none;">
+                        <h3>Resume Analysis</h3>
+                        <div id="resume-analysis"></div>
+                    </div>
+
                     <!-- Strengths with Evidence -->
                     <div class="section"><h3>Key Strengths</h3><div id="strengths-list"></div></div>
 
@@ -613,7 +669,7 @@
 
     <!-- Add Transcript Modal -->
     <div class="modal" id="add-transcript-modal" onclick="closeModal('add-transcript-modal', event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width:600px;">
             <h3>Add Transcript</h3>
             <div class="form-group">
                 <label>Candidate Name *</label>
@@ -625,7 +681,11 @@
 
 Example format:
 Interviewer: Tell me about yourself.
-Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea>
+Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Resume (Optional - for deeper analysis)</label>
+                <textarea id="new-transcript-resume" placeholder="Paste the candidate's resume here for a more thorough analysis comparing resume claims to interview responses..." style="min-height:100px;"></textarea>
             </div>
             <div class="btn-row">
                 <button class="btn btn-secondary" onclick="closeModal('add-transcript-modal')">Cancel</button>
@@ -757,12 +817,14 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
         function showAddTranscriptModal() {
             document.getElementById('new-transcript-name').value = '';
             document.getElementById('new-transcript-text').value = '';
+            document.getElementById('new-transcript-resume').value = '';
             document.getElementById('add-transcript-modal').classList.add('active');
         }
 
         async function saveTranscript() {
             const name = document.getElementById('new-transcript-name').value.trim();
             const text = document.getElementById('new-transcript-text').value.trim();
+            const resume = document.getElementById('new-transcript-resume').value.trim();
 
             if (!name || !text) {
                 alert('Name and transcript are required');
@@ -770,10 +832,13 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
             }
 
             try {
+                const payload = { candidate_name: name, transcript: text, source: 'paste' };
+                if (resume) payload.resume = resume;
+
                 const res = await fetch(`${API}/transcripts`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ candidate_name: name, transcript: text, source: 'paste' })
+                    body: JSON.stringify(payload)
                 });
                 if (res.ok) {
                     closeModal('add-transcript-modal');
@@ -797,6 +862,7 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
                     <input type="checkbox" class="item-checkbox" ${selectedTranscripts.has(t.id) ? 'checked' : ''}
                            onchange="toggleTranscriptSelection('${t.id}', this.checked)" onclick="event.stopPropagation()">
                     <span class="item-name">${t.candidate_name || 'Unknown'}</span>
+                    ${t.resume ? '<span class="item-meta" style="color:#a78bfa;font-size:0.6rem;" title="Resume attached">+CV</span>' : ''}
                     <span class="item-meta" style="color:#10b981;font-size:0.65rem;">${t.source || 'upload'}</span>
                     <button class="item-delete" onclick="event.stopPropagation();deleteTranscript('${t.id}')">×</button>
                 </li>
@@ -999,12 +1065,48 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
                 breakdownSection.style.display = 'block';
                 document.getElementById('score-breakdown').innerHTML = Object.entries(breakdown).map(([key, val]) => `
                     <div class="score-bar">
-                        <div class="score-bar-label"><span>${key.replace('_', ' ')}</span><span>${val}%</span></div>
+                        <div class="score-bar-label"><span>${key.replace(/_/g, ' ')}</span><span>${val}%</span></div>
                         <div class="score-bar-fill" style="width:${val}%"></div>
                     </div>
                 `).join('');
             } else {
                 breakdownSection.style.display = 'none';
+            }
+
+            // Interview Q&A
+            const qaList = fullData.interview_qa;
+            const qaSection = document.getElementById('qa-section');
+            if (qaList && qaList.length > 0) {
+                qaSection.style.display = 'block';
+                document.getElementById('qa-list').innerHTML = qaList.map(qa => `
+                    <div class="qa-card ${qa.quality || ''}">
+                        <div class="qa-question">${qa.question}</div>
+                        <div class="qa-answer">${qa.answer}</div>
+                        <div class="qa-meta">
+                            <span class="qa-quality ${qa.quality || ''}">${qa.quality || ''}</span>
+                            <span class="qa-notes">${qa.notes || ''}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                qaSection.style.display = 'none';
+            }
+
+            // Resume Analysis
+            const resumeAnalysis = fullData.resume_analysis;
+            const resumeSection = document.getElementById('resume-section');
+            if (resumeAnalysis && resumeAnalysis !== null) {
+                resumeSection.style.display = 'block';
+                document.getElementById('resume-analysis').innerHTML = `
+                    <div class="assessment-box">
+                        ${resumeAnalysis.resume_job_match ? `<div class="assessment-item"><div class="assessment-label">Resume-Job Match</div><div class="assessment-value">${resumeAnalysis.resume_job_match}</div></div>` : ''}
+                        ${resumeAnalysis.resume_interview_alignment ? `<div class="assessment-item"><div class="assessment-label">Resume-Interview Alignment</div><div class="assessment-value">${resumeAnalysis.resume_interview_alignment}</div></div>` : ''}
+                        ${resumeAnalysis.resume_strengths && resumeAnalysis.resume_strengths.length ? `<div class="assessment-item"><div class="assessment-label">Resume Strengths</div><div class="assessment-value">${resumeAnalysis.resume_strengths.map(s => '• ' + s).join('<br>')}</div></div>` : ''}
+                        ${resumeAnalysis.resume_gaps && resumeAnalysis.resume_gaps.length ? `<div class="assessment-item"><div class="assessment-label">Not Discussed in Interview</div><div class="assessment-value" style="color:#fbbf24;">${resumeAnalysis.resume_gaps.map(s => '• ' + s).join('<br>')}</div></div>` : ''}
+                    </div>
+                `;
+            } else {
+                resumeSection.style.display = 'none';
             }
 
             // Strengths with evidence
