@@ -376,6 +376,120 @@
             font-size: 0.9rem;
         }
 
+        .report-meta-editable {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .report-meta-editable .editable {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .report-meta-editable .editable:hover {
+            background: rgba(124, 58, 237, 0.3);
+            color: #fff;
+        }
+
+        .report-meta-editable .editable::after {
+            content: ' ✎';
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .report-meta-editable .editable:hover::after {
+            opacity: 1;
+        }
+
+        .meta-separator {
+            color: #555;
+        }
+
+        .edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .edit-modal.active {
+            display: flex;
+        }
+
+        .edit-modal-content {
+            background: #1a1a2e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .edit-modal h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .edit-modal input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .edit-modal input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        .edit-modal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .edit-modal-buttons button {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .edit-modal-buttons .save-btn {
+            background: #7c3aed;
+            border: none;
+            color: #fff;
+        }
+
+        .edit-modal-buttons .save-btn:hover {
+            background: #9333ea;
+        }
+
+        .edit-modal-buttons .cancel-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+        }
+
+        .edit-modal-buttons .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
         .fit-score {
             text-align: center;
             margin-bottom: 2rem;
@@ -608,7 +722,13 @@ Include:
                     <div class="report-header">
                         <div class="report-title-section">
                             <h2>Candidate Fit Report</h2>
-                            <p class="report-meta" id="report-meta"></p>
+                            <div class="report-meta-editable">
+                                <span id="report-meta-name" class="editable" onclick="editField('candidate_name')"></span>
+                                <span class="meta-separator"> | </span>
+                                <span id="report-meta-title" class="editable" onclick="editField('job_title')"></span>
+                                <span class="meta-separator"> | </span>
+                                <span id="report-meta-date"></span>
+                            </div>
                         </div>
                     </div>
 
@@ -661,6 +781,18 @@ Include:
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="edit-modal" id="edit-modal" onclick="closeEditModal(event)">
+        <div class="edit-modal-content" onclick="event.stopPropagation()">
+            <h3 id="edit-modal-title">Edit</h3>
+            <input type="text" id="edit-modal-input" placeholder="Enter value...">
+            <div class="edit-modal-buttons">
+                <button class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+                <button class="save-btn" onclick="saveEdit()">Save</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -859,12 +991,10 @@ Include:
         }
 
         function displayReport(data) {
-            // Meta info
-            const meta = [];
-            if (data.candidate_name) meta.push(data.candidate_name);
-            if (data.job_title) meta.push(data.job_title);
-            if (data.created_at) meta.push(new Date(data.created_at).toLocaleDateString());
-            document.getElementById('report-meta').textContent = meta.join(' | ');
+            // Meta info - editable fields
+            document.getElementById('report-meta-name').textContent = data.candidate_name || 'Unknown Candidate';
+            document.getElementById('report-meta-title').textContent = data.job_title || 'Unknown Position';
+            document.getElementById('report-meta-date').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : new Date().toLocaleDateString();
 
             // Score
             const score = data.fit_score || 0;
@@ -1063,6 +1193,83 @@ Generated by Interview Analyzer - bigoil.net
                 printWindow.print();
             };
         }
+
+        // Edit functionality
+        let currentEditField = null;
+
+        function editField(field) {
+            if (!currentReportId) {
+                alert('Please save the report first before editing.');
+                return;
+            }
+
+            currentEditField = field;
+            const title = field === 'candidate_name' ? 'Edit Candidate Name' : 'Edit Job Title';
+            const currentValue = currentReportData[field] || '';
+
+            document.getElementById('edit-modal-title').textContent = title;
+            document.getElementById('edit-modal-input').value = currentValue;
+            document.getElementById('edit-modal').classList.add('active');
+            document.getElementById('edit-modal-input').focus();
+        }
+
+        function closeEditModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('edit-modal').classList.remove('active');
+            currentEditField = null;
+        }
+
+        async function saveEdit() {
+            const newValue = document.getElementById('edit-modal-input').value.trim();
+
+            if (!currentReportId || !currentEditField) {
+                closeEditModal();
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/interview-reports/${currentReportId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        [currentEditField]: newValue
+                    })
+                });
+
+                if (response.ok) {
+                    // Update local data
+                    currentReportData[currentEditField] = newValue;
+
+                    // Update display
+                    if (currentEditField === 'candidate_name') {
+                        document.getElementById('report-meta-name').textContent = newValue || 'Unknown Candidate';
+                    } else if (currentEditField === 'job_title') {
+                        document.getElementById('report-meta-title').textContent = newValue || 'Unknown Position';
+                    }
+
+                    // Reload sidebar to show updated name
+                    loadReports();
+
+                    closeEditModal();
+                } else {
+                    alert('Failed to save changes. Please try again.');
+                }
+            } catch (err) {
+                console.error('Error saving edit:', err);
+                alert('Failed to save changes. Please try again.');
+            }
+        }
+
+        // Handle Enter key in edit modal
+        document.getElementById('edit-modal-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                saveEdit();
+            } else if (e.key === 'Escape') {
+                closeEditModal();
+            }
+        });
     </script>
 </body>
 </html>
