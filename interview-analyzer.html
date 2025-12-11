@@ -116,6 +116,16 @@
             font-weight: 600;
         }
 
+        .report-item-draft {
+            color: #fbbf24;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+
+        .report-item.draft {
+            border-left: 3px solid #fbbf24;
+        }
+
         .report-item-delete {
             color: #ff6b6b;
             opacity: 0;
@@ -135,6 +145,57 @@
             text-align: center;
             padding: 2rem 1rem;
             font-size: 0.9rem;
+        }
+
+        .bulk-upload-btn {
+            width: 100%;
+            padding: 0.5rem;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            color: #fbbf24;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .bulk-upload-btn:hover {
+            background: rgba(251, 191, 36, 0.3);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #666;
+            margin: 1rem 0 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Draft analysis panel */
+        .draft-panel {
+            display: none;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .draft-panel.active {
+            display: block;
+        }
+
+        .draft-panel h3 {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .draft-info {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         /* Main content */
@@ -650,9 +711,13 @@
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                 </svg>
-                Past Reports
+                Reports
             </h2>
             <button class="new-report-btn" onclick="newReport()">+ New Analysis</button>
+            <input type="file" id="bulk-upload-input" multiple accept=".txt" style="display:none" onchange="handleBulkUpload(event)">
+            <button class="bulk-upload-btn" onclick="document.getElementById('bulk-upload-input').click()">
+                Bulk Upload Transcripts
+            </button>
             <ul class="report-list" id="report-list">
                 <li class="no-reports">Loading reports...</li>
             </ul>
@@ -717,6 +782,20 @@ Include:
                 </div>
 
                 <div class="error" id="error"></div>
+
+                <!-- Draft Panel - shown when viewing a draft that needs job description -->
+                <div class="draft-panel" id="draft-panel">
+                    <h3>Draft: <span id="draft-candidate-name"></span></h3>
+                    <p class="draft-info">This transcript has been saved. Add a job description to run the analysis.</p>
+                    <div class="input-box" style="margin-bottom: 1rem;">
+                        <h3 style="color: #fbbf24;">Job Description</h3>
+                        <textarea id="draft-job-description" placeholder="Paste the job description here to analyze this candidate..."></textarea>
+                    </div>
+                    <input type="text" class="meta-input" id="draft-job-title" placeholder="Job Title" style="margin-bottom: 1rem;">
+                    <button class="analyze-btn" onclick="analyzeDraft()" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);">
+                        Run Analysis
+                    </button>
+                </div>
 
                 <div class="report" id="report">
                     <div class="report-header">
@@ -815,19 +894,45 @@ Include:
                 const list = document.getElementById('report-list');
 
                 if (data.reports && data.reports.length > 0) {
-                    list.innerHTML = data.reports.map(r => `
-                        <li class="report-item" data-id="${r.id}" onclick="loadReport('${r.id}')">
-                            <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
-                            <div class="report-item-meta">
-                                <span>${r.job_title || 'Unknown Position'}</span>
-                                <span class="report-item-score">${r.fit_score}%</span>
-                            </div>
-                            <div class="report-item-meta">
-                                <span>${new Date(r.created_at).toLocaleDateString()}</span>
-                                <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
-                            </div>
-                        </li>
-                    `).join('');
+                    // Separate drafts and completed reports
+                    const drafts = data.reports.filter(r => r.fit_score === null);
+                    const completed = data.reports.filter(r => r.fit_score !== null);
+
+                    let html = '';
+
+                    if (drafts.length > 0) {
+                        html += '<div class="section-label">Drafts (need job description)</div>';
+                        html += drafts.map(r => `
+                            <li class="report-item draft" data-id="${r.id}" onclick="loadReport('${r.id}')">
+                                <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
+                                <div class="report-item-meta">
+                                    <span class="report-item-draft">DRAFT</span>
+                                    <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
+                                </div>
+                            </li>
+                        `).join('');
+                    }
+
+                    if (completed.length > 0) {
+                        if (drafts.length > 0) {
+                            html += '<div class="section-label">Completed Reports</div>';
+                        }
+                        html += completed.map(r => `
+                            <li class="report-item" data-id="${r.id}" onclick="loadReport('${r.id}')">
+                                <div class="report-item-name">${r.candidate_name || 'Unknown'}</div>
+                                <div class="report-item-meta">
+                                    <span>${r.job_title || 'Unknown Position'}</span>
+                                    <span class="report-item-score">${r.fit_score}%</span>
+                                </div>
+                                <div class="report-item-meta">
+                                    <span>${new Date(r.created_at).toLocaleDateString()}</span>
+                                    <button class="report-item-delete" onclick="event.stopPropagation(); deleteReport('${r.id}')">Delete</button>
+                                </div>
+                            </li>
+                        `).join('');
+                    }
+
+                    list.innerHTML = html;
                 } else {
                     list.innerHTML = '<li class="no-reports">No reports yet. Create your first analysis!</li>';
                 }
@@ -852,23 +957,37 @@ Include:
                 }
 
                 currentReportId = reportId;
-                currentReportData = {
-                    fit_score: data.fit_score,
-                    strengths: data.strengths || [],
-                    matching_skills: data.matching_skills || [],
-                    concerns: data.concerns || [],
-                    notable_quotes: data.notable_quotes || [],
-                    summary: data.summary,
-                    candidate_name: data.candidate_name,
-                    job_title: data.job_title,
-                    created_at: data.created_at
-                };
 
-                displayReport(currentReportData);
+                // Check if this is a draft (no fit_score)
+                if (data.fit_score === null) {
+                    // Show draft panel
+                    document.getElementById('draft-candidate-name').textContent = data.candidate_name || 'Unknown';
+                    document.getElementById('draft-job-description').value = '';
+                    document.getElementById('draft-job-title').value = '';
+                    document.getElementById('input-form').style.display = 'none';
+                    document.getElementById('report').classList.remove('active');
+                    document.getElementById('draft-panel').classList.add('active');
+                } else {
+                    // Show completed report
+                    currentReportData = {
+                        fit_score: data.fit_score,
+                        strengths: data.strengths || [],
+                        matching_skills: data.matching_skills || [],
+                        concerns: data.concerns || [],
+                        notable_quotes: data.notable_quotes || [],
+                        summary: data.summary,
+                        candidate_name: data.candidate_name,
+                        job_title: data.job_title,
+                        created_at: data.created_at
+                    };
 
-                // Hide input form, show report
-                document.getElementById('input-form').style.display = 'none';
-                document.getElementById('report').classList.add('active');
+                    displayReport(currentReportData);
+
+                    // Hide input form and draft panel, show report
+                    document.getElementById('input-form').style.display = 'none';
+                    document.getElementById('draft-panel').classList.remove('active');
+                    document.getElementById('report').classList.add('active');
+                }
 
                 // Close sidebar on mobile
                 document.getElementById('sidebar').classList.remove('open');
@@ -902,12 +1021,112 @@ Include:
             currentReportData = null;
             document.getElementById('input-form').style.display = 'block';
             document.getElementById('report').classList.remove('active');
+            document.getElementById('draft-panel').classList.remove('active');
             document.getElementById('candidate-name').value = '';
             document.getElementById('job-title').value = '';
             document.getElementById('transcript').value = '';
             document.getElementById('job-description').value = '';
             document.querySelectorAll('.report-item').forEach(el => el.classList.remove('active'));
             document.getElementById('sidebar').classList.remove('open');
+        }
+
+        // Bulk upload handling
+        async function handleBulkUpload(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+
+            const uploadResults = [];
+
+            for (const file of files) {
+                try {
+                    const text = await file.text();
+                    // Extract candidate name from filename (remove .txt extension)
+                    const candidateName = file.name.replace(/\.txt$/i, '').replace(/[_-]/g, ' ');
+
+                    const response = await fetch(`${API_BASE}/interview-drafts`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            transcript: text,
+                            candidate_name: candidateName
+                        })
+                    });
+
+                    if (response.ok) {
+                        uploadResults.push({ file: file.name, success: true });
+                    } else {
+                        uploadResults.push({ file: file.name, success: false });
+                    }
+                } catch (err) {
+                    uploadResults.push({ file: file.name, success: false, error: err.message });
+                }
+            }
+
+            // Reload the sidebar
+            loadReports();
+
+            // Show results
+            const successCount = uploadResults.filter(r => r.success).length;
+            const failCount = uploadResults.filter(r => !r.success).length;
+
+            if (failCount === 0) {
+                alert(`Successfully uploaded ${successCount} transcript(s) as drafts. Click on each draft to add a job description and run the analysis.`);
+            } else {
+                alert(`Uploaded ${successCount} transcript(s). ${failCount} failed.`);
+            }
+
+            // Clear the input
+            event.target.value = '';
+        }
+
+        // Analyze a draft
+        async function analyzeDraft() {
+            const jobDescription = document.getElementById('draft-job-description').value.trim();
+            const jobTitle = document.getElementById('draft-job-title').value.trim();
+
+            if (!jobDescription) {
+                alert('Please enter a job description to analyze the candidate.');
+                return;
+            }
+
+            if (!currentReportId) {
+                alert('No draft selected.');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('draft-panel').classList.remove('active');
+
+            try {
+                const response = await fetch(`${API_BASE}/interview-reports/${currentReportId}/analyze`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        job_description: jobDescription,
+                        job_title: jobTitle
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Analysis failed. Please try again.');
+                }
+
+                const data = await response.json();
+                currentReportData = data;
+                currentReportData.job_title = jobTitle;
+
+                displayReport(currentReportData);
+
+                // Reload sidebar
+                loadReports();
+
+            } catch (err) {
+                showError(err.message || 'An error occurred. Please try again.');
+                document.getElementById('draft-panel').classList.add('active');
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+            }
         }
 
         // File upload handling
