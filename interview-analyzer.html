@@ -239,6 +239,97 @@
         }
         .section li::before { content: '✓'; position: absolute; left: 0; color: #00d4ff; }
         .section.concerns li::before { content: '!'; color: #ff6b6b; }
+
+        /* Evidence cards for strengths/skills/concerns */
+        .evidence-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #7c3aed;
+        }
+        .evidence-card.concern { border-left-color: #ff6b6b; }
+        .evidence-card-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .evidence-card-title .tag {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(124,58,237,0.3);
+            color: #a78bfa;
+        }
+        .evidence-card-title .tag.high { background: rgba(16,185,129,0.3); color: #6ee7b7; }
+        .evidence-card-title .tag.medium { background: rgba(251,191,36,0.3); color: #fcd34d; }
+        .evidence-card-title .tag.low { background: rgba(156,163,175,0.3); color: #9ca3af; }
+        .evidence-card-quote {
+            font-style: italic;
+            color: #a78bfa;
+            padding: 0.5rem;
+            background: rgba(124,58,237,0.1);
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+        .evidence-card-detail {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Score breakdown bars */
+        .score-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+        .score-bar-label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .score-bar-fill {
+            height: 6px;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border-radius: 3px;
+        }
+
+        /* Hiring recommendation badge */
+        .hiring-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .hiring-badge.strong_yes { background: #065f46; color: #6ee7b7; }
+        .hiring-badge.yes { background: #064e3b; color: #a7f3d0; }
+        .hiring-badge.maybe { background: #78350f; color: #fcd34d; }
+        .hiring-badge.no { background: #7f1d1d; color: #fca5a5; }
+        .hiring-badge.strong_no { background: #450a0a; color: #fca5a5; }
+
+        /* Assessment boxes */
+        .assessment-box {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .assessment-item {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .assessment-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .assessment-label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 0.25rem; }
+        .assessment-value { color: #ccc; font-size: 0.9rem; }
+
         .quote {
             padding: 0.75rem;
             border-left: 3px solid #7c3aed;
@@ -249,6 +340,8 @@
             background: rgba(0,0,0,0.2);
             border-radius: 0 8px 8px 0;
         }
+        .quote.positive { border-left-color: #10b981; }
+        .quote.negative { border-left-color: #ff6b6b; }
         .quote-context { font-size: 0.75rem; color: #666; margin-top: 0.25rem; font-style: normal; }
         .download-buttons {
             display: flex;
@@ -438,18 +531,53 @@
                         <span id="report-date"></span>
                     </div>
 
+                    <!-- Overall Score -->
                     <div class="fit-score">
                         <div class="score-circle" id="score-circle" style="--score:0%">
                             <span class="score-value" id="score-value">--</span>
                         </div>
                         <div class="score-label">Overall Fit Score</div>
+                        <div id="hiring-rec" style="margin-top:0.5rem;font-weight:600;"></div>
                     </div>
 
-                    <div class="section"><h3>Key Strengths</h3><ul id="strengths-list"></ul></div>
-                    <div class="section"><h3>Matching Skills</h3><ul id="skills-list"></ul></div>
-                    <div class="section concerns"><h3>Areas to Explore</h3><ul id="concerns-list"></ul></div>
+                    <!-- Score Breakdown -->
+                    <div class="section" id="score-breakdown-section" style="display:none;">
+                        <h3>Score Breakdown</h3>
+                        <div id="score-breakdown" style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;"></div>
+                    </div>
+
+                    <!-- Strengths with Evidence -->
+                    <div class="section"><h3>Key Strengths</h3><div id="strengths-list"></div></div>
+
+                    <!-- Skills with Evidence -->
+                    <div class="section"><h3>Skills & Experience Match</h3><div id="skills-list"></div></div>
+
+                    <!-- Concerns -->
+                    <div class="section concerns"><h3>Concerns & Gaps</h3><div id="concerns-list"></div></div>
+
+                    <!-- Communication Assessment -->
+                    <div class="section" id="comm-section" style="display:none;">
+                        <h3>Communication Assessment</h3>
+                        <div id="comm-assessment"></div>
+                    </div>
+
+                    <!-- Cultural Fit -->
+                    <div class="section" id="culture-section" style="display:none;">
+                        <h3>Cultural Fit Indicators</h3>
+                        <div id="culture-indicators"></div>
+                    </div>
+
+                    <!-- Notable Quotes -->
                     <div class="section"><h3>Notable Quotes</h3><div id="quotes-container"></div></div>
-                    <div class="section"><h3>Summary</h3><p id="summary-text" style="color:#ccc;line-height:1.6;"></p></div>
+
+                    <!-- Follow-up Questions -->
+                    <div class="section" id="followup-section" style="display:none;">
+                        <h3>Suggested Follow-up Questions</h3>
+                        <ul id="followup-list"></ul>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="section"><h3>Executive Summary</h3><p id="summary-text" style="color:#ccc;line-height:1.6;white-space:pre-wrap;"></p></div>
 
                     <div class="download-buttons">
                         <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
@@ -817,28 +945,131 @@ Candidate: I have 5 years of experience..." style="min-height:200px;"></textarea
         }
 
         function displayReport(data) {
+            // Check if we have full_response with detailed data
+            let fullData = data;
+            if (data.full_response) {
+                try {
+                    fullData = typeof data.full_response === 'string' ? JSON.parse(data.full_response) : data.full_response;
+                    // Merge with original data for metadata
+                    fullData = {...fullData, candidate_name: data.candidate_name, job_title: data.job_title, created_at: data.created_at};
+                } catch(e) { console.log('Could not parse full_response'); }
+            }
+
             document.getElementById('report-name').textContent = data.candidate_name || 'Unknown';
             document.getElementById('report-job').textContent = data.job_title || 'Unknown Position';
             document.getElementById('report-date').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : '';
 
-            const score = data.fit_score || 0;
+            // Overall score
+            const score = fullData.fit_score || data.fit_score || 0;
             document.getElementById('score-value').textContent = score + '%';
             document.getElementById('score-circle').style.setProperty('--score', score + '%');
 
-            renderList('strengths-list', data.strengths || []);
-            renderList('skills-list', data.matching_skills || []);
-            renderList('concerns-list', data.concerns || []);
+            // Hiring recommendation
+            const hiringRec = fullData.hiring_recommendation;
+            const hiringEl = document.getElementById('hiring-rec');
+            if (hiringRec) {
+                const labels = {strong_yes: 'Strong Yes', yes: 'Yes', maybe: 'Maybe', no: 'No', strong_no: 'Strong No'};
+                hiringEl.innerHTML = `<span class="hiring-badge ${hiringRec}">${labels[hiringRec] || hiringRec}</span>`;
+            } else {
+                hiringEl.innerHTML = '';
+            }
 
-            const quotes = document.getElementById('quotes-container');
-            quotes.innerHTML = (data.notable_quotes || []).map(q => `
-                <div class="quote">"${q.quote}"<div class="quote-context">${q.context || ''}</div></div>
-            `).join('');
+            // Score breakdown
+            const breakdown = fullData.fit_score_breakdown;
+            const breakdownSection = document.getElementById('score-breakdown-section');
+            if (breakdown) {
+                breakdownSection.style.display = 'block';
+                document.getElementById('score-breakdown').innerHTML = Object.entries(breakdown).map(([key, val]) => `
+                    <div class="score-bar">
+                        <div class="score-bar-label"><span>${key.replace('_', ' ')}</span><span>${val}%</span></div>
+                        <div class="score-bar-fill" style="width:${val}%"></div>
+                    </div>
+                `).join('');
+            } else {
+                breakdownSection.style.display = 'none';
+            }
 
-            document.getElementById('summary-text').textContent = data.summary || '';
-        }
+            // Strengths with evidence
+            const strengths = fullData.strengths || data.strengths || [];
+            document.getElementById('strengths-list').innerHTML = strengths.map(s => {
+                if (typeof s === 'string') return `<div class="evidence-card"><div class="evidence-card-title">${s}</div></div>`;
+                return `<div class="evidence-card">
+                    <div class="evidence-card-title">${s.strength || s}<span class="tag ${s.relevance || ''}">${s.relevance || ''}</span></div>
+                    ${s.evidence ? `<div class="evidence-card-quote">"${s.evidence}"</div>` : ''}
+                    ${s.job_requirement ? `<div class="evidence-card-detail">Addresses: ${s.job_requirement}</div>` : ''}
+                </div>`;
+            }).join('');
 
-        function renderList(id, items) {
-            document.getElementById(id).innerHTML = items.map(i => `<li>${i}</li>`).join('');
+            // Skills with evidence
+            const skills = fullData.matching_skills || data.matching_skills || [];
+            document.getElementById('skills-list').innerHTML = skills.map(s => {
+                if (typeof s === 'string') return `<div class="evidence-card"><div class="evidence-card-title">${s}</div></div>`;
+                return `<div class="evidence-card">
+                    <div class="evidence-card-title">${s.skill || s}<span class="tag">${s.experience_level || ''}</span></div>
+                    ${s.evidence ? `<div class="evidence-card-quote">"${s.evidence}"</div>` : ''}
+                    ${s.job_match ? `<div class="evidence-card-detail">${s.job_match}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // Concerns
+            const concerns = fullData.concerns || data.concerns || [];
+            document.getElementById('concerns-list').innerHTML = concerns.map(c => {
+                if (typeof c === 'string') return `<div class="evidence-card concern"><div class="evidence-card-title">${c}</div></div>`;
+                return `<div class="evidence-card concern">
+                    <div class="evidence-card-title">${c.concern || c}<span class="tag ${c.severity || ''}">${c.severity || ''}</span></div>
+                    ${c.evidence ? `<div class="evidence-card-quote">"${c.evidence}"</div>` : ''}
+                    ${c.mitigation ? `<div class="evidence-card-detail">Mitigation: ${c.mitigation}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // Communication assessment
+            const comm = fullData.communication_assessment;
+            const commSection = document.getElementById('comm-section');
+            if (comm) {
+                commSection.style.display = 'block';
+                document.getElementById('comm-assessment').innerHTML = `<div class="assessment-box">
+                    ${comm.clarity ? `<div class="assessment-item"><div class="assessment-label">Clarity</div><div class="assessment-value">${comm.clarity}</div></div>` : ''}
+                    ${comm.confidence ? `<div class="assessment-item"><div class="assessment-label">Confidence</div><div class="assessment-value">${comm.confidence}</div></div>` : ''}
+                    ${comm.examples_quality ? `<div class="assessment-item"><div class="assessment-label">Use of Examples</div><div class="assessment-value">${comm.examples_quality}</div></div>` : ''}
+                    ${comm.overall ? `<div class="assessment-item"><div class="assessment-label">Overall</div><div class="assessment-value">${comm.overall}</div></div>` : ''}
+                </div>`;
+            } else {
+                commSection.style.display = 'none';
+            }
+
+            // Cultural indicators
+            const culture = fullData.cultural_indicators;
+            const cultureSection = document.getElementById('culture-section');
+            if (culture) {
+                cultureSection.style.display = 'block';
+                document.getElementById('culture-indicators').innerHTML = `<div class="assessment-box">
+                    ${culture.work_style ? `<div class="assessment-item"><div class="assessment-label">Work Style</div><div class="assessment-value">${culture.work_style}</div></div>` : ''}
+                    ${culture.values ? `<div class="assessment-item"><div class="assessment-label">Values</div><div class="assessment-value">${culture.values}</div></div>` : ''}
+                    ${culture.team_fit ? `<div class="assessment-item"><div class="assessment-label">Team Fit</div><div class="assessment-value">${culture.team_fit}</div></div>` : ''}
+                </div>`;
+            } else {
+                cultureSection.style.display = 'none';
+            }
+
+            // Notable quotes
+            const quotes = fullData.notable_quotes || data.notable_quotes || [];
+            document.getElementById('quotes-container').innerHTML = quotes.map(q => {
+                const sentiment = q.sentiment || 'neutral';
+                return `<div class="quote ${sentiment}">"${q.quote}"<div class="quote-context">${q.context || ''}</div></div>`;
+            }).join('');
+
+            // Follow-up questions
+            const followup = fullData.follow_up_questions;
+            const followupSection = document.getElementById('followup-section');
+            if (followup && followup.length) {
+                followupSection.style.display = 'block';
+                document.getElementById('followup-list').innerHTML = followup.map(q => `<li>${q}</li>`).join('');
+            } else {
+                followupSection.style.display = 'none';
+            }
+
+            // Summary
+            document.getElementById('summary-text').textContent = fullData.summary || data.summary || '';
         }
 
         // UI helpers
