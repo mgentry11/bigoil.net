@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Outreach | Recruiting Tools</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .app-layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-header a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0.5rem;
+        }
+
+        .sidebar-nav { flex: 1; padding: 1rem; }
+        .nav-section { margin-bottom: 1.5rem; }
+        .nav-section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            padding: 0 0.5rem;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+        .nav-item.active { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+        .nav-icon { font-size: 1.1rem; }
+        .nav-badge {
+            margin-left: auto;
+            background: rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .page-header h2 {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 0.6rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary { background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: #fff; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; }
+        .btn-success { background: #059669; color: #fff; }
+        .btn-danger { background: #dc2626; color: #fff; }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .card-title { font-size: 1.1rem; font-weight: 600; }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: #60a5fa; }
+        .stat-label { font-size: 0.8rem; color: #64748b; margin-top: 0.25rem; }
+
+        /* Form Elements */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        /* Table */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        th { color: #64748b; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; }
+        td { color: #e2e8f0; font-size: 0.85rem; }
+        tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .status-draft { background: #374151; color: #9ca3af; }
+        .status-scheduled { background: #1e3a5f; color: #93c5fd; }
+        .status-sent { background: #065f46; color: #6ee7b7; }
+        .status-failed { background: #7f1d1d; color: #fca5a5; }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Panels */
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* Tags */
+        .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .tag:hover { background: rgba(99, 102, 241, 0.4); }
+
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="recruiting-tools.html">&larr; Recruiting Tools</a>
+                <h1>Email Outreach</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Campaigns</div>
+                    <div class="nav-item active" onclick="showPanel('dashboard')">
+                        <span class="nav-icon">&#128202;</span>
+                        Dashboard
+                    </div>
+                    <div class="nav-item" onclick="showPanel('campaigns')">
+                        <span class="nav-icon">&#128231;</span>
+                        All Campaigns
+                        <span class="nav-badge">3</span>
+                    </div>
+                    <div class="nav-item" onclick="showPanel('templates')">
+                        <span class="nav-icon">&#128196;</span>
+                        Templates
+                    </div>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Contacts</div>
+                    <div class="nav-item" onclick="showPanel('contacts')">
+                        <span class="nav-icon">&#128101;</span>
+                        All Contacts
+                        <span class="nav-badge">156</span>
+                    </div>
+                    <div class="nav-item" onclick="showModal('import-modal')">
+                        <span class="nav-icon">&#128228;</span>
+                        Import Contacts
+                    </div>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Analytics</div>
+                    <div class="nav-item" onclick="showPanel('analytics')">
+                        <span class="nav-icon">&#128200;</span>
+                        Reports
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="container">
+                <!-- Dashboard Panel -->
+                <div class="panel active" id="dashboard-panel">
+                    <div class="page-header">
+                        <h2>Dashboard</h2>
+                        <button class="btn btn-primary" onclick="showModal('new-campaign-modal')">
+                            + New Campaign
+                        </button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">156</div>
+                            <div class="stat-label">Total Contacts</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">432</div>
+                            <div class="stat-label">Emails Sent</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">38%</div>
+                            <div class="stat-label">Open Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">12%</div>
+                            <div class="stat-label">Reply Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Recent Campaigns</span>
+                            <button class="btn btn-secondary" onclick="showPanel('campaigns')">View All</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campaign</th>
+                                        <th>Status</th>
+                                        <th>Sent</th>
+                                        <th>Opened</th>
+                                        <th>Replied</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Senior Developer Outreach</td>
+                                        <td><span class="status-badge status-sent">Sent</span></td>
+                                        <td>45</td>
+                                        <td>18 (40%)</td>
+                                        <td>6 (13%)</td>
+                                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Product Manager Search</td>
+                                        <td><span class="status-badge status-scheduled">Scheduled</span></td>
+                                        <td>0</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Edit</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Science Talent</td>
+                                        <td><span class="status-badge status-draft">Draft</span></td>
+                                        <td>0</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Edit</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campaigns Panel -->
+                <div class="panel" id="campaigns-panel">
+                    <div class="page-header">
+                        <h2>All Campaigns</h2>
+                        <button class="btn btn-primary" onclick="showModal('new-campaign-modal')">
+                            + New Campaign
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Campaign Name</th>
+                                        <th>Status</th>
+                                        <th>Recipients</th>
+                                        <th>Sent</th>
+                                        <th>Open Rate</th>
+                                        <th>Reply Rate</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="campaigns-table">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Panel -->
+                <div class="panel" id="templates-panel">
+                    <div class="page-header">
+                        <h2>Email Templates</h2>
+                        <button class="btn btn-primary" onclick="showModal('new-template-modal')">
+                            + New Template
+                        </button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+                        <div class="card" style="cursor: pointer;">
+                            <div class="card-title">Initial Outreach</div>
+                            <p style="color: #64748b; font-size: 0.85rem; margin: 0.5rem 0;">Standard first contact template for passive candidates</p>
+                            <div class="tag-list">
+                                <span class="tag">{first_name}</span>
+                                <span class="tag">{company}</span>
+                                <span class="tag">{role}</span>
+                            </div>
+                        </div>
+                        <div class="card" style="cursor: pointer;">
+                            <div class="card-title">Follow Up #1</div>
+                            <p style="color: #64748b; font-size: 0.85rem; margin: 0.5rem 0;">First follow-up after 3 days of no response</p>
+                            <div class="tag-list">
+                                <span class="tag">{first_name}</span>
+                                <span class="tag">{role}</span>
+                            </div>
+                        </div>
+                        <div class="card" style="cursor: pointer;">
+                            <div class="card-title">Technical Role</div>
+                            <p style="color: #64748b; font-size: 0.85rem; margin: 0.5rem 0;">Specialized template for engineering positions</p>
+                            <div class="tag-list">
+                                <span class="tag">{first_name}</span>
+                                <span class="tag">{tech_stack}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacts Panel -->
+                <div class="panel" id="contacts-panel">
+                    <div class="page-header">
+                        <h2>Contacts</h2>
+                        <button class="btn btn-primary" onclick="showModal('import-modal')">
+                            Import Contacts
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Company</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contacts-table">
+                                    <tr>
+                                        <td>John Smith</td>
+                                        <td>john.smith@example.com</td>
+                                        <td>Tech Corp</td>
+                                        <td>Senior Engineer</td>
+                                        <td><span class="status-badge status-sent">Contacted</span></td>
+                                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sarah Johnson</td>
+                                        <td>sarah.j@startup.io</td>
+                                        <td>Startup Inc</td>
+                                        <td>Product Manager</td>
+                                        <td><span class="status-badge status-draft">New</span></td>
+                                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Panel -->
+                <div class="panel" id="analytics-panel">
+                    <div class="page-header">
+                        <h2>Analytics</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">432</div>
+                            <div class="stat-label">Total Sent</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">164</div>
+                            <div class="stat-label">Opened</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">52</div>
+                            <div class="stat-label">Replied</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Interviews</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Performance Over Time</div>
+                        <p style="color: #64748b; padding: 3rem; text-align: center;">
+                            Analytics charts will be displayed here when connected to backend.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Campaign Modal -->
+    <div class="modal" id="new-campaign-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Campaign</h3>
+                <button class="modal-close" onclick="closeModal('new-campaign-modal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Campaign Name *</label>
+                <input type="text" placeholder="e.g., Senior Developer Outreach Q1">
+            </div>
+            <div class="form-group">
+                <label>Template</label>
+                <select>
+                    <option>Initial Outreach</option>
+                    <option>Follow Up #1</option>
+                    <option>Technical Role</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Subject Line *</label>
+                <input type="text" placeholder="Exciting opportunity at {company}">
+            </div>
+            <div class="form-group">
+                <label>Email Body *</label>
+                <textarea placeholder="Hi {first_name},
+
+I came across your profile and was impressed by your experience at {current_company}..."></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button class="btn btn-secondary" onclick="closeModal('new-campaign-modal')">Cancel</button>
+                <button class="btn btn-primary">Create Campaign</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Contacts Modal -->
+    <div class="modal" id="import-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Import Contacts</h3>
+                <button class="modal-close" onclick="closeModal('import-modal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Upload CSV or Excel File</label>
+                <div style="border: 2px dashed rgba(255,255,255,0.2); border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer;">
+                    <p style="color: #888;">Click to upload or drag & drop</p>
+                    <p style="color: #666; font-size: 0.8rem;">CSV, XLSX supported</p>
+                    <input type="file" accept=".csv,.xlsx" style="display: none;">
+                </div>
+            </div>
+            <p style="color: #64748b; font-size: 0.85rem;">Required columns: email. Optional: first_name, last_name, company, title</p>
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button class="btn btn-secondary" onclick="closeModal('import-modal')">Cancel</button>
+                <button class="btn btn-primary">Import</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(panelId + '-panel').classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal on background click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

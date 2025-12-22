@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Extractor | Recruiting Tools</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a { color: #94a3b8; text-decoration: none; }
+        .header a:hover { color: #fff; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 2rem; }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .panel h2 { color: #60a5fa; font-size: 1.2rem; margin-bottom: 1rem; }
+
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover { border-color: #7c3aed; background: rgba(124, 58, 237, 0.1); }
+        .upload-zone.dragover { border-color: #60a5fa; background: rgba(96, 165, 250, 0.1); }
+        .upload-zone input { display: none; }
+        .upload-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .upload-text { color: #888; }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .form-group select option { background: #1a1a2e; }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-primary { background: linear-gradient(90deg, #3b82f6, #8b5cf6); color: #fff; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-text { font-size: 0.85rem; color: #888; text-align: center; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        th { color: #60a5fa; font-weight: 600; }
+        td { color: #ccc; }
+        .status-success { color: #6ee7b7; }
+        .status-error { color: #fca5a5; }
+        .status-pending { color: #fcd34d; }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #60a5fa; }
+        .stat-label { font-size: 0.75rem; color: #666; }
+
+        .hidden { display: none; }
+
+        @media (max-width: 768px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="recruiting-tools.html" class="logo">
+            <span>&larr;</span> Recruiting Tools
+        </a>
+        <a href="index.html">Big Oil</a>
+    </header>
+
+    <div class="container">
+        <h1>Email Extractor</h1>
+        <p class="subtitle">Extract professional emails from LinkedIn profiles using ContactOut API</p>
+
+        <!-- Upload Panel -->
+        <div class="panel" id="upload-panel">
+            <h2>Step 1: Upload Excel File</h2>
+            <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+                <input type="file" id="file-input" accept=".xlsx,.xls,.csv" onchange="handleFileSelect(event)">
+                <div class="upload-icon">&#128196;</div>
+                <p class="upload-text">Click or drag Excel/CSV file with LinkedIn URLs</p>
+                <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">Supports .xlsx, .xls, .csv</p>
+            </div>
+        </div>
+
+        <!-- Configuration Panel -->
+        <div class="panel hidden" id="config-panel">
+            <h2>Step 2: Configure Columns</h2>
+            <p style="color: #888; margin-bottom: 1rem;">File: <strong id="file-name"></strong> (<span id="row-count"></span> rows)</p>
+
+            <div class="form-group">
+                <label>LinkedIn URL Column *</label>
+                <select id="linkedin-column"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Name Column (optional)</label>
+                <select id="name-column">
+                    <option value="">-- None --</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button class="btn btn-secondary" onclick="resetUpload()">Upload Different File</button>
+                <button class="btn btn-primary" id="start-btn" onclick="startExtraction()">Start Extraction</button>
+            </div>
+        </div>
+
+        <!-- Progress Panel -->
+        <div class="panel hidden" id="progress-panel">
+            <h2>Extracting Emails...</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-processed">0</div>
+                    <div class="stat-label">Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-found">0</div>
+                    <div class="stat-label">Emails Found</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-failed">0</div>
+                    <div class="stat-label">Not Found</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-remaining">0</div>
+                    <div class="stat-label">Remaining</div>
+                </div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <p class="progress-text" id="progress-text">Starting...</p>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="panel hidden" id="results-panel">
+            <h2>Results</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="final-total">0</div>
+                    <div class="stat-label">Total Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="final-found">0</div>
+                    <div class="stat-label">Emails Found</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="final-rate">0%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="final-phones">0</div>
+                    <div class="stat-label">Phones Found</div>
+                </div>
+            </div>
+
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>LinkedIn</th>
+                            <th>Email</th>
+                            <th>Work Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-table"></tbody>
+                </table>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="downloadResults()">Download CSV</button>
+                <button class="btn btn-secondary" onclick="resetUpload()">Process Another File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://metabomaxpro1.onrender.com/api';
+        let uploadedFile = null;
+        let fileData = [];
+        let results = [];
+
+        // Drag and drop handlers
+        const uploadZone = document.getElementById('upload-zone');
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('file-input').files = files;
+                handleFileSelect({ target: { files } });
+            }
+        });
+
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            uploadedFile = file;
+            document.getElementById('file-name').textContent = file.name;
+
+            // Parse file client-side
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    // For CSV
+                    if (file.name.endsWith('.csv')) {
+                        const text = e.target.result;
+                        const lines = text.split('\n');
+                        const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                        fileData = lines.slice(1).filter(l => l.trim()).map(line => {
+                            const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
+                            const row = {};
+                            headers.forEach((h, i) => row[h] = values[i] || '');
+                            return row;
+                        });
+                        populateColumnSelectors(headers);
+                    } else {
+                        // For Excel, we'd need a library - show message
+                        alert('For Excel files, please save as CSV first. CSV support is built-in.');
+                        return;
+                    }
+
+                    document.getElementById('row-count').textContent = fileData.length;
+                    document.getElementById('upload-panel').classList.add('hidden');
+                    document.getElementById('config-panel').classList.remove('hidden');
+                } catch (err) {
+                    alert('Error parsing file: ' + err.message);
+                }
+            };
+
+            if (file.name.endsWith('.csv')) {
+                reader.readAsText(file);
+            } else {
+                reader.readAsArrayBuffer(file);
+            }
+        }
+
+        function populateColumnSelectors(columns) {
+            const linkedinSelect = document.getElementById('linkedin-column');
+            const nameSelect = document.getElementById('name-column');
+
+            linkedinSelect.innerHTML = '<option value="">-- Select Column --</option>';
+            nameSelect.innerHTML = '<option value="">-- None --</option>';
+
+            columns.forEach(col => {
+                linkedinSelect.innerHTML += `<option value="${col}">${col}</option>`;
+                nameSelect.innerHTML += `<option value="${col}">${col}</option>`;
+
+                // Auto-select likely columns
+                const colLower = col.toLowerCase();
+                if (colLower.includes('linkedin') || colLower.includes('url') || colLower.includes('profile')) {
+                    linkedinSelect.value = col;
+                }
+                if (colLower.includes('name') && !colLower.includes('company')) {
+                    nameSelect.value = col;
+                }
+            });
+        }
+
+        function resetUpload() {
+            uploadedFile = null;
+            fileData = [];
+            results = [];
+            document.getElementById('file-input').value = '';
+            document.getElementById('upload-panel').classList.remove('hidden');
+            document.getElementById('config-panel').classList.add('hidden');
+            document.getElementById('progress-panel').classList.add('hidden');
+            document.getElementById('results-panel').classList.add('hidden');
+        }
+
+        async function startExtraction() {
+            const linkedinCol = document.getElementById('linkedin-column').value;
+            const nameCol = document.getElementById('name-column').value;
+
+            if (!linkedinCol) {
+                alert('Please select the LinkedIn URL column');
+                return;
+            }
+
+            // Show progress panel
+            document.getElementById('config-panel').classList.add('hidden');
+            document.getElementById('progress-panel').classList.remove('hidden');
+
+            const total = fileData.length;
+            let processed = 0;
+            let found = 0;
+            let failed = 0;
+            results = [];
+
+            document.getElementById('stat-remaining').textContent = total;
+
+            for (const row of fileData) {
+                const linkedinUrl = row[linkedinCol];
+                const name = nameCol ? row[nameCol] : '';
+
+                if (!linkedinUrl || !linkedinUrl.includes('linkedin')) {
+                    results.push({ name, linkedin: linkedinUrl, email: '', workEmail: '', phone: '', status: 'invalid_url' });
+                    failed++;
+                } else {
+                    // Simulate API call (replace with actual API when backend is ready)
+                    try {
+                        const response = await fetch(`${API}/extract-email`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ linkedin_url: linkedinUrl })
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            results.push({
+                                name,
+                                linkedin: linkedinUrl,
+                                email: data.email || '',
+                                workEmail: data.work_email || '',
+                                phone: data.phone || '',
+                                status: data.email ? 'success' : 'not_found'
+                            });
+                            if (data.email) found++;
+                            else failed++;
+                        } else {
+                            results.push({ name, linkedin: linkedinUrl, email: '', workEmail: '', phone: '', status: 'error' });
+                            failed++;
+                        }
+                    } catch (e) {
+                        // API not available - simulate for demo
+                        results.push({ name, linkedin: linkedinUrl, email: '', workEmail: '', phone: '', status: 'api_unavailable' });
+                        failed++;
+                    }
+                }
+
+                processed++;
+                updateProgress(processed, total, found, failed);
+
+                // Rate limiting
+                await new Promise(r => setTimeout(r, 500));
+            }
+
+            showResults(processed, found, failed);
+        }
+
+        function updateProgress(processed, total, found, failed) {
+            const percent = Math.round((processed / total) * 100);
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-text').textContent = `Processing ${processed} of ${total}...`;
+            document.getElementById('stat-processed').textContent = processed;
+            document.getElementById('stat-found').textContent = found;
+            document.getElementById('stat-failed').textContent = failed;
+            document.getElementById('stat-remaining').textContent = total - processed;
+        }
+
+        function showResults(total, found, failed) {
+            document.getElementById('progress-panel').classList.add('hidden');
+            document.getElementById('results-panel').classList.remove('hidden');
+
+            document.getElementById('final-total').textContent = total;
+            document.getElementById('final-found').textContent = found;
+            document.getElementById('final-rate').textContent = Math.round((found / total) * 100) + '%';
+            document.getElementById('final-phones').textContent = results.filter(r => r.phone).length;
+
+            const tbody = document.getElementById('results-table');
+            tbody.innerHTML = results.map(r => `
+                <tr>
+                    <td>${r.name || '-'}</td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">${r.linkedin || '-'}</td>
+                    <td>${r.email || '-'}</td>
+                    <td>${r.workEmail || '-'}</td>
+                    <td>${r.phone || '-'}</td>
+                    <td class="${r.status === 'success' ? 'status-success' : 'status-error'}">${r.status}</td>
+                </tr>
+            `).join('');
+        }
+
+        function downloadResults() {
+            const headers = ['Name', 'LinkedIn URL', 'Email', 'Work Email', 'Phone', 'Status'];
+            const rows = results.map(r => [r.name, r.linkedin, r.email, r.workEmail, r.phone, r.status]);
+
+            let csv = headers.join(',') + '\n';
+            rows.forEach(row => {
+                csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'email_extraction_results.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>
