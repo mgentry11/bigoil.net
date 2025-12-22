@@ -492,23 +492,167 @@
         @media (min-width: 901px) {
             .sidebar-toggle { display: none; }
         }
+
+        /* Job Selection Overlay */
+        .job-selection-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .job-selection-overlay.hidden { display: none; }
+        .job-selection-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+        .job-selection-container h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .job-selection-container .subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .job-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .job-card:hover {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+        }
+        .job-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .job-card-company {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .job-card-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+        .job-card-stat {
+            color: #666;
+        }
+        .job-card-stat span {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        .job-card-delete {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .job-card:hover .job-card-delete { opacity: 1; }
+        .job-card-delete:hover { color: #ff6b6b; }
+        .no-jobs-message {
+            color: #666;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        /* Current Job Header in Sidebar */
+        .current-job-header {
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .current-job-info h2 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin: 0;
+        }
+        .current-job-company {
+            font-size: 0.75rem;
+            color: #a78bfa;
+        }
+        .switch-job-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .switch-job-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <!-- Job Selection Overlay - Shows when no job is selected -->
+    <div class="job-selection-overlay" id="job-selection-overlay">
+        <div class="job-selection-container">
+            <h1>Interview Analyzer</h1>
+            <p class="subtitle">Select a job to manage candidates and analyze interviews</p>
 
-    <div class="app-layout">
-        <aside class="sidebar" id="sidebar">
-            <!-- Jobs Section -->
-            <div class="sidebar-section">
-                <div class="section-header">
-                    <h3>Job Descriptions</h3>
-                    <button class="add-btn" onclick="showAddJobModal()">+ Add</button>
-                </div>
-                <ul class="item-list" id="jobs-list"></ul>
+            <div class="job-grid" id="job-grid">
+                <!-- Jobs will be rendered here -->
             </div>
 
-            <!-- Transcripts Section - Permanent and Reusable -->
+            <button class="btn btn-primary" onclick="showAddJobModal()" style="margin-top:1.5rem;">
+                + Create New Job
+            </button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="app-layout" id="main-app" style="display:none;">
+        <aside class="sidebar" id="sidebar">
+            <!-- Current Job Header -->
+            <div class="current-job-header" id="current-job-header">
+                <div class="current-job-info">
+                    <h2 id="current-job-title">No Job Selected</h2>
+                    <span class="current-job-company" id="current-job-company"></span>
+                </div>
+                <button class="switch-job-btn" onclick="switchJob()">Switch Job</button>
+            </div>
+
+            <!-- Transcripts Section - For Current Job -->
             <div class="sidebar-section">
                 <div class="section-header">
                     <h3>Transcripts</h3>
@@ -521,7 +665,7 @@
                 <ul class="item-list" id="drafts-list"></ul>
             </div>
 
-            <!-- Completed Section -->
+            <!-- Completed Reports Section - For Current Job -->
             <div class="sidebar-section">
                 <div class="section-header">
                     <h3>Completed Reports</h3>
@@ -529,12 +673,9 @@
                 <ul class="item-list" id="completed-list"></ul>
             </div>
 
-            <!-- Action Bar -->
+            <!-- Action Bar - No job selector needed -->
             <div class="action-bar">
-                <div class="selection-count" id="selection-count">Select drafts to analyze</div>
-                <select id="job-selector">
-                    <option value="">-- Select Job Description --</option>
-                </select>
+                <div class="selection-count" id="selection-count">Select transcripts to analyze</div>
                 <button class="analyze-selected-btn" id="analyze-btn" onclick="analyzeSelected()" disabled>
                     Analyze Selected
                 </button>
@@ -711,55 +852,114 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
     <script>
         const API = 'https://metabomaxpro1.onrender.com/api';
         let jobs = [];
-        let transcripts = [];  // Permanent transcripts (can be re-analyzed)
-        let completed = [];    // Completed analysis reports
+        let transcripts = [];  // Transcripts for current job
+        let completed = [];    // Reports for current job
         let selectedTranscripts = new Set();
         let currentReportId = null;
         let currentReportData = null;
         let currentEditField = null;
+        let currentJobId = null;  // Currently selected job
+        let currentJob = null;    // Current job object
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadJobs();
-            loadTranscripts();
-            loadReports();
+            loadJobs();  // Load jobs for selection screen
         });
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        // Jobs
+        // =========================================
+        // JOB SELECTION SCREEN
+        // =========================================
+
         async function loadJobs() {
             try {
                 const res = await fetch(`${API}/job-descriptions`);
                 const data = await res.json();
                 jobs = data.jobs || [];
-                renderJobs();
-                updateJobSelector();
+                renderJobGrid();
             } catch (e) {
                 console.error('Failed to load jobs:', e);
+                // Show grid even on error
+                renderJobGrid();
             }
         }
 
-        function renderJobs() {
-            const list = document.getElementById('jobs-list');
+        function renderJobGrid() {
+            const grid = document.getElementById('job-grid');
             if (jobs.length === 0) {
-                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No jobs yet. Click + Add</li>';
+                grid.innerHTML = `
+                    <div class="no-jobs-message">
+                        <p>No jobs yet. Create your first job to get started!</p>
+                    </div>
+                `;
                 return;
             }
-            list.innerHTML = jobs.map(j => `
-                <li class="item job-item" data-id="${j.id}">
-                    <span class="item-name">${j.title}</span>
-                    ${j.company ? `<span class="item-meta">${j.company}</span>` : ''}
-                    <button class="item-delete" onclick="event.stopPropagation();deleteJob('${j.id}')">×</button>
-                </li>
+            grid.innerHTML = jobs.map(j => `
+                <div class="job-card" onclick="selectJob('${j.id}')">
+                    <button class="job-card-delete" onclick="event.stopPropagation();deleteJobFromGrid('${j.id}')">&times;</button>
+                    <div class="job-card-title">${j.title}</div>
+                    <div class="job-card-company">${j.company || 'No company'}</div>
+                    <div class="job-card-stats">
+                        <div class="job-card-stat"><span>${j.transcript_count || 0}</span> transcripts</div>
+                        <div class="job-card-stat"><span>${j.report_count || 0}</span> reports</div>
+                    </div>
+                </div>
             `).join('');
         }
 
-        function updateJobSelector() {
-            const sel = document.getElementById('job-selector');
-            sel.innerHTML = '<option value="">-- Select Job Description --</option>' +
-                jobs.map(j => `<option value="${j.id}">${j.title}${j.company ? ' ('+j.company+')' : ''}</option>`).join('');
+        async function selectJob(jobId) {
+            currentJobId = jobId;
+            currentJob = jobs.find(j => j.id === jobId);
+
+            if (!currentJob) {
+                console.error('Job not found:', jobId);
+                return;
+            }
+
+            // Update header
+            document.getElementById('current-job-title').textContent = currentJob.title;
+            document.getElementById('current-job-company').textContent = currentJob.company || '';
+
+            // Hide overlay, show main app
+            document.getElementById('job-selection-overlay').classList.add('hidden');
+            document.getElementById('main-app').style.display = 'flex';
+
+            // Load data for this job
+            selectedTranscripts.clear();
+            await loadTranscripts();
+            await loadReports();
+            updateSelectionUI();
+            showPanel('welcome-panel');
+        }
+
+        function switchJob() {
+            // Reset state
+            currentJobId = null;
+            currentJob = null;
+            transcripts = [];
+            completed = [];
+            selectedTranscripts.clear();
+            currentReportId = null;
+            currentReportData = null;
+
+            // Show overlay, hide main app
+            document.getElementById('job-selection-overlay').classList.remove('hidden');
+            document.getElementById('main-app').style.display = 'none';
+
+            // Refresh jobs list
+            loadJobs();
+        }
+
+        async function deleteJobFromGrid(jobId) {
+            if (!confirm('Delete this job? All transcripts and reports for this job will also be deleted.')) return;
+            try {
+                await fetch(`${API}/job-descriptions/${jobId}`, { method: 'DELETE' });
+                loadJobs();
+            } catch (e) {
+                alert('Failed to delete job: ' + e.message);
+            }
         }
 
         function showAddJobModal() {
@@ -802,19 +1002,30 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
             loadJobs();
         }
 
-        // Transcripts - now permanent and reusable
+        // Transcripts - filtered by current job
         async function loadTranscripts() {
+            if (!currentJobId) {
+                transcripts = [];
+                renderTranscripts();
+                return;
+            }
             try {
-                const res = await fetch(`${API}/transcripts`);
+                const res = await fetch(`${API}/job-descriptions/${currentJobId}/transcripts`);
                 const data = await res.json();
                 transcripts = data.transcripts || [];
                 renderTranscripts();
             } catch (e) {
                 console.error('Failed to load transcripts:', e);
+                transcripts = [];
+                renderTranscripts();
             }
         }
 
         function showAddTranscriptModal() {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                return;
+            }
             document.getElementById('new-transcript-name').value = '';
             document.getElementById('new-transcript-text').value = '';
             document.getElementById('new-transcript-resume').value = '';
@@ -822,6 +1033,11 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
         }
 
         async function saveTranscript() {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                return;
+            }
+
             const name = document.getElementById('new-transcript-name').value.trim();
             const text = document.getElementById('new-transcript-text').value.trim();
             const resume = document.getElementById('new-transcript-resume').value.trim();
@@ -832,7 +1048,12 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
             }
 
             try {
-                const payload = { candidate_name: name, transcript: text, source: 'paste' };
+                const payload = {
+                    job_id: currentJobId,  // Link to current job
+                    candidate_name: name,
+                    transcript: text,
+                    source: 'paste'
+                };
                 if (resume) payload.resume = resume;
 
                 const res = await fetch(`${API}/transcripts`, {
@@ -887,10 +1108,15 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
             updateSelectionUI();
         }
 
-        // Reports (completed analysis)
+        // Reports - filtered by current job
         async function loadReports() {
+            if (!currentJobId) {
+                completed = [];
+                renderCompleted();
+                return;
+            }
             try {
-                const res = await fetch(`${API}/interview-reports`);
+                const res = await fetch(`${API}/job-descriptions/${currentJobId}/reports`);
                 const data = await res.json();
                 const reports = data.reports || [];
                 // Only show completed reports (with fit_score)
@@ -898,6 +1124,8 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
                 renderCompleted();
             } catch (e) {
                 console.error('Failed to load reports:', e);
+                completed = [];
+                renderCompleted();
             }
         }
 
@@ -919,13 +1147,11 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
 
         function updateSelectionUI() {
             const count = selectedTranscripts.size;
-            const jobId = document.getElementById('job-selector').value;
             document.getElementById('selection-count').textContent =
                 count === 0 ? 'Select transcripts to analyze' : `${count} transcript(s) selected`;
-            document.getElementById('analyze-btn').disabled = count === 0 || !jobId;
+            // Enable button if we have selections (job is already selected via currentJobId)
+            document.getElementById('analyze-btn').disabled = count === 0 || !currentJobId;
         }
-
-        document.getElementById('job-selector').addEventListener('change', updateSelectionUI);
 
         async function deleteReport(id) {
             if (!confirm('Delete this report?')) return;
@@ -936,8 +1162,14 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
             }
         }
 
-        // Bulk upload - now saves to transcripts table
+        // Bulk upload - saves transcripts linked to current job
         async function handleBulkUpload(event) {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                event.target.value = '';
+                return;
+            }
+
             const files = event.target.files;
             if (!files.length) return;
 
@@ -951,7 +1183,13 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
                     await fetch(`${API}/transcripts`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ transcript: text, candidate_name: name, source: 'upload', filename: file.name })
+                        body: JSON.stringify({
+                            job_id: currentJobId,  // Link to current job
+                            transcript: text,
+                            candidate_name: name,
+                            source: 'upload',
+                            filename: file.name
+                        })
                     });
                     uploaded++;
                     updateProgress(uploaded / files.length * 100, `Uploaded ${uploaded} of ${files.length}`);
@@ -963,15 +1201,14 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
             event.target.value = '';
             loadTranscripts();
             hideLoading();
-            alert(`Uploaded ${uploaded} transcript(s). They will remain available for re-analysis against different jobs.`);
+            alert(`Uploaded ${uploaded} transcript(s) for this job.`);
         }
 
-        // Analyze selected transcripts - creates new reports, keeps transcripts
+        // Analyze selected transcripts - creates new reports for current job
         async function analyzeSelected() {
-            const jobId = document.getElementById('job-selector').value;
             const transcriptIds = Array.from(selectedTranscripts);
 
-            if (!jobId || transcriptIds.length === 0) return;
+            if (!currentJobId || transcriptIds.length === 0) return;
 
             showLoading(`Analyzing ${transcriptIds.length} candidate(s)...`);
             updateProgress(0, 'Starting analysis...');
@@ -980,7 +1217,7 @@ Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea
                 const res = await fetch(`${API}/analyze-transcripts`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ job_id: jobId, transcript_ids: transcriptIds })
+                    body: JSON.stringify({ job_id: currentJobId, transcript_ids: transcriptIds })
                 });
 
                 const data = await res.json();

@@ -122,6 +122,57 @@ body {
     color: var(--color-gold);
 }
 
+/* Navigation Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown .dropdown-toggle {
+    cursor: pointer;
+}
+
+.nav-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(15, 15, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    border-radius: 8px;
+    min-width: 200px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    list-style: none;
+    z-index: 1000;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown .dropdown-menu li {
+    padding: 0;
+}
+
+.nav-dropdown .dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.nav-dropdown .dropdown-menu a:hover {
+    background: rgba(201, 162, 39, 0.1);
+    color: var(--color-gold);
+}
+
 /* Hero Text */
 .hero-text {
     flex: 1;

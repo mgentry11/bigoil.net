@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiting Tools | Big Oil</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #fff;
+        }
+        .logo-icon { font-size: 1.5rem; }
+        .logo-text { font-weight: 700; letter-spacing: 2px; }
+        .back-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-link:hover { color: #fff; }
+
+        /* Main Content */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tool Categories */
+        .category {
+            margin-bottom: 3rem;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .category h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Tool Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Tool Card */
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tool-card:hover::before { opacity: 1; }
+
+        .tool-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1e40af, #7c3aed);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .tool-status {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-live { background: #065f46; color: #6ee7b7; }
+        .status-beta { background: #78350f; color: #fcd34d; }
+        .status-coming { background: #1e3a5f; color: #93c5fd; }
+
+        .tool-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tool-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .tool-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .feature-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            border-radius: 4px;
+        }
+
+        /* Coming Soon Overlay */
+        .tool-card.coming-soon {
+            opacity: 0.7;
+            cursor: default;
+        }
+        .tool-card.coming-soon:hover {
+            transform: none;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Quick Stats */
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .stats-bar { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">&#9906;</span>
+                <span class="logo-text">BIG OIL</span>
+            </a>
+            <a href="index.html" class="back-link">
+                <span>&larr;</span> Back to Main Site
+            </a>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <h1>Recruiting Tools</h1>
+            <p>Comprehensive suite of AI-powered tools for sourcing, screening, and managing candidates</p>
+        </section>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Tools Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">AI</div>
+                <div class="stat-label">Powered Analysis</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Web Based</div>
+            </div>
+        </div>
+
+        <!-- Interview & Analysis -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">&#128221;</div>
+                <h2>Interview & Analysis</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="interview-analyzer.html" class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128202;</div>
+                        <span class="tool-status status-live">Live</span>
+                    </div>
+                    <h3>Interview Analyzer</h3>
+                    <p>AI-powered analysis of interview transcripts. Get fit scores, identify strengths/concerns, and compare candidates against job requirements.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">GPT-4 Analysis</span>
+                        <span class="feature-tag">Fit Scoring</span>
+                        <span class="feature-tag">Resume Matching</span>
+                    </div>
+                </a>
+
+                <a href="candidate-analyzer.html" class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128269;</div>
+                        <span class="tool-status status-live">Live</span>
+                    </div>
+                    <h3>Candidate Analyzer</h3>
+                    <p>Deep analysis of candidate profiles, experience matching, and skill assessment with comprehensive reporting.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Profile Analysis</span>
+                        <span class="feature-tag">Skill Matching</span>
+                        <span class="feature-tag">Reports</span>
+                    </div>
+                </a>
+
+                <a href="candidate-verification.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128274;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Candidate Verification</h3>
+                    <p>AI-powered fraud detection and verification. Analyze resumes for AI-generated content, validate credentials, and assess risk.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Fraud Detection</span>
+                        <span class="feature-tag">AI Content Check</span>
+                        <span class="feature-tag">Risk Scoring</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- LinkedIn Tools -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">&#128101;</div>
+                <h2>LinkedIn Tools</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="linkedin-downloader.html" class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128229;</div>
+                        <span class="tool-status status-live">Live</span>
+                    </div>
+                    <h3>LinkedIn Downloader</h3>
+                    <p>Download LinkedIn profiles as PDFs for offline review and analysis. Includes Chrome extension for one-click saves.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Chrome Extension</span>
+                        <span class="feature-tag">PDF Export</span>
+                        <span class="feature-tag">Bulk Download</span>
+                    </div>
+                </a>
+
+                <a href="linkedin-pdf-uploader.html" class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128228;</div>
+                        <span class="tool-status status-live">Live</span>
+                    </div>
+                    <h3>LinkedIn PDF Uploader</h3>
+                    <p>Upload and process LinkedIn PDF profiles. Extract structured data for analysis and candidate tracking.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">PDF Processing</span>
+                        <span class="feature-tag">Data Extraction</span>
+                        <span class="feature-tag">Batch Upload</span>
+                    </div>
+                </a>
+
+                <a href="email-extractor.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128231;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Email Extractor</h3>
+                    <p>Find professional emails for LinkedIn profiles. Integrates with ContactOut API for accurate email lookups.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Email Lookup</span>
+                        <span class="feature-tag">ContactOut API</span>
+                        <span class="feature-tag">Excel Export</span>
+                    </div>
+                </a>
+
+                <a href="linkedin-sourcing.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#127919;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>LinkedIn Sourcing</h3>
+                    <p>Track candidates sourced from LinkedIn organized by job positions. Multi-user support with data persistence.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Candidate Tracking</span>
+                        <span class="feature-tag">Job Organization</span>
+                        <span class="feature-tag">Team Collaboration</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Resume Tools -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">&#128196;</div>
+                <h2>Resume Tools</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="resume-ranker.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#127942;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Resume Ranker</h3>
+                    <p>Automatically rank resumes against job requirements. Score candidates based on skills, experience, and qualifications.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Auto Ranking</span>
+                        <span class="feature-tag">Skill Matching</span>
+                        <span class="feature-tag">Batch Processing</span>
+                    </div>
+                </a>
+
+                <a href="resume-anonymizer.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128683;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Resume Anonymizer</h3>
+                    <p>Remove personal identifying information from resumes for blind hiring. Uses local AI for privacy.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">PII Removal</span>
+                        <span class="feature-tag">Blind Hiring</span>
+                        <span class="feature-tag">Local Processing</span>
+                    </div>
+                </a>
+
+                <a href="resume-analyzer.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128200;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Resume Analyzer</h3>
+                    <p>Deep analysis of resume content, formatting, and effectiveness. Get improvement suggestions and ATS compatibility scores.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Content Analysis</span>
+                        <span class="feature-tag">ATS Check</span>
+                        <span class="feature-tag">Suggestions</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Outreach Tools -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">&#128236;</div>
+                <h2>Outreach & Communication</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="email-outreach.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#9993;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Email Outreach</h3>
+                    <p>Full email campaign management for recruiting. Templates, personalization, tracking, and SendGrid integration.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Campaigns</span>
+                        <span class="feature-tag">Templates</span>
+                        <span class="feature-tag">Tracking</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Indeed Tools -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">&#128188;</div>
+                <h2>Indeed Tools</h2>
+            </div>
+            <div class="tools-grid">
+                <a href="indeed-downloader.html" class="tool-card coming-soon">
+                    <div class="tool-header">
+                        <div class="tool-icon">&#128229;</div>
+                        <span class="tool-status status-coming">Coming</span>
+                    </div>
+                    <h3>Indeed Resume Downloader</h3>
+                    <p>Chrome extension to bulk download applicant resumes from Indeed employer accounts. Automated batch processing.</p>
+                    <div class="tool-features">
+                        <span class="feature-tag">Chrome Extension</span>
+                        <span class="feature-tag">Bulk Download</span>
+                        <span class="feature-tag">Auto-naming</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Big Oil Corporation. Recruiting Tools Suite.</p>
+    </footer>
+</body>
+</html>
