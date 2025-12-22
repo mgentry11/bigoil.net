@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teenagent - ADHD Companion</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Personality Selector */
+        .personality-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .personality-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .personality-btn:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #fff;
+        }
+
+        .personality-btn.active {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.2);
+            color: #fff;
+        }
+
+        .personality-btn.max.active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.2);
+        }
+
+        .personality-btn.sage.active {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .personality-btn.daphne.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .settings-btn:hover {
+            color: #fff;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: rgba(124, 58, 237, 0.3);
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai.max {
+            border-left: 3px solid #f59e0b;
+        }
+
+        .message.ai.sage {
+            border-left: 3px solid #10b981;
+        }
+
+        .message.ai.daphne {
+            border-left: 3px solid #8b5cf6;
+        }
+
+        .typing-indicator {
+            align-self: flex-start;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+        }
+
+        /* Welcome Message */
+        .welcome-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .welcome-subtitle {
+            color: #888;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            resize: none;
+            min-height: 48px;
+            max-height: 150px;
+            line-height: 1.4;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        .message-input::placeholder {
+            color: #666;
+        }
+
+        .send-btn {
+            padding: 0.875rem 1.5rem;
+            background: #7c3aed;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .send-btn:hover {
+            background: #6d28d9;
+        }
+
+        .send-btn:disabled {
+            background: #4a4a6a;
+            cursor: not-allowed;
+        }
+
+        /* Settings Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #1e1e3f;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .modal-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .modal-field input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .modal-field input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .modal-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-btn.primary {
+            background: #7c3aed;
+            border: none;
+            color: #fff;
+        }
+
+        .modal-btn.primary:hover {
+            background: #6d28d9;
+        }
+
+        .modal-btn.danger {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .modal-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .api-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .api-status.valid {
+            color: #10b981;
+        }
+
+        .api-status.invalid {
+            color: #ef4444;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Celebration Animation */
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            animation: celebrate 1s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes celebrate {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Clear chat button */
+        .clear-chat-btn {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .clear-chat-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .header-controls {
+                justify-content: space-between;
+            }
+
+            .personality-selector {
+                flex: 1;
+            }
+
+            .personality-btn {
+                flex: 1;
+                text-align: center;
+                padding: 0.5rem;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">&#129504;</span>
+                <span>Teenagent</span>
+            </div>
+            <div class="header-controls">
+                <div class="personality-selector">
+                    <button class="personality-btn max active" data-personality="max">Max</button>
+                    <button class="personality-btn sage" data-personality="sage">Sage</button>
+                    <button class="personality-btn daphne" data-personality="daphne">Daphne</button>
+                </div>
+                <button class="settings-btn" id="settingsBtn" title="Settings">&#9881;</button>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-container" id="welcomeContainer">
+                <div class="welcome-icon">&#129504;</div>
+                <h2 class="welcome-title">Hey, you showed up!</h2>
+                <p class="welcome-subtitle">That's already a win. I'm here to help you tackle whatever's on your mind. Pick a personality above and let's chat.</p>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-container">
+                <textarea
+                    class="message-input"
+                    id="messageInput"
+                    placeholder="What's on your mind?"
+                    rows="1"
+                ></textarea>
+                <button class="send-btn" id="sendBtn">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <h2>Settings</h2>
+            <div class="modal-field">
+                <label>OpenAI API Key</label>
+                <input type="password" id="apiKeyInput" placeholder="sk-...">
+                <div class="api-status" id="apiStatus"></div>
+            </div>
+            <div class="modal-field">
+                <label>Conversation</label>
+                <button class="clear-chat-btn" id="clearChatBtn">Clear Chat History</button>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="closeModalBtn">Cancel</button>
+                <button class="modal-btn primary" id="saveSettingsBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // System Prompts
+        const BASE_PROMPT = `You are an ADHD companion for adults. You MUST follow these rules:
+
+1. NEVER judge, criticize, or use phrases like "you should have" or "why didn't you"
+2. Celebrate EVERY action - even opening the app is a win worth acknowledging
+3. Keep responses to 2-3 sentences MAXIMUM. Brevity is essential.
+4. Present only ONE idea or question per message
+5. Break everything into tiny, manageable micro-steps
+6. Validate emotions BEFORE offering any solutions
+7. Use body doubling language when appropriate: "I'm here with you", "Let's do this together"
+8. You are NOT a therapist - be clear about your scope if mental health crisis arises
+9. If you detect crisis keywords (suicidal, self-harm, etc.), respond with empathy and provide: "If you're in crisis, please reach out to 988 (Suicide & Crisis Lifeline) or text HOME to 741741."
+
+Remember: Short responses. No lectures. No judgment. Celebrate everything.`;
+
+        const PERSONALITIES = {
+            max: {
+                name: 'Max',
+                color: '#f59e0b',
+                prompt: `${BASE_PROMPT}
+
+You are Max - The Hype Coach. Your personality traits:
+- Energetic and genuinely excited about every small win
+- Use gaming and sports metaphors naturally (missions, quests, leveling up, crushing it)
+- Treat tasks as adventures, not chores
+- Your energy is high but NEVER overwhelming or manic
+- You're a supportive friend, not a drill sergeant
+- Celebrate loudly but authentically
+
+Sample responses:
+- "You showed up! That's move #1. What's the mission today?"
+- "Emails? Those are just side quests. Let's knock out the first one and see how it feels."
+- "THREE DONE. You're on a streak! Keep going or take a victory lap - your call."
+
+Remember: High energy, game-like framing, genuine celebration, SHORT responses.`
+            },
+            sage: {
+                name: 'Sage',
+                color: '#10b981',
+                prompt: `${BASE_PROMPT}
+
+You are Sage - The Zen Master. Your personality traits:
+- Calm, grounding presence above all else
+- Prioritize emotional validation - acknowledge feelings first, always
+- Offer PRESENCE, not immediate solutions
+- Use gentle, measured language with natural pauses
+- When someone is overwhelmed, you slow everything down
+- You're the calm in their storm
+
+Sample responses:
+- "I'm here. You don't have to do anything right now."
+- "That sounds really heavy. Want to talk about it, or just sit together for a bit?"
+- "One breath. Just one. We can figure out the rest after."
+
+Remember: Calm energy, validation first, presence over solutions, SHORT responses.`
+            },
+            daphne: {
+                name: 'Daphne',
+                color: '#8b5cf6',
+                prompt: `${BASE_PROMPT}
+
+You are Daphne - The Strategic Friend. Your personality traits:
+- Practical, organized, and friendly - like a capable friend who has their life together
+- Help break down complexity into clear, achievable steps
+- Ask good clarifying questions to understand the real problem
+- Create structure without being rigid or bossy
+- See the big picture and make it feel manageable
+- You're warm but focused
+
+Sample responses:
+- "Okay, let's map this out. What's actually due first?"
+- "I see three things here. Which one is bugging you the most?"
+- "Here's how I'd break this down: [micro-steps]. Does that feel more doable?"
+
+Remember: Practical clarity, structured help, warmth with focus, SHORT responses.`
+            }
+        };
+
+        // State
+        let currentPersonality = 'max';
+        let conversationHistory = [];
+        let apiKey = '';
+        let isWaiting = false;
+
+        // DOM Elements
+        const chatContainer = document.getElementById('chatContainer');
+        const welcomeContainer = document.getElementById('welcomeContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        const apiKeyInput = document.getElementById('apiKeyInput');
+        const apiStatus = document.getElementById('apiStatus');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const clearChatBtn = document.getElementById('clearChatBtn');
+        const personalityBtns = document.querySelectorAll('.personality-btn');
+
+        // Initialize
+        function init() {
+            loadSettings();
+            loadConversation();
+            setupEventListeners();
+            autoResizeTextarea();
+        }
+
+        function loadSettings() {
+            apiKey = localStorage.getItem('teenagent_api_key') || '';
+            currentPersonality = localStorage.getItem('teenagent_personality') || 'max';
+
+            apiKeyInput.value = apiKey;
+            updatePersonalityUI();
+            updateApiStatus();
+        }
+
+        function loadConversation() {
+            const saved = localStorage.getItem('teenagent_history');
+            if (saved) {
+                conversationHistory = JSON.parse(saved);
+                if (conversationHistory.length > 0) {
+                    welcomeContainer.style.display = 'none';
+                    conversationHistory.forEach(msg => {
+                        addMessageToUI(msg.role === 'assistant' ? 'ai' : 'user', msg.content, false);
+                    });
+                    scrollToBottom();
+                }
+            }
+        }
+
+        function saveConversation() {
+            localStorage.setItem('teenagent_history', JSON.stringify(conversationHistory));
+        }
+
+        function setupEventListeners() {
+            // Personality buttons
+            personalityBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPersonality = btn.dataset.personality;
+                    localStorage.setItem('teenagent_personality', currentPersonality);
+                    updatePersonalityUI();
+                });
+            });
+
+            // Send message
+            sendBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Settings modal
+            settingsBtn.addEventListener('click', () => {
+                settingsModal.classList.add('active');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                settingsModal.classList.remove('active');
+            });
+
+            saveSettingsBtn.addEventListener('click', saveSettings);
+
+            clearChatBtn.addEventListener('click', clearChat);
+
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) {
+                    settingsModal.classList.remove('active');
+                }
+            });
+
+            // Auto-resize textarea
+            messageInput.addEventListener('input', autoResizeTextarea);
+        }
+
+        function autoResizeTextarea() {
+            messageInput.style.height = 'auto';
+            messageInput.style.height = Math.min(messageInput.scrollHeight, 150) + 'px';
+        }
+
+        function updatePersonalityUI() {
+            personalityBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.personality === currentPersonality);
+            });
+        }
+
+        function updateApiStatus() {
+            if (!apiKey) {
+                apiStatus.innerHTML = '';
+                return;
+            }
+
+            if (apiKey.startsWith('sk-')) {
+                apiStatus.innerHTML = '<span class="status-dot"></span> API key saved';
+                apiStatus.className = 'api-status valid';
+            } else {
+                apiStatus.innerHTML = '<span class="status-dot"></span> Invalid API key format';
+                apiStatus.className = 'api-status invalid';
+            }
+        }
+
+        function saveSettings() {
+            apiKey = apiKeyInput.value.trim();
+            localStorage.setItem('teenagent_api_key', apiKey);
+            updateApiStatus();
+            settingsModal.classList.remove('active');
+        }
+
+        function clearChat() {
+            if (confirm('Clear all chat history? This cannot be undone.')) {
+                conversationHistory = [];
+                localStorage.removeItem('teenagent_history');
+                chatContainer.innerHTML = '';
+                chatContainer.appendChild(welcomeContainer);
+                welcomeContainer.style.display = 'flex';
+                settingsModal.classList.remove('active');
+            }
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message || isWaiting) return;
+
+            if (!apiKey) {
+                alert('Please add your OpenAI API key in settings first.');
+                settingsModal.classList.add('active');
+                return;
+            }
+
+            // Hide welcome if first message
+            if (welcomeContainer.style.display !== 'none') {
+                welcomeContainer.style.display = 'none';
+            }
+
+            // Add user message
+            addMessageToUI('user', message);
+            conversationHistory.push({ role: 'user', content: message });
+            saveConversation();
+
+            // Clear input
+            messageInput.value = '';
+            autoResizeTextarea();
+
+            // Show typing indicator
+            isWaiting = true;
+            sendBtn.disabled = true;
+            const typingIndicator = showTypingIndicator();
+
+            try {
+                const response = await callOpenAI(message);
+
+                // Remove typing indicator
+                typingIndicator.remove();
+
+                // Add AI response
+                addMessageToUI('ai', response);
+                conversationHistory.push({ role: 'assistant', content: response });
+                saveConversation();
+
+                // Celebration for task completion keywords
+                if (message.toLowerCase().includes('done') ||
+                    message.toLowerCase().includes('finished') ||
+                    message.toLowerCase().includes('completed')) {
+                    celebrate();
+                }
+
+            } catch (error) {
+                typingIndicator.remove();
+                addMessageToUI('ai', `Oops, something went wrong. ${error.message}. Check your API key in settings.`);
+            }
+
+            isWaiting = false;
+            sendBtn.disabled = false;
+            messageInput.focus();
+        }
+
+        async function callOpenAI(message) {
+            const personality = PERSONALITIES[currentPersonality];
+
+            const messages = [
+                { role: 'system', content: personality.prompt },
+                ...conversationHistory.slice(-10), // Keep last 10 messages for context
+                { role: 'user', content: message }
+            ];
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4-turbo-preview',
+                    messages: messages,
+                    max_tokens: 300,
+                    temperature: 0.8
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API request failed');
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content;
+        }
+
+        function addMessageToUI(type, content, animate = true) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+
+            if (type === 'ai') {
+                messageDiv.classList.add(currentPersonality);
+            }
+
+            messageDiv.textContent = content;
+
+            if (!animate) {
+                messageDiv.style.animation = 'none';
+            }
+
+            chatContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.createElement('div');
+            indicator.className = `typing-indicator ${currentPersonality}`;
+            indicator.innerHTML = '<span></span><span></span><span></span>';
+            chatContainer.appendChild(indicator);
+            scrollToBottom();
+            return indicator;
+        }
+
+        function scrollToBottom() {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function celebrate() {
+            const emojis = ['🎉', '⭐', '🔥', '💪', '🚀', '✨'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            celebration.textContent = emoji;
+            document.body.appendChild(celebration);
+
+            setTimeout(() => celebration.remove(), 1000);
+        }
+
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>
