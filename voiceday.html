@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceDay iOS App - Screen Matrix</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #252525;
+            --accent: #22c55e;
+            --accent-light: #4ade80;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .screen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .screen-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.15);
+        }
+
+        .screen-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .screen-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-preview img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .card-preview .placeholder {
+            color: var(--text-secondary);
+            font-size: 3rem;
+        }
+
+        .card-preview .click-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .screen-card:hover .click-hint {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-file {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .feature-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .badge-tab { background: #3b82f6; color: white; }
+        .badge-modal { background: #8b5cf6; color: white; }
+        .badge-sheet { background: #f59e0b; color: black; }
+        .badge-fullscreen { background: #ef4444; color: white; }
+        .badge-component { background: #6b7280; color: white; }
+        .badge-onboarding { background: #10b981; color: white; }
+
+        /* Color coding for sections */
+        .tab-screens .section-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .onboarding-screens .section-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+        .focus-screens .section-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .task-screens .section-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .routine-screens .section-icon { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .settings-screens .section-icon { background: linear-gradient(135deg, #6b7280, #9ca3af); }
+        .utility-screens .section-icon { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 400px;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--bg-card);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-card);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-nav.prev { left: -60px; }
+        .modal-nav.next { right: -60px; }
+
+        .architecture-diagram {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .diagram-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            min-width: 80px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-item:hover, .tab-item.active {
+            background: var(--accent);
+            color: black;
+        }
+
+        .tab-emoji {
+            font-size: 1.5rem;
+        }
+
+        .tab-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .stats { gap: 20px; }
+            .stat-number { font-size: 2rem; }
+            .screen-grid { grid-template-columns: 1fr; }
+            .modal-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VoiceDay</h1>
+            <p class="subtitle">ADHD-Friendly Task Management iOS App</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Main Tabs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Total Screens</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Bot Personalities</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">iOS 17+</div>
+                    <div class="stat-label">Target Platform</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Tab Views -->
+        <section class="section tab-screens">
+            <div class="section-header">
+                <div class="section-icon">📱</div>
+                <h2>Main Tab Views</h2>
+            </div>
+            <div class="screen-grid">
+                <div class="screen-card" onclick="openModal('voiceday-screens/focus-home.png', 'Focus Home')">
+                    <span class="badge badge-tab">Tab 0</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/focus-home.png" alt="Focus Home Screen">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80);">🎯</div>
+                        <div>
+                            <div class="card-title">Focus Home</div>
+                            <div class="card-file">FocusHomeView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Primary entry point. Shows ONE task at a time to reduce overwhelm. Includes momentum meter, mode selector, and hyperfocus button.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Single Task Focus</span>
+                        <span class="feature-tag">Voice Commands</span>
+                        <span class="feature-tag">Momentum Tracking</span>
+                    </div>
+                </div>
+
+                <div class="screen-card" onclick="openModal('voiceday-screens/recording.png', 'Recording View')">
+                    <span class="badge badge-tab">Tab 1</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/recording.png" alt="Recording Screen">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ef4444, #f87171);">🎙️</div>
+                        <div>
+                            <div class="card-title">Recording View</div>
+                            <div class="card-file">RecordingView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Voice dictation interface. Converts natural speech into tasks, events, and reminders using Claude AI with personality.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Speech Recognition</span>
+                        <span class="feature-tag">AI Processing</span>
+                        <span class="feature-tag">Architect Mode</span>
+                    </div>
+                </div>
+
+                <div class="screen-card" onclick="openModal('voiceday-screens/tasks.png', 'Tasks List')">
+                    <span class="badge badge-tab">Tab 2</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/tasks.png" alt="Tasks Screen">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">✅</div>
+                        <div>
+                            <div class="card-title">Tasks List</div>
+                            <div class="card-file">TasksListView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Full task list grouped by Today, Tomorrow, This Week, Later. BIG checkboxes and action buttons for ADHD-friendly interaction.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Grouped by Date</span>
+                        <span class="feature-tag">Swipe Actions</span>
+                        <span class="feature-tag">Push/Reschedule</span>
+                    </div>
+                </div>
+
+                <div class="screen-card" onclick="openModal('voiceday-screens/goals.png', 'Goals View')">
+                    <span class="badge badge-tab">Tab 3</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/goals.png" alt="Goals Screen">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">🎯</div>
+                        <div>
+                            <div class="card-title">Goals View</div>
+                            <div class="card-file">GoalsView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Long-term goal tracking with milestones. AI breaks goals into actionable steps with suggested schedules and daily reminders.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Milestones</span>
+                        <span class="feature-tag">Progress Rings</span>
+                        <span class="feature-tag">Voice Input</span>
+                    </div>
+                </div>
+
+                <div class="screen-card" onclick="openModal('voiceday-screens/settings.png', 'Settings')">
+                    <span class="badge badge-tab">Tab 4</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/settings.png" alt="Settings Screen">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #6b7280, #9ca3af);">⚙️</div>
+                        <div>
+                            <div class="card-title">Settings</div>
+                            <div class="card-file">SettingsView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">App configuration including API keys, voice selection, personality, themes, reminder settings, and check-in schedules.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Interface Mode</span>
+                        <span class="feature-tag">Version Selection</span>
+                        <span class="feature-tag">Themes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus & Productivity -->
+        <section class="section focus-screens">
+            <div class="section-header">
+                <div class="section-icon">🧘</div>
+                <h2>Focus & Productivity Screens</h2>
+            </div>
+            <div class="screen-grid">
+                <div class="screen-card" onclick="openModal('voiceday-screens/focus-home.png', 'Hyperfocus Mode')">
+                    <span class="badge badge-fullscreen">Full Screen</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🔒</span>
+                        <span class="click-hint">Click to view</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">🔒</div>
+                        <div>
+                            <div class="card-title">Hyperfocus Mode</div>
+                            <div class="card-file">HyperfocusView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Giant button to enter focus mode. Pauses all reminders. Timer with color stages indicating session length.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Giant Button</span>
+                        <span class="feature-tag">Stage Colors</span>
+                        <span class="feature-tag">Pause Reminders</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-fullscreen">Full Screen</span>
+                    <div class="card-preview">
+                        <span class="placeholder">👥</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">👥</div>
+                        <div>
+                            <div class="card-title">Body Doubling</div>
+                            <div class="card-file">BodyDoublingView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Virtual co-working presence. Someone "with you" while working. Ambient sounds and periodic check-ins.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Virtual Presence</span>
+                        <span class="feature-tag">Check-ins</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">⚡</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">⚡</div>
+                        <div>
+                            <div class="card-title">Quick Focus Setup</div>
+                            <div class="card-file">QuickFocusSetupView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Set duration and success criteria before starting a focus session. Quick 5/15/25/custom minute options.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Duration Picker</span>
+                        <span class="feature-tag">Quick Start</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task Management -->
+        <section class="section task-screens">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Task Management Screens</h2>
+            </div>
+            <div class="screen-grid">
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">📦</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">📦</div>
+                        <div>
+                            <div class="card-title">Task Breakdown</div>
+                            <div class="card-file">TaskBreakdownView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">AI breaks big tasks into smaller, manageable steps. Creates subtasks automatically from a single overwhelming task.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">AI Breakdown</span>
+                        <span class="feature-tag">Subtasks</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">⚔️</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">⚔️</div>
+                        <div>
+                            <div class="card-title">Task Attack</div>
+                            <div class="card-file">TaskAttackView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Actionable plan for tackling a task. "How?" button from Focus view. Shows first step and estimated time.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Attack Plan</span>
+                        <span class="feature-tag">First Step</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🔀</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">🔀</div>
+                        <div>
+                            <div class="card-title">Task Triage</div>
+                            <div class="card-file">TaskTriageView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Quick priority sorting. Swipe-based interface to categorize tasks as Do Now, Do Later, Delegate, or Delete.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Swipe Sort</span>
+                        <span class="feature-tag">Priority Matrix</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">📆</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80);">📆</div>
+                        <div>
+                            <div class="card-title">Smart Scheduler</div>
+                            <div class="card-file">SmartSchedulerView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">AI-powered scheduling suggestions. Finds optimal times based on energy levels and existing commitments.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">AI Scheduling</span>
+                        <span class="feature-tag">Energy Aware</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Routines -->
+        <section class="section routine-screens">
+            <div class="section-header">
+                <div class="section-icon">🌅</div>
+                <h2>Daily Routine Screens</h2>
+            </div>
+            <div class="screen-grid">
+                <div class="screen-card">
+                    <span class="badge badge-fullscreen">Full Screen</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🌅</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">🌅</div>
+                        <div>
+                            <div class="card-title">Morning Checklist</div>
+                            <div class="card-file">MorningChecklistView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Guided morning routine. Voice-led check-in covering medication, hydration, intention setting, and first task selection.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Voice Guided</span>
+                        <span class="feature-tag">Medication</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-fullscreen">Full Screen</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🌙</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8);">🌙</div>
+                        <div>
+                            <div class="card-title">Evening Check-in</div>
+                            <div class="card-file">EveningCheckInView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">End-of-day reflection. Review what got done, celebrate wins, plan tomorrow's top priority.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Day Review</span>
+                        <span class="feature-tag">Celebration</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">⚡</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80);">⚡</div>
+                        <div>
+                            <div class="card-title">Energy Check-in</div>
+                            <div class="card-file">EnergyCheckInView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Quick energy level assessment. Adjusts task recommendations based on current state.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Energy Slider</span>
+                        <span class="feature-tag">Task Adjustment</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">💊</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">💊</div>
+                        <div>
+                            <div class="card-title">Medication Window</div>
+                            <div class="card-file">MedicationWindowView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Track medication effectiveness window. Suggests high-focus tasks during peak times.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Medication Tracking</span>
+                        <span class="feature-tag">Peak Time</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Utility Screens -->
+        <section class="section utility-screens">
+            <div class="section-header">
+                <div class="section-icon">🛠️</div>
+                <h2>Utility & Special Screens</h2>
+            </div>
+            <div class="screen-grid">
+                <div class="screen-card" onclick="openModal('voiceday-screens/recording.png', 'Architect Mode')">
+                    <span class="badge badge-fullscreen">Full Screen</span>
+                    <div class="card-preview">
+                        <img src="voiceday-screens/recording.png" alt="Architect Mode">
+                        <span class="click-hint">Click to enlarge</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">🏗️</div>
+                        <div>
+                            <div class="card-title">Architect Mode</div>
+                            <div class="card-file">RecordingView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Product brainstorming assistant. Converts rambling into structured blueprints with features, roadmap, and tech stack.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Brainstorm</span>
+                        <span class="feature-tag">Blueprint</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🏆</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80);">🏆</div>
+                        <div>
+                            <div class="card-title">My Rewards</div>
+                            <div class="card-file">MyRewardsView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Gamification rewards and achievements. Points for completed tasks, streaks, and milestones.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Points System</span>
+                        <span class="feature-tag">Achievements</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-modal">Modal</span>
+                    <div class="card-preview">
+                        <span class="placeholder">🎉</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #22c55e, #4ade80);">🎉</div>
+                        <div>
+                            <div class="card-title">Push Celebration</div>
+                            <div class="card-file">PushCelebrationView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Celebration when task is rescheduled. Positive reinforcement for making decisions.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Confetti</span>
+                        <span class="feature-tag">Positive Message</span>
+                    </div>
+                </div>
+
+                <div class="screen-card">
+                    <span class="badge badge-sheet">Sheet</span>
+                    <div class="card-preview">
+                        <span class="placeholder">👨‍💼</span>
+                    </div>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">👨‍💼</div>
+                        <div>
+                            <div class="card-title">Manager Dashboard</div>
+                            <div class="card-file">ManagerDashboardView.swift</div>
+                        </div>
+                    </div>
+                    <p class="card-description">Overview for parents/managers of ADHD users. See progress without micromanaging.</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Progress View</span>
+                        <span class="feature-tag">Parental View</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>VoiceDay iOS App Screen Matrix</p>
+            <p style="margin-top: 8px;">Generated from source code analysis • SwiftUI • iOS 17+</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Bundle ID: com.gadfly.adhd</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modal-image" src="" alt="Screen Preview">
+            <div class="modal-title" id="modal-title"></div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(imageSrc, title) {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>

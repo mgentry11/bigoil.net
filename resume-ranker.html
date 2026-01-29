@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Ranker | Recruiting Tools</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a { color: #94a3b8; text-decoration: none; }
+        .header a:hover { color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 2rem; }
+
+        .setup-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .card h3 { color: #fbbf24; margin-bottom: 1rem; font-size: 1.1rem; }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+
+        .skills-input {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .skill-tag {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-tag button {
+            background: none;
+            border: none;
+            color: #fbbf24;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+        .upload-zone input { display: none; }
+        .upload-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+        .file-list { margin-top: 1rem; max-height: 200px; overflow-y: auto; }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .file-item button {
+            background: none;
+            border: none;
+            color: #f87171;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-primary { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #000; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+        /* Results */
+        .results-section { display: none; }
+        .results-section.active { display: block; }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ranking-table th { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; }
+        .ranking-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+        .rank-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; }
+        .rank-2 { background: linear-gradient(135deg, #9ca3af, #6b7280); color: #fff; }
+        .rank-3 { background: linear-gradient(135deg, #b45309, #92400e); color: #fff; }
+        .rank-other { background: rgba(255, 255, 255, 0.1); color: #888; }
+
+        .score-bar {
+            width: 100px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+
+        .match-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+        .match-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #6ee7b7;
+        }
+        .match-tag.missing {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+        }
+
+        .candidate-details {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .candidate-details.active { display: block; }
+
+        @media (max-width: 768px) {
+            .setup-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="recruiting-tools.html">&larr; Recruiting Tools</a>
+        <a href="index.html">Big Oil</a>
+    </header>
+
+    <div class="container">
+        <h1>Resume Ranker</h1>
+        <p class="subtitle">Automatically rank candidates against job requirements</p>
+
+        <!-- Setup Section -->
+        <div class="setup-section" id="setup-section">
+            <div class="card">
+                <h3>Job Requirements</h3>
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="job-title" placeholder="e.g., Senior Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label>Required Skills (press Enter to add)</label>
+                    <input type="text" id="skill-input" placeholder="Type a skill and press Enter" onkeypress="handleSkillInput(event)">
+                    <div class="skills-input" id="required-skills"></div>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Skills (optional)</label>
+                    <input type="text" id="preferred-input" placeholder="Type a skill and press Enter" onkeypress="handlePreferredInput(event)">
+                    <div class="skills-input" id="preferred-skills"></div>
+                </div>
+                <div class="form-group">
+                    <label>Minimum Years Experience</label>
+                    <select id="min-experience">
+                        <option value="0">Any</option>
+                        <option value="1">1+ years</option>
+                        <option value="2">2+ years</option>
+                        <option value="3">3+ years</option>
+                        <option value="5" selected>5+ years</option>
+                        <option value="7">7+ years</option>
+                        <option value="10">10+ years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Upload Resumes</h3>
+                <div class="upload-zone" onclick="document.getElementById('resume-input').click()">
+                    <input type="file" id="resume-input" accept=".pdf,.doc,.docx,.txt" multiple onchange="handleFileUpload(event)">
+                    <div class="upload-icon">&#128196;</div>
+                    <p style="color: #888;">Click or drag to upload resumes</p>
+                    <p style="color: #666; font-size: 0.8rem;">PDF, DOC, DOCX, TXT - Multiple files allowed</p>
+                </div>
+                <div class="file-list" id="file-list"></div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <button class="btn btn-primary" id="rank-btn" onclick="startRanking()" disabled>
+                Rank Candidates
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="results-section">
+            <div class="results-header">
+                <h2 style="color: #fff;">Ranking Results</h2>
+                <div>
+                    <button class="btn btn-secondary" onclick="downloadRankings()">Download CSV</button>
+                    <button class="btn btn-secondary" onclick="resetRanking()" style="margin-left: 0.5rem;">New Ranking</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Candidate</th>
+                            <th>Score</th>
+                            <th>Experience</th>
+                            <th>Skill Match</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let requiredSkills = [];
+        let preferredSkills = [];
+        let uploadedFiles = [];
+        let rankings = [];
+
+        function handleSkillInput(event) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const skill = input.value.trim();
+                if (skill && !requiredSkills.includes(skill)) {
+                    requiredSkills.push(skill);
+                    renderSkills();
+                }
+                input.value = '';
+            }
+        }
+
+        function handlePreferredInput(event) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const skill = input.value.trim();
+                if (skill && !preferredSkills.includes(skill)) {
+                    preferredSkills.push(skill);
+                    renderSkills();
+                }
+                input.value = '';
+            }
+        }
+
+        function removeSkill(skill, isRequired) {
+            if (isRequired) {
+                requiredSkills = requiredSkills.filter(s => s !== skill);
+            } else {
+                preferredSkills = preferredSkills.filter(s => s !== skill);
+            }
+            renderSkills();
+        }
+
+        function renderSkills() {
+            document.getElementById('required-skills').innerHTML = requiredSkills.map(s => `
+                <span class="skill-tag">${s} <button onclick="removeSkill('${s}', true)">&times;</button></span>
+            `).join('');
+
+            document.getElementById('preferred-skills').innerHTML = preferredSkills.map(s => `
+                <span class="skill-tag">${s} <button onclick="removeSkill('${s}', false)">&times;</button></span>
+            `).join('');
+
+            updateRankButton();
+        }
+
+        function handleFileUpload(event) {
+            const files = Array.from(event.target.files);
+            uploadedFiles = [...uploadedFiles, ...files];
+            renderFileList();
+            updateRankButton();
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            renderFileList();
+            updateRankButton();
+        }
+
+        function renderFileList() {
+            document.getElementById('file-list').innerHTML = uploadedFiles.map((f, i) => `
+                <div class="file-item">
+                    <span>${f.name}</span>
+                    <button onclick="removeFile(${i})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function updateRankButton() {
+            document.getElementById('rank-btn').disabled = uploadedFiles.length === 0 || requiredSkills.length === 0;
+        }
+
+        async function startRanking() {
+            const jobTitle = document.getElementById('job-title').value || 'Position';
+            const minExp = parseInt(document.getElementById('min-experience').value);
+
+            // Simulate ranking process
+            rankings = uploadedFiles.map((file, index) => {
+                // Generate mock scores (in production, this would analyze the actual resume)
+                const skillMatchCount = Math.floor(Math.random() * requiredSkills.length) + 1;
+                const prefMatchCount = Math.floor(Math.random() * (preferredSkills.length + 1));
+                const experience = Math.floor(Math.random() * 12) + 1;
+
+                const skillScore = (skillMatchCount / requiredSkills.length) * 50;
+                const prefScore = preferredSkills.length > 0 ? (prefMatchCount / preferredSkills.length) * 20 : 20;
+                const expScore = Math.min(experience / Math.max(minExp, 1), 1.5) * 30;
+                const totalScore = Math.round(skillScore + prefScore + expScore);
+
+                const matchedSkills = requiredSkills.slice(0, skillMatchCount);
+                const missingSkills = requiredSkills.slice(skillMatchCount);
+
+                return {
+                    name: file.name.replace(/\.(pdf|doc|docx|txt)$/i, '').replace(/[_-]/g, ' '),
+                    file: file.name,
+                    score: Math.min(totalScore, 100),
+                    experience: experience,
+                    matchedSkills,
+                    missingSkills,
+                    matchedPreferred: preferredSkills.slice(0, prefMatchCount)
+                };
+            });
+
+            // Sort by score
+            rankings.sort((a, b) => b.score - a.score);
+
+            // Show results
+            document.getElementById('setup-section').style.display = 'none';
+            document.querySelector('.btn-primary').style.display = 'none';
+            document.getElementById('results-section').classList.add('active');
+
+            renderRankings();
+        }
+
+        function renderRankings() {
+            const tbody = document.getElementById('ranking-body');
+            tbody.innerHTML = rankings.map((r, i) => {
+                const rank = i + 1;
+                let rankClass = 'rank-other';
+                if (rank === 1) rankClass = 'rank-1';
+                else if (rank === 2) rankClass = 'rank-2';
+                else if (rank === 3) rankClass = 'rank-3';
+
+                return `
+                    <tr>
+                        <td><div class="rank-badge ${rankClass}">${rank}</div></td>
+                        <td><strong>${r.name}</strong><br><span style="color: #666; font-size: 0.75rem;">${r.file}</span></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-weight: 600;">${r.score}%</span>
+                                <div class="score-bar"><div class="score-fill" style="width: ${r.score}%"></div></div>
+                            </div>
+                        </td>
+                        <td>${r.experience} years</td>
+                        <td>
+                            <div class="match-tags">
+                                ${r.matchedSkills.map(s => `<span class="match-tag">${s}</span>`).join('')}
+                                ${r.missingSkills.map(s => `<span class="match-tag missing">${s}</span>`).join('')}
+                            </div>
+                        </td>
+                        <td><button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="toggleDetails(${i})">Details</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="padding: 0;">
+                            <div class="candidate-details" id="details-${i}">
+                                <p><strong>Matched Required Skills:</strong> ${r.matchedSkills.join(', ') || 'None'}</p>
+                                <p><strong>Missing Required Skills:</strong> ${r.missingSkills.join(', ') || 'None'}</p>
+                                <p><strong>Matched Preferred Skills:</strong> ${r.matchedPreferred.join(', ') || 'None'}</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function toggleDetails(index) {
+            const details = document.getElementById('details-' + index);
+            details.classList.toggle('active');
+        }
+
+        function downloadRankings() {
+            const headers = ['Rank', 'Name', 'File', 'Score', 'Experience', 'Matched Skills', 'Missing Skills'];
+            const rows = rankings.map((r, i) => [
+                i + 1,
+                r.name,
+                r.file,
+                r.score,
+                r.experience,
+                r.matchedSkills.join('; '),
+                r.missingSkills.join('; ')
+            ]);
+
+            let csv = headers.join(',') + '\n';
+            rows.forEach(row => {
+                csv += row.map(cell => `"${(cell + '').replace(/"/g, '""')}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'resume_rankings.csv';
+            a.click();
+        }
+
+        function resetRanking() {
+            uploadedFiles = [];
+            rankings = [];
+            document.getElementById('resume-input').value = '';
+            document.getElementById('file-list').innerHTML = '';
+            document.getElementById('setup-section').style.display = 'grid';
+            document.querySelector('.btn-primary').style.display = 'inline-block';
+            document.getElementById('results-section').classList.remove('active');
+            updateRankButton();
+        }
+    </script>
+</body>
+</html>

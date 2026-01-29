@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Verification | Recruiting Tools</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a { color: #94a3b8; text-decoration: none; }
+        .header a:hover { color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #f87171, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 2rem; }
+
+        .upload-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .upload-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .upload-card h3 { color: #f87171; margin-bottom: 1rem; }
+
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-zone:hover { border-color: #f87171; background: rgba(248, 113, 113, 0.1); }
+        .upload-zone input { display: none; }
+        .upload-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-group textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-primary { background: linear-gradient(90deg, #f87171, #fbbf24); color: #000; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+        /* Results */
+        .results-section { display: none; }
+        .results-section.active { display: block; }
+
+        .risk-score {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .risk-gauge {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .risk-minimal { background: linear-gradient(135deg, #065f46, #10b981); color: #6ee7b7; }
+        .risk-low { background: linear-gradient(135deg, #047857, #34d399); color: #a7f3d0; }
+        .risk-medium { background: linear-gradient(135deg, #b45309, #fbbf24); color: #fef3c7; }
+        .risk-high { background: linear-gradient(135deg, #b91c1c, #f87171); color: #fecaca; }
+        .risk-critical { background: linear-gradient(135deg, #7f1d1d, #dc2626); color: #fca5a5; }
+        .risk-label { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .finding-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .finding-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .finding-icon { font-size: 1.25rem; }
+        .finding-icon.pass { color: #6ee7b7; }
+        .finding-icon.warning { color: #fcd34d; }
+        .finding-icon.fail { color: #fca5a5; }
+
+        .finding-list { list-style: none; }
+        .finding-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            color: #ccc;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .finding-list li:last-child { border-bottom: none; }
+        .finding-list .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 0.4rem;
+            flex-shrink: 0;
+        }
+        .indicator.green { background: #10b981; }
+        .indicator.yellow { background: #fbbf24; }
+        .indicator.red { background: #ef4444; }
+
+        .detailed-report {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .detailed-report h3 { color: #f87171; margin-bottom: 1rem; }
+        .report-section { margin-bottom: 1.5rem; }
+        .report-section h4 { color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .report-section p { color: #ccc; font-size: 0.9rem; line-height: 1.6; }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .upload-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="recruiting-tools.html">&larr; Recruiting Tools</a>
+        <a href="index.html">Big Oil</a>
+    </header>
+
+    <div class="container">
+        <h1>Candidate Verification</h1>
+        <p class="subtitle">AI-powered fraud detection and credential verification</p>
+
+        <!-- Upload Section -->
+        <div class="upload-section" id="upload-section">
+            <div class="upload-card">
+                <h3>Upload Resume</h3>
+                <div class="upload-zone" onclick="document.getElementById('resume-input').click()">
+                    <input type="file" id="resume-input" accept=".pdf,.doc,.docx,.txt" onchange="handleResumeUpload(event)">
+                    <div class="upload-icon">&#128196;</div>
+                    <p style="color: #888;">Click to upload resume</p>
+                    <p style="color: #666; font-size: 0.8rem;">PDF, DOC, DOCX, TXT</p>
+                </div>
+                <p id="resume-filename" style="color: #6ee7b7; margin-top: 0.5rem; font-size: 0.85rem;"></p>
+            </div>
+
+            <div class="upload-card">
+                <h3>LinkedIn Profile (Optional)</h3>
+                <div class="form-group">
+                    <label>LinkedIn URL</label>
+                    <textarea id="linkedin-url" placeholder="https://linkedin.com/in/username
+
+Or paste LinkedIn profile text here for verification..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <button class="btn btn-primary" id="verify-btn" onclick="startVerification()" disabled>
+                Start Verification Analysis
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="results-section">
+            <div class="risk-score">
+                <div class="risk-gauge" id="risk-gauge">--</div>
+                <div class="risk-label" id="risk-label">Analyzing...</div>
+                <p style="color: #888; margin-top: 0.5rem;" id="risk-summary"></p>
+            </div>
+
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <h4><span class="finding-icon" id="ai-icon">&#9679;</span> AI Content Detection</h4>
+                    <ul class="finding-list" id="ai-findings">
+                        <li><span class="indicator"></span> Analyzing content patterns...</li>
+                    </ul>
+                </div>
+
+                <div class="finding-card">
+                    <h4><span class="finding-icon" id="resume-icon">&#9679;</span> Resume Analysis</h4>
+                    <ul class="finding-list" id="resume-findings">
+                        <li><span class="indicator"></span> Checking career progression...</li>
+                    </ul>
+                </div>
+
+                <div class="finding-card">
+                    <h4><span class="finding-icon" id="linkedin-icon">&#9679;</span> LinkedIn Verification</h4>
+                    <ul class="finding-list" id="linkedin-findings">
+                        <li><span class="indicator"></span> Verifying profile data...</li>
+                    </ul>
+                </div>
+
+                <div class="finding-card">
+                    <h4><span class="finding-icon" id="online-icon">&#9679;</span> Online Presence</h4>
+                    <ul class="finding-list" id="online-findings">
+                        <li><span class="indicator"></span> Searching digital footprint...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detailed-report" id="detailed-report">
+                <h3>Detailed Analysis Report</h3>
+                <div class="report-section">
+                    <h4>Executive Summary</h4>
+                    <p id="report-summary">Generating comprehensive analysis...</p>
+                </div>
+                <div class="report-section">
+                    <h4>Red Flags Detected</h4>
+                    <p id="report-flags">Scanning for inconsistencies...</p>
+                </div>
+                <div class="report-section">
+                    <h4>Recommendations</h4>
+                    <p id="report-recommendations">Preparing verification recommendations...</p>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="downloadReport()">Download Report</button>
+                <button class="btn btn-secondary" onclick="resetVerification()">Verify Another Candidate</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let resumeFile = null;
+        let verificationResults = null;
+
+        function handleResumeUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                resumeFile = file;
+                document.getElementById('resume-filename').textContent = file.name;
+                document.getElementById('verify-btn').disabled = false;
+            }
+        }
+
+        async function startVerification() {
+            if (!resumeFile) {
+                alert('Please upload a resume first');
+                return;
+            }
+
+            // Show results section
+            document.getElementById('upload-section').style.display = 'none';
+            document.getElementById('results-section').classList.add('active');
+            document.querySelector('.btn-primary').disabled = true;
+
+            // Simulate verification process (replace with actual API calls)
+            await simulateVerification();
+        }
+
+        async function simulateVerification() {
+            // Simulate AI processing delay
+            await delay(1500);
+
+            // Generate mock results (in production, this would call the backend API)
+            const riskScore = Math.floor(Math.random() * 60) + 10; // 10-70 for demo
+            let riskLevel, riskClass;
+
+            if (riskScore < 20) { riskLevel = 'MINIMAL'; riskClass = 'risk-minimal'; }
+            else if (riskScore < 40) { riskLevel = 'LOW'; riskClass = 'risk-low'; }
+            else if (riskScore < 60) { riskLevel = 'MEDIUM'; riskClass = 'risk-medium'; }
+            else if (riskScore < 80) { riskLevel = 'HIGH'; riskClass = 'risk-high'; }
+            else { riskLevel = 'CRITICAL'; riskClass = 'risk-critical'; }
+
+            // Update risk gauge
+            const gauge = document.getElementById('risk-gauge');
+            gauge.textContent = riskScore;
+            gauge.className = 'risk-gauge ' + riskClass;
+            document.getElementById('risk-label').textContent = riskLevel + ' RISK';
+            document.getElementById('risk-summary').textContent = getRiskSummary(riskLevel);
+
+            // Update AI Content Detection
+            await delay(500);
+            updateFindings('ai', [
+                { status: 'green', text: 'Natural language patterns detected' },
+                { status: riskScore > 50 ? 'yellow' : 'green', text: riskScore > 50 ? 'Some sections may contain AI-generated content' : 'No AI-generated content detected' },
+                { status: 'green', text: 'Consistent writing style throughout' }
+            ], riskScore > 50 ? 'warning' : 'pass');
+
+            // Update Resume Analysis
+            await delay(500);
+            updateFindings('resume', [
+                { status: 'green', text: 'Career progression appears logical' },
+                { status: riskScore > 40 ? 'yellow' : 'green', text: riskScore > 40 ? 'Some date gaps detected' : 'No unexplained gaps in employment' },
+                { status: 'green', text: 'Skills align with claimed experience' },
+                { status: riskScore > 60 ? 'red' : 'green', text: riskScore > 60 ? 'Vague job descriptions detected' : 'Specific, verifiable achievements listed' }
+            ], riskScore > 60 ? 'fail' : (riskScore > 40 ? 'warning' : 'pass'));
+
+            // Update LinkedIn Verification
+            await delay(500);
+            const hasLinkedIn = document.getElementById('linkedin-url').value.trim().length > 0;
+            if (hasLinkedIn) {
+                updateFindings('linkedin', [
+                    { status: 'green', text: 'Profile URL validated' },
+                    { status: 'green', text: 'Employment history matches resume' },
+                    { status: riskScore > 50 ? 'yellow' : 'green', text: riskScore > 50 ? 'Limited connections and activity' : 'Active profile with engagement' }
+                ], riskScore > 50 ? 'warning' : 'pass');
+            } else {
+                updateFindings('linkedin', [
+                    { status: 'yellow', text: 'No LinkedIn URL provided' },
+                    { status: 'yellow', text: 'Unable to cross-reference claims' }
+                ], 'warning');
+            }
+
+            // Update Online Presence
+            await delay(500);
+            updateFindings('online', [
+                { status: 'green', text: 'Email domain verified' },
+                { status: riskScore > 30 ? 'yellow' : 'green', text: riskScore > 30 ? 'Limited online footprint' : 'Consistent online presence found' },
+                { status: 'green', text: 'No negative references found' }
+            ], riskScore > 30 ? 'warning' : 'pass');
+
+            // Update detailed report
+            document.getElementById('report-summary').textContent = getDetailedSummary(riskScore, riskLevel);
+            document.getElementById('report-flags').textContent = getRedFlags(riskScore);
+            document.getElementById('report-recommendations').textContent = getRecommendations(riskScore, riskLevel);
+
+            verificationResults = { riskScore, riskLevel, resumeName: resumeFile.name };
+        }
+
+        function updateFindings(section, items, overallStatus) {
+            const list = document.getElementById(section + '-findings');
+            const icon = document.getElementById(section + '-icon');
+
+            list.innerHTML = items.map(item => `
+                <li><span class="indicator ${item.status}"></span> ${item.text}</li>
+            `).join('');
+
+            icon.className = 'finding-icon ' + overallStatus;
+        }
+
+        function getRiskSummary(level) {
+            const summaries = {
+                'MINIMAL': 'Candidate profile appears authentic with strong verification signals.',
+                'LOW': 'Minor concerns detected but overall profile appears legitimate.',
+                'MEDIUM': 'Some inconsistencies found. Recommend additional verification.',
+                'HIGH': 'Multiple red flags detected. Thorough background check recommended.',
+                'CRITICAL': 'Significant fraud indicators present. Exercise extreme caution.'
+            };
+            return summaries[level];
+        }
+
+        function getDetailedSummary(score, level) {
+            return `Based on our comprehensive analysis, this candidate has been assigned a risk score of ${score}/100 (${level} risk). The analysis examined AI content patterns, resume authenticity, LinkedIn profile verification, and overall online presence. ${score < 40 ? 'The candidate appears to have a legitimate and verifiable background.' : 'Some areas warrant additional scrutiny before proceeding with this candidate.'}`;
+        }
+
+        function getRedFlags(score) {
+            if (score < 30) return 'No significant red flags detected during analysis.';
+            if (score < 50) return 'Minor inconsistencies in dates or descriptions. Some sections could benefit from verification during interview.';
+            if (score < 70) return 'Several concerns identified: potential employment gaps, vague job descriptions, limited online verification points. Consider requesting references.';
+            return 'Multiple serious concerns: possible AI-generated content, unverifiable claims, inconsistent information across sources. Strong recommendation for thorough background verification.';
+        }
+
+        function getRecommendations(score, level) {
+            if (level === 'MINIMAL' || level === 'LOW') {
+                return 'Proceed with standard interview process. Verify key employment dates and credentials as part of normal due diligence.';
+            } else if (level === 'MEDIUM') {
+                return 'Conduct behavioral interview focusing on specific projects and achievements. Request professional references. Verify educational credentials.';
+            } else {
+                return 'Before proceeding: 1) Request and verify all references, 2) Conduct thorough background check, 3) Verify all educational credentials, 4) Ask detailed questions about claimed achievements in interview.';
+            }
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function resetVerification() {
+            resumeFile = null;
+            verificationResults = null;
+            document.getElementById('resume-input').value = '';
+            document.getElementById('resume-filename').textContent = '';
+            document.getElementById('linkedin-url').value = '';
+            document.getElementById('verify-btn').disabled = true;
+            document.getElementById('upload-section').style.display = 'grid';
+            document.getElementById('results-section').classList.remove('active');
+        }
+
+        function downloadReport() {
+            if (!verificationResults) return;
+
+            const report = `CANDIDATE VERIFICATION REPORT
+================================
+Resume: ${verificationResults.resumeName}
+Date: ${new Date().toLocaleDateString()}
+
+RISK ASSESSMENT
+---------------
+Score: ${verificationResults.riskScore}/100
+Level: ${verificationResults.riskLevel}
+
+SUMMARY
+-------
+${document.getElementById('report-summary').textContent}
+
+RED FLAGS
+---------
+${document.getElementById('report-flags').textContent}
+
+RECOMMENDATIONS
+---------------
+${document.getElementById('report-recommendations').textContent}
+
+---
+Generated by Big Oil Recruiting Tools
+`;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'verification_report.txt';
+            a.click();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Analyzer - Candidate Fit Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        .app-layout { display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background: rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        .sidebar h2 {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .sidebar-section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .section-header h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 0.5px;
+        }
+        .add-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #888;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        .add-btn:hover { border-color: #7c3aed; color: #fff; }
+
+        /* Item lists */
+        .item-list { list-style: none; }
+        .item {
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 0.4rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .item:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(124, 58, 237, 0.5); }
+        .item.selected { border-color: #7c3aed; background: rgba(124, 58, 237, 0.2); }
+        .item-checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: #7c3aed;
+        }
+        .item-name { flex: 1; color: #fff; }
+        .item-meta { font-size: 0.7rem; color: #888; }
+        .item-score { color: #00d4ff; font-weight: 600; font-size: 0.75rem; }
+        .item-draft { color: #fbbf24; font-size: 0.65rem; font-weight: 600; }
+        .item-delete {
+            color: #ff6b6b;
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            font-size: 0.7rem;
+            padding: 0.2rem;
+        }
+        .item:hover .item-delete { opacity: 1; }
+
+        /* Job items */
+        .job-item { border-left: 3px solid #10b981; }
+        .job-item.selected { border-left-color: #00d4ff; }
+
+        /* Draft items */
+        .draft-item { border-left: 3px solid #fbbf24; }
+
+        /* Completed items */
+        .completed-item { border-left: 3px solid #7c3aed; }
+
+        /* Action bar */
+        .action-bar {
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            bottom: 0;
+        }
+        .action-bar select {
+            width: 100%;
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .action-bar select option { background: #1a1a2e; }
+        .analyze-selected-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .analyze-selected-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .selection-count { font-size: 0.75rem; color: #888; margin-bottom: 0.5rem; text-align: center; }
+
+        /* Main content */
+        .main-content { flex: 1; padding: 2rem; overflow-y: auto; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+        /* Panels */
+        .panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .panel.active { display: block; }
+        .panel h2 { color: #00d4ff; margin-bottom: 1rem; font-size: 1.2rem; }
+
+        /* Form elements */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #7c3aed; }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: none;
+        }
+        .btn-primary { background: linear-gradient(90deg, #7c3aed, #00d4ff); color: #fff; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-row { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+        /* Upload area */
+        .upload-area {
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .upload-area:hover { border-color: #7c3aed; background: rgba(124,58,237,0.1); }
+        .upload-area input { display: none; }
+
+        /* Report display */
+        .report-meta { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .report-meta .editable {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .report-meta .editable:hover { background: rgba(124,58,237,0.3); color: #fff; }
+        .fit-score { text-align: center; margin: 2rem 0; }
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#00d4ff var(--score), rgba(255,255,255,0.1) var(--score));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .score-value { position: relative; z-index: 1; font-size: 2rem; font-weight: bold; }
+        .score-label { color: #888; }
+        .section { margin-bottom: 1.5rem; }
+        .section h3 { color: #7c3aed; margin-bottom: 0.75rem; font-size: 1rem; }
+        .section ul { list-style: none; }
+        .section li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .section li::before { content: '✓'; position: absolute; left: 0; color: #00d4ff; }
+        .section.concerns li::before { content: '!'; color: #ff6b6b; }
+
+        /* Evidence cards for strengths/skills/concerns */
+        .evidence-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #7c3aed;
+        }
+        .evidence-card.concern { border-left-color: #ff6b6b; }
+        .evidence-card-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .evidence-card-title .tag {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: rgba(124,58,237,0.3);
+            color: #a78bfa;
+        }
+        .evidence-card-title .tag.high { background: rgba(16,185,129,0.3); color: #6ee7b7; }
+        .evidence-card-title .tag.medium { background: rgba(251,191,36,0.3); color: #fcd34d; }
+        .evidence-card-title .tag.low { background: rgba(156,163,175,0.3); color: #9ca3af; }
+        .evidence-card-quote {
+            font-style: italic;
+            color: #a78bfa;
+            padding: 0.5rem;
+            background: rgba(124,58,237,0.1);
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+        .evidence-card-detail {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        /* Score breakdown bars */
+        .score-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+        .score-bar-label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .score-bar-fill {
+            height: 6px;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            border-radius: 3px;
+        }
+
+        /* Hiring recommendation badge */
+        .hiring-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .hiring-badge.strong_yes { background: #065f46; color: #6ee7b7; }
+        .hiring-badge.yes { background: #064e3b; color: #a7f3d0; }
+        .hiring-badge.maybe { background: #78350f; color: #fcd34d; }
+        .hiring-badge.no { background: #7f1d1d; color: #fca5a5; }
+        .hiring-badge.strong_no { background: #450a0a; color: #fca5a5; }
+
+        /* Assessment boxes */
+        .assessment-box {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .assessment-item {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .assessment-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .assessment-label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 0.25rem; }
+        .assessment-value { color: #ccc; font-size: 0.9rem; }
+
+        .quote {
+            padding: 0.75rem;
+            border-left: 3px solid #7c3aed;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0 8px 8px 0;
+        }
+        .quote.positive { border-left-color: #10b981; }
+        .quote.negative { border-left-color: #ff6b6b; }
+        .quote-context { font-size: 0.75rem; color: #666; margin-top: 0.25rem; font-style: normal; }
+
+        /* Q&A Cards */
+        .qa-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid #00d4ff;
+        }
+        .qa-card.excellent { border-left-color: #10b981; }
+        .qa-card.good { border-left-color: #22c55e; }
+        .qa-card.fair { border-left-color: #fbbf24; }
+        .qa-card.poor { border-left-color: #ff6b6b; }
+        .qa-question {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .qa-question::before { content: 'Q: '; color: #00d4ff; font-weight: 600; }
+        .qa-answer {
+            color: #fff;
+            font-size: 0.9rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+        .qa-answer::before { content: 'A: '; color: #7c3aed; font-weight: 600; }
+        .qa-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+        .qa-quality {
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .qa-quality.excellent { background: rgba(16,185,129,0.3); color: #6ee7b7; }
+        .qa-quality.good { background: rgba(34,197,94,0.3); color: #86efac; }
+        .qa-quality.fair { background: rgba(251,191,36,0.3); color: #fcd34d; }
+        .qa-quality.poor { background: rgba(255,107,107,0.3); color: #fca5a5; }
+        .qa-notes { color: #888; font-style: italic; }
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .download-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(124,58,237,0.3);
+            border: 1px solid #7c3aed;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .download-btn:hover { background: rgba(124,58,237,0.5); }
+
+        /* Loading */
+        .loading { display: none; text-align: center; padding: 3rem; }
+        .loading.active { display: block; }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #7c3aed;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #888; font-size: 0.9rem; }
+
+        /* Progress bar for batch */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal h3 { color: #00d4ff; margin-bottom: 1rem; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .sidebar {
+                position: fixed;
+                left: -320px;
+                top: 0;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+            .sidebar.open { left: 0; }
+            .sidebar-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 1000;
+                background: #7c3aed;
+                border: none;
+                border-radius: 8px;
+                padding: 0.5rem;
+                color: #fff;
+                cursor: pointer;
+            }
+            .main-content { padding: 1rem; padding-top: 4rem; }
+        }
+        @media (min-width: 901px) {
+            .sidebar-toggle { display: none; }
+        }
+
+        /* Job Selection Overlay */
+        .job-selection-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .job-selection-overlay.hidden { display: none; }
+        .job-selection-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+        .job-selection-container h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .job-selection-container .subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .job-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .job-card:hover {
+            border-color: #7c3aed;
+            background: rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+        }
+        .job-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .job-card-company {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .job-card-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+        .job-card-stat {
+            color: #666;
+        }
+        .job-card-stat span {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        .job-card-delete {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .job-card:hover .job-card-delete { opacity: 1; }
+        .job-card-delete:hover { color: #ff6b6b; }
+        .no-jobs-message {
+            color: #666;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        /* Current Job Header in Sidebar */
+        .current-job-header {
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .current-job-info h2 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin: 0;
+        }
+        .current-job-company {
+            font-size: 0.75rem;
+            color: #a78bfa;
+        }
+        .switch-job-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #888;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .switch-job-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Job Selection Overlay - Shows when no job is selected -->
+    <div class="job-selection-overlay" id="job-selection-overlay">
+        <div class="job-selection-container">
+            <h1>Interview Analyzer</h1>
+            <p class="subtitle">Select a job to manage candidates and analyze interviews</p>
+
+            <div class="job-grid" id="job-grid">
+                <!-- Jobs will be rendered here -->
+            </div>
+
+            <button class="btn btn-primary" onclick="showAddJobModal()" style="margin-top:1.5rem;">
+                + Create New Job
+            </button>
+        </div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="app-layout" id="main-app" style="display:none;">
+        <aside class="sidebar" id="sidebar">
+            <!-- Current Job Header -->
+            <div class="current-job-header" id="current-job-header">
+                <div class="current-job-info">
+                    <h2 id="current-job-title">No Job Selected</h2>
+                    <span class="current-job-company" id="current-job-company"></span>
+                </div>
+                <button class="switch-job-btn" onclick="switchJob()">Switch Job</button>
+            </div>
+
+            <!-- Transcripts Section - For Current Job -->
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Transcripts</h3>
+                    <div style="display:flex;gap:0.25rem;">
+                        <button class="add-btn" onclick="showAddTranscriptModal()">+ Paste</button>
+                        <button class="add-btn" onclick="document.getElementById('bulk-input').click()">+ Upload</button>
+                    </div>
+                </div>
+                <input type="file" id="bulk-input" multiple accept=".txt" style="display:none" onchange="handleBulkUpload(event)">
+                <ul class="item-list" id="drafts-list"></ul>
+            </div>
+
+            <!-- Completed Reports Section - For Current Job -->
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <h3>Completed Reports</h3>
+                </div>
+                <ul class="item-list" id="completed-list"></ul>
+            </div>
+
+            <!-- Action Bar - No job selector needed -->
+            <div class="action-bar">
+                <div class="selection-count" id="selection-count">Select transcripts to analyze</div>
+                <button class="analyze-selected-btn" id="analyze-btn" onclick="analyzeSelected()" disabled>
+                    Analyze Selected
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="container">
+                <h1>Interview Analyzer</h1>
+                <p class="subtitle">Upload transcripts, add job descriptions, then batch analyze candidates</p>
+
+                <!-- Welcome Panel -->
+                <div class="panel active" id="welcome-panel">
+                    <h2>Getting Started</h2>
+                    <p style="color:#888; margin-bottom:1rem;">1. Add job descriptions using the "+ Add" button</p>
+                    <p style="color:#888; margin-bottom:1rem;">2. Upload interview transcripts (.txt files)</p>
+                    <p style="color:#888; margin-bottom:1rem;">3. Select transcripts, choose a job, click "Analyze Selected"</p>
+                    <div class="upload-area" onclick="document.getElementById('bulk-input').click()">
+                        <p style="color:#888;">Click to upload transcript files</p>
+                        <p style="color:#666; font-size:0.8rem; margin-top:0.5rem;">Accepts multiple .txt files</p>
+                    </div>
+                </div>
+
+                <!-- Loading Panel -->
+                <div class="loading" id="loading-panel">
+                    <div class="spinner"></div>
+                    <p class="loading-text" id="loading-text">Processing...</p>
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                    <p class="loading-text" id="progress-text"></p>
+                </div>
+
+                <!-- Report Panel -->
+                <div class="panel" id="report-panel">
+                    <h2>Candidate Fit Report</h2>
+                    <div class="report-meta">
+                        <span id="report-name" class="editable" onclick="editField('candidate_name')"></span> |
+                        <span id="report-job" class="editable" onclick="editField('job_title')"></span> |
+                        <span id="report-date"></span>
+                    </div>
+
+                    <!-- Overall Score -->
+                    <div class="fit-score">
+                        <div class="score-circle" id="score-circle" style="--score:0%">
+                            <span class="score-value" id="score-value">--</span>
+                        </div>
+                        <div class="score-label">Overall Fit Score</div>
+                        <div id="hiring-rec" style="margin-top:0.5rem;font-weight:600;"></div>
+                    </div>
+
+                    <!-- Score Breakdown -->
+                    <div class="section" id="score-breakdown-section" style="display:none;">
+                        <h3>Score Breakdown</h3>
+                        <div id="score-breakdown" style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;"></div>
+                    </div>
+
+                    <!-- Interview Q&A -->
+                    <div class="section" id="qa-section" style="display:none;">
+                        <h3>Interview Questions & Answers</h3>
+                        <div id="qa-list"></div>
+                    </div>
+
+                    <!-- Resume Analysis -->
+                    <div class="section" id="resume-section" style="display:none;">
+                        <h3>Resume Analysis</h3>
+                        <div id="resume-analysis"></div>
+                    </div>
+
+                    <!-- Strengths with Evidence -->
+                    <div class="section"><h3>Key Strengths</h3><div id="strengths-list"></div></div>
+
+                    <!-- Skills with Evidence -->
+                    <div class="section"><h3>Skills & Experience Match</h3><div id="skills-list"></div></div>
+
+                    <!-- Concerns -->
+                    <div class="section concerns"><h3>Concerns & Gaps</h3><div id="concerns-list"></div></div>
+
+                    <!-- Communication Assessment -->
+                    <div class="section" id="comm-section" style="display:none;">
+                        <h3>Communication Assessment</h3>
+                        <div id="comm-assessment"></div>
+                    </div>
+
+                    <!-- Cultural Fit -->
+                    <div class="section" id="culture-section" style="display:none;">
+                        <h3>Cultural Fit Indicators</h3>
+                        <div id="culture-indicators"></div>
+                    </div>
+
+                    <!-- Notable Quotes -->
+                    <div class="section"><h3>Notable Quotes</h3><div id="quotes-container"></div></div>
+
+                    <!-- Follow-up Questions -->
+                    <div class="section" id="followup-section" style="display:none;">
+                        <h3>Suggested Follow-up Questions</h3>
+                        <ul id="followup-list"></ul>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="section"><h3>Executive Summary</h3><p id="summary-text" style="color:#ccc;line-height:1.6;white-space:pre-wrap;"></p></div>
+
+                    <div class="download-buttons">
+                        <button class="download-btn" onclick="downloadPDF()">Download PDF</button>
+                        <button class="download-btn" onclick="downloadText()">Download Text</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Job Modal -->
+    <div class="modal" id="add-job-modal" onclick="closeModal('add-job-modal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3>Add Job Description</h3>
+            <div class="form-group">
+                <label>Job Title *</label>
+                <input type="text" id="new-job-title" placeholder="e.g., Senior Software Engineer">
+            </div>
+            <div class="form-group">
+                <label>Company (optional)</label>
+                <input type="text" id="new-job-company" placeholder="e.g., Acme Corp">
+            </div>
+            <div class="form-group">
+                <label>Job Description *</label>
+                <textarea id="new-job-description" placeholder="Paste the full job description here..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" onclick="closeModal('add-job-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveJobDescription()">Save Job</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Transcript Modal -->
+    <div class="modal" id="add-transcript-modal" onclick="closeModal('add-transcript-modal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width:600px;">
+            <h3>Add Transcript</h3>
+            <div class="form-group">
+                <label>Candidate Name *</label>
+                <input type="text" id="new-transcript-name" placeholder="e.g., John Smith">
+            </div>
+            <div class="form-group">
+                <label>Interview Transcript *</label>
+                <textarea id="new-transcript-text" placeholder="Paste the interview transcript here...
+
+Example format:
+Interviewer: Tell me about yourself.
+Candidate: I have 5 years of experience..." style="min-height:150px;"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Resume (Optional - for deeper analysis)</label>
+                <textarea id="new-transcript-resume" placeholder="Paste the candidate's resume here for a more thorough analysis comparing resume claims to interview responses..." style="min-height:100px;"></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" onclick="closeModal('add-transcript-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveTranscript()">Save Transcript</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="edit-modal" onclick="closeModal('edit-modal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h3 id="edit-modal-title">Edit</h3>
+            <div class="form-group">
+                <input type="text" id="edit-modal-input">
+            </div>
+            <div class="btn-row">
+                <button class="btn btn-secondary" onclick="closeModal('edit-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEdit()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://bigoil-backend.onrender.com/api';
+        let jobs = [];
+        let transcripts = [];  // Transcripts for current job
+        let completed = [];    // Reports for current job
+        let selectedTranscripts = new Set();
+        let currentReportId = null;
+        let currentReportData = null;
+        let currentEditField = null;
+        let currentJobId = null;  // Currently selected job
+        let currentJob = null;    // Current job object
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadJobs();  // Load jobs for selection screen
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // =========================================
+        // JOB SELECTION SCREEN
+        // =========================================
+
+        async function loadJobs() {
+            try {
+                const res = await fetch(`${API}/job-descriptions`);
+                const data = await res.json();
+                jobs = data.jobs || [];
+                renderJobGrid();
+            } catch (e) {
+                console.error('Failed to load jobs:', e);
+                // Show grid even on error
+                renderJobGrid();
+            }
+        }
+
+        function renderJobGrid() {
+            const grid = document.getElementById('job-grid');
+            if (jobs.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-jobs-message">
+                        <p>No jobs yet. Create your first job to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+            grid.innerHTML = jobs.map(j => `
+                <div class="job-card" onclick="selectJob('${j.id}')">
+                    <button class="job-card-delete" onclick="event.stopPropagation();deleteJobFromGrid('${j.id}')">&times;</button>
+                    <div class="job-card-title">${j.title}</div>
+                    <div class="job-card-company">${j.company || 'No company'}</div>
+                    <div class="job-card-stats">
+                        <div class="job-card-stat"><span>${j.transcript_count || 0}</span> transcripts</div>
+                        <div class="job-card-stat"><span>${j.report_count || 0}</span> reports</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function selectJob(jobId) {
+            currentJobId = jobId;
+            currentJob = jobs.find(j => j.id === jobId);
+
+            if (!currentJob) {
+                console.error('Job not found:', jobId);
+                return;
+            }
+
+            // Update header
+            document.getElementById('current-job-title').textContent = currentJob.title;
+            document.getElementById('current-job-company').textContent = currentJob.company || '';
+
+            // Hide overlay, show main app
+            document.getElementById('job-selection-overlay').classList.add('hidden');
+            document.getElementById('main-app').style.display = 'flex';
+
+            // Load data for this job
+            selectedTranscripts.clear();
+            await loadTranscripts();
+            await loadReports();
+            updateSelectionUI();
+            showPanel('welcome-panel');
+        }
+
+        function switchJob() {
+            // Reset state
+            currentJobId = null;
+            currentJob = null;
+            transcripts = [];
+            completed = [];
+            selectedTranscripts.clear();
+            currentReportId = null;
+            currentReportData = null;
+
+            // Show overlay, hide main app
+            document.getElementById('job-selection-overlay').classList.remove('hidden');
+            document.getElementById('main-app').style.display = 'none';
+
+            // Refresh jobs list
+            loadJobs();
+        }
+
+        async function deleteJobFromGrid(jobId) {
+            if (!confirm('Delete this job? All transcripts and reports for this job will also be deleted.')) return;
+            try {
+                await fetch(`${API}/job-descriptions/${jobId}`, { method: 'DELETE' });
+                loadJobs();
+            } catch (e) {
+                alert('Failed to delete job: ' + e.message);
+            }
+        }
+
+        function showAddJobModal() {
+            document.getElementById('new-job-title').value = '';
+            document.getElementById('new-job-company').value = '';
+            document.getElementById('new-job-description').value = '';
+            document.getElementById('add-job-modal').classList.add('active');
+        }
+
+        async function saveJobDescription() {
+            const title = document.getElementById('new-job-title').value.trim();
+            const company = document.getElementById('new-job-company').value.trim();
+            const description = document.getElementById('new-job-description').value.trim();
+
+            if (!title || !description) {
+                alert('Title and description are required');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API}/job-descriptions`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ title, company, description })
+                });
+                if (res.ok) {
+                    closeModal('add-job-modal');
+                    loadJobs();
+                } else {
+                    alert('Failed to save job description');
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        async function deleteJob(id) {
+            if (!confirm('Delete this job description?')) return;
+            await fetch(`${API}/job-descriptions/${id}`, {method: 'DELETE'});
+            loadJobs();
+        }
+
+        // Transcripts - filtered by current job
+        async function loadTranscripts() {
+            if (!currentJobId) {
+                transcripts = [];
+                renderTranscripts();
+                return;
+            }
+            try {
+                const res = await fetch(`${API}/job-descriptions/${currentJobId}/transcripts`);
+                const data = await res.json();
+                transcripts = data.transcripts || [];
+                renderTranscripts();
+            } catch (e) {
+                console.error('Failed to load transcripts:', e);
+                transcripts = [];
+                renderTranscripts();
+            }
+        }
+
+        function showAddTranscriptModal() {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                return;
+            }
+            document.getElementById('new-transcript-name').value = '';
+            document.getElementById('new-transcript-text').value = '';
+            document.getElementById('new-transcript-resume').value = '';
+            document.getElementById('add-transcript-modal').classList.add('active');
+        }
+
+        async function saveTranscript() {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                return;
+            }
+
+            const name = document.getElementById('new-transcript-name').value.trim();
+            const text = document.getElementById('new-transcript-text').value.trim();
+            const resume = document.getElementById('new-transcript-resume').value.trim();
+
+            if (!name || !text) {
+                alert('Name and transcript are required');
+                return;
+            }
+
+            try {
+                const payload = {
+                    job_id: currentJobId,  // Link to current job
+                    candidate_name: name,
+                    transcript: text,
+                    source: 'paste'
+                };
+                if (resume) payload.resume = resume;
+
+                const res = await fetch(`${API}/transcripts`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    closeModal('add-transcript-modal');
+                    loadTranscripts();
+                } else {
+                    alert('Failed to save transcript');
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        function renderTranscripts() {
+            const list = document.getElementById('drafts-list');
+            if (transcripts.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No transcripts. Upload or paste above.</li>';
+                return;
+            }
+            list.innerHTML = transcripts.map(t => `
+                <li class="item draft-item ${selectedTranscripts.has(t.id) ? 'selected' : ''}" data-id="${t.id}">
+                    <input type="checkbox" class="item-checkbox" ${selectedTranscripts.has(t.id) ? 'checked' : ''}
+                           onchange="toggleTranscriptSelection('${t.id}', this.checked)" onclick="event.stopPropagation()">
+                    <span class="item-name">${t.candidate_name || 'Unknown'}</span>
+                    ${t.resume ? '<span class="item-meta" style="color:#a78bfa;font-size:0.6rem;" title="Resume attached">+CV</span>' : ''}
+                    <span class="item-meta" style="color:#10b981;font-size:0.65rem;">${t.source || 'upload'}</span>
+                    <button class="item-delete" onclick="event.stopPropagation();deleteTranscript('${t.id}')">×</button>
+                </li>
+            `).join('');
+        }
+
+        function toggleTranscriptSelection(id, checked) {
+            if (checked) {
+                selectedTranscripts.add(id);
+            } else {
+                selectedTranscripts.delete(id);
+            }
+            updateSelectionUI();
+            renderTranscripts();
+        }
+
+        async function deleteTranscript(id) {
+            if (!confirm('Delete this transcript? This cannot be undone.')) return;
+            await fetch(`${API}/transcripts/${id}`, {method: 'DELETE'});
+            selectedTranscripts.delete(id);
+            loadTranscripts();
+            updateSelectionUI();
+        }
+
+        // Reports - filtered by current job
+        async function loadReports() {
+            if (!currentJobId) {
+                completed = [];
+                renderCompleted();
+                return;
+            }
+            try {
+                const res = await fetch(`${API}/job-descriptions/${currentJobId}/reports`);
+                const data = await res.json();
+                const reports = data.reports || [];
+                // Only show completed reports (with fit_score)
+                completed = reports.filter(r => r.fit_score !== null);
+                renderCompleted();
+            } catch (e) {
+                console.error('Failed to load reports:', e);
+                completed = [];
+                renderCompleted();
+            }
+        }
+
+        function renderCompleted() {
+            const list = document.getElementById('completed-list');
+            if (completed.length === 0) {
+                list.innerHTML = '<li style="color:#666;font-size:0.8rem;padding:0.5rem;">No completed reports yet.</li>';
+                return;
+            }
+            list.innerHTML = completed.map(r => `
+                <li class="item completed-item" data-id="${r.id}" onclick="viewReport('${r.id}')">
+                    <span class="item-name">${r.candidate_name || 'Unknown'}</span>
+                    <span class="item-meta">${r.job_title || ''}</span>
+                    <span class="item-score">${r.fit_score}%</span>
+                    <button class="item-delete" onclick="event.stopPropagation();deleteReport('${r.id}')">×</button>
+                </li>
+            `).join('');
+        }
+
+        function updateSelectionUI() {
+            const count = selectedTranscripts.size;
+            document.getElementById('selection-count').textContent =
+                count === 0 ? 'Select transcripts to analyze' : `${count} transcript(s) selected`;
+            // Enable button if we have selections (job is already selected via currentJobId)
+            document.getElementById('analyze-btn').disabled = count === 0 || !currentJobId;
+        }
+
+        async function deleteReport(id) {
+            if (!confirm('Delete this report?')) return;
+            await fetch(`${API}/interview-reports/${id}`, {method: 'DELETE'});
+            loadReports();
+            if (currentReportId === id) {
+                showPanel('welcome-panel');
+            }
+        }
+
+        // Bulk upload - saves transcripts linked to current job
+        async function handleBulkUpload(event) {
+            if (!currentJobId) {
+                alert('Please select a job first');
+                event.target.value = '';
+                return;
+            }
+
+            const files = event.target.files;
+            if (!files.length) return;
+
+            showLoading('Uploading transcripts...');
+            let uploaded = 0;
+
+            for (const file of files) {
+                try {
+                    const text = await file.text();
+                    const name = file.name.replace(/\.txt$/i, '').replace(/[_-]/g, ' ');
+                    await fetch(`${API}/transcripts`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            job_id: currentJobId,  // Link to current job
+                            transcript: text,
+                            candidate_name: name,
+                            source: 'upload',
+                            filename: file.name
+                        })
+                    });
+                    uploaded++;
+                    updateProgress(uploaded / files.length * 100, `Uploaded ${uploaded} of ${files.length}`);
+                } catch (e) {
+                    console.error('Upload failed:', e);
+                }
+            }
+
+            event.target.value = '';
+            loadTranscripts();
+            hideLoading();
+            alert(`Uploaded ${uploaded} transcript(s) for this job.`);
+        }
+
+        // Analyze selected transcripts - creates new reports for current job
+        async function analyzeSelected() {
+            const transcriptIds = Array.from(selectedTranscripts);
+
+            if (!currentJobId || transcriptIds.length === 0) return;
+
+            showLoading(`Analyzing ${transcriptIds.length} candidate(s)...`);
+            updateProgress(0, 'Starting analysis...');
+
+            try {
+                const res = await fetch(`${API}/analyze-transcripts`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ job_id: currentJobId, transcript_ids: transcriptIds })
+                });
+
+                const data = await res.json();
+
+                if (data.results) {
+                    const success = data.results.filter(r => r.success).length;
+                    const failed = data.results.filter(r => !r.success).length;
+
+                    selectedTranscripts.clear();
+                    loadReports();  // Reload to show new completed reports
+                    renderTranscripts();  // Re-render to clear selection checkboxes
+                    updateSelectionUI();
+                    hideLoading();
+
+                    if (failed === 0) {
+                        alert(`Successfully analyzed ${success} candidate(s)! Transcripts remain available for re-analysis.`);
+                    } else {
+                        alert(`Analyzed ${success} candidate(s). ${failed} failed. Transcripts remain available.`);
+                    }
+                }
+            } catch (e) {
+                hideLoading();
+                alert('Analysis failed: ' + e.message);
+            }
+        }
+
+        // View report
+        async function viewReport(id) {
+            try {
+                const res = await fetch(`${API}/interview-reports/${id}`);
+                const data = await res.json();
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                currentReportId = id;
+                currentReportData = data;
+                displayReport(data);
+                showPanel('report-panel');
+                document.getElementById('sidebar').classList.remove('open');
+            } catch (e) {
+                alert('Failed to load report');
+            }
+        }
+
+        function displayReport(data) {
+            // Check if we have full_response with detailed data
+            let fullData = data;
+            if (data.full_response) {
+                try {
+                    fullData = typeof data.full_response === 'string' ? JSON.parse(data.full_response) : data.full_response;
+                    // Merge with original data for metadata
+                    fullData = {...fullData, candidate_name: data.candidate_name, job_title: data.job_title, created_at: data.created_at};
+                } catch(e) { console.log('Could not parse full_response'); }
+            }
+
+            document.getElementById('report-name').textContent = data.candidate_name || 'Unknown';
+            document.getElementById('report-job').textContent = data.job_title || 'Unknown Position';
+            document.getElementById('report-date').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : '';
+
+            // Overall score
+            const score = fullData.fit_score || data.fit_score || 0;
+            document.getElementById('score-value').textContent = score + '%';
+            document.getElementById('score-circle').style.setProperty('--score', score + '%');
+
+            // Hiring recommendation
+            const hiringRec = fullData.hiring_recommendation;
+            const hiringEl = document.getElementById('hiring-rec');
+            if (hiringRec) {
+                const labels = {strong_yes: 'Strong Yes', yes: 'Yes', maybe: 'Maybe', no: 'No', strong_no: 'Strong No'};
+                hiringEl.innerHTML = `<span class="hiring-badge ${hiringRec}">${labels[hiringRec] || hiringRec}</span>`;
+            } else {
+                hiringEl.innerHTML = '';
+            }
+
+            // Score breakdown
+            const breakdown = fullData.fit_score_breakdown;
+            const breakdownSection = document.getElementById('score-breakdown-section');
+            if (breakdown) {
+                breakdownSection.style.display = 'block';
+                document.getElementById('score-breakdown').innerHTML = Object.entries(breakdown).map(([key, val]) => `
+                    <div class="score-bar">
+                        <div class="score-bar-label"><span>${key.replace(/_/g, ' ')}</span><span>${val}%</span></div>
+                        <div class="score-bar-fill" style="width:${val}%"></div>
+                    </div>
+                `).join('');
+            } else {
+                breakdownSection.style.display = 'none';
+            }
+
+            // Interview Q&A
+            const qaList = fullData.interview_qa;
+            const qaSection = document.getElementById('qa-section');
+            if (qaList && qaList.length > 0) {
+                qaSection.style.display = 'block';
+                document.getElementById('qa-list').innerHTML = qaList.map(qa => `
+                    <div class="qa-card ${qa.quality || ''}">
+                        <div class="qa-question">${qa.question}</div>
+                        <div class="qa-answer">${qa.answer}</div>
+                        <div class="qa-meta">
+                            <span class="qa-quality ${qa.quality || ''}">${qa.quality || ''}</span>
+                            <span class="qa-notes">${qa.notes || ''}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                qaSection.style.display = 'none';
+            }
+
+            // Resume Analysis
+            const resumeAnalysis = fullData.resume_analysis;
+            const resumeSection = document.getElementById('resume-section');
+            if (resumeAnalysis && resumeAnalysis !== null) {
+                resumeSection.style.display = 'block';
+                document.getElementById('resume-analysis').innerHTML = `
+                    <div class="assessment-box">
+                        ${resumeAnalysis.resume_job_match ? `<div class="assessment-item"><div class="assessment-label">Resume-Job Match</div><div class="assessment-value">${resumeAnalysis.resume_job_match}</div></div>` : ''}
+                        ${resumeAnalysis.resume_interview_alignment ? `<div class="assessment-item"><div class="assessment-label">Resume-Interview Alignment</div><div class="assessment-value">${resumeAnalysis.resume_interview_alignment}</div></div>` : ''}
+                        ${resumeAnalysis.resume_strengths && resumeAnalysis.resume_strengths.length ? `<div class="assessment-item"><div class="assessment-label">Resume Strengths</div><div class="assessment-value">${resumeAnalysis.resume_strengths.map(s => '• ' + s).join('<br>')}</div></div>` : ''}
+                        ${resumeAnalysis.resume_gaps && resumeAnalysis.resume_gaps.length ? `<div class="assessment-item"><div class="assessment-label">Not Discussed in Interview</div><div class="assessment-value" style="color:#fbbf24;">${resumeAnalysis.resume_gaps.map(s => '• ' + s).join('<br>')}</div></div>` : ''}
+                    </div>
+                `;
+            } else {
+                resumeSection.style.display = 'none';
+            }
+
+            // Strengths with evidence
+            const strengths = fullData.strengths || data.strengths || [];
+            document.getElementById('strengths-list').innerHTML = strengths.map(s => {
+                if (typeof s === 'string') return `<div class="evidence-card"><div class="evidence-card-title">${s}</div></div>`;
+                return `<div class="evidence-card">
+                    <div class="evidence-card-title">${s.strength || s}<span class="tag ${s.relevance || ''}">${s.relevance || ''}</span></div>
+                    ${s.evidence ? `<div class="evidence-card-quote">"${s.evidence}"</div>` : ''}
+                    ${s.job_requirement ? `<div class="evidence-card-detail">Addresses: ${s.job_requirement}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // Skills with evidence
+            const skills = fullData.matching_skills || data.matching_skills || [];
+            document.getElementById('skills-list').innerHTML = skills.map(s => {
+                if (typeof s === 'string') return `<div class="evidence-card"><div class="evidence-card-title">${s}</div></div>`;
+                return `<div class="evidence-card">
+                    <div class="evidence-card-title">${s.skill || s}<span class="tag">${s.experience_level || ''}</span></div>
+                    ${s.evidence ? `<div class="evidence-card-quote">"${s.evidence}"</div>` : ''}
+                    ${s.job_match ? `<div class="evidence-card-detail">${s.job_match}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // Concerns
+            const concerns = fullData.concerns || data.concerns || [];
+            document.getElementById('concerns-list').innerHTML = concerns.map(c => {
+                if (typeof c === 'string') return `<div class="evidence-card concern"><div class="evidence-card-title">${c}</div></div>`;
+                return `<div class="evidence-card concern">
+                    <div class="evidence-card-title">${c.concern || c}<span class="tag ${c.severity || ''}">${c.severity || ''}</span></div>
+                    ${c.evidence ? `<div class="evidence-card-quote">"${c.evidence}"</div>` : ''}
+                    ${c.mitigation ? `<div class="evidence-card-detail">Mitigation: ${c.mitigation}</div>` : ''}
+                </div>`;
+            }).join('');
+
+            // Communication assessment
+            const comm = fullData.communication_assessment;
+            const commSection = document.getElementById('comm-section');
+            if (comm) {
+                commSection.style.display = 'block';
+                document.getElementById('comm-assessment').innerHTML = `<div class="assessment-box">
+                    ${comm.clarity ? `<div class="assessment-item"><div class="assessment-label">Clarity</div><div class="assessment-value">${comm.clarity}</div></div>` : ''}
+                    ${comm.confidence ? `<div class="assessment-item"><div class="assessment-label">Confidence</div><div class="assessment-value">${comm.confidence}</div></div>` : ''}
+                    ${comm.examples_quality ? `<div class="assessment-item"><div class="assessment-label">Use of Examples</div><div class="assessment-value">${comm.examples_quality}</div></div>` : ''}
+                    ${comm.overall ? `<div class="assessment-item"><div class="assessment-label">Overall</div><div class="assessment-value">${comm.overall}</div></div>` : ''}
+                </div>`;
+            } else {
+                commSection.style.display = 'none';
+            }
+
+            // Cultural indicators
+            const culture = fullData.cultural_indicators;
+            const cultureSection = document.getElementById('culture-section');
+            if (culture) {
+                cultureSection.style.display = 'block';
+                document.getElementById('culture-indicators').innerHTML = `<div class="assessment-box">
+                    ${culture.work_style ? `<div class="assessment-item"><div class="assessment-label">Work Style</div><div class="assessment-value">${culture.work_style}</div></div>` : ''}
+                    ${culture.values ? `<div class="assessment-item"><div class="assessment-label">Values</div><div class="assessment-value">${culture.values}</div></div>` : ''}
+                    ${culture.team_fit ? `<div class="assessment-item"><div class="assessment-label">Team Fit</div><div class="assessment-value">${culture.team_fit}</div></div>` : ''}
+                </div>`;
+            } else {
+                cultureSection.style.display = 'none';
+            }
+
+            // Notable quotes
+            const quotes = fullData.notable_quotes || data.notable_quotes || [];
+            document.getElementById('quotes-container').innerHTML = quotes.map(q => {
+                const sentiment = q.sentiment || 'neutral';
+                return `<div class="quote ${sentiment}">"${q.quote}"<div class="quote-context">${q.context || ''}</div></div>`;
+            }).join('');
+
+            // Follow-up questions
+            const followup = fullData.follow_up_questions;
+            const followupSection = document.getElementById('followup-section');
+            if (followup && followup.length) {
+                followupSection.style.display = 'block';
+                document.getElementById('followup-list').innerHTML = followup.map(q => `<li>${q}</li>`).join('');
+            } else {
+                followupSection.style.display = 'none';
+            }
+
+            // Summary
+            document.getElementById('summary-text').textContent = fullData.summary || data.summary || '';
+        }
+
+        // UI helpers
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('loading-panel').classList.remove('active');
+            document.getElementById(panelId).classList.add('active');
+        }
+
+        function showLoading(text) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('loading-text').textContent = text;
+            document.getElementById('loading-panel').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-panel').classList.remove('active');
+            showPanel('welcome-panel');
+        }
+
+        function updateProgress(percent, text) {
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-text').textContent = text || '';
+        }
+
+        function closeModal(id, event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Edit functionality
+        function editField(field) {
+            if (!currentReportId) return;
+            currentEditField = field;
+            const title = field === 'candidate_name' ? 'Edit Candidate Name' : 'Edit Job Title';
+            const value = currentReportData[field] || '';
+            document.getElementById('edit-modal-title').textContent = title;
+            document.getElementById('edit-modal-input').value = value;
+            document.getElementById('edit-modal').classList.add('active');
+            document.getElementById('edit-modal-input').focus();
+        }
+
+        async function saveEdit() {
+            const value = document.getElementById('edit-modal-input').value.trim();
+            if (!currentReportId || !currentEditField) return;
+
+            try {
+                await fetch(`${API}/interview-reports/${currentReportId}`, {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ [currentEditField]: value })
+                });
+                currentReportData[currentEditField] = value;
+                displayReport(currentReportData);
+                loadReports();
+                closeModal('edit-modal');
+            } catch (e) {
+                alert('Failed to save');
+            }
+        }
+
+        // Downloads
+        function downloadText() {
+            if (!currentReportData) return;
+            const d = currentReportData;
+            const text = `CANDIDATE FIT REPORT
+${d.candidate_name ? 'Candidate: ' + d.candidate_name : ''}
+${d.job_title ? 'Position: ' + d.job_title : ''}
+Fit Score: ${d.fit_score}%
+
+STRENGTHS
+${(d.strengths || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+MATCHING SKILLS
+${(d.matching_skills || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+CONCERNS
+${(d.concerns || []).map((s,i) => (i+1) + '. ' + s).join('\n')}
+
+SUMMARY
+${d.summary || ''}
+`;
+            const blob = new Blob([text], {type: 'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${(d.candidate_name || 'report').replace(/\s+/g, '-')}-fit-report.txt`;
+            a.click();
+        }
+
+        function downloadPDF() {
+            if (!currentReportData) return;
+            const d = currentReportData;
+            const html = `<!DOCTYPE html><html><head><style>
+                body{font-family:sans-serif;padding:40px;color:#333;}
+                h1{color:#7c3aed;} h2{color:#7c3aed;margin-top:20px;border-bottom:2px solid #eee;padding-bottom:5px;}
+                .score{text-align:center;font-size:48px;color:#7c3aed;margin:30px 0;}
+                ul{list-style:none;padding:0;} li{padding:8px 0;padding-left:20px;position:relative;}
+                li::before{content:'✓';position:absolute;left:0;color:#00d4ff;}
+                .concerns li::before{content:'!';color:#ff6b6b;}
+                .quote{padding:10px;border-left:3px solid #7c3aed;margin:10px 0;background:#f8f7ff;font-style:italic;}
+            </style></head><body>
+                <h1>Candidate Fit Report</h1>
+                <p>${[d.candidate_name, d.job_title].filter(Boolean).join(' | ')}</p>
+                <div class="score">${d.fit_score}%</div>
+                <h2>Key Strengths</h2><ul>${(d.strengths||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Matching Skills</h2><ul>${(d.matching_skills||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Areas to Explore</h2><ul class="concerns">${(d.concerns||[]).map(s=>'<li>'+s+'</li>').join('')}</ul>
+                <h2>Notable Quotes</h2>${(d.notable_quotes||[]).map(q=>'<div class="quote">"'+q.quote+'"</div>').join('')}
+                <h2>Summary</h2><p>${d.summary||''}</p>
+            </body></html>`;
+            const w = window.open('','_blank');
+            w.document.write(html);
+            w.document.close();
+            w.onload = () => w.print();
+        }
+    </script>
+</body>
+</html>
