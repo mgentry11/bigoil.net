@@ -549,19 +549,296 @@
         
         <!-- CHEAT SHEET SECTION -->
         <div id="cheat-sheet" class="content-section">
-            <h2>Quick Reference Cheat Sheet</h2>
+            <h2>One-Page Cheat Sheet (8.5" × 11", Single Side Only)</h2>
+            <button class="print-btn" onclick="printCheatSheet()">🖨️ Print Cheat Sheet</button>
             
-            <div class="quick-ref">
-                <div class="quick-card">
-                    <h4>📊 Cardinality</h4>
-                    <ul>
-                        <li><strong>|A| = |B|:</strong> ∃ bijection f: A → B</li>
-                        <li><strong>Countable:</strong> |A| = |ℕ| or finite</li>
-                        <li><strong>Uncountable:</strong> Not countable</li>
-                        <li><strong>ℵ₀ = |ℕ| = |ℤ| = |ℚ|</strong></li>
-                        <li><strong>|ℝ| = 2^ℵ₀</strong></li>
-                    </ul>
+            <style>
+                @media print {
+                    body * {
+                        visibility: hidden;
+                    }
+                    #cheat-sheet, #cheat-sheet * {
+                        visibility: visible;
+                    }
+                    #cheat-sheet {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .nav-tabs, h2, .print-btn {
+                        display: none !important;
+                    }
+                }
+                
+                .cheat-sheet-container {
+                    width: 8.5in;
+                    height: 11in;
+                    background: white;
+                    padding: 0.25in;
+                    margin: 20px auto;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    font-size: 8pt;
+                    line-height: 1.2;
+                    overflow: hidden;
+                    position: relative;
+                }
+                
+                .cheat-sheet-content {
+                    column-count: 3;
+                    column-gap: 0.15in;
+                    height: 10in;
+                }
+                
+                .cheat-section {
+                    break-inside: avoid;
+                    margin-bottom: 6px;
+                    padding: 4px;
+                    background: #f8f9fa;
+                    border-radius: 3px;
+                }
+                
+                .cheat-section h4 {
+                    font-size: 9pt;
+                    margin: 0 0 3px 0;
+                    color: #667eea;
+                    border-bottom: 1px solid #667eea;
+                    padding-bottom: 2px;
+                }
+                
+                .cheat-section ul, .cheat-section ol {
+                    margin: 2px 0 2px 12px;
+                    padding: 0;
+                }
+                
+                .cheat-section li {
+                    margin-bottom: 1px;
+                    font-size: 7.5pt;
+                }
+                
+                .cheat-section p {
+                    margin: 2px 0;
+                    font-size: 7.5pt;
+                }
+                
+                .cheat-title {
+                    text-align: center;
+                    font-size: 14pt;
+                    font-weight: bold;
+                    color: #667eea;
+                    margin-bottom: 8px;
+                    column-span: all;
+                    border-bottom: 2px solid #667eea;
+                    padding-bottom: 4px;
+                }
+                
+                .cheat-footer {
+                    position: absolute;
+                    bottom: 0.15in;
+                    left: 0.25in;
+                    right: 0.25in;
+                    text-align: center;
+                    font-size: 7pt;
+                    color: #666;
+                    column-span: all;
+                }
+                
+                .mono {
+                    font-family: 'Courier New', monospace;
+                    font-size: 7pt;
+                    background: #f0f0f0;
+                    padding: 1px 2px;
+                    border-radius: 2px;
+                }
+            </style>
+            
+            <div class="cheat-sheet-container" id="printable-cheatsheet">
+                <div class="cheat-title">Real Analysis Midterm 1 - Cheat Sheet</div>
+                
+                <div class="cheat-sheet-content">
+                    <div class="cheat-section">
+                        <h4>📊 Cardinality</h4>
+                        <ul>
+                            <li><strong>|A|=|B|:</strong> <span class="mono">∃</span> bijection f:A→B</li>
+                            <li><strong>Countable:</strong> |A|=|ℕ| or finite</li>
+                            <li><strong>ℵ₀=|ℕ|=|ℤ|=|ℚ|</strong></li>
+                            <li><strong>|ℝ|=2^ℵ₀</strong> (uncountable)</li>
+                            <li><strong>CSB:</strong> injections both ways ⟹ bijection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>🔢 Convergence</h4>
+                        <p class="mono">aₙ→L iff ∀ε>0, ∃N, ∀n>N: |aₙ-L|<ε</p>
+                        <p><strong>Cauchy:</strong> <span class="mono">∀ε>0, ∃N, ∀p,q>N: |xₚ-x_q|<ε</span></p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>⬆️ Supremum (1.17)</h4>
+                        <p><strong>α=sup A iff:</strong></p>
+                        <ol>
+                            <li>α bounds A above</li>
+                            <li><span class="mono">∀ε>0, ∃a∈A: α-ε < a ≤ α</span></li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📐 Archimedean Property</h4>
+                        <p><strong>For ℚ:</strong></p>
+                        <ul>
+                            <li><span class="mono">∀a>0, ∃n: 0 < 1/n < a</span></li>
+                            <li><span class="mono">∀b>0, ∃n: b < n</span></li>
+                        </ul>
+                        <p><strong>Density:</strong> x<y ⟹ ∃z: x<z<y</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>🔗 Implications</h4>
+                        <p class="mono">Convergent ⟹ Cauchy ⟹ Bounded</p>
+                        <p>In ℝ: Convergent ⟺ Cauchy</p>
+                        <p>In ℚ: Cauchy ⇏ Convergent</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📏 Triangle Inequalities</h4>
+                        <p class="mono">|x+y| ≤ |x|+|y|</p>
+                        <p class="mono">||x|-|y|| ≤ |x-y|</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>➕ Field Axioms</h4>
+                        <p><strong>A1-A4 (+):</strong> Assoc, Identity 0, Inverse -x, Commut</p>
+                        <p><strong>M1-M4 (·):</strong> Assoc, Identity 1, Inverse 1/x, Commut</p>
+                        <p><strong>D:</strong> x(y+z)=xy+xz</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📋 Prop 1.9 (Addition)</h4>
+                        <ul>
+                            <li>(a) x+y=x+z ⟹ y=z</li>
+                            <li>(b) x+y=x ⟹ y=0</li>
+                            <li>(c) x+y=0 ⟹ y=-x</li>
+                            <li>(d) -(-x)=x</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📋 Prop 1.10 (Multiplication)</h4>
+                        <ul>
+                            <li>(a) x≠0, xy=xz ⟹ y=z</li>
+                            <li>(b) x≠0, xy=x ⟹ y=1</li>
+                            <li>(c) x≠0, xy=1 ⟹ y=1/x</li>
+                            <li>(d) 1/(1/x)=x</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📋 Prop 1.11</h4>
+                        <ul>
+                            <li>(a) 0·x=0</li>
+                            <li>(b) x,y≠0 ⟹ xy≠0</li>
+                            <li>(c) (-x)y=-(xy)</li>
+                            <li>(d) (-x)(-y)=xy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📋 Prop 1.12 (Ordered Field)</h4>
+                        <ul>
+                            <li>(i) x≠0 ⟹ x²>0, so 1>0</li>
+                            <li>(ii) x>0 ⟹ 1/x>0</li>
+                            <li>(iii) a>b, c>0 ⟹ ac>bc</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>🎯 Key Theorems</h4>
+                        <ul>
+                            <li><strong>2.1:</strong> Limits unique</li>
+                            <li><strong>2.4:</strong> Convergent ⟹ Bounded</li>
+                            <li><strong>2.5:</strong> lim(aₙ+bₙ)=lim aₙ+lim bₙ</li>
+                            <li><strong>2.9:</strong> Cauchy ⟹ Bounded</li>
+                            <li><strong>2.10:</strong> Convergent ⟹ Cauchy</li>
+                            <li><strong>2.11:</strong> Cauchy + conv subseq ⟹ Convergent</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📊 Common Sequences</h4>
+                        <ul>
+                            <li><strong>1/n → 0:</strong> N>1/ε</li>
+                            <li><strong>1/2ⁿ → 0:</strong> N>log₂(1/ε)</li>
+                            <li><strong>rⁿ(|r|<1)→0:</strong> Use Bernoulli</li>
+                            <li><strong>(3n+2)/(5n-1)→3/5:</strong> N>13/(25ε)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>🔄 Subsequences</h4>
+                        <ul>
+                            <li>Convergent ⟹ all subseq to same L</li>
+                            <li>Different subseq limits ⟹ diverges</li>
+                            <li>Even: nₖ=2k</li>
+                            <li>Odd: nₖ=2k-1</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>⚠️ Completeness</h4>
+                        <p><strong>LUB Property:</strong> Every bounded above set has sup in ℝ</p>
+                        <p><strong>Cauchy Complete:</strong> Every Cauchy sequence converges in ℝ</p>
+                        <p>ℝ has both, ℚ has neither</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📝 Algebraic Number</h4>
+                        <p>a algebraic if p(a)=0 for polynomial p with integer coefficients.</p>
+                        <p>ℚ⊆A, A countable</p>
+                        <p>π,e transcendental</p>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>🎪 Cantor Diagonal</h4>
+                        <p>To prove uncountable:</p>
+                        <ol>
+                            <li>Assume countable</li>
+                            <li>List all elements</li>
+                            <li>Flip diagonal</li>
+                            <li>New element not in list</li>
+                            <li>Contradiction!</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>💡 Proof Template (ε-N)</h4>
+                        <ol>
+                            <li>Claim limit L</li>
+                            <li>Scratch: |aₙ-L|<ε, solve n></li>
+                            <li>Let ε>0, define N</li>
+                            <li>Show |aₙ-L|<ε for n>N</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cheat-section">
+                        <h4>📚 Key Distinctions</h4>
+                        <p><strong>ℝ:</strong> Complete, LUB ✓, Cauchy ✓</p>
+                        <p><strong>ℚ:</strong> Not complete, No LUB, Not Cauchy</p>
+                        <p>Both have Archimedean property</p>
+                        <p>|ℝ|>|ℚ| (uncountable vs countable)</p>
+                    </div>
                 </div>
+                
+                <div class="cheat-footer">UC Santa Cruz Math 105A - Winter 2026 | mgentry11 @ bigoil.net</div>
+            </div>
+            
+            <script>
+                function printCheatSheet() {
+                    window.print();
+                }
+            </script>
+        </div>
                 
                 <div class="quick-card">
                     <h4>🔢 Convergence</h4>
