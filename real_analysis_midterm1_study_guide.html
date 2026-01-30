@@ -360,9 +360,20 @@
             
             <div class="definition-box">
                 <h4>The Archimedean Property</h4>
+                <p><strong>For ℚ (and later ℝ):</strong></p>
                 <p><strong>Version 1:</strong> For every positive rational a, ∃ natural n: 0 < 1/n < a</p>
                 <p><strong>Version 2:</strong> For every positive rational b, ∃ natural n: b < n</p>
-                <p><strong>What it means:</strong> No infinitely small or infinitely large elements exist</p>
+                <p><strong>Version 3:</strong> For x, y > 0, ∃ n ∈ ℕ: nx > y</p>
+                
+                <p><strong>What it means:</strong></p>
+                <ul>
+                    <li>No infinitely small (infinitesimal) elements</li>
+                    <li>No infinitely large elements</li>
+                    <li>ℚ has no "smallest" positive element</li>
+                    <li>Between any two rationals, there's another rational (density)</li>
+                </ul>
+                
+                <p><strong>Theorem 1.15 (Density of ℚ):</strong> For x, y ∈ ℚ with x < y, ∃ z ∈ ℚ: x < z < y</p>
             </div>
             
             <div class="definition-box">
@@ -410,18 +421,52 @@
             
             <h3>2. Theorems to Know Proofs Of</h3>
             
+            <div class="proof-box">
+                <h4>Theorem: Archimedean Property of ℚ</h4>
+                <p><strong>Statement:</strong> For every positive rational a, there exists a natural number n such that 0 < 1/n < a.</p>
+                <p><strong>Proof:</strong></p>
+                <p>Let a > 0 be a positive rational. Then a = p/q where p, q ∈ ℕ.</p>
+                <p>Take n = q + 1 ∈ ℕ.</p>
+                <p>Then na = (q+1)p/q = p + p/q > p ≥ 1.</p>
+                <p>So a > 1/n > 0. ∎</p>
+            </div>
+            
             <div class="theorem-box">
-                <h4>Proposition 1.9: Field Axiom Properties</h4>
+                <h4>Proposition 1.9: Field Axiom Properties (Addition)</h4>
                 <p><strong>(a) Cancellation:</strong> x + y = x + z ⇒ y = z</p>
                 <p><strong>(b) Unique identity:</strong> x + y = x ⇒ y = 0</p>
                 <p><strong>(c) Unique inverse:</strong> x + y = 0 ⇒ y = -x</p>
                 <p><strong>(d) Double negative:</strong> -(-x) = x</p>
+                <p><strong>Proof of (a):</strong> y = 0 + y = (-x + x) + y = -x + (x + y) = -x + (x + z) = (-x + x) + z = 0 + z = z</p>
             </div>
             
             <div class="theorem-box">
-                <h4>Proposition 1.11</h4>
-                <p><strong>(a)</strong> 0 · x = 0</p>
-                <p><strong>(d)</strong> (-x)(-y) = xy</p>
+                <h4>Proposition 1.10: Field Axiom Properties (Multiplication)</h4>
+                <p><strong>(a) Cancellation:</strong> If x ≠ 0 and xy = xz, then y = z</p>
+                <p><strong>(b) Unique identity:</strong> If x ≠ 0 and xy = x, then y = 1</p>
+                <p><strong>(c) Unique inverse:</strong> If x ≠ 0 and xy = 1, then y = 1/x</p>
+                <p><strong>(d) Inverse of inverse:</strong> If x ≠ 0, then 1/(1/x) = x</p>
+            </div>
+            
+            <div class="theorem-box">
+                <h4>Proposition 1.11: Field Axiom Consequences</h4>
+                <p><strong>(a) Zero multiplication:</strong> 0 · x = 0</p>
+                <p><strong>(b) Nonzero product:</strong> If x ≠ 0 and y ≠ 0, then xy ≠ 0</p>
+                <p><strong>(c) Negative multiplication:</strong> (-x)y = -(xy) = x(-y)</p>
+                <p><strong>(d) Product of negatives:</strong> (-x)(-y) = xy</p>
+                <p><strong>Proof of (a):</strong> 0·x = (0+0)·x = 0·x + 0·x. By cancellation (Prop 1.9a), 0·x = 0.</p>
+                <p><strong>Proof of (d):</strong> (-x)(-y) = -[x(-y)] = -[-(xy)] = xy</p>
+            </div>
+            
+            <div class="proof-box">
+                <h4>Theorem 1.17: Alternate Characterization of Supremum</h4>
+                <p><strong>Statement:</strong> α = sup A if and only if:</p>
+                <ol>
+                    <li>α is an upper bound of A</li>
+                    <li>∀ε > 0, ∃a ∈ A such that α - ε < a ≤ α</li>
+                </ol>
+                <p><strong>Proof (⇒):</strong> Suppose α = sup A. Then α is an upper bound (condition 1). For any ε > 0, α - ε < α, so α - ε is not an upper bound. Thus ∃a ∈ A with α - ε < a. Since α is an upper bound, a ≤ α.</p>
+                <p><strong>Proof (⇐):</strong> Suppose conditions 1 and 2 hold. Let β < α. Take ε = α - β > 0. By condition 2, ∃a ∈ A with α - ε < a, i.e., β < a. So β is not an upper bound. Thus α is the least upper bound. ∎</p>
             </div>
             
             <div class="proof-box">
