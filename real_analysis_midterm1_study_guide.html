@@ -1231,95 +1231,377 @@ Convergent ⟹ Cauchy ⟹ Bounded
             </div>
         </div>
         
-        <!-- SOLUTIONS SECTION -->
+        <!-- COMPREHENSIVE REVIEWS SECTION -->
         <div id="solutions" class="content-section">
-            <h2>Complete Solutions with Explanations</h2>
+            <h2>📚 Comprehensive Problem Reviews</h2>
             
             <div class="warning-box">
-                <strong>Scoring Rubric:</strong>
+                <strong>How to Use This Section:</strong>
                 <ul>
-                    <li><strong>Definitions (20 pts):</strong> 4 pts each - precise, rigorous, correct notation</li>
-                    <li><strong>True/False (20 pts):</strong> 4 pts each - correct answer + valid justification</li>
-                    <li><strong>Find Error (15 pts):</strong> 5 pts each - identify error + explain why</li>
-                    <li><strong>Proofs (45 pts):</strong> Clear logical flow, proper use of definitions</li>
+                    <li>Each review breaks down the problem type with detailed explanations</li>
+                    <li>Common mistakes are highlighted</li>
+                    <li>Step-by-step approaches provided</li>
+                    <li>Practice variations included</li>
                 </ul>
             </div>
             
-            <h3>Study Tips Based on Common Mistakes</h3>
+            <h3>PART I: Definitions Review (Q1-Q5)</h3>
             
-            <div class="quick-ref">
-                <div class="quick-card">
-                    <h4>⚠️ Common Errors</h4>
-                    <ul>
-                        <li>Assuming limit exists before proving convergence</li>
-                        <li>N depends on n (should only depend on ε)</li>
-                        <li>Division by zero</li>
-                        <li>Wrong quantifiers (∀ vs ∃)</li>
-                        <li>Using boundedness without proof</li>
-                    </ul>
-                </div>
-                
-                <div class="quick-card">
-                    <h4>💡 Proof Writing Tips</h4>
-                    <ul>
-                        <li>State what you're proving</li>
-                        <li>State your assumptions</li>
-                        <li>Show logical steps clearly</li>
-                        <li>End with ∎ or "QED"</li>
-                        <li>Use scratch work!</li>
-                    </ul>
-                </div>
-                
-                <div class="quick-card">
-                    <h4>🎯 Key Relationships</h4>
-                    <div class="formula">
-Convergent ⟹ Cauchy ⟹ Bounded
-                    </div>
-                    <p>In ℝ: Convergent ⟺ Cauchy</p>
-                    <p>In ℚ: Cauchy ⇏ Convergent</p>
-                </div>
-                
-                <div class="quick-card">
-                    <h4>📚 Key Distinctions</h4>
-                    <ul>
-                        <li><strong>ℝ:</strong> Complete, has LUB property</li>
-                        <li><strong>ℚ:</strong> Not complete, no LUB property</li>
-                        <li>Both have Archimedean property</li>
-                        <li>|ℝ| > |ℚ| (uncountable vs countable)</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <h3>Essential Formulas</h3>
-            
-            <div class="formula">
-<strong>Triangle Inequality:</strong> |x + y| ≤ |x| + |y|
-            </div>
-            
-            <div class="formula">
-<strong>Geometric Series:</strong> 1 + r + r² + ... + rⁿ = (1 - rⁿ⁺¹)/(1 - r) → 1/(1-r) as n→∞ (for |r| < 1)
-            </div>
-            
-            <div class="formula">
-<strong>Bernoulli's Inequality:</strong> (1 + h)ⁿ ≥ 1 + nh for h > 0, n ∈ ℕ
-            </div>
-            
-            <h3>Cantor's Diagonal Argument</h3>
-            
-            <div class="proof-box">
-                <p><strong>To prove {0,1}^ℕ is uncountable:</strong></p>
+            <div class="review-box">
+                <h4>📖 Definition Writing Strategy</h4>
+                <p><strong>Template for 4/4 points:</strong></p>
                 <ol>
-                    <li>Assume countable: list all sequences a₁, a₂, a₃, ...</li>
-                    <li>Write as array: aᵢ = aᵢ₁aᵢ₂aᵢ₃...</li>
-                    <li>Build b = b₁b₂b₃... where bₖ ≠ aₖₖ (flip diagonal)</li>
-                    <li>b differs from every aₖ at position k</li>
-                    <li>b not in list → <strong>Contradiction!</strong></li>
+                    <li><strong>Formal definition</strong> (2 pts): Use precise mathematical language with quantifiers</li>
+                    <li><strong>English translation</strong> (1 pt): Explain what it means in words</li>
+                    <li><strong>Example + verification</strong> (1 pt): Concrete example with brief proof</li>
                 </ol>
+                
+                <div class="strategy-box">
+                    <h4>Q1: Algebraic Number (Review)</h4>
+                    <p><strong>Key points:</strong></p>
+                    <ul>
+                        <li>Must specify "polynomial with integer coefficients"</li>
+                        <li>Don't just say "satisfies a polynomial" - be specific!</li>
+                        <li>Good example: √2 (use x² - 2 = 0)</li>
+                        <li>Bad example: e or π (they're transcendental!)</li>
+                    </ul>
+                    <p><strong>Common mistakes:</strong></p>
+                    <ul>
+                        <li>Forgetting to specify integer coefficients</li>
+                        <li>Using transcendental numbers as examples</li>
+                        <li>Not verifying p(a) = 0 explicitly</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q2: Countable Sets (Review)</h4>
+                    <p><strong>Two acceptable definitions:</strong></p>
+                    <ol>
+                        <li>Finite OR |X| = |ℕ| (bijection exists)</li>
+                        <li>Elements can be listed as x₁, x₂, x₃, ...</li>
+                    </ol>
+                    <p><strong>For algebraic numbers being countable:</strong></p>
+                    <ul>
+                        <li>Step 1: Countable polynomials (by degree + coefficient bounds)</li>
+                        <li>Step 2: Each polynomial has finitely many roots</li>
+                        <li>Step 3: Countable union of finite sets is countable</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q3: Supremum Definition (Review)</h4>
+                    <p><strong>Must include both parts:</strong></p>
+                    <ol>
+                        <li>Upper bound property</li>
+                        <li>Leastness property (if β < α, then β not upper bound)</li>
+                    </ol>
+                    <p><strong>Theorem 1.17 alternate form:</strong></p>
+                    <div class="formula">
+α = sup A ⟺ (i) α bounds A, AND (ii) ∀ε>0, ∃a∈A: α-ε < a ≤ α
+                    </div>
+                    <p><strong>Intuition:</strong> Can get arbitrarily close from below</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q4-Q5: Convergence vs Cauchy (Review)</h4>
+                    <p><strong>Key differences:</strong></p>
+                    <table style="width:100%; margin: 10px 0;">
+                        <tr style="background: #667eea; color: white;">
+                            <th>Feature</th>
+                            <th>Convergent</th>
+                            <th>Cauchy</th>
+                        </tr>
+                        <tr>
+                            <td>Requires limit L?</td>
+                            <td>Yes (explicit)</td>
+                            <td>No</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td>Condition</td>
+                            <td>|aₙ - L| < ε</td>
+                            <td>|aₚ - a_q| < ε</td>
+                        </tr>
+                        <tr>
+                            <td>In ℝ</td>
+                            <td colspan="2">Equivalent!</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td>In ℚ</td>
+                            <td>May not converge</td>
+                            <td>Can exist without limit in ℚ</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <h3>PART II: True or False Review (Q6-Q10)</h3>
+            
+            <div class="review-box">
+                <h4>🎯 T/F Decision Framework</h4>
+                
+                <div class="strategy-box">
+                    <h4>Q6: ℝ is countable?</h4>
+                    <p><strong>Answer: FALSE</strong></p>
+                    <p><strong>Why?</strong> Cantor's diagonal argument proves ℝ is uncountable.</p>
+                    <p><strong>Key fact:</strong> |ℝ| = 2^ℵ₀ > ℵ₀ = |ℕ|</p>
+                    <p><strong>Common confusion:</strong> Don't confuse "infinite" with "countable infinite"</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q7: Bounded ⟹ Convergent?</h4>
+                    <p><strong>Answer: FALSE</strong></p>
+                    <p><strong>Counterexample:</strong> aₙ = (-1)ⁿ</p>
+                    <ul>
+                        <li>Bounded: |aₙ| ≤ 1 for all n ✓</li>
+                        <li>Not convergent: oscillates between -1 and 1</li>
+                        <li>Proof: even subsequence → 1, odd subsequence → -1</li>
+                    </ul>
+                    <p><strong>What IS true:</strong> Convergent ⟹ Bounded (Theorem 2.4)</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q8: Convergent ⟹ Subsequences converge?</h4>
+                    <p><strong>Answer: TRUE</strong></p>
+                    <p><strong>Key insight:</strong> If aₙ → L, then EVERY subsequence aₙₖ → L</p>
+                    <p><strong>Proof sketch:</strong> Since nₖ ≥ k, if k > N then nₖ > N</p>
+                    <p><strong>Converse use:</strong> Different subsequence limits ⟹ original diverges</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q9: Cauchy ⟹ Bounded?</h4>
+                    <p><strong>Answer: TRUE</strong> (Theorem 2.9)</p>
+                    <p><strong>Proof approach:</strong></p>
+                    <ol>
+                        <li>Take ε = 1 in Cauchy definition</li>
+                        <li>Get N such that p,q > N ⟹ |xₚ - x_q| < 1</li>
+                        <li>Fix q = N+1, then |xₚ| < |x_{N+1}| + 1 for all p > N</li>
+                        <li>Take max over finite initial segment + tail bound</li>
+                    </ol>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q10: ℚ has LUB property?</h4>
+                    <p><strong>Answer: FALSE</strong></p>
+                    <p><strong>Counterexample:</strong> A = {q ∈ ℚ : q² < 2}</p>
+                    <ul>
+                        <li>A is bounded above (by 2)</li>
+                        <li>sup A = √2</li>
+                        <li>√2 ∉ ℚ</li>
+                    </ul>
+                    <p><strong>Key distinction:</strong> ℝ has LUB property, ℚ does not</p>
+                </div>
+            </div>
+            
+            <h3>PART III: Find the Error Review (Q11-Q13)</h3>
+            
+            <div class="review-box">
+                <h4>🔍 Error Detection Checklist</h4>
+                
+                <div class="strategy-box">
+                    <h4>Q11: Product Rule Proof Error</h4>
+                    <p><strong>The Error:</strong> |bₙ| is not a constant!</p>
+                    <p>In the expression: |aₙbₙ - LM| < ε|bₙ| + |L|ε</p>
+                    <p>The term |bₙ| varies with n, so we can't "make ε small enough"</p>
+                    
+                    <p><strong>Correct approach:</strong></p>
+                    <ol>
+                        <li>First prove convergent sequences are bounded (Theorem 2.4)</li>
+                        <li>So |bₙ| ≤ K for some constant K</li>
+                        <li>Choose N₁ so |aₙ - A| < ε/(2K)</li>
+                        <li>Choose N₂ so |bₙ - B| < ε/(2|L|+1)</li>
+                        <li>Then bound is K·ε/(2K) + |L|·ε/(2|L|+1) < ε</li>
+                    </ol>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q12: "Bounded ⟹ Convergent" Error</h4>
+                    <p><strong>The Error:</strong> "Since bounded sequences converge" is FALSE</p>
+                    <p><strong>What's true:</strong> Convergent ⟹ Bounded (not conversely)</p>
+                    <p><strong>Correct statement:</strong> In ℝ, Cauchy ⟺ Convergent</p>
+                    <p><strong>In ℚ:</strong> Can be Cauchy but not converge (e.g., to √2)</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q13: LUB in ℚ Error</h4>
+                    <p><strong>The Error:</strong> Applying LUB property to ℚ instead of ℝ</p>
+                    <p>The LUB property states: "Every nonempty subset of ℝ bounded above has LUB in ℝ"</p>
+                    <p><strong>Key point:</strong> The supremum might not be in the original set!</p>
+                    <p>For A = {q ∈ ℚ : q² < 2}: sup A = √2 ∉ ℚ</p>
+                </div>
+            </div>
+            
+            <h3>PART IV: Proofs Review (Q14-Q18)</h3>
+            
+            <div class="review-box">
+                <h4>✍️ Proof Writing Masterclass</h4>
+                
+                <div class="strategy-box">
+                    <h4>Q14: Field Axiom Proofs</h4>
+                    <p><strong>Part (a): Cancellation (x≠0, xy=xz ⟹ y=z)</strong></p>
+                    <div class="formula">
+x⁻¹(xy) = x⁻¹(xz)  &nbsp;&nbsp;[multiply both sides by x⁻¹, exists by M4]<br>
+(x⁻¹x)y = (x⁻¹x)z  &nbsp;&nbsp;[associativity M1]<br>
+1·y = 1·z          &nbsp;&nbsp;[inverse M4]<br>
+y = z              &nbsp;&nbsp;[identity M2] ∎
+                    </div>
+                    
+                    <p><strong>Part (b): (-x)(-y) = xy</strong></p>
+                    <div class="formula">
+(-x)(-y) = -[x(-y)]   &nbsp;&nbsp;[Prop 1.11c: (-a)b = -(ab)]<br>
+         = -[-(xy)]   &nbsp;&nbsp;[Prop 1.11c again]<br>
+         = xy         &nbsp;&nbsp;[Prop 1.9d: -(-z) = z] ∎
+                    </div>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q15: ε-N Convergence Proof</h4>
+                    <p><strong>Claim:</strong> lim (3n+2)/(5n-1) = 3/5</p>
+                    
+                    <p><strong>Step 1: Scratch Work</strong></p>
+                    <div class="formula">
+|(3n+2)/(5n-1) - 3/5| = |(15n+10-15n+3)/(25n-5)| = 13/(25n-5)
+                    </div>
+                    <p>For n ≥ 1: 25n-5 > 25n-5n = 20n, so 13/(25n-5) < 13/(20n)</p>
+                    <p>We need 13/(20n) < ε, so n > 13/(20ε)</p>
+                    
+                    <p><strong>Step 2: Formal Proof</strong></p>
+                    <div class="formula">
+Let ε > 0. By Archimedean Property, ∃ N ∈ ℕ with N > 13/(20ε).<br><br>
+For n > N:<br>
+|(3n+2)/(5n-1) - 3/5| = 13/(25n-5) < 13/(20n) < 13/(20N) < ε<br><br>
+Therefore, lim (3n+2)/(5n-1) = 3/5. ∎
+                    </div>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q16: Subsequence Analysis</h4>
+                    <p><strong>Given:</strong> aₙ = (-1)ⁿ + 1/n</p>
+                    
+                    <p><strong>Part (a): First 6 terms</strong></p>
+                    <ul>
+                        <li>a₁ = -1 + 1 = 0</li>
+                        <li>a₂ = 1 + 1/2 = 1.5</li>
+                        <li>a₃ = -1 + 1/3 ≈ -0.667</li>
+                        <li>a₄ = 1 + 1/4 = 1.25</li>
+                        <li>a₅ = -1 + 1/5 = -0.8</li>
+                        <li>a₆ = 1 + 1/6 ≈ 1.167</li>
+                    </ul>
+                    
+                    <p><strong>Part (b): Two subsequences</strong></p>
+                    <ul>
+                        <li><strong>Odd:</strong> nₖ = 2k-1, a_{2k-1} = -1 + 1/(2k-1) → -1 as k→∞</li>
+                        <li><strong>Even:</strong> nₖ = 2k, a_{2k} = 1 + 1/(2k) → 1 as k→∞</li>
+                    </ul>
+                    
+                    <p><strong>Part (c): Convergence?</strong></p>
+                    <p>NO! Since odd subsequence → -1 and even subsequence → 1, and -1 ≠ 1, the sequence diverges.</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q17: Cauchy Sequences</h4>
+                    <p><strong>Part (a): Prove xₙ = 1/n is Cauchy</strong></p>
+                    <div class="formula">
+Let ε > 0. By AP, ∃ N with 1/N < ε.<br><br>
+For p > q > N:<br>
+|xₚ - x_q| = |1/p - 1/q| = (p-q)/(pq) < p/(pq) = 1/q < 1/N < ε<br><br>
+Therefore {xₙ} is Cauchy. ∎
+                    </div>
+                    
+                    <p><strong>Part (b): Convergence in ℚ?</strong></p>
+                    <p>Sequence: a₁=1, aₙ₊₁ = (aₙ + 2/aₙ)/2 (Babylonian method)</p>
+                    <p><strong>Answer:</strong> NO, does not converge in ℚ</p>
+                    <p><strong>Reason:</strong> This sequence converges to √2 in ℝ. Since √2 ∉ ℚ, it cannot converge to any element of ℚ.</p>
+                    <p><strong>Moral:</strong> ℚ is not Cauchy complete!</p>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Q18: Cardinality Proof</h4>
+                    <p><strong>Part (a): CSB Theorem</strong></p>
+                    <p>If f: A → B and g: B → A are both injective functions, then there exists a bijection h: A → B.</p>
+                    
+                    <p><strong>Part (b): Prove S = {(m,n) ∈ ℕ×ℕ : m ≤ n} is countable</strong></p>
+                    <p><strong>Strategy:</strong> Use CSB theorem</p>
+                    
+                    <p><strong>Injection f: S → ℕ:</strong></p>
+                    <p>Define f(m,n) = 2^m · 3^n</p>
+                    <p>This is injective by Fundamental Theorem of Arithmetic (unique prime factorization)</p>
+                    
+                    <p><strong>Injection g: ℕ → S:</strong></p>
+                    <p>Define g(n) = (1, n)</p>
+                    <p>Clearly 1 ≤ n, so (1,n) ∈ S</p>
+                    
+                    <p><strong>Conclusion:</strong> By CSB, |S| = |ℕ|, so S is countable. ∎</p>
+                </div>
+            </div>
+            
+            <h3>🎯 Practice Variations</h3>
+            
+            <div class="review-box">
+                <h4>Try These Similar Problems</h4>
+                
+                <div class="strategy-box">
+                    <h4>Additional Practice - Definitions</h4>
+                    <ul>
+                        <li>Define transcendental number and prove e is not algebraic (hint: Lindemann–Weierstrass theorem)</li>
+                        <li>Define infimum and give alternate characterization</li>
+                        <li>Define metric space and prove d(x,y) = |x-y| is a metric on ℝ</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Additional Practice - Proofs</h4>
+                    <ul>
+                        <li>Prove lim (2n+5)/(3n-1) = 2/3 using ε-N definition</li>
+                        <li>Prove that if aₙ → L and bₙ → M, then aₙbₙ → LM (carefully!)</li>
+                        <li>Prove that any interval (a,b) with a<b is uncountable</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-box">
+                    <h4>Additional Practice - Find the Error</h4>
+                    <ul>
+                        <li>"Proof" that all Cauchy sequences converge (in ℚ)</li>
+                        <li>"Proof" using N that depends on n</li>
+                        <li>"Proof" that divides by an expression that could be zero</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>📊 Scoring Breakdown</h3>
+            
+            <div class="review-box">
+                <table style="width:100%; border-collapse: collapse;">
+                    <tr style="background: #667eea; color: white;">
+                        <th style="padding: 10px; text-align: left;">Question Type</th>
+                        <th style="padding: 10px; text-align: left;">Points</th>
+                        <th style="padding: 10px; text-align: left;">Key to Success</th>
+                    </tr>
+                    <tr>
+                        <td>Definitions</td>
+                        <td>20 (4 each)</td>
+                        <td>Formal + example</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td>True/False</td>
+                        <td>20 (4 each)</td>
+                        <td>Answer + justification/counterexample</td>
+                    </tr>
+                    <tr>
+                        <td>Find Error</td>
+                        <td>15 (5 each)</td>
+                        <td>Identify + explain + correct</td>
+                    </tr>
+                    <tr style="background: #f8f9fa;">
+                        <td>Proofs</td>
+                        <td>45</td>
+                        <td>Clear logic, proper definitions</td>
+                    </tr>
+                </table>
             </div>
             
             <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px;">
-                <h3>🎓 Good Luck on Your Exam!</h3>
-                <p style="font-size: 1.2em; margin-top: 10px;">Remember: Practice the homework problems!</p>
+                <h3>🎓 You're Ready!</h3>
+                <p style="font-size: 1.2em; margin-top: 10px;">Practice makes perfect. You've got this! 💪</p>
             </div>
         </div>
         
