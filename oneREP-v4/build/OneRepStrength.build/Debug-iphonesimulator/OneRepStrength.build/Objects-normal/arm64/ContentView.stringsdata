@@ -1,0 +1,360 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Charts (use StatsView)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 434
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld days",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 467
+        }
+      },
+      {
+        "comment": "",
+        "key": "Streak",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 463
+        }
+      },
+      {
+        "comment": "",
+        "key": "This Week",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 482
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export Data (CSV)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 506
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Body Measurement",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 556
+        }
+      },
+      {
+        "comment": "",
+        "key": "No PRs yet - complete some workouts!",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 603
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Records",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 597
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 617
+        }
+      },
+      {
+        "comment": "",
+        "key": "Body Weight",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 649
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log body weight to see your trend",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 671
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 663
+        }
+      },
+      {
+        "comment": "",
+        "key": "30-day change:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 679
+        }
+      },
+      {
+        "comment": "",
+        "key": "+%@ lbs",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 682
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ lbs",
+        "location": {
+          "startingColumn": 83,
+          "startingLine": 682
+        }
+      },
+      {
+        "comment": "",
+        "key": "Latest Measurements",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 702
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Measurements",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 807
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 776
+        }
+      },
+      {
+        "comment": "",
+        "key": "Measurements (inches)",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 795
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 803
+        }
+      },
+      {
+        "comment": "",
+        "key": "Body Weight",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 778
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 780
+        }
+      },
+      {
+        "comment": "",
+        "key": "Body Fat %",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 786
+        }
+      },
+      {
+        "comment": "",
+        "key": "%",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 788
+        }
+      },
+      {
+        "comment": "",
+        "key": "Optional notes",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 804
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 811
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 814
+        }
+      },
+      {
+        "comment": "",
+        "key": "in",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 852
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export Workout Data",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 875
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export all your workout logs as a CSV file that can be opened in Excel, Google Sheets, or any spreadsheet app.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 880
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld sets will be exported",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 887
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export CSV",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 896
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 912
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workout Log",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 986
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld sets",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 991
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Sets Logged Yet",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1004
+        }
+      },
+      {
+        "comment": "",
+        "key": "Complete exercises and tap \"Log Set\" to track your progress",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1008
+        }
+      },
+      {
+        "comment": "",
+        "key": "No workout selected",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1059
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 1129
+        }
+      },
+      {
+        "comment": "",
+        "key": "Repeat",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1099
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1115
+        }
+      },
+      {
+        "comment": "",
+        "key": "(%@)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1149
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 1162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Failure",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1170
+        }
+      }
+    ]
+  },
+  "version": 1
+}

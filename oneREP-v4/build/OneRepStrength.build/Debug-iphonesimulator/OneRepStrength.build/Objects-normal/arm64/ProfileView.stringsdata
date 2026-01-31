@@ -1,0 +1,104 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/ProfileView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Profile",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Member since %@",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 200
+        }
+      },
+      {
+        "comment": "",
+        "key": "Achievements",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "Experience Level",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 327
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data Analytics",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 372
+        }
+      },
+      {
+        "comment": "",
+        "key": "View detailed exercise breakdowns",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 376
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Profile",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 401
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Profile",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 608
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 601
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 614
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Information",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 628
+        }
+      },
+      {
+        "comment": "",
+        "key": "Experience Level",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 644
+        }
+      }
+    ]
+  },
+  "version": 1
+}

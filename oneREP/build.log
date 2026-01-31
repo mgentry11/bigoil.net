@@ -1,0 +1,435 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj -scheme OneRepStrength -destination "platform=iOS Simulator,name=iPhone 17 Pro" clean build
+
+2026-01-16 09:45:45.815 xcodebuild[6349:54494] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+** CLEAN SUCCEEDED **
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'OneRepStrength' in project 'OneRepStrength' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 1b876b12519c9bfc9e2cf7d827bf2456
+Build description path: /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/XCBuildData/1b876b12519c9bfc9e2cf7d827bf2456.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -o /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    builtin-create-build-directory /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength-a906481c2c12364be52417598411c102-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength.xcodeproj
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength-a906481c2c12364be52417598411c102-VFS-iphonesimulator/all-product-headers.yaml
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.DependencyStaticMetadataFileList (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.DependencyMetadataFileList (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-project-headers.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-project-headers.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-own-target-headers.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-generated-files.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-generated-files.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-target-headers.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-non-framework-target-headers.hmap (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-DebugDylibPath-normal-arm64.txt (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-DebugDylibInstallName-normal-arm64.txt (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftConstValuesFileList (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftFileList (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftFileList
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_const_extract_protocols.json (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-OutputFileMap.json (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.LinkFileList (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.LinkFileList
+
+MkDir /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /bin/mkdir -p /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app
+
+WriteAuxiliaryFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/Entitlements-Simulated.plist (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    write-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/Entitlements-Simulated.plist
+
+ProcessProductPackaging "" /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "P96DZPGQGW.com.onerepstrength.app";
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent
+
+ProcessProductPackagingDER /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent.der (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /usr/bin/derq query -f xml -i /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent.der --raw
+
+Ld /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/__preview.dylib normal (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -O0 -L/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -F/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -install_name @rpath/OneRepStrength.debug.dylib -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength.app-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/__preview.dylib
+
+MkDir /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/thinned (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /bin/mkdir -p /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/thinned
+
+GenerateAssetSymbols /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets --compile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_dependencies --output-partial-info-plist /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 17.0 --platform iphonesimulator --bundle-identifier com.onerepstrength.app --generate-swift-asset-symbols /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.document.warnings */
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets:./AppIcon.appiconset/(null)[2d][AppIcon.png]: warning: The app icon set "AppIcon" has an unassigned child.
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets:./AppIcon.appiconset/(null)[2d][AppIcon.png]: warning: The app icon set "AppIcon" has an unassigned child.
+/* com.apple.actool.compilation-results */
+/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+MkDir /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/unthinned (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /bin/mkdir -p /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/unthinned
+
+CompileAssetCatalogVariant thinned /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets --compile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPhone18,1 --filter-for-device-os-version 26.2 --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 17.0 --platform iphonesimulator
+/* com.apple.actool.document.warnings */
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets:./AppIcon.appiconset/(null)[2d][AppIcon.png]: warning: The app icon set "AppIcon" has an unassigned child.
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets:./AppIcon.appiconset/(null)[2d][AppIcon.png]: warning: The app icon set "AppIcon" has an unassigned child.
+/* com.apple.actool.compilation-results */
+/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist_thinned
+/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriver OneRepStrength normal arm64 com.apple.xcode.tools.swift.compiler (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name OneRepStrength -Onone -enforce-exclusivity\=checked @/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -F /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -output-file-map /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_const_extract_protocols.json -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-generated-files.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-own-target-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-target-headers.hmap -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-project-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources-normal/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-Swift.h -working-directory /Users/markgentry/Projects/onerepstrength-main/oneREP -experimental-emit-module-separately -disable-cmo
+
+SwiftCompile normal arm64 Compiling\ TimerView.swift,\ HistoryView.swift,\ SettingsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/TimerView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/HistoryView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SettingsView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/TimerView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/HistoryView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SettingsView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ WorkoutActivityAttributes.swift,\ WorkoutManager.swift,\ WorkoutListView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutActivityAttributes.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ViewModels/WorkoutManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/WorkoutListView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutActivityAttributes.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ViewModels/WorkoutManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/WorkoutListView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ OneRepStrengthApp.swift,\ ContentView.swift,\ AppIntents.swift,\ Exercise.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ContentView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/AppIntents.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/Exercise.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+Failed frontend command:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -c -primary-file /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift -primary-file /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ContentView.swift -primary-file /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/AppIntents.swift -primary-file /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/Exercise.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutLog.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/TimerPhase.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/BodyMeasurements.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutActivityAttributes.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ViewModels/WorkoutManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/WorkoutListView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/TimerView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/HistoryView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SettingsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/OnboardingView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProfileView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RestView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/DataAnalyticsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProgressChartsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutinesView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutineDetailView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SaveAsTemplateSheet.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/AudioManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/ThemeManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutTemplateManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutScheduler.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/HealthKitManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/CloudSyncManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/SecureStorage.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutActivityManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WatchConnectivityManager.swift /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.swift -supplementary-output-file-map /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/supplementaryOutputs-1 -emit-localized-strings -emit-localized-strings-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64 -target arm64-apple-ios17.0-simulator -module-can-import-version DeveloperToolsSupport 23.0.4 23.0.4 -module-can-import-version SwiftUI 7.2.5.1 7.2.5 -module-can-import-version UIKit 9126.2.4.1 9126.2.4 -disable-cross-import-overlay-search -swift-module-cross-import AppIntents /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/SwiftUI.swiftoverlay -swift-module-cross-import AppIntents /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/UIKit.swiftoverlay -swift-module-cross-import AppIntents /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/SwiftUI.swiftoverlay -swift-module-cross-import AppIntents /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/UIKit.swiftoverlay -swift-module-cross-import RelevanceKit /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/RelevanceKit.framework/Modules/RelevanceKit.swiftcrossimport/MapKit.swiftoverlay -swift-module-cross-import RelevanceKit /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk/System/Library/Frameworks/RelevanceKit.framework/Modules/RelevanceKit.swiftcrossimport/MapKit.swiftoverlay -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libAppIntentsMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#AppIntentsMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libFoundationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#FoundationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libObservationMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#ObservationMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libPreviewsMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#PreviewsMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftMacros -load-resolved-plugin /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftUIMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -I /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -F /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=4 -module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -swift-version 5 -enforce-exclusivity\=checked -Onone -D DEBUG -serialize-debugging-options -const-gather-protocols-file /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_const_extract_protocols.json -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/markgentry/Projects/onerepstrength-main/oneREP -enable-anonymous-context-mangled-names -file-compilation-dir /Users/markgentry/Projects/onerepstrength-main/oneREP -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-generated-files.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-own-target-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-target-headers.hmap -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-project-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources-normal/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name OneRepStrength -frontend-parseable-output -disable-clang-spi -target-sdk-version 26.2 -target-sdk-name iphonesimulator26.2 -clang-target arm64-apple-ios26.2-simulator -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.o -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.o -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.o -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Exercise.o -index-unit-output-path /OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.o -index-unit-output-path /OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.o -index-unit-output-path /OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.o -index-unit-output-path /OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Exercise.o -index-store-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Index.noindex/DataStore -index-system-modules
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift:53:26: error: value of type 'AudioManager' has no dynamic member 'stopAudio' using key path from root type 'AudioManager'
+            audioManager.stopAudio()
+            ~~~~~~~~~~~~ ^~~~~~~~~
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift:53:13: error: referencing subscript 'subscript(dynamicMember:)' requires wrapper 'ObservedObject<AudioManager>.Wrapper'
+            audioManager.stopAudio()
+            ^
+            $
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift:53:26: error: cannot call value of non-function type 'Binding<Subject>'
+            audioManager.stopAudio()
+                         ^        ~~
+                                  
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ContentView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/AppIntents.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/Exercise.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ OnboardingView.swift,\ ProfileView.swift,\ RestView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/OnboardingView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProfileView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RestView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/OnboardingView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProfileView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RestView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ DataAnalyticsView.swift,\ ProgressChartsView.swift,\ RoutinesView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/DataAnalyticsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProgressChartsView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutinesView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/DataAnalyticsView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/ProgressChartsView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutinesView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ ThemeManager.swift,\ WorkoutTemplateManager.swift,\ WorkoutScheduler.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/ThemeManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutTemplateManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutScheduler.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/ThemeManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutTemplateManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutScheduler.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ WorkoutLog.swift,\ TimerPhase.swift,\ WorkoutTemplate.swift,\ BodyMeasurements.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutLog.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/TimerPhase.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/BodyMeasurements.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutLog.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/TimerPhase.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift:112:9: warning: immutable property will not be decoded because it is declared with an initial value which cannot be overwritten
+    let version: Int = 1
+        ^
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift:112:9: note: set the initial value via the initializer or explicitly define a CodingKeys enum including a 'version' case to silence this warning
+    let version: Int = 1
+        ^
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/WorkoutTemplate.swift:112:9: note: make the property mutable instead
+    let version: Int = 1
+    ~~~ ^
+    var
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/BodyMeasurements.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ HealthKitManager.swift,\ CloudSyncManager.swift,\ SecureStorage.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/HealthKitManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/CloudSyncManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/SecureStorage.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/HealthKitManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/HealthKitManager.swift:104:63: warning: variable 'self' was written to, but never read
+        builder.beginCollection(withStart: startDate) { [weak self] success, error in
+                                                              ^
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/CloudSyncManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/CloudSyncManager.swift:163:30: warning: reference to captured var 'downloadedLogs' in concurrently-executing code; this is an error in the Swift 6 language mode
+            mergeWorkoutLogs(downloadedLogs)
+                             ^
+/Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/CloudSyncManager.swift:266:35: warning: reference to captured var 'downloadedMeasurements' in concurrently-executing code; this is an error in the Swift 6 language mode
+            mergeBodyMeasurements(downloadedMeasurements)
+                                  ^
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/SecureStorage.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ OneRepStrength (in target 'OneRepStrength' from project 'OneRepStrength')
+
+EmitSwiftModule normal arm64 (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 Compiling\ RoutineDetailView.swift,\ SaveAsTemplateSheet.swift,\ AudioManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutineDetailView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SaveAsTemplateSheet.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/AudioManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/RoutineDetailView.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Views/SaveAsTemplateSheet.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/AudioManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+LinkAssetCatalog /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Assets.xcassets (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-linkAssetCatalog --thinned /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/thinned --thinned-dependencies /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist_unthinned --output /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app --plist-output /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/Assets.car (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WorkoutLog.swift, TimerPhase.swift, WorkoutTemplate.swift, BodyMeasurements.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 Compiling\ WorkoutActivityManager.swift,\ WatchConnectivityManager.swift,\ GeneratedAssetSymbols.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutActivityManager.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WatchConnectivityManager.swift /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WorkoutActivityManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Services/WatchConnectivityManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftCompile normal arm64 /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling ThemeManager.swift, WorkoutTemplateManager.swift, WorkoutScheduler.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+ProcessInfoPlistFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/Info.plist /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-infoPlistUtility /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist -producttype com.apple.product-type.application -genpkginfo /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.app/Info.plist
+
+SwiftDriverJobDiscovery normal arm64 Compiling HealthKitManager.swift, CloudSyncManager.swift, SecureStorage.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for OneRepStrength (in target 'OneRepStrength' from project 'OneRepStrength')
+
+SwiftDriver\ Compilation\ Requirements OneRepStrength normal arm64 com.apple.xcode.tools.swift.compiler (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name OneRepStrength -Onone -enforce-exclusivity\=checked @/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -F /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache -output-file-map /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/markgentry/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength_const_extract_protocols.json -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-generated-files.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-own-target-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-all-target-headers.hmap -Xcc -iquote -Xcc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/OneRepStrength-project-headers.hmap -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources-normal/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/arm64 -Xcc -I/Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-Swift.h -working-directory /Users/markgentry/Projects/onerepstrength-main/oneREP -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/OneRepStrength-Swift.h /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-Swift.h (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-swiftHeaderTool -arch arm64 /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength-Swift.h -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/DerivedSources/OneRepStrength-Swift.h
+
+Copy /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftdoc (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftdoc /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftmodule (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftmodule /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.abi.json (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.abi.json /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftsourceinfo (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrength.swiftsourceinfo /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-eeoheqlrbwwyrbgvulrrknetqmnh/Build/Products/Debug-iphonesimulator/OneRepStrength.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftCompile normal arm64 Compiling\ OneRepStrengthApp.swift,\ ContentView.swift,\ AppIntents.swift,\ Exercise.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/ContentView.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/AppIntents.swift /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/Models/Exercise.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+	SwiftCompile normal arm64 /Users/markgentry/Projects/onerepstrength-main/oneREP/OneRepStrength/OneRepStrengthApp.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+	Building project OneRepStrength with scheme OneRepStrength
+(3 failures)

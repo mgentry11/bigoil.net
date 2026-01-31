@@ -1,0 +1,296 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/ProfileView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Profile",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 331
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear All Progress?",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 341
+        }
+      },
+      {
+        "comment": "",
+        "key": "Profile %lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 121
+        }
+      },
+      {
+        "comment": "",
+        "key": "Member since %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 132
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recommended Routine",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 165
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data Analytics",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 212
+        }
+      },
+      {
+        "comment": "",
+        "key": "Detailed exercise breakdowns & progress",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workout History",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 236
+        }
+      },
+      {
+        "comment": "",
+        "key": "No workouts yet",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 261
+        }
+      },
+      {
+        "comment": "",
+        "key": "Complete a workout to see your history",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 263
+        }
+      },
+      {
+        "comment": "",
+        "key": "Just say these to Siri - no setup needed!",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 288
+        }
+      },
+      {
+        "comment": "",
+        "key": "Siri Voice Commands",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 282
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear All Progress",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 315
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 335
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 342
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 343
+        }
+      },
+      {
+        "comment": "",
+        "key": "This will delete all workout history and exercise data. This cannot be undone.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 347
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workout %@",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 655
+        }
+      },
+      {
+        "comment": "",
+        "key": "PR",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 661
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 680
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 756
+        }
+      },
+      {
+        "comment": "",
+        "key": "PR",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 768
+        }
+      },
+      {
+        "comment": "",
+        "key": "\"%@\"",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 806
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Profile",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 935
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Information",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 860
+        }
+      },
+      {
+        "comment": "",
+        "key": "Experience Level",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 885
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recommended Routine",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 916
+        }
+      },
+      {
+        "comment": "",
+        "key": "Member Since",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 930
+        }
+      },
+      {
+        "comment": "",
+        "key": "Name",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 862
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter your name",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 864
+        }
+      },
+      {
+        "comment": "",
+        "key": "Age",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 869
+        }
+      },
+      {
+        "comment": "",
+        "key": "Age",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 871
+        }
+      },
+      {
+        "comment": "",
+        "key": "Body Weight (lbs)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 877
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 879
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 939
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 944
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,864 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Say to Siri:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "\"%@\"",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap for Siri voice commands",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Siri Voice Commands",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Say \"Hey Siri\" then:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 91
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workouts",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 96
+        }
+      },
+      {
+        "comment": "",
+        "key": "Any Exercise",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 102
+        }
+      },
+      {
+        "comment": "",
+        "key": "\"Hey Siri, %@\"",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quick Start Workout",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start the first exercise of your current OneRepStrength workout",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pause Workout",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 157
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pause the current OneRepStrength workout timer",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "Resume Workout",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 172
+        }
+      },
+      {
+        "comment": "",
+        "key": "Resume the current OneRepStrength workout timer",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 173
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip to Next Phase",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 187
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip to the next phase in your OneRepStrength workout",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 188
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise",
+        "location": {
+          "startingColumn": 71,
+          "startingLine": 261
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Press",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 265
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pulldown",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 266
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chest Press",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 267
+        }
+      },
+      {
+        "comment": "",
+        "key": "Overhead Press",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 268
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Curl (Workout A)",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 269
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bicep Curl",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 270
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tricep Extension",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 271
+        }
+      },
+      {
+        "comment": "",
+        "key": "Calf Raise",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 272
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Extension",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 273
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seated Row",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 274
+        }
+      },
+      {
+        "comment": "",
+        "key": "Incline Press",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 275
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lateral Raise",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 276
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Curl (Workout B)",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 277
+        }
+      },
+      {
+        "comment": "",
+        "key": "Shrug",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 278
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ab Crunch",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 279
+        }
+      },
+      {
+        "comment": "",
+        "key": "Back Extension",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 280
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pec Deck",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 282
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chest Fly",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 283
+        }
+      },
+      {
+        "comment": "",
+        "key": "Decline Press",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 284
+        }
+      },
+      {
+        "comment": "",
+        "key": "Converging Chest Press",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 285
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lat Pulldown",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 287
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cable Row",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 288
+        }
+      },
+      {
+        "comment": "",
+        "key": "Low Row",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 289
+        }
+      },
+      {
+        "comment": "",
+        "key": "High Row",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 290
+        }
+      },
+      {
+        "comment": "",
+        "key": "T-Bar Row",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 291
+        }
+      },
+      {
+        "comment": "",
+        "key": "Assisted Pullup",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 292
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rear Delt Machine",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 293
+        }
+      },
+      {
+        "comment": "",
+        "key": "Shoulder Press",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 295
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lateral Raise Machine",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 296
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reverse Fly",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 297
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preacher Curl",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 299
+        }
+      },
+      {
+        "comment": "",
+        "key": "Machine Curl",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 300
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tricep Pushdown",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 301
+        }
+      },
+      {
+        "comment": "",
+        "key": "Assisted Dip",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 302
+        }
+      },
+      {
+        "comment": "",
+        "key": "Wrist Curl",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 303
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hack Squat",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 305
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Curl",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 306
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seated Leg Curl",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 307
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lying Leg Curl",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 308
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hip Abduction",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 309
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hip Adduction",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 310
+        }
+      },
+      {
+        "comment": "",
+        "key": "Glute Kickback",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 311
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hip Extension",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 312
+        }
+      },
+      {
+        "comment": "",
+        "key": "Standing Calf Raise",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 313
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seated Calf Raise",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 314
+        }
+      },
+      {
+        "comment": "",
+        "key": "Inner Thigh",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 315
+        }
+      },
+      {
+        "comment": "",
+        "key": "Outer Thigh",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 316
+        }
+      },
+      {
+        "comment": "",
+        "key": "Abdominal Machine",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 318
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rotary Torso",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 319
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hyperextension",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 320
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Exercise",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 335
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start a specific exercise in OneRepStrength",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 336
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 339
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Press",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 360
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Press exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 361
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Pulldown",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 372
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Pulldown exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 373
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Chest Press",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 384
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Chest Press exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 385
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Overhead Press",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 396
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Overhead Press exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 397
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Curl",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 408
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Curl exercise from current workout",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 409
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Bicep Curl",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 423
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Bicep Curl exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 424
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Tricep Extension",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 435
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Tricep Extension exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 436
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Calf Raise",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 447
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Calf Raise exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 448
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Extension",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 459
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Leg Extension exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 460
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Seated Row",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 471
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Seated Row exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 472
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Incline Press",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 483
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Incline Press exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 484
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Lateral Raise",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 495
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Lateral Raise exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 496
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Shrug",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 507
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Shrug exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 508
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Ab Crunch",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 519
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Ab Crunch exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 520
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Back Extension",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 531
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Back Extension exercise",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 532
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Workout",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 569
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Exercise",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 578
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Press",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 588
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chest Press",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 598
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pulldown",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 608
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seated Row",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 618
+        }
+      },
+      {
+        "comment": "",
+        "key": "Leg Curl",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 628
+        }
+      }
+    ]
+  },
+  "version": 1
+}

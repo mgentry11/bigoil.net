@@ -1,0 +1,30 @@
+{
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/ProgressChartsView.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/ProgressChartsView.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/ProgressChartsView.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/ProgressChartsView.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/ProgressChartsView.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/ProgressChartsView.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/RoutineDetailView.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutineDetailView.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutineDetailView.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutineDetailView.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutineDetailView.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutineDetailView.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/RoutinesView.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutinesView.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutinesView.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutinesView.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutinesView.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/RoutinesView.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/SaveAsTemplateSheet.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/SaveAsTemplateSheet.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/SaveAsTemplateSheet.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/SaveAsTemplateSheet.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/SaveAsTemplateSheet.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/x86_64/SaveAsTemplateSheet.swiftdeps"
+  }
+}

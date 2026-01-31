@@ -1,0 +1,712 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/WorkoutListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Reset Workout?",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Finish Workout",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "Partner Options",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 128
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reset",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 129
+        }
+      },
+      {
+        "comment": "",
+        "key": "This will clear all weights, completion status, and custom exercises for this workout.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 133
+        }
+      },
+      {
+        "comment": "",
+        "key": "Finish",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save as Routine & Finish",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 145
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "Would you like to save this workout as a reusable routine?",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 151
+        }
+      },
+      {
+        "comment": "",
+        "key": "Switch Partner",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 163
+        }
+      },
+      {
+        "comment": "",
+        "key": "End Partner Workout",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 166
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 169
+        }
+      },
+      {
+        "comment": "",
+        "key": "Current Turn: Partner %lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 171
+        }
+      },
+      {
+        "comment": "",
+        "key": "OneRep",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "Strength",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 193
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Exercise",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 233
+        }
+      },
+      {
+        "comment": "",
+        "key": "LAST WEIGHT",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 384
+        }
+      },
+      {
+        "comment": "",
+        "key": " %@",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 387
+        }
+      },
+      {
+        "comment": "",
+        "key": "BODYWEIGHT",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 347
+        }
+      },
+      {
+        "comment": "",
+        "key": "Negative Only",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 359
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 373
+        }
+      },
+      {
+        "comment": "",
+        "key": "LBS",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 376
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Details",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 442
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Timer",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 448
+        }
+      },
+      {
+        "comment": "",
+        "key": "Watch Demo",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 455
+        }
+      },
+      {
+        "comment": "",
+        "key": "Profile %@",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 498
+        }
+      },
+      {
+        "comment": "",
+        "key": "Currently selected",
+        "location": {
+          "startingColumn": 41,
+          "startingLine": 499
+        }
+      },
+      {
+        "comment": "",
+        "key": "Double tap to switch profile",
+        "location": {
+          "startingColumn": 64,
+          "startingLine": 499
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 729
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Exercise?",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 719
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time Completed",
+        "location": {
+          "startingColumn": 58,
+          "startingLine": 578
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Weight",
+        "location": {
+          "startingColumn": 77,
+          "startingLine": 578
+        }
+      },
+      {
+        "comment": "",
+        "key": "min:sec",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 595
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 617
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 620
+        }
+      },
+      {
+        "comment": "",
+        "key": "-2.5",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 636
+        }
+      },
+      {
+        "comment": "",
+        "key": "+2.5",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 645
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reached Failure",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 667
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 689
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 706
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 720
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 721
+        }
+      },
+      {
+        "comment": "",
+        "key": "Remove %@ from this workout?",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 726
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Exercise",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 963
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Name",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 804
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter exercise name",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 808
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bodyweight Exercise",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 829
+        }
+      },
+      {
+        "comment": "",
+        "key": "Track time instead of weight (pull-ups, dips)",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 832
+        }
+      },
+      {
+        "comment": "",
+        "key": "Negative Resistance Only",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 856
+        }
+      },
+      {
+        "comment": "",
+        "key": "Position → Slow Lowering → Done & Log",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 859
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duration set in Settings > Phase Timings",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 862
+        }
+      },
+      {
+        "comment": "",
+        "key": "Starting Weight (optional)",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 882
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 895
+        }
+      },
+      {
+        "comment": "",
+        "key": "0",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 887
+        }
+      },
+      {
+        "comment": "",
+        "key": "Suggested",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 904
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Exercise",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 950
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 967
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Exercise",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 1185
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Exercise",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1166
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Name",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1003
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise name",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 1007
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bodyweight Exercise",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1027
+        }
+      },
+      {
+        "comment": "",
+        "key": "Track time instead of weight (pull-ups, dips)",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1030
+        }
+      },
+      {
+        "comment": "",
+        "key": "Negative Resistance Only",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 1054
+        }
+      },
+      {
+        "comment": "",
+        "key": "Position → Slow Lowering → Done & Log",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 1057
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duration set in Settings > Phase Timings",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 1060
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 1080
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1093
+        }
+      },
+      {
+        "comment": "",
+        "key": "0",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 1085
+        }
+      },
+      {
+        "comment": "",
+        "key": "Paste a YouTube link to show how this exercise is performed",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1119
+        }
+      },
+      {
+        "comment": "",
+        "key": "YouTube URL",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 1110
+        }
+      },
+      {
+        "comment": "",
+        "key": "Demo Video (YouTube)",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 1105
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Exercise",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 1130
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Changes",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1153
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1170
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 1186
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 1190
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete %@?",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 1192
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Demo",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1268
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap to watch on YouTube",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 1223
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open in YouTube",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1253
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1272
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workout Date",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 1310
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reschedule Workout",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1299
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pick a new date",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1303
+        }
+      },
+      {
+        "comment": "",
+        "key": "Set Date",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1327
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1342
+        }
+      }
+    ]
+  },
+  "version": 1
+}

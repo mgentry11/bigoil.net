@@ -1,0 +1,288 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/TimerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "NEW PR!",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Record!",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ phase, %lld seconds remaining, %@",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 111
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld seconds remaining",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 115
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log set and finish",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 323
+        }
+      },
+      {
+        "comment": "",
+        "key": "Saves your set and returns to workout list",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 324
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time Completed",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 134
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bodyweight Exercise",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 148
+        }
+      },
+      {
+        "comment": "",
+        "key": "seconds",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 143
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Weight",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 172
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 175
+        }
+      },
+      {
+        "comment": "",
+        "key": "-2.5",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 192
+        }
+      },
+      {
+        "comment": "",
+        "key": "+2.5",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 202
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reached Failure",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 223
+        }
+      },
+      {
+        "comment": "",
+        "key": "Next Session",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 235
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 245
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 260
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Set",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 314
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log set and rest",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 341
+        }
+      },
+      {
+        "comment": "",
+        "key": "Saves your set and starts rest timer",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 342
+        }
+      },
+      {
+        "comment": "",
+        "key": "Do another set",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 358
+        }
+      },
+      {
+        "comment": "",
+        "key": "Saves your set and restarts timer for another set",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 359
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rest",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 331
+        }
+      },
+      {
+        "comment": "",
+        "key": "Another Set",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 348
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reset phase",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 373
+        }
+      },
+      {
+        "comment": "",
+        "key": "Restarts the current phase timer",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 374
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pause timer",
+        "location": {
+          "startingColumn": 77,
+          "startingLine": 384
+        }
+      },
+      {
+        "comment": "",
+        "key": "Resume timer",
+        "location": {
+          "startingColumn": 93,
+          "startingLine": 384
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip to next phase",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 394
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ %@ for next session",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 816
+        }
+      },
+      {
+        "comment": "",
+        "key": "Currently selected",
+        "location": {
+          "startingColumn": 41,
+          "startingLine": 817
+        }
+      },
+      {
+        "comment": "",
+        "key": "Double tap to select",
+        "location": {
+          "startingColumn": 64,
+          "startingLine": 817
+        }
+      }
+    ]
+  },
+  "version": 1
+}

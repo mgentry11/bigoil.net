@@ -1,0 +1,5 @@
+DerivedData/
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+node_modules/

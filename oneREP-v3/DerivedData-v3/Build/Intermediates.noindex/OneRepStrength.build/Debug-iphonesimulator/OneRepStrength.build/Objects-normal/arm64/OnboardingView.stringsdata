@@ -1,0 +1,80 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/OnboardingView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Continue",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Welcome to\nOneRepStrength",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "High-Intensity Training\nwith precision timing",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 95
+        }
+      },
+      {
+        "comment": "",
+        "key": "How HIT Works",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 110
+        }
+      },
+      {
+        "comment": "",
+        "key": "The app guides you through each phase with audio cues and haptic feedback",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 136
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your Experience",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 152
+        }
+      },
+      {
+        "comment": "",
+        "key": "This helps us recommend the right workout frequency",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 157
+        }
+      },
+      {
+        "comment": "",
+        "key": "You're Ready!",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 214
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Training",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 229
+        }
+      }
+    ]
+  },
+  "version": 1
+}

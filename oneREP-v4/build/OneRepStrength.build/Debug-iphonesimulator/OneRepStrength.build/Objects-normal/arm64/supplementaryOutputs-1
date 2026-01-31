@@ -1,0 +1,30 @@
+{
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/AppIntents.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AppIntents.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/ContentView.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ContentView.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/OneRepStrengthApp.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/OneRepStrengthApp.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Services/SoundMappingManager.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/SoundMappingManager.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/SoundMappingManager.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/SoundMappingManager.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/SoundMappingManager.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/SoundMappingManager.swiftdeps"
+  }
+}

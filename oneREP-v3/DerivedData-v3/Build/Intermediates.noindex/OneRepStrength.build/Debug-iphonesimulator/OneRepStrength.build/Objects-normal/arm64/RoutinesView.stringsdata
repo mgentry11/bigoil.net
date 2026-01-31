@@ -1,0 +1,128 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/RoutinesView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Routines",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Recent Workouts",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "Complete workouts to see them here",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 145
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Saved Routines",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 177
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save your workouts as routines to quickly repeat them later",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 182
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create Routine",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "Repeat Last Workout",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 225
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 234
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 237
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 303
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 308
+        }
+      },
+      {
+        "comment": "",
+        "key": "Used %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 310
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 377
+        }
+      },
+      {
+        "comment": "",
+        "key": "Repeat",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 394
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 409
+        }
+      }
+    ]
+  },
+  "version": 1
+}

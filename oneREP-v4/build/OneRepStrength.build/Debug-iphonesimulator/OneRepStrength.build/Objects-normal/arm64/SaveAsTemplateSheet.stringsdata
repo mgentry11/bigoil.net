@@ -1,0 +1,136 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/SaveAsTemplateSheet.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Save as Routine",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create a reusable routine from these exercises",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "Routine Name",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., Upper Body Push",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercises (%lld)",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 90
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 111
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Routine",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 137
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 154
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save as Routine",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 223
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save this workout from %@",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 228
+        }
+      },
+      {
+        "comment": "",
+        "key": "Routine Name",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 236
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., Full Body",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 240
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercises (%lld)",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 273
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Routine",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 298
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 315
+        }
+      }
+    ]
+  },
+  "version": 1
+}

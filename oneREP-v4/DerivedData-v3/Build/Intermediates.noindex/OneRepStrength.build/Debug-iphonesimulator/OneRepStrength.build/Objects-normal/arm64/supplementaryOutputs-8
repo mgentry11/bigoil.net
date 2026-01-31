@@ -1,0 +1,30 @@
+{
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/AudioManager.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AudioManager.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AudioManager.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AudioManager.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AudioManager.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/AudioManager.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/ThemeManager.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ThemeManager.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ThemeManager.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ThemeManager.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ThemeManager.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/ThemeManager.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/WorkoutScheduler.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutScheduler.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutScheduler.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutScheduler.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutScheduler.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutScheduler.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/WorkoutTemplateManager.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutTemplateManager.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutTemplateManager.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutTemplateManager.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutTemplateManager.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/DerivedData-v3/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutTemplateManager.swiftdeps"
+  }
+}

@@ -1,0 +1,3978 @@
+[
+  {
+    "typeName": "OneRepStrength.QuickStartWorkoutIntent",
+    "mangledTypeName": "14OneRepStrength23QuickStartWorkoutIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 140,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength23QuickStartWorkoutIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength017QuickStartWorkoutC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 141,
+        "valueKind": "RawLiteral",
+        "value": "Quick Start Workout"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 142,
+        "valueKind": "RawLiteral",
+        "value": "Start the first exercise of your current OneRepStrength workout"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 143,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.PauseWorkoutIntent",
+    "mangledTypeName": "14OneRepStrength18PauseWorkoutIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 156,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength18PauseWorkoutIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength012PauseWorkoutC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 157,
+        "valueKind": "RawLiteral",
+        "value": "Pause Workout"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 158,
+        "valueKind": "RawLiteral",
+        "value": "Pause the current OneRepStrength workout timer"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 159,
+        "valueKind": "RawLiteral",
+        "value": "false"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.ResumeWorkoutIntent",
+    "mangledTypeName": "14OneRepStrength19ResumeWorkoutIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 171,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength19ResumeWorkoutIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength013ResumeWorkoutC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 172,
+        "valueKind": "RawLiteral",
+        "value": "Resume Workout"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 173,
+        "valueKind": "RawLiteral",
+        "value": "Resume the current OneRepStrength workout timer"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 174,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.SkipPhaseIntent",
+    "mangledTypeName": "14OneRepStrength15SkipPhaseIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 186,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength15SkipPhaseIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength09SkipPhaseC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 187,
+        "valueKind": "RawLiteral",
+        "value": "Skip to Next Phase"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 188,
+        "valueKind": "RawLiteral",
+        "value": "Skip to the next phase in your OneRepStrength workout"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 189,
+        "valueKind": "RawLiteral",
+        "value": "false"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.ExerciseType",
+    "mangledTypeName": "14OneRepStrength12ExerciseTypeO",
+    "kind": "enum",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 201,
+    "conformances": [
+      "Swift.Equatable",
+      "Swift.Hashable",
+      "Swift.RawRepresentable",
+      "AppIntents.AppEnum",
+      "AppIntents.AppValue",
+      "AppIntents.StaticDisplayRepresentable",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents.TypeDisplayRepresentable",
+      "AppIntents._IntentValue",
+      "Swift.Sendable",
+      "AppIntents.CaseDisplayRepresentable",
+      "Swift.SendableMetatype",
+      "Foundation.CustomLocalizedStringResourceConvertible",
+      "Swift.CaseIterable",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "Swift.Equatable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Hashable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.RawRepresentable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.AppEnum",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.AppValue",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.StaticDisplayRepresentable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.TypeDisplayRepresentable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._IntentValue",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.CaseDisplayRepresentable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Foundation.CustomLocalizedStringResourceConvertible",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.CaseIterable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "RawValue",
+        "substitutedTypeName": "Swift.String",
+        "substitutedMangledTypeName": "SS"
+      },
+      {
+        "typeAliasName": "ValueType",
+        "substitutedTypeName": "OneRepStrength.ExerciseType",
+        "substitutedMangledTypeName": "14OneRepStrength12ExerciseTypeO"
+      },
+      {
+        "typeAliasName": "UnwrappedType",
+        "substitutedTypeName": "OneRepStrength.ExerciseType",
+        "substitutedMangledTypeName": "14OneRepStrength12ExerciseTypeO"
+      },
+      {
+        "typeAliasName": "Specification",
+        "substitutedTypeName": "some AppIntents.ResolverSpecification",
+        "substitutedMangledTypeName": "10AppIntents0A4EnumPAAE28defaultResolverSpecificationQrvpZQOy14OneRepStrength12ExerciseTypeO_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ResolverSpecification"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "AllCases",
+        "substitutedTypeName": "Swift.Array<OneRepStrength.ExerciseType>",
+        "substitutedMangledTypeName": "Say14OneRepStrength12ExerciseTypeOG"
+      }
+    ],
+    "properties": [
+      {
+        "label": "typeDisplayRepresentation",
+        "type": "AppIntents.TypeDisplayRepresentation",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 261,
+        "valueKind": "RawLiteral",
+        "value": "Exercise"
+      },
+      {
+        "label": "caseDisplayRepresentations",
+        "type": "Swift.Dictionary<OneRepStrength.ExerciseType, AppIntents.DisplayRepresentation>",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 263,
+        "valueKind": "Dictionary",
+        "value": [
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "legPress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Leg Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "pulldown"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Pulldown"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "chestPress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Chest Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "overheadPress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Overhead Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "legCurlA"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Leg Curl (Workout A)"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "bicepCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Bicep Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "tricepExtension"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Tricep Extension"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "calfRaise"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Calf Raise"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "legExtension"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Leg Extension"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "seatedRow"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Seated Row"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "inclinePress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Incline Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "lateralRaise"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Lateral Raise"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "legCurlB"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Leg Curl (Workout B)"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "shrug"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Shrug"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "abCrunch"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Ab Crunch"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "backExtension"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Back Extension"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "pecDeck"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Pec Deck"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "chestFly"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Chest Fly"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "declinePress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Decline Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "convergingChestPress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Converging Chest Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "latPulldown"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Lat Pulldown"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "cableRow"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Cable Row"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "lowRow"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Low Row"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "highRow"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "High Row"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "tBar"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "T-Bar Row"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "assistedPullup"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Assisted Pullup"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "rearDeltMachine"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Rear Delt Machine"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "shoulderPress"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Shoulder Press"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "lateralRaiseMachine"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Lateral Raise Machine"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "reverseFly"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Reverse Fly"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "preacherCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Preacher Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "machineCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Machine Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "tricepPushdown"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Tricep Pushdown"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "assistedDip"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Assisted Dip"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "wristCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Wrist Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "hackSquat"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Hack Squat"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "legCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Leg Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "seatedLegCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Seated Leg Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "lyingLegCurl"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Lying Leg Curl"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "hipAbduction"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Hip Abduction"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "hipAdduction"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Hip Adduction"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "gluteKickback"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Glute Kickback"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "hipExtension"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Hip Extension"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "standingCalfRaise"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Standing Calf Raise"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "seatedCalfRaise"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Seated Calf Raise"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "innerThigh"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Inner Thigh"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "outerThigh"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Outer Thigh"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "abdominalMachine"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Abdominal Machine"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "rotaryTorso"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Rotary Torso"
+            }
+          },
+          {
+            "key": {
+              "valueKind": "Enum",
+              "value": {
+                "name": "hyperextension"
+              }
+            },
+            "value": {
+              "valueKind": "RawLiteral",
+              "value": "Hyperextension"
+            }
+          }
+        ]
+      },
+      {
+        "label": "exerciseName",
+        "type": "Swift.String",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "false",
+        "isComputed": "true",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 324,
+        "valueKind": "Runtime"
+      },
+      {
+        "label": "allCases",
+        "type": "Swift.Array<OneRepStrength.ExerciseType>",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "true",
+        "valueKind": "Array",
+        "value": [
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "legPress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "pulldown"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "chestPress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "overheadPress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "legCurlA"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "bicepCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "tricepExtension"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "calfRaise"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "legExtension"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "seatedRow"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "inclinePress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "lateralRaise"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "legCurlB"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "shrug"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "abCrunch"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "backExtension"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "pecDeck"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "chestFly"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "declinePress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "convergingChestPress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "latPulldown"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "cableRow"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "lowRow"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "highRow"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "tBar"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "assistedPullup"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "rearDeltMachine"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "shoulderPress"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "lateralRaiseMachine"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "reverseFly"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "preacherCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "machineCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "tricepPushdown"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "assistedDip"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "wristCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "hackSquat"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "legCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "seatedLegCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "lyingLegCurl"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "hipAbduction"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "hipAdduction"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "gluteKickback"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "hipExtension"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "standingCalfRaise"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "seatedCalfRaise"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "innerThigh"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "outerThigh"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "abdominalMachine"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "rotaryTorso"
+            }
+          },
+          {
+            "valueKind": "Enum",
+            "value": {
+              "name": "hyperextension"
+            }
+          }
+        ]
+      },
+      {
+        "label": "rawValue",
+        "type": "Swift.String",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "false",
+        "isComputed": "true",
+        "valueKind": "Runtime"
+      }
+    ],
+    "cases": [
+      {
+        "name": "legPress",
+        "rawValue": "Leg Press"
+      },
+      {
+        "name": "pulldown",
+        "rawValue": "Pulldown"
+      },
+      {
+        "name": "chestPress",
+        "rawValue": "Chest Press"
+      },
+      {
+        "name": "overheadPress",
+        "rawValue": "Overhead Press"
+      },
+      {
+        "name": "legCurlA",
+        "rawValue": "Leg Curl (Workout A)"
+      },
+      {
+        "name": "bicepCurl",
+        "rawValue": "Bicep Curl"
+      },
+      {
+        "name": "tricepExtension",
+        "rawValue": "Tricep Extension"
+      },
+      {
+        "name": "calfRaise",
+        "rawValue": "Calf Raise"
+      },
+      {
+        "name": "legExtension",
+        "rawValue": "Leg Extension"
+      },
+      {
+        "name": "seatedRow",
+        "rawValue": "Seated Row"
+      },
+      {
+        "name": "inclinePress",
+        "rawValue": "Incline Press"
+      },
+      {
+        "name": "lateralRaise",
+        "rawValue": "Lateral Raise"
+      },
+      {
+        "name": "legCurlB",
+        "rawValue": "Leg Curl (Workout B)"
+      },
+      {
+        "name": "shrug",
+        "rawValue": "Shrug"
+      },
+      {
+        "name": "abCrunch",
+        "rawValue": "Ab Crunch"
+      },
+      {
+        "name": "backExtension",
+        "rawValue": "Back Extension"
+      },
+      {
+        "name": "pecDeck",
+        "rawValue": "Pec Deck"
+      },
+      {
+        "name": "chestFly",
+        "rawValue": "Chest Fly"
+      },
+      {
+        "name": "declinePress",
+        "rawValue": "Decline Press"
+      },
+      {
+        "name": "convergingChestPress",
+        "rawValue": "Converging Chest Press"
+      },
+      {
+        "name": "latPulldown",
+        "rawValue": "Lat Pulldown"
+      },
+      {
+        "name": "cableRow",
+        "rawValue": "Cable Row"
+      },
+      {
+        "name": "lowRow",
+        "rawValue": "Low Row"
+      },
+      {
+        "name": "highRow",
+        "rawValue": "High Row"
+      },
+      {
+        "name": "tBar",
+        "rawValue": "T-Bar Row"
+      },
+      {
+        "name": "assistedPullup",
+        "rawValue": "Assisted Pullup"
+      },
+      {
+        "name": "rearDeltMachine",
+        "rawValue": "Rear Delt Machine"
+      },
+      {
+        "name": "shoulderPress",
+        "rawValue": "Shoulder Press"
+      },
+      {
+        "name": "lateralRaiseMachine",
+        "rawValue": "Lateral Raise Machine"
+      },
+      {
+        "name": "reverseFly",
+        "rawValue": "Reverse Fly"
+      },
+      {
+        "name": "preacherCurl",
+        "rawValue": "Preacher Curl"
+      },
+      {
+        "name": "machineCurl",
+        "rawValue": "Machine Curl"
+      },
+      {
+        "name": "tricepPushdown",
+        "rawValue": "Tricep Pushdown"
+      },
+      {
+        "name": "assistedDip",
+        "rawValue": "Assisted Dip"
+      },
+      {
+        "name": "wristCurl",
+        "rawValue": "Wrist Curl"
+      },
+      {
+        "name": "hackSquat",
+        "rawValue": "Hack Squat"
+      },
+      {
+        "name": "legCurl",
+        "rawValue": "Leg Curl"
+      },
+      {
+        "name": "seatedLegCurl",
+        "rawValue": "Seated Leg Curl"
+      },
+      {
+        "name": "lyingLegCurl",
+        "rawValue": "Lying Leg Curl"
+      },
+      {
+        "name": "hipAbduction",
+        "rawValue": "Hip Abduction"
+      },
+      {
+        "name": "hipAdduction",
+        "rawValue": "Hip Adduction"
+      },
+      {
+        "name": "gluteKickback",
+        "rawValue": "Glute Kickback"
+      },
+      {
+        "name": "hipExtension",
+        "rawValue": "Hip Extension"
+      },
+      {
+        "name": "standingCalfRaise",
+        "rawValue": "Standing Calf Raise"
+      },
+      {
+        "name": "seatedCalfRaise",
+        "rawValue": "Seated Calf Raise"
+      },
+      {
+        "name": "innerThigh",
+        "rawValue": "Inner Thigh"
+      },
+      {
+        "name": "outerThigh",
+        "rawValue": "Outer Thigh"
+      },
+      {
+        "name": "abdominalMachine",
+        "rawValue": "Abdominal Machine"
+      },
+      {
+        "name": "rotaryTorso",
+        "rawValue": "Rotary Torso"
+      },
+      {
+        "name": "hyperextension",
+        "rawValue": "Hyperextension"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartExerciseIntent",
+    "mangledTypeName": "14OneRepStrength19StartExerciseIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 334,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength19StartExerciseIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength013StartExerciseC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "_exercise",
+        "type": "AppIntents.IntentParameter<OneRepStrength.ExerciseType>",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "false",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 340,
+        "valueKind": "InitCall",
+        "value": {
+          "type": "AppIntents.IntentParameter<OneRepStrength.ExerciseType>",
+          "arguments": [
+            {
+              "label": "title",
+              "type": "Foundation.LocalizedStringResource",
+              "valueKind": "RawLiteral",
+              "value": "Exercise"
+            },
+            {
+              "label": "description",
+              "type": "Swift.Optional<Foundation.LocalizedStringResource>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "default",
+              "type": "Swift.Optional<OneRepStrength.ExerciseType>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "requestValueDialog",
+              "type": "Swift.Optional<AppIntents.IntentDialog>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "requestDisambiguationDialog",
+              "type": "Swift.Optional<AppIntents.IntentDialog>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "inputConnectionBehavior",
+              "type": "AppIntents.InputConnectionBehavior",
+              "valueKind": "Runtime"
+            },
+            {
+              "label": "supportedValues",
+              "type": "Swift.Array<OneRepStrength.ExerciseType>",
+              "valueKind": "Runtime"
+            }
+          ]
+        }
+      },
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 335,
+        "valueKind": "RawLiteral",
+        "value": "Start Exercise"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 336,
+        "valueKind": "RawLiteral",
+        "value": "Start a specific exercise in OneRepStrength"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 337,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      },
+      {
+        "label": "exercise",
+        "type": "OneRepStrength.ExerciseType",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "false",
+        "isComputed": "true",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 340,
+        "valueKind": "InitCall",
+        "value": {
+          "type": "AppIntents.IntentParameter<OneRepStrength.ExerciseType>",
+          "arguments": [
+            {
+              "label": "title",
+              "type": "Foundation.LocalizedStringResource",
+              "valueKind": "RawLiteral",
+              "value": "Exercise"
+            },
+            {
+              "label": "description",
+              "type": "Swift.Optional<Foundation.LocalizedStringResource>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "default",
+              "type": "Swift.Optional<OneRepStrength.ExerciseType>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "requestValueDialog",
+              "type": "Swift.Optional<AppIntents.IntentDialog>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "requestDisambiguationDialog",
+              "type": "Swift.Optional<AppIntents.IntentDialog>",
+              "valueKind": "RawLiteral",
+              "value": "nil"
+            },
+            {
+              "label": "inputConnectionBehavior",
+              "type": "AppIntents.InputConnectionBehavior",
+              "valueKind": "Runtime"
+            },
+            {
+              "label": "supportedValues",
+              "type": "Swift.Array<OneRepStrength.ExerciseType>",
+              "valueKind": "Runtime"
+            }
+          ]
+        },
+        "propertyWrappers": [
+          {
+            "type": "AppIntents.IntentParameter",
+            "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+            "line": 339,
+            "arguments": [
+              {
+                "label": "title",
+                "type": "Foundation.LocalizedStringResource",
+                "valueKind": "RawLiteral",
+                "value": "Exercise"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "$exercise",
+        "type": "AppIntents.IntentParameter<OneRepStrength.ExerciseType>",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "false",
+        "isComputed": "true",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 340,
+        "valueKind": "Runtime"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartLegPressIntent",
+    "mangledTypeName": "14OneRepStrength19StartLegPressIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 359,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength19StartLegPressIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength013StartLegPressC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 360,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Press"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 361,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Press exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 362,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartPulldownIntent",
+    "mangledTypeName": "14OneRepStrength19StartPulldownIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 371,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength19StartPulldownIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength013StartPulldownC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 372,
+        "valueKind": "RawLiteral",
+        "value": "Start Pulldown"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 373,
+        "valueKind": "RawLiteral",
+        "value": "Start Pulldown exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 374,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartChestPressIntent",
+    "mangledTypeName": "14OneRepStrength21StartChestPressIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 383,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength21StartChestPressIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength015StartChestPressC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 384,
+        "valueKind": "RawLiteral",
+        "value": "Start Chest Press"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 385,
+        "valueKind": "RawLiteral",
+        "value": "Start Chest Press exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 386,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartOverheadPressIntent",
+    "mangledTypeName": "14OneRepStrength24StartOverheadPressIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 395,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength24StartOverheadPressIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength018StartOverheadPressC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 396,
+        "valueKind": "RawLiteral",
+        "value": "Start Overhead Press"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 397,
+        "valueKind": "RawLiteral",
+        "value": "Start Overhead Press exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 398,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartLegCurlIntent",
+    "mangledTypeName": "14OneRepStrength18StartLegCurlIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 407,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength18StartLegCurlIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength012StartLegCurlC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 408,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Curl"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 409,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Curl exercise from current workout"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 410,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartBicepCurlIntent",
+    "mangledTypeName": "14OneRepStrength20StartBicepCurlIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 422,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength20StartBicepCurlIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength014StartBicepCurlC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 423,
+        "valueKind": "RawLiteral",
+        "value": "Start Bicep Curl"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 424,
+        "valueKind": "RawLiteral",
+        "value": "Start Bicep Curl exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 425,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartTricepExtensionIntent",
+    "mangledTypeName": "14OneRepStrength26StartTricepExtensionIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 434,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength26StartTricepExtensionIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength020StartTricepExtensionC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 435,
+        "valueKind": "RawLiteral",
+        "value": "Start Tricep Extension"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 436,
+        "valueKind": "RawLiteral",
+        "value": "Start Tricep Extension exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 437,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartCalfRaiseIntent",
+    "mangledTypeName": "14OneRepStrength20StartCalfRaiseIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 446,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength20StartCalfRaiseIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength014StartCalfRaiseC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 447,
+        "valueKind": "RawLiteral",
+        "value": "Start Calf Raise"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 448,
+        "valueKind": "RawLiteral",
+        "value": "Start Calf Raise exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 449,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartLegExtensionIntent",
+    "mangledTypeName": "14OneRepStrength23StartLegExtensionIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 458,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength23StartLegExtensionIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength017StartLegExtensionC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 459,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Extension"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 460,
+        "valueKind": "RawLiteral",
+        "value": "Start Leg Extension exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 461,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartSeatedRowIntent",
+    "mangledTypeName": "14OneRepStrength20StartSeatedRowIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 470,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength20StartSeatedRowIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength014StartSeatedRowC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 471,
+        "valueKind": "RawLiteral",
+        "value": "Start Seated Row"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 472,
+        "valueKind": "RawLiteral",
+        "value": "Start Seated Row exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 473,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartInclinePressIntent",
+    "mangledTypeName": "14OneRepStrength23StartInclinePressIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 482,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength23StartInclinePressIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength017StartInclinePressC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 483,
+        "valueKind": "RawLiteral",
+        "value": "Start Incline Press"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 484,
+        "valueKind": "RawLiteral",
+        "value": "Start Incline Press exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 485,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartLateralRaiseIntent",
+    "mangledTypeName": "14OneRepStrength23StartLateralRaiseIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 494,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength23StartLateralRaiseIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength017StartLateralRaiseC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 495,
+        "valueKind": "RawLiteral",
+        "value": "Start Lateral Raise"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 496,
+        "valueKind": "RawLiteral",
+        "value": "Start Lateral Raise exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 497,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartShrugIntent",
+    "mangledTypeName": "14OneRepStrength16StartShrugIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 506,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength16StartShrugIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength010StartShrugC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 507,
+        "valueKind": "RawLiteral",
+        "value": "Start Shrug"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 508,
+        "valueKind": "RawLiteral",
+        "value": "Start Shrug exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 509,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartAbCrunchIntent",
+    "mangledTypeName": "14OneRepStrength19StartAbCrunchIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 518,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength19StartAbCrunchIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength013StartAbCrunchC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 519,
+        "valueKind": "RawLiteral",
+        "value": "Start Ab Crunch"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 520,
+        "valueKind": "RawLiteral",
+        "value": "Start Ab Crunch exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 521,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.StartBackExtensionIntent",
+    "mangledTypeName": "14OneRepStrength24StartBackExtensionIntentV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 530,
+    "conformances": [
+      "AppIntents.AppIntent",
+      "AppIntents.PersistentlyIdentifiable",
+      "AppIntents._SupportsAppDependencies",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppIntent",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents.PersistentlyIdentifiable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "AppIntents._SupportsAppDependencies",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [
+      {
+        "typeAliasName": "PerformResult",
+        "substitutedTypeName": "some AppIntents.IntentResult",
+        "substitutedMangledTypeName": "14OneRepStrength24StartBackExtensionIntentV7performQryYaKFQOy_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.IntentResult"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      },
+      {
+        "typeAliasName": "SummaryContent",
+        "substitutedTypeName": "some AppIntents.ParameterSummary",
+        "substitutedMangledTypeName": "10AppIntents0A6IntentPAAE16parameterSummaryQrvpZQOy14OneRepStrength018StartBackExtensionC0V_Qo_",
+        "opaqueTypeProtocolRequirements": [
+          "AppIntents.ParameterSummary"
+        ],
+        "opaqueTypeSameTypeRequirements": []
+      }
+    ],
+    "properties": [
+      {
+        "label": "title",
+        "type": "Foundation.LocalizedStringResource",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 531,
+        "valueKind": "RawLiteral",
+        "value": "Start Back Extension"
+      },
+      {
+        "label": "description",
+        "type": "AppIntents.IntentDescription",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 532,
+        "valueKind": "RawLiteral",
+        "value": "Start Back Extension exercise"
+      },
+      {
+        "label": "openAppWhenRun",
+        "type": "Swift.Bool",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "false",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 533,
+        "valueKind": "RawLiteral",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "typeName": "OneRepStrength.OneRepStrengthShortcuts",
+    "mangledTypeName": "14OneRepStrength0abC9ShortcutsV",
+    "kind": "struct",
+    "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+    "line": 559,
+    "conformances": [
+      "AppIntents.AppShortcutsProvider",
+      "Swift.Sendable",
+      "Swift.SendableMetatype",
+      "Swift.BitwiseCopyable"
+    ],
+    "allConformances": [
+      {
+        "protocolName": "AppIntents.AppShortcutsProvider",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.Sendable",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.SendableMetatype",
+        "conformanceDefiningModule": "OneRepStrength"
+      },
+      {
+        "protocolName": "Swift.BitwiseCopyable",
+        "conformanceDefiningModule": "OneRepStrength"
+      }
+    ],
+    "associatedTypeAliases": [],
+    "properties": [
+      {
+        "label": "appShortcuts",
+        "type": "Swift.Array<AppIntents.AppShortcut>",
+        "mangledTypeName": "n/a - deprecated",
+        "isStatic": "true",
+        "isComputed": "true",
+        "file": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/AppIntents.swift",
+        "line": 560,
+        "valueKind": "Builder",
+        "value": {
+          "type": "AppIntents.AppShortcutsBuilder",
+          "members": [
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.QuickStartWorkoutIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.QuickStartWorkoutIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.QuickStartWorkoutIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start workout with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " quick start"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Open "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start my workout with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Start Workout"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "play.fill"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartExerciseIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartExerciseIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartExerciseIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " "
+                              },
+                              {
+                                "valueKind": "KeyPath",
+                                "value": {
+                                  "path": "$exercise",
+                                  "rootType": "OneRepStrength.StartExerciseIntent",
+                                  "components": [
+                                    {
+                                      "label": "$exercise",
+                                      "type": "AppIntents.IntentParameter<OneRepStrength.ExerciseType>"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Start Exercise"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartLegPressIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartLegPressIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartLegPressIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start Leg Press with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " Leg Press"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Leg Press"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartChestPressIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartChestPressIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartChestPressIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start Chest Press with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " Chest Press"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Chest Press"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartPulldownIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartPulldownIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartPulldownIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start Pulldown with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " Pulldown"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Pulldown"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartSeatedRowIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartSeatedRowIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartSeatedRowIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start Seated Row with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " Seated Row"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Seated Row"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "buildExpression",
+              "element": {
+                "valueKind": "InitCall",
+                "value": {
+                  "type": "AppIntents.AppShortcut",
+                  "arguments": [
+                    {
+                      "label": "intent",
+                      "type": "OneRepStrength.StartLegCurlIntent",
+                      "valueKind": "InitCall",
+                      "value": {
+                        "type": "OneRepStrength.StartLegCurlIntent",
+                        "arguments": []
+                      }
+                    },
+                    {
+                      "label": "phrases",
+                      "type": "Swift.Array<AppIntents.AppShortcutPhrase<OneRepStrength.StartLegCurlIntent>>",
+                      "valueKind": "Array",
+                      "value": [
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": "Start Leg Curl with "
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "valueKind": "InterpolatedStringLiteral",
+                          "value": {
+                            "segments": [
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": ""
+                              },
+                              {
+                                "valueKind": "Enum",
+                                "value": {
+                                  "name": "applicationName"
+                                }
+                              },
+                              {
+                                "valueKind": "RawLiteral",
+                                "value": " Leg Curl"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "label": "shortTitle",
+                      "type": "Foundation.LocalizedStringResource",
+                      "valueKind": "RawLiteral",
+                      "value": "Leg Curl"
+                    },
+                    {
+                      "label": "systemImageName",
+                      "type": "Swift.String",
+                      "valueKind": "RawLiteral",
+                      "value": "figure.strengthtraining.traditional"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

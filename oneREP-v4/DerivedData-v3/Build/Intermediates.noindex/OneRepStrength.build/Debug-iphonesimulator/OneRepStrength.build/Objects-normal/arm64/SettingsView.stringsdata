@@ -1,0 +1,208 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "Color Theme",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "Voice Options",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Phase Timing",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 106
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sync Exercises",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 153
+        }
+      },
+      {
+        "comment": "",
+        "key": "About",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 180
+        }
+      },
+      {
+        "comment": "",
+        "key": "Standard Voices",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pro Voices",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "PRO",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "Commander",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Map Commander Sounds",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reset to Defaults",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 145
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import from Website",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "Browse Exercise Library",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 168
+        }
+      },
+      {
+        "comment": "",
+        "key": "Version",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 182
+        }
+      },
+      {
+        "comment": "",
+        "key": "1.0.0",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 201
+        }
+      },
+      {
+        "comment": "",
+        "key": "%llds",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 257
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 21,
+          "startingLine": 261
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import from Website",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 374
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 313
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Exercises",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 284
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter the 6-character code from the website to import your selected exercises.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 288
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap to enter code",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 330
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Exercises",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 359
+        }
+      }
+    ]
+  },
+  "version": 1
+}

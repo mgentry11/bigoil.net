@@ -1,0 +1,30 @@
+{
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Models/BodyMeasurements.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/BodyMeasurements.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/BodyMeasurements.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/BodyMeasurements.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/BodyMeasurements.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/BodyMeasurements.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Models/Profile.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Profile.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Profile.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Profile.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Profile.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/Profile.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Models/WorkoutActivityAttributes.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutActivityAttributes.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutActivityAttributes.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutActivityAttributes.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutActivityAttributes.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutActivityAttributes.swiftdeps"
+  },
+  "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/ViewModels/WorkoutManager.swift" : {
+    "const-values" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutManager.swiftconstvalues",
+    "dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutManager.d",
+    "diagnostics" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutManager.dia",
+    "object" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutManager.o",
+    "swift-dependencies" : "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/build/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/Objects-normal/arm64/WorkoutManager.swiftdeps"
+  }
+}

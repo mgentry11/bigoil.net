@@ -1,0 +1,280 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/ProgressChartsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No Data Yet",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "Complete some workouts to see your progress charts",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight Progress",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 118
+        }
+      },
+      {
+        "comment": "",
+        "key": "Date",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 128
+        }
+      },
+      {
+        "comment": "",
+        "key": "Date",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 134
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 135
+        }
+      },
+      {
+        "comment": "",
+        "key": "Date",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 140
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Need at least 2 data points",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 181
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Statistics",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 223
+        }
+      },
+      {
+        "comment": "",
+        "key": "1RM Calculator",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 283
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 289
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 292
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reps",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 302
+        }
+      },
+      {
+        "comment": "",
+        "key": "1-12",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 305
+        }
+      },
+      {
+        "comment": "",
+        "key": "Estimated 1RM:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 324
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 326
+        }
+      },
+      {
+        "comment": "",
+        "key": "Training Percentages",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 337
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 343
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 349
+        }
+      },
+      {
+        "comment": "",
+        "key": "Warm-up Calculator",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 391
+        }
+      },
+      {
+        "comment": "",
+        "key": "Working Weight",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 397
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 400
+        }
+      },
+      {
+        "comment": "",
+        "key": "Calculate",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 410
+        }
+      },
+      {
+        "comment": "",
+        "key": "Recommended Warm-up",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 424
+        }
+      },
+      {
+        "comment": "",
+        "key": "Set %lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 431
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 436
+        }
+      },
+      {
+        "comment": "",
+        "key": "(%lld%%)",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 441
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld reps",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 447
+        }
+      },
+      {
+        "comment": "",
+        "key": "Working Set",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 458
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ lbs",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 464
+        }
+      },
+      {
+        "comment": "",
+        "key": "(100%)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 469
+        }
+      }
+    ]
+  },
+  "version": 1
+}

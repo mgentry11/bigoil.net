@@ -1,0 +1,152 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/TimerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "OneRepStrength",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 146
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 193
+        }
+      },
+      {
+        "comment": "",
+        "key": "SECONDS",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 200
+        }
+      },
+      {
+        "comment": "",
+        "key": "PAUSE",
+        "location": {
+          "startingColumn": 62,
+          "startingLine": 235
+        }
+      },
+      {
+        "comment": "",
+        "key": "PLAY",
+        "location": {
+          "startingColumn": 72,
+          "startingLine": 235
+        }
+      },
+      {
+        "comment": "",
+        "key": "SKIP",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 256
+        }
+      },
+      {
+        "comment": "",
+        "key": "DONE",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 277
+        }
+      },
+      {
+        "comment": "",
+        "key": "STOP",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 296
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reached Failure",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 327
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rest",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 341
+        }
+      },
+      {
+        "comment": "",
+        "key": "Log Set",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 353
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 383
+        }
+      },
+      {
+        "comment": "",
+        "key": "lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 386
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time Completed",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 413
+        }
+      },
+      {
+        "comment": "",
+        "key": "seconds",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 421
+        }
+      },
+      {
+        "comment": "",
+        "key": "NEW PR!",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 473
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 477
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Record!",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 481
+        }
+      }
+    ]
+  },
+  "version": 1
+}

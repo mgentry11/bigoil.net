@@ -1,0 +1,160 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/RoutineDetailView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Delete Routine?",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 182
+        }
+      },
+      {
+        "comment": "",
+        "key": "Routine Name",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercises",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 84
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start This Workout",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 108
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share Routine",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Routine",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 136
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 169
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 176
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 183
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete \"%@\"? This action cannot be undone.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 188
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 281
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 296
+        }
+      },
+      {
+        "comment": "",
+        "key": "No weight",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 301
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share \"%@\"",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 337
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share this routine with friends via AirDrop, Messages, or any other app",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 342
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld exercises included",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 349
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 359
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 375
+        }
+      }
+    ]
+  },
+  "version": 1
+}

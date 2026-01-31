@@ -1,0 +1,49 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -scheme OneRepStrength -configuration Debug -destination "generic/platform=iOS Simulator" build
+
+2026-01-20 04:39:20.069 xcodebuild[5622:1994749] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'OneRepStrength' in project 'OneRepStrength' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 3dd51766fc97e2e2e74739fbecd84865
+Build description path: /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Intermediates.noindex/XCBuildData/3dd51766fc97e2e2e74739fbecd84865.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -o /Users/markgentry/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.2-23C53-7d00a8b37fbd7999ea79df8ebc024bf0.sdkstatcache
+
+warning: Skipping duplicate build file in Compile Sources build phase: /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/ViewModels/ProfileManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+warning: Skipping duplicate build file in Compile Sources build phase: /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/ElevenLabsService.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+warning: Skipping duplicate build file in Compile Sources build phase: /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/ViewModels/ProfileManager.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+warning: Skipping duplicate build file in Compile Sources build phase: /Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Services/ElevenLabsService.swift (in target 'OneRepStrength' from project 'OneRepStrength')
+ProcessInfoPlistFile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Products/Debug-iphonesimulator/OneRepStrength.app/Info.plist /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist (in target 'OneRepStrength' from project 'OneRepStrength')
+    cd /Users/markgentry/Projects/onerepstrength-main/oneREP-v3
+    builtin-infoPlistUtility /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/empty-OneRepStrength.plist -producttype com.apple.product-type.application -genpkginfo /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Products/Debug-iphonesimulator/OneRepStrength.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Intermediates.noindex/OneRepStrength.build/Debug-iphonesimulator/OneRepStrength.build/assetcatalog_generated_info.plist -o /Users/markgentry/Library/Developer/Xcode/DerivedData/OneRepStrength-dkblqozibtkwgpejdghqnqbtuzlb/Build/Products/Debug-iphonesimulator/OneRepStrength.app/Info.plist
+
+** BUILD SUCCEEDED **
+

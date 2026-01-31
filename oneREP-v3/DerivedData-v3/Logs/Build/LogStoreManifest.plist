@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>12</integer>
+	<key>logs</key>
+	<dict>
+		<key>4460D82E-1B2A-4FB0-990D-72E85974C37B</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4460D82E-1B2A-4FB0-990D-72E85974C37B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>6</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>OneRepStrength project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>OneRepStrength</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project OneRepStrength with scheme OneRepStrength</string>
+			<key>timeStartedRecording</key>
+			<real>790391630.77192903</real>
+			<key>timeStoppedRecording</key>
+			<real>790391647.91036797</real>
+			<key>title</key>
+			<string>Building project OneRepStrength with scheme OneRepStrength</string>
+			<key>uniqueIdentifier</key>
+			<string>4460D82E-1B2A-4FB0-990D-72E85974C37B</string>
+		</dict>
+		<key>8D1B7D05-3211-49EE-9BA6-357A3B4336EF</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8D1B7D05-3211-49EE-9BA6-357A3B4336EF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>OneRepStrength project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>OneRepStrength</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Cleaning project OneRepStrength with scheme OneRepStrength</string>
+			<key>timeStartedRecording</key>
+			<real>790391630.29874396</real>
+			<key>timeStoppedRecording</key>
+			<real>790391630.76726401</real>
+			<key>title</key>
+			<string>Cleaning project OneRepStrength with scheme OneRepStrength</string>
+			<key>uniqueIdentifier</key>
+			<string>8D1B7D05-3211-49EE-9BA6-357A3B4336EF</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

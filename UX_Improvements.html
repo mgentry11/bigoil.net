@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneRepStrength - UX Improvement Recommendations</title>
+    <style>
+        :root {
+            --primary: #FFD700;
+            --bg: #1a1a1a;
+            --card: #2a2a2a;
+            --text: #ffffff;
+            --text-dim: #888888;
+            --red: #ff4444;
+            --yellow: #ffaa00;
+            --green: #44aa44;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--card);
+        }
+        
+        .priority-high { color: var(--red); }
+        .priority-medium { color: var(--yellow); }
+        .priority-low { color: var(--green); }
+        
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: #000;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .label {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .label-current { background: #444; color: #aaa; }
+        .label-problem { background: #ff444433; color: #ff6666; }
+        .label-fix { background: #44aa4433; color: #66cc66; }
+        
+        .issue-block {
+            margin: 12px 0;
+            padding: 12px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+        
+        .issue-block.current { border-color: #666; }
+        .issue-block.problem { border-color: var(--red); }
+        .issue-block.fix { border-color: var(--green); }
+        
+        .issue-block strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .issue-block.current strong { color: #888; }
+        .issue-block.problem strong { color: var(--red); }
+        .issue-block.fix strong { color: var(--green); }
+        
+        ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        li {
+            margin: 6px 0;
+            color: var(--text-dim);
+        }
+        
+        .mockup {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 12px 0;
+            color: #ccc;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        th {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        td:last-child {
+            text-align: center;
+        }
+        
+        .impact-high { color: var(--red); font-weight: 600; }
+        .impact-medium { color: var(--yellow); }
+        .impact-low { color: var(--green); }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .summary-box ol {
+            margin-left: 20px;
+        }
+        
+        .summary-box li {
+            color: var(--text);
+            margin: 8px 0;
+        }
+        
+        .toc {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .toc a:hover {
+            color: var(--primary);
+        }
+        
+        .emoji {
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>OneRepStrength</h1>
+    <p class="subtitle">UX Improvement Recommendations - January 2026</p>
+    
+    <nav class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#high"><span class="emoji">🔴</span> High Impact (Critical for Adoption)</a></li>
+            <li><a href="#medium"><span class="emoji">🟡</span> Medium Impact (Improves Retention)</a></li>
+            <li><a href="#low"><span class="emoji">🟢</span> Nice to Have (Polish)</a></li>
+            <li><a href="#quick"><span class="emoji">⚡</span> Quick Wins</a></li>
+            <li><a href="#recommended"><span class="emoji">🎯</span> Recommended Starting Point</a></li>
+        </ul>
+    </nav>
+
+    <section id="high">
+        <h2><span class="emoji">🔴</span> <span class="priority-high">High Impact</span> - Critical for Adoption</h2>
+        
+        <div class="card">
+            <h3><span class="card-number">1</span> Confusing Tap Gestures</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                Double-tap to start exercise, single-tap to edit details
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Non-standard interaction pattern. No iOS app uses double-tap as primary action. Users don't discover how to start exercises.
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                <ul>
+                    <li><strong>Single-tap</strong> &rarr; Start exercise timer immediately</li>
+                    <li><strong>Long-press</strong> &rarr; Show context menu (Edit, Delete, Reorder)</li>
+                    <li>Alternative: Make the play button more prominent and remove tap gestures from card body</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">2</span> Missing Onboarding</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                User drops directly into workout list on first launch
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                HIT training has specific methodology (eccentric/concentric phases). Users need guidance to understand the app's purpose and how to use it effectively.
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                Add first-launch onboarding flow:
+                <ul>
+                    <li>Welcome screen explaining HIT training benefits</li>
+                    <li>Experience level picker (reuse existing UI from Profile)</li>
+                    <li>Quick tutorial showing phase-based timer concept</li>
+                    <li>Optional: "Let's calibrate your starting weights" wizard</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">3</span> Weight Entry Flow</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                User logs weight AFTER completing the exercise set
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Users must remember the weight they used. Cognitive load during/after intense exercise. No weight progression suggestions.
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                <ul>
+                    <li>Pre-populate weight input BEFORE starting timer</li>
+                    <li>Show "Last time: 135 lbs" prominently on exercise card</li>
+                    <li>Quick +5/-5 adjustment buttons before starting</li>
+                    <li>Auto-suggest weight progression: "You hit failure at 135 lbs last time. Try 140 lbs?"</li>
+                    <li>After completion, just confirm or adjust the pre-set weight</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">4</span> Timer View Overwhelm</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                Timer view shows: phase indicators (E-C-F), large countdown, phase name, play/pause/skip controls, all simultaneously
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Information overload during physically demanding exercise. Users can't focus on form while processing UI elements.
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                Simplify the timer view:
+                <ul>
+                    <li>Single large timer number (make it HUGE)</li>
+                    <li>Phase name in large text below</li>
+                    <li>Remove or minimize the E-C-F phase indicators</li>
+                    <li>Add pulsing/breathing animation to current phase</li>
+                    <li>Strong haptic feedback at phase transitions</li>
+                    <li>Consider: Full-screen color change per phase (blue for eccentric, green for concentric)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="medium">
+        <h2><span class="emoji">🟡</span> <span class="priority-medium">Medium Impact</span> - Improves Retention</h2>
+        
+        <div class="card">
+            <h3><span class="card-number">5</span> Rest Timer Enhancement</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                Shows countdown timer and "Next: [exercise name]" only
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Enhancement</strong>
+                Make rest time productive and prepare user for next exercise:
+            </div>
+            
+            <div class="mockup">
+┌─────────────────────────────────┐
+│         REST - 1:30             │
+│     ━━━━━━━━━━━━━━━━━━━━━       │
+│                                 │
+│     💧 Hydrate                  │
+│     🔄 Shake out your arms      │
+│                                 │
+│     ─────────────────────       │
+│                                 │
+│     NEXT UP:                    │
+│     ┌─────────────────────┐     │
+│     │  🏋️ Chest Press      │     │
+│     │  Last: 135 lbs       │     │
+│     │  Target: 140 lbs     │     │
+│     │                      │     │
+│     │  [ Set Weight ]      │     │
+│     └─────────────────────┘     │
+│                                 │
+│         [ Skip Rest ]           │
+└─────────────────────────────────┘</div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">6</span> Exercise Reordering</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                Exercises are in fixed order from template/defaults
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Users need to adapt workout order based on equipment availability at the gym
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                <ul>
+                    <li>Add drag handles on exercise cards</li>
+                    <li>Or: "Edit Order" button that enables drag-to-reorder mode</li>
+                    <li>Save custom order per workout type</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">7</span> Progress Feedback & Celebrations</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                Checkmark when exercise complete, PR badge shown in history view
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Instant gratification is missing. Users don't feel rewarded for achievements in the moment.
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                <ul>
+                    <li>Confetti animation when hitting a new PR</li>
+                    <li>"🔥 3 sets completed!" toast notifications</li>
+                    <li>Progress ring on workout list header showing % complete</li>
+                    <li>Streak celebration animation at 7, 14, 30 days</li>
+                    <li>Sound effect options for PR achievement</li>
+                    <li>"Personal Best!" callout immediately after logging weight</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">8</span> Simplified Stats Tab</h3>
+            
+            <div class="issue-block current">
+                <strong>Current Behavior</strong>
+                4 sections: Overview, Charts, Tools, Body - horizontal scrolling picker
+            </div>
+            
+            <div class="issue-block problem">
+                <strong>Problem</strong>
+                Too many options leads to decision fatigue. Most users just want to see "am I getting stronger?"
+            </div>
+            
+            <div class="issue-block fix">
+                <strong>Recommended Fix</strong>
+                <ul>
+                    <li>Default to Overview with key metrics only</li>
+                    <li>Surface the most motivating stat prominently: "You're 12% stronger than last month"</li>
+                    <li>Collapse Charts, Tools, Body into expandable sections or "More Stats" button</li>
+                    <li>Show the single most relevant PR at the top</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="low">
+        <h2><span class="emoji">🟢</span> <span class="priority-low">Nice to Have</span> - Polish</h2>
+        
+        <div class="card">
+            <h3><span class="card-number">9</span> Haptic Feedback</h3>
+            <p>Add iOS haptics throughout the app:</p>
+            <ul>
+                <li><strong>Phase transitions</strong> - Heavy impact tap</li>
+                <li><strong>10-second warning</strong> - Light double-tap</li>
+                <li><strong>Set completion</strong> - Success haptic pattern</li>
+                <li><strong>PR achievement</strong> - Celebration haptic pattern</li>
+                <li><strong>Button presses</strong> - Light tap</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">10</span> Watch & Lock Screen Widgets</h3>
+            <p>Extend presence beyond the app:</p>
+            <ul>
+                <li>Apple Watch complication showing next workout date</li>
+                <li>Lock Screen widget with current streak</li>
+                <li>Live Activity during workout showing current phase/time</li>
+                <li>"Time to train!" notification with action buttons</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">11</span> Quick Actions (3D Touch / Long Press on App Icon)</h3>
+            <ul>
+                <li>"Start Workout A"</li>
+                <li>"Start Workout B"</li>
+                <li>"Continue Last Workout"</li>
+                <li>"Log Body Weight"</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">12</span> Accessibility Improvements</h3>
+            <ul>
+                <li>VoiceOver labels for all interactive elements</li>
+                <li>Dynamic Type support (scalable text)</li>
+                <li>Reduce Motion option (disable animations)</li>
+                <li>High contrast mode support</li>
+                <li>Voice control compatibility</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3><span class="card-number">13</span> Appearance Settings</h3>
+            <div class="issue-block current">
+                <strong>Current</strong>
+                App forces dark mode always
+            </div>
+            <div class="issue-block fix">
+                <strong>Recommended</strong>
+                <ul>
+                    <li>Follow system setting by default</li>
+                    <li>Manual override in settings (Light / Dark / System)</li>
+                    <li>Keep existing theme color options</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="quick">
+        <h2><span class="emoji">⚡</span> Quick Wins</h2>
+        <p style="color: var(--text-dim); margin-bottom: 16px;">Changes that can be implemented in under 1 hour each:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Change</th>
+                    <th>Effort</th>
+                    <th>Impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Replace double-tap hint with swipe or remove gesture</td>
+                    <td>30 min</td>
+                    <td class="impact-high">High</td>
+                </tr>
+                <tr>
+                    <td>Add haptic feedback on phase transitions</td>
+                    <td>20 min</td>
+                    <td class="impact-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Show "Last: X lbs" on exercise card</td>
+                    <td>15 min</td>
+                    <td class="impact-high">High</td>
+                </tr>
+                <tr>
+                    <td>Add progress ring/bar to workout list header</td>
+                    <td>45 min</td>
+                    <td class="impact-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Animate weight increment/decrement buttons</td>
+                    <td>15 min</td>
+                    <td class="impact-low">Low</td>
+                </tr>
+                <tr>
+                    <td>Add "Skip Exercise" option to exercise card</td>
+                    <td>30 min</td>
+                    <td class="impact-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Add confetti animation on PR</td>
+                    <td>45 min</td>
+                    <td class="impact-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Update export filename to "OneRepStrength"</td>
+                    <td>5 min</td>
+                    <td class="impact-low">Low</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="recommended">
+        <div class="summary-box">
+            <h3>🎯 Recommended Starting Point</h3>
+            <p style="color: var(--text-dim); margin-bottom: 16px;">If you can only do 3 things, do these:</p>
+            <ol>
+                <li><strong>Fix the tap gesture</strong> - Single-tap to start exercise. This removes the #1 usability barrier.</li>
+                <li><strong>Pre-populate weight before timer starts</strong> - Show last weight, let user adjust, THEN start. Reduces cognitive load.</li>
+                <li><strong>Add haptic feedback</strong> - Makes the app feel premium and helps users track phases without looking at screen.</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer>
+        <p>Generated for OneRepStrength (formerly HITCoachPro)</p>
+        <p>January 2, 2026</p>
+    </footer>
+</body>
+</html>

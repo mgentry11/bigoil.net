@@ -1,0 +1,80 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/StatsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Stats",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 117
+        }
+      },
+      {
+        "comment": "",
+        "key": "Day Streak",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 121
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weekly Workouts",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight Progress",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 198
+        }
+      },
+      {
+        "comment": "",
+        "key": "Not enough data",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 250
+        }
+      },
+      {
+        "comment": "",
+        "key": "PR Badges",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 269
+        }
+      },
+      {
+        "comment": "",
+        "key": "Complete workouts to earn PR badges",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 274
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 329
+        }
+      }
+    ]
+  },
+  "version": 1
+}

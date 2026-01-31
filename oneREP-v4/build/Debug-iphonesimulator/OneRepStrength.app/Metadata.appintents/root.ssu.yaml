@@ -1,0 +1,150 @@
+apiVersion: ssu/v1
+nlu:
+  shortcuts:
+    bundleIdentifier: com.onerepstrength.app
+    intents:
+    - metadata:
+        name: QuickStartWorkoutIntent_0
+        title: Quick Start Workout
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start workout with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} quick start'
+          - '{${+prefix} }Open ${+applicationName}'
+          - '{${+prefix} }Start my workout with ${+applicationName}'
+    - metadata:
+        name: StartExerciseIntent_1
+        title: Start Exercise
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }${+applicationName} ${ExerciseType}'
+    - metadata:
+        name: StartLegPressIntent_2
+        title: Start Leg Press
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start Leg Press with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} Leg Press'
+    - metadata:
+        name: StartChestPressIntent_3
+        title: Start Chest Press
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start Chest Press with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} Chest Press'
+    - metadata:
+        name: StartPulldownIntent_4
+        title: Start Pulldown
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start Pulldown with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} Pulldown'
+    - metadata:
+        name: StartSeatedRowIntent_5
+        title: Start Seated Row
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start Seated Row with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} Seated Row'
+    - metadata:
+        name: StartLegCurlIntent_6
+        title: Start Leg Curl
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Start Leg Curl with ${+applicationName}'
+          - '{${+prefix} }${+applicationName} Leg Curl'
+    - metadata:
+        name: +negative
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }${+standardAppShortcutNegatives}'
+variables:
+- name: +applicationName
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+    - OneRepStrength
+- name: ExerciseType
+  type: ssu/parameter
+  definitions:
+  - locale: en
+    synomyms:
+    - Leg Press
+    - Pulldown
+    - Chest Press
+    - Overhead Press
+    - Leg Curl (Workout A)
+    - Bicep Curl
+    - Tricep Extension
+    - Calf Raise
+    - Leg Extension
+    - Seated Row
+    - Incline Press
+    - Lateral Raise
+    - Leg Curl (Workout B)
+    - Shrug
+    - Ab Crunch
+    - Back Extension
+    - Pec Deck
+    - Chest Fly
+    - Decline Press
+    - Converging Chest Press
+    - Lat Pulldown
+    - Cable Row
+    - Low Row
+    - High Row
+    - T-Bar Row
+    - Assisted Pullup
+    - Rear Delt Machine
+    - Shoulder Press
+    - Lateral Raise Machine
+    - Reverse Fly
+    - Preacher Curl
+    - Machine Curl
+    - Tricep Pushdown
+    - Assisted Dip
+    - Wrist Curl
+    - Hack Squat
+    - Leg Curl
+    - Seated Leg Curl
+    - Lying Leg Curl
+    - Hip Abduction
+    - Hip Adduction
+    - Glute Kickback
+    - Hip Extension
+    - Standing Calf Raise
+    - Seated Calf Raise
+    - Inner Thigh
+    - Outer Thigh
+    - Abdominal Machine
+    - Rotary Torso
+    - Hyperextension
+- name: +prefix
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+      $ref: ssu://Resources/prefix/en.yaml
+- name: +standardAppShortcutNegatives
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+      $ref: ssu://Resources/standardAppShortcutNegatives/en.yaml

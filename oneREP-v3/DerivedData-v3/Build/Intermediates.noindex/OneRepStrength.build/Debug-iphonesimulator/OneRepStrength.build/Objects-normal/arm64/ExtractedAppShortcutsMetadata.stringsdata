@@ -1,0 +1,86 @@
+{
+  "tables" : {
+    "AppShortcuts" : [
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start workout with ${applicationName}",
+          "${applicationName} quick start",
+          "Open ${applicationName}",
+          "Start my workout with ${applicationName}"
+        ],
+        "key" : "Start workout with ${applicationName}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "${applicationName} ${exercise}"
+        ],
+        "key" : "${applicationName} ${exercise}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start Leg Press with ${applicationName}",
+          "${applicationName} Leg Press"
+        ],
+        "key" : "Start Leg Press with ${applicationName}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start Chest Press with ${applicationName}",
+          "${applicationName} Chest Press"
+        ],
+        "key" : "Start Chest Press with ${applicationName}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start Pulldown with ${applicationName}",
+          "${applicationName} Pulldown"
+        ],
+        "key" : "Start Pulldown with ${applicationName}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start Seated Row with ${applicationName}",
+          "${applicationName} Seated Row"
+        ],
+        "key" : "Start Seated Row with ${applicationName}"
+      },
+      {
+        "location" : {
+          "startingLine" : 560,
+          "startingColumn" : 0
+        },
+        "values" : [
+          "Start Leg Curl with ${applicationName}",
+          "${applicationName} Leg Curl"
+        ],
+        "key" : "Start Leg Curl with ${applicationName}"
+      }
+    ]
+  },
+  "source" : "\/Users\/markgentry\/Projects\/onerepstrength-main\/oneREP-v3\/OneRepStrength\/AppIntents.swift",
+  "version" : 1
+}

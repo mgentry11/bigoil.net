@@ -1,0 +1,200 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/DataAnalyticsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Stats",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 84
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 88
+        }
+      },
+      {
+        "comment": "",
+        "key": "This Week",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 101
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld Sets",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 104
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Volume",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 112
+        }
+      },
+      {
+        "comment": "",
+        "key": "Summary",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "Personal Records",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 261
+        }
+      },
+      {
+        "comment": "",
+        "key": "Exercise Breakdown",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 286
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 291
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@ History",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 326
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld sets",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 330
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 426
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld sets",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 481
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 491
+        }
+      },
+      {
+        "comment": "",
+        "key": "Max",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 495
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 501
+        }
+      },
+      {
+        "comment": "",
+        "key": "Avg",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 505
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 511
+        }
+      },
+      {
+        "comment": "",
+        "key": "Fail",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 515
+        }
+      },
+      {
+        "comment": "",
+        "key": "Progress",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 555
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld - %lld lbs",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 620
+        }
+      },
+      {
+        "comment": "",
+        "key": "Weight",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 613
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 649
+        }
+      },
+      {
+        "comment": "",
+        "key": "RPE %lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 661
+        }
+      }
+    ]
+  },
+  "version": 1
+}

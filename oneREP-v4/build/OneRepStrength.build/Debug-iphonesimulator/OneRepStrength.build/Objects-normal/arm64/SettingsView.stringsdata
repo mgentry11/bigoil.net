@@ -1,0 +1,336 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v4/OneRepStrength/Views/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "Color Theme",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 84
+        }
+      },
+      {
+        "comment": "",
+        "key": "Glass Effect",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 115
+        }
+      },
+      {
+        "comment": "",
+        "key": "Glassmorphism",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preview of glass effect",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 130
+        }
+      },
+      {
+        "comment": "",
+        "key": "Intensity",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 173
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Voice Options",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 225
+        }
+      },
+      {
+        "comment": "",
+        "key": "Standard Voices",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 232
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pro Voices",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 255
+        }
+      },
+      {
+        "comment": "",
+        "key": "PRO",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 261
+        }
+      },
+      {
+        "comment": "",
+        "key": "Commander",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 269
+        }
+      },
+      {
+        "comment": "",
+        "key": "Map Commander Sounds",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 301
+        }
+      },
+      {
+        "comment": "",
+        "key": "Phase Timing",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 330
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reset",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 340
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sync & Tools",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 365
+        }
+      },
+      {
+        "comment": "",
+        "key": "OneRepStrength",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 405
+        }
+      },
+      {
+        "comment": "",
+        "key": "Version 1.0.0",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 409
+        }
+      },
+      {
+        "comment": "",
+        "key": "%llds",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 514
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 519
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import from Website",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 693
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 631
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Exercises",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 599
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter the 6-character code from the website to import your selected exercises.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 603
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap to enter code",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 646
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import Exercises",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 676
+        }
+      },
+      {
+        "comment": "",
+        "key": "Schedule",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 772
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reminders",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 781
+        }
+      },
+      {
+        "comment": "",
+        "key": "Workout Reminders",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 792
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 798
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reminder Time",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 825
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quick Actions",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 852
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 993
+        }
+      },
+      {
+        "comment": "",
+        "key": "NEXT WORKOUT",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1037
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1059
+        }
+      },
+      {
+        "comment": "",
+        "key": "days",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1062
+        }
+      },
+      {
+        "comment": "",
+        "key": "Today is workout day!",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1074
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1165
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reminder Time",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1149
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1144
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1155
+        }
+      }
+    ]
+  },
+  "version": 1
+}

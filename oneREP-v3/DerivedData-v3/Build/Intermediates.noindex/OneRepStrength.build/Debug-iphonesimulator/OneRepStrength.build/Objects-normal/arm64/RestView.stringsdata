@@ -1,0 +1,104 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/RestView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Rest timer: %lld seconds remaining",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip rest period",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "Double tap to skip rest and start next exercise",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "REST",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "seconds",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "UP NEXT",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld lbs",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Adjust weight",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 118
+        }
+      },
+      {
+        "comment": "",
+        "key": "-5",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 108
+        }
+      },
+      {
+        "comment": "",
+        "key": "+5",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip Rest",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 141
+        }
+      }
+    ]
+  },
+  "version": 1
+}

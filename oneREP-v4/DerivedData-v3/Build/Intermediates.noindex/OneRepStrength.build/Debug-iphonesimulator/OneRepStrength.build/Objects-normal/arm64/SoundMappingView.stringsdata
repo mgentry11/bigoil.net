@@ -1,0 +1,32 @@
+{
+  "source": "/Users/markgentry/Projects/onerepstrength-main/oneREP-v3/OneRepStrength/Views/SoundMappingView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Map Sounds",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Tap an event to assign an audio file. Tap the Play button to preview a file.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unassigned",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 42
+        }
+      }
+    ]
+  },
+  "version": 1
+}
