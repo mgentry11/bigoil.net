@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Analyzer | BigOil.net</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>Candidate Analyzer</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
     <style>
         :root {
             --primary: #0077B5;
@@ -23,11 +24,7 @@
             --danger: #ef4444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Open Sans', sans-serif;
@@ -36,7 +33,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             padding: 20px 40px;
@@ -55,16 +51,9 @@
             gap: 12px;
         }
 
-        .header h1 svg {
-            width: 32px;
-            height: 32px;
-        }
+        .header h1 svg { width: 32px; height: 32px; }
 
-        .header-nav {
-            display: flex;
-            gap: 20px;
-        }
-
+        .header-nav { display: flex; gap: 20px; }
         .header-nav a {
             color: white;
             text-decoration: none;
@@ -73,12 +62,8 @@
             border-radius: 8px;
             transition: background 0.2s;
         }
+        .header-nav a:hover { background: rgba(255, 255, 255, 0.1); }
 
-        .header-nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Main Layout */
         .main-container {
             display: grid;
             grid-template-columns: 350px 1fr 400px;
@@ -89,7 +74,6 @@
             min-height: calc(100vh - 80px);
         }
 
-        /* Sidebar Sections */
         .sidebar {
             background: var(--bg-card);
             border-radius: 16px;
@@ -109,17 +93,9 @@
             color: var(--secondary);
         }
 
-        .sidebar h2 svg {
-            width: 20px;
-            height: 20px;
-        }
+        .sidebar h2 svg { width: 20px; height: 20px; }
 
-        /* Candidate Cards */
-        .candidate-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .candidate-list { display: flex; flex-direction: column; gap: 10px; }
 
         .candidate-card {
             background: var(--bg-input);
@@ -128,24 +104,23 @@
             cursor: pointer;
             transition: all 0.2s;
             border: 2px solid transparent;
+            position: relative;
         }
-
-        .candidate-card:hover {
-            border-color: var(--primary);
-            transform: translateX(4px);
+        .candidate-card:hover { border-color: var(--primary); transform: translateX(4px); }
+        .candidate-card.selected { border-color: var(--secondary); background: rgba(0, 160, 220, 0.1); }
+        .candidate-card.compare-selected::after {
+            content: 'VS';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--accent);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
-
-        .candidate-card.selected {
-            border-color: var(--secondary);
-            background: rgba(0, 160, 220, 0.1);
-        }
-
-        .candidate-card .name {
-            font-weight: 600;
-            font-size: 15px;
-            margin-bottom: 4px;
-        }
-
+        .candidate-card .name { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
         .candidate-card .headline {
             font-size: 12px;
             color: var(--text-secondary);
@@ -155,14 +130,14 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         .candidate-card .meta {
             display: flex;
             gap: 10px;
             font-size: 11px;
             color: var(--text-secondary);
+            flex-wrap: wrap;
+            align-items: center;
         }
-
         .candidate-card .score {
             display: inline-flex;
             align-items: center;
@@ -172,12 +147,27 @@
             font-size: 12px;
             font-weight: 600;
         }
-
         .score.high { background: rgba(34, 197, 94, 0.2); color: var(--success); }
         .score.medium { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
         .score.low { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
 
-        /* Upload Section */
+        .candidate-card .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 4px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .candidate-card:hover .delete-btn { opacity: 1; }
+        .candidate-card .delete-btn:hover { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+
         .upload-zone {
             border: 2px dashed var(--border-color);
             border-radius: 12px;
@@ -185,34 +175,58 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
-
-        .upload-zone:hover {
+        .upload-zone:hover, .upload-zone.dragover {
             border-color: var(--primary);
             background: rgba(0, 119, 181, 0.05);
         }
+        .upload-zone svg { width: 40px; height: 40px; color: var(--text-secondary); margin-bottom: 10px; }
+        .upload-zone p { font-size: 13px; color: var(--text-secondary); }
+        .upload-zone .formats { font-size: 11px; color: var(--text-secondary); opacity: 0.7; margin-top: 5px; }
 
-        .upload-zone svg {
-            width: 40px;
-            height: 40px;
+        .folder-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .folder-input-row input {
+            flex: 1;
+            padding: 10px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            transition: border-color 0.2s;
+            min-width: 0;
+        }
+        .folder-input-row input:focus { outline: none; border-color: var(--primary); }
+        .folder-input-row input::placeholder { color: var(--text-secondary); opacity: 0.6; }
+        .folder-input-row button {
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .folder-input-row button:hover { border-color: var(--primary); color: var(--text-primary); }
+        .or-divider {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.5;
             margin-bottom: 10px;
         }
 
-        .upload-zone p {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .upload-zone .formats {
-            font-size: 11px;
-            color: var(--text-secondary);
-            opacity: 0.7;
-            margin-top: 5px;
-        }
-
-        /* Job Descriptions */
         .job-card {
             background: var(--bg-input);
             border-radius: 12px;
@@ -221,29 +235,29 @@
             transition: all 0.2s;
             border: 2px solid transparent;
             margin-bottom: 10px;
+            position: relative;
         }
-
-        .job-card:hover {
-            border-color: var(--accent);
-        }
-
-        .job-card.active {
-            border-color: var(--accent);
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .job-card .title {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .job-card .company {
-            font-size: 12px;
+        .job-card:hover { border-color: var(--accent); }
+        .job-card.active { border-color: var(--accent); background: rgba(16, 185, 129, 0.1); }
+        .job-card .title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .job-card .company { font-size: 12px; color: var(--text-secondary); }
+        .job-card .delete-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
             color: var(--text-secondary);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 4px;
+            border-radius: 4px;
+            font-size: 14px;
         }
+        .job-card:hover .delete-btn { opacity: 1; }
+        .job-card .delete-btn:hover { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
 
-        /* Main Content */
         .main-content {
             background: var(--bg-card);
             border-radius: 16px;
@@ -253,7 +267,6 @@
             max-height: calc(100vh - 120px);
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 5px;
@@ -262,7 +275,6 @@
             padding: 5px;
             border-radius: 12px;
         }
-
         .tab {
             flex: 1;
             padding: 12px 20px;
@@ -273,18 +285,11 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 14px;
         }
+        .tab:hover { color: var(--text-primary); }
+        .tab.active { background: var(--primary); color: white; }
 
-        .tab:hover {
-            color: var(--text-primary);
-        }
-
-        .tab.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Profile View */
         .profile-header {
             display: flex;
             gap: 20px;
@@ -292,7 +297,6 @@
             padding-bottom: 25px;
             border-bottom: 1px solid var(--border-color);
         }
-
         .profile-avatar {
             width: 80px;
             height: 80px;
@@ -305,18 +309,8 @@
             font-weight: 600;
             flex-shrink: 0;
         }
-
-        .profile-info h3 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .profile-info .headline {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
+        .profile-info h3 { font-size: 24px; margin-bottom: 5px; }
+        .profile-info .headline { color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
         .profile-info .location {
             color: var(--text-secondary);
             font-size: 13px;
@@ -324,8 +318,15 @@
             align-items: center;
             gap: 5px;
         }
+        .profile-info .profile-link {
+            color: var(--secondary);
+            font-size: 13px;
+            text-decoration: none;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        .profile-info .profile-link:hover { text-decoration: underline; }
 
-        /* Fit Analysis */
         .fit-score-card {
             background: linear-gradient(135deg, var(--bg-input) 0%, rgba(0, 119, 181, 0.1) 100%);
             border-radius: 16px;
@@ -333,12 +334,7 @@
             margin-bottom: 25px;
             text-align: center;
         }
-
-        .fit-score-card h4 {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+        .fit-score-card h4 { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
 
         .score-circle {
             width: 120px;
@@ -351,31 +347,34 @@
             font-size: 36px;
             font-weight: 700;
             position: relative;
+            background: var(--bg-card);
         }
-
         .score-circle::before {
             content: '';
             position: absolute;
             inset: -4px;
             border-radius: 50%;
             background: conic-gradient(var(--success) calc(var(--score) * 1%), var(--border-color) 0);
-            z-index: -1;
+            z-index: 0;
         }
-
+        .score-circle::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--bg-card);
+            z-index: 1;
+        }
+        .score-circle span { position: relative; z-index: 2; }
         .score-circle.high { color: var(--success); }
+        .score-circle.high::before { background: conic-gradient(var(--success) calc(var(--score) * 1%), var(--border-color) 0); }
         .score-circle.medium { color: var(--warning); }
+        .score-circle.medium::before { background: conic-gradient(var(--warning) calc(var(--score) * 1%), var(--border-color) 0); }
         .score-circle.low { color: var(--danger); }
+        .score-circle.low::before { background: conic-gradient(var(--danger) calc(var(--score) * 1%), var(--border-color) 0); }
+        .fit-score-card .label { font-size: 13px; color: var(--text-secondary); }
 
-        .fit-score-card .label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        /* Skills Match */
-        .skills-section {
-            margin-bottom: 25px;
-        }
-
+        .skills-section { margin-bottom: 25px; }
         .skills-section h4 {
             font-size: 16px;
             margin-bottom: 15px;
@@ -391,31 +390,12 @@
             font-size: 12px;
             margin: 4px;
         }
+        .skill-tag.matched { background: rgba(34, 197, 94, 0.2); color: var(--success); border: 1px solid var(--success); }
+        .skill-tag.partial { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .skill-tag.missing { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .skill-tag.neutral { background: rgba(160, 160, 176, 0.1); color: var(--text-secondary); border: 1px solid var(--border-color); }
 
-        .skill-tag.matched {
-            background: rgba(34, 197, 94, 0.2);
-            color: var(--success);
-            border: 1px solid var(--success);
-        }
-
-        .skill-tag.partial {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-            border: 1px solid var(--warning);
-        }
-
-        .skill-tag.missing {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 25px;
-        }
-
+        .timeline { position: relative; padding-left: 25px; }
         .timeline::before {
             content: '';
             position: absolute;
@@ -425,12 +405,7 @@
             width: 2px;
             background: var(--border-color);
         }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 20px;
-        }
-
+        .timeline-item { position: relative; padding-bottom: 20px; }
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -442,37 +417,18 @@
             background: var(--secondary);
             border: 2px solid var(--bg-card);
         }
+        .timeline-item h5 { font-size: 14px; margin-bottom: 3px; }
+        .timeline-item .company { color: var(--secondary); font-size: 13px; margin-bottom: 3px; }
+        .timeline-item .duration { color: var(--text-secondary); font-size: 12px; }
+        .timeline-item .description { color: var(--text-secondary); font-size: 12px; margin-top: 6px; line-height: 1.5; }
 
-        .timeline-item h5 {
-            font-size: 14px;
-            margin-bottom: 3px;
-        }
-
-        .timeline-item .company {
-            color: var(--secondary);
-            font-size: 13px;
-            margin-bottom: 3px;
-        }
-
-        .timeline-item .duration {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        /* Right Panel */
-        .right-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
+        .right-panel { display: flex; flex-direction: column; gap: 20px; }
         .panel-card {
             background: var(--bg-card);
             border-radius: 16px;
             padding: 20px;
             border: 1px solid var(--border-color);
         }
-
         .panel-card h3 {
             font-family: 'Oswald', sans-serif;
             font-size: 16px;
@@ -483,7 +439,6 @@
             color: var(--accent);
         }
 
-        /* Analysis Actions */
         .action-btn {
             width: 100%;
             padding: 14px 20px;
@@ -497,50 +452,24 @@
             justify-content: center;
             gap: 8px;
             margin-bottom: 10px;
+            font-size: 14px;
         }
-
         .action-btn.primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
         }
-
-        .action-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
-        }
-
+        .action-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3); }
         .action-btn.secondary {
             background: var(--bg-input);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
         }
+        .action-btn.secondary:hover { border-color: var(--primary); }
+        .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
-        .action-btn.secondary:hover {
-            border-color: var(--primary);
-        }
-
-        .action-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--text-secondary); }
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 12px 15px;
             background: var(--bg-input);
@@ -551,77 +480,25 @@
             font-size: 14px;
             transition: border-color 0.2s;
         }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+        .form-group textarea { min-height: 150px; resize: vertical; }
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Analysis Results */
         .analysis-item {
             padding: 12px;
             background: var(--bg-input);
             border-radius: 10px;
             margin-bottom: 10px;
         }
+        .analysis-item .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+        .analysis-item .value { font-size: 14px; font-weight: 500; }
+        .analysis-item .bar { height: 6px; background: var(--border-color); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .analysis-item .bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
 
-        .analysis-item .label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+        .empty-state svg { width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3; }
+        .empty-state h3 { font-size: 18px; margin-bottom: 10px; color: var(--text-primary); }
+        .empty-state p { font-size: 14px; }
 
-        .analysis-item .value {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .analysis-item .bar {
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .analysis-item .bar-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        .empty-state svg {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            opacity: 0.3;
-        }
-
-        .empty-state h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .empty-state p {
-            font-size: 14px;
-        }
-
-        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -634,12 +511,7 @@
             visibility: hidden;
             transition: all 0.3s;
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal {
             background: var(--bg-card);
             border-radius: 16px;
@@ -650,74 +522,96 @@
             overflow-y: auto;
             transform: translateY(20px);
             transition: transform 0.3s;
+            border: 1px solid var(--border-color);
         }
+        .modal-overlay.active .modal { transform: translateY(0); }
+        .modal h2 { font-family: 'Oswald', sans-serif; font-size: 22px; margin-bottom: 20px; }
+        .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
 
-        .modal-overlay.active .modal {
-            transform: translateY(0);
+        .loading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 40px; color: var(--text-secondary); }
+        .spinner { width: 24px; height: 24px; border: 3px solid var(--border-color); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Compare tab */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
-
-        .modal h2 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 22px;
-            margin-bottom: 20px;
+        .compare-card {
+            background: var(--bg-input);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
         }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
+        .compare-card .compare-header {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
         }
-
-        /* Loading */
-        .loading {
+        .compare-card .compare-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 40px;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 auto 10px;
+        }
+        .compare-card h4 { font-size: 16px; margin-bottom: 4px; }
+        .compare-card .sub { font-size: 12px; color: var(--text-secondary); }
+        .compare-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(42, 42, 58, 0.5); }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-row .cr-label { font-size: 12px; color: var(--text-secondary); }
+        .compare-row .cr-value { font-size: 13px; font-weight: 500; }
+        .compare-select-hint {
+            text-align: center;
+            padding: 15px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
         }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-color: var(--success); }
+        .toast.error { border-color: var(--danger); }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        #fileInput { display: none; }
 
-        /* Responsive */
         @media (max-width: 1200px) {
-            .main-container {
-                grid-template-columns: 300px 1fr;
-            }
-            .right-panel {
-                display: none;
-            }
+            .main-container { grid-template-columns: 300px 1fr; }
+            .right-panel { display: none; }
         }
-
         @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                max-height: none;
-            }
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
-
-        /* Hidden file input */
-        #fileInput {
-            display: none;
+            .main-container { grid-template-columns: 1fr; }
+            .sidebar { max-height: none; }
+            .header { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
@@ -733,14 +627,12 @@
             Candidate Analyzer
         </h1>
         <nav class="header-nav">
-            <a href="index.html">Home</a>
-            <a href="interview-analyzer.html">Interview Analyzer</a>
-            <a href="#" id="extensionLink">Get Extension</a>
+            <a href="#" onclick="clearAllData(); return false;">Clear Data</a>
+            <a href="#" onclick="document.getElementById('fileInput').click(); return false;">Import</a>
         </nav>
     </header>
 
     <main class="main-container">
-        <!-- Left Sidebar - Candidates -->
         <aside class="sidebar">
             <h2>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -749,7 +641,7 @@
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                Candidates
+                Candidates <span id="candidateCount" style="font-size:13px; color:var(--text-secondary); font-family:'Open Sans'">(0)</span>
             </h2>
 
             <div class="upload-zone" id="uploadZone">
@@ -758,17 +650,25 @@
                     <polyline points="17 8 12 3 7 8"></polyline>
                     <line x1="12" y1="3" x2="12" y2="15"></line>
                 </svg>
-                <p>Upload LinkedIn PDF or CSV</p>
-                <span class="formats">PDF, CSV, Excel supported</span>
+                <p>Upload LinkedIn PDF, CSV, or Excel</p>
+                <span class="formats">Drag &amp; drop or click to browse</span>
             </div>
-            <input type="file" id="fileInput" accept=".pdf,.csv,.xlsx,.xls" multiple>
+            <div class="or-divider">or</div>
+            <div class="folder-input-row">
+                <input type="text" id="folderPathInput" placeholder="/path/to/folder" spellcheck="false">
+                <button id="folderPathBtn" title="Load folder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Load
+                </button>
+            </div>
+            <input type="file" id="fileInput" accept=".pdf,.csv,.xlsx,.xls,.json" multiple>
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none">
 
-            <div id="candidateList" class="candidate-list">
-                <!-- Candidates populated dynamically -->
-            </div>
+            <div id="candidateList" class="candidate-list"></div>
         </aside>
 
-        <!-- Main Content -->
         <section class="main-content">
             <div class="tabs">
                 <button class="tab active" data-tab="profile">Profile</button>
@@ -783,14 +683,14 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     <h3>No Candidate Selected</h3>
-                    <p>Upload a LinkedIn PDF or select a candidate to view their profile</p>
+                    <p>Upload a LinkedIn PDF, CSV, or Excel file to get started</p>
                 </div>
 
                 <div id="profileView" style="display: none;">
                     <div class="profile-header">
                         <div class="profile-avatar" id="profileAvatar">JD</div>
                         <div class="profile-info">
-                            <h3 id="profileName">John Doe</h3>
+                            <h3 id="profileName" style="cursor:pointer" title="Click to edit">John Doe</h3>
                             <p class="headline" id="profileHeadline">Senior Software Engineer</p>
                             <p class="location" id="profileLocation">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -799,61 +699,42 @@
                                 </svg>
                                 <span>San Francisco, CA</span>
                             </p>
+                            <a class="profile-link" id="profileLink" href="#" target="_blank" style="display:none">View LinkedIn Profile</a>
+                        </div>
+                    </div>
+
+                    <div id="profileComment" style="display:none; margin-bottom: 20px;">
+                        <div style="background: var(--bg-input); border-radius: 12px; padding: 15px; border-left: 3px solid var(--warning);">
+                            <div style="font-size: 12px; color: var(--warning); margin-bottom: 5px; font-weight: 600;">Recruiter Notes</div>
+                            <p id="profileCommentText" style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;"></p>
+                        </div>
+                    </div>
+
+                    <div id="profileScoreSection" style="display:none; margin-bottom: 20px;">
+                        <div style="background: var(--bg-input); border-radius: 12px; padding: 15px; border-left: 3px solid var(--secondary);">
+                            <div style="font-size: 12px; color: var(--secondary); margin-bottom: 5px; font-weight: 600;">Candidate Score</div>
+                            <p id="profileScoreText" style="color: var(--text-primary); font-size: 24px; font-weight: 700;"></p>
                         </div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="9 11 12 14 22 4"></polyline>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                            </svg>
-                            Skills
-                        </h4>
-                        <div id="profileSkills">
-                            <!-- Skills populated dynamically -->
-                        </div>
+                        <h4>Skills</h4>
+                        <div id="profileSkills"></div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            </svg>
-                            Experience
-                        </h4>
-                        <div id="profileExperience" class="timeline">
-                            <!-- Experience populated dynamically -->
-                        </div>
+                        <h4>Experience</h4>
+                        <div id="profileExperience" class="timeline"></div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                            </svg>
-                            Education
-                        </h4>
-                        <div id="profileEducation" class="timeline">
-                            <!-- Education populated dynamically -->
-                        </div>
+                        <h4>Education</h4>
+                        <div id="profileEducation" class="timeline"></div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                            </svg>
-                            About
-                        </h4>
-                        <p id="profileAbout" style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
-                            <!-- About text populated dynamically -->
-                        </p>
+                        <h4>About</h4>
+                        <p id="profileAbout" style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;"></p>
                     </div>
                 </div>
             </div>
@@ -865,7 +746,7 @@
                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                     </svg>
                     <h3>Select a Job Description</h3>
-                    <p>Choose a job from the right panel to analyze candidate fit</p>
+                    <p>Add a job from the right panel, then select both a candidate and job to analyze fit</p>
                 </div>
 
                 <div id="analysisView" style="display: none;">
@@ -879,35 +760,19 @@
 
                     <div class="skills-section">
                         <h4>Skills Match</h4>
-                        <div id="skillsMatch">
-                            <!-- Skills match populated dynamically -->
-                        </div>
+                        <div id="skillsMatch"></div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                            Detailed Analysis
-                        </h4>
-                        <div id="detailedAnalysis">
-                            <!-- Analysis items populated dynamically -->
-                        </div>
+                        <h4>Detailed Analysis</h4>
+                        <div id="detailedAnalysis"></div>
                     </div>
 
                     <div class="skills-section">
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            AI Recommendations
-                        </h4>
+                        <h4>Recommendations</h4>
                         <div id="aiRecommendations" style="background: var(--bg-input); border-radius: 12px; padding: 15px;">
                             <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
-                                Click "Run AI Analysis" to get detailed recommendations about this candidate's fit for the selected role.
+                                Click "Run Analysis" to get recommendations.
                             </p>
                         </div>
                     </div>
@@ -915,19 +780,13 @@
             </div>
 
             <div id="compareTab" class="tab-content" style="display: none;">
-                <div class="empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                    <h3>Compare Candidates</h3>
-                    <p>Select multiple candidates from the list to compare their profiles and fit scores</p>
+                <div class="compare-select-hint" id="compareHint">
+                    Hold <strong>Shift</strong> and click candidates in the sidebar to select them for comparison (2-4 candidates)
                 </div>
+                <div id="compareContent"></div>
             </div>
         </section>
 
-        <!-- Right Panel -->
         <aside class="right-panel">
             <div class="panel-card">
                 <h3>
@@ -944,9 +803,7 @@
                     </svg>
                     Add Job Description
                 </button>
-                <div id="jobList" style="margin-top: 15px;">
-                    <!-- Jobs populated dynamically -->
-                </div>
+                <div id="jobList" style="margin-top: 15px;"></div>
             </div>
 
             <div class="panel-card">
@@ -961,7 +818,10 @@
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    Run AI Analysis
+                    Run Analysis
+                </button>
+                <button class="action-btn secondary" id="analyzeAllBtn" disabled>
+                    Analyze All Candidates
                 </button>
                 <button class="action-btn secondary" id="exportCsvBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -969,16 +829,10 @@
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    Export to CSV
+                    Export CSV
                 </button>
                 <button class="action-btn secondary" id="exportExcelBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                    </svg>
-                    Export to Excel
+                    Export Excel
                 </button>
             </div>
 
@@ -996,7 +850,7 @@
                     <div class="value" id="statTotalCandidates">0</div>
                 </div>
                 <div class="analysis-item">
-                    <div class="label">Analyzed Today</div>
+                    <div class="label">Analyzed</div>
                     <div class="value" id="statAnalyzedToday">0</div>
                 </div>
                 <div class="analysis-item">
@@ -1026,39 +880,86 @@
                 </div>
                 <div class="form-group">
                     <label for="jobRequirements">Key Requirements (one per line)</label>
-                    <textarea id="jobRequirements" placeholder="5+ years of experience&#10;Python proficiency&#10;Team leadership"></textarea>
+                    <textarea id="jobRequirements" placeholder="5+ years of experience&#10;Python proficiency&#10;Team leadership" style="min-height:100px"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jobSkills">Required Skills (comma separated)</label>
+                    <input type="text" id="jobSkills" placeholder="Python, SQL, AWS, React">
                 </div>
                 <div class="modal-actions">
-                    <button type="button" class="action-btn secondary" id="cancelJobBtn">Cancel</button>
-                    <button type="submit" class="action-btn primary">Save Job</button>
+                    <button type="button" class="action-btn secondary" id="cancelJobBtn" style="flex:1">Cancel</button>
+                    <button type="submit" class="action-btn primary" style="flex:1">Save Job</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Edit Candidate Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h2>Edit Candidate</h2>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editName">Name *</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editHeadline">Headline / Title</label>
+                    <input type="text" id="editHeadline" placeholder="e.g., Senior Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="editLocation">Location</label>
+                    <input type="text" id="editLocation" placeholder="e.g., San Francisco, CA">
+                </div>
+                <div class="form-group">
+                    <label for="editSkills">Skills (comma separated)</label>
+                    <input type="text" id="editSkills" placeholder="Python, SQL, AWS">
+                </div>
+                <div class="form-group">
+                    <label for="editAbout">About / Summary</label>
+                    <textarea id="editAbout" style="min-height:100px"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editUrl">LinkedIn URL</label>
+                    <input type="text" id="editUrl" placeholder="https://linkedin.com/in/...">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="action-btn secondary" id="cancelEditBtn" style="flex:1">Cancel</button>
+                    <button type="submit" class="action-btn primary" style="flex:1">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
     <script>
-        // API Configuration
-        const API = 'https://bigoil-backend.onrender.com/api';
+        // Configure pdf.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
         // State
         let candidates = [];
         let jobs = [];
         let selectedCandidate = null;
         let selectedJob = null;
+        let compareCandidates = new Set();
 
-        // DOM Elements
+        // DOM
         const fileInput = document.getElementById('fileInput');
         const uploadZone = document.getElementById('uploadZone');
         const candidateList = document.getElementById('candidateList');
         const jobList = document.getElementById('jobList');
         const jobModal = document.getElementById('jobModal');
+        const editModal = document.getElementById('editModal');
         const jobForm = document.getElementById('jobForm');
+        const editForm = document.getElementById('editForm');
         const tabs = document.querySelectorAll('.tab');
         const analyzeBtn = document.getElementById('analyzeBtn');
+        const analyzeAllBtn = document.getElementById('analyzeAllBtn');
         const exportCsvBtn = document.getElementById('exportCsvBtn');
         const exportExcelBtn = document.getElementById('exportExcelBtn');
 
-        // Initialize
+        // Init
         document.addEventListener('DOMContentLoaded', () => {
             loadFromStorage();
             setupEventListeners();
@@ -1066,74 +967,563 @@
         });
 
         function setupEventListeners() {
-            // File upload
             uploadZone.addEventListener('click', () => fileInput.click());
-            uploadZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadZone.style.borderColor = 'var(--primary)';
-            });
-            uploadZone.addEventListener('dragleave', () => {
-                uploadZone.style.borderColor = 'var(--border-color)';
-            });
+            uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+            uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
             uploadZone.addEventListener('drop', handleDrop);
             fileInput.addEventListener('change', handleFileSelect);
 
-            // Tabs
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-            });
+            // Folder path input
+            const folderPathInput = document.getElementById('folderPathInput');
+            const folderPathBtn = document.getElementById('folderPathBtn');
+            const folderInput = document.getElementById('folderInput');
 
-            // Job modal
-            document.getElementById('addJobBtn').addEventListener('click', () => {
-                jobModal.classList.add('active');
+            folderPathBtn.addEventListener('click', () => handleFolderPathOrPicker(folderPathInput.value.trim()));
+            folderPathInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleFolderPathOrPicker(folderPathInput.value.trim());
+                }
             });
-            document.getElementById('cancelJobBtn').addEventListener('click', () => {
-                jobModal.classList.remove('active');
-                jobForm.reset();
-            });
+            folderInput.addEventListener('change', handleFolderSelect);
+
+            tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+
+            document.getElementById('addJobBtn').addEventListener('click', () => jobModal.classList.add('active'));
+            document.getElementById('cancelJobBtn').addEventListener('click', () => { jobModal.classList.remove('active'); jobForm.reset(); });
             jobForm.addEventListener('submit', handleJobSubmit);
 
-            // Actions
+            document.getElementById('cancelEditBtn').addEventListener('click', () => { editModal.classList.remove('active'); editForm.reset(); });
+            editForm.addEventListener('submit', handleEditSubmit);
+
             analyzeBtn.addEventListener('click', runAnalysis);
+            analyzeAllBtn.addEventListener('click', runAnalysisAll);
             exportCsvBtn.addEventListener('click', exportToCSV);
             exportExcelBtn.addEventListener('click', exportToExcel);
+
+            document.getElementById('profileName').addEventListener('click', () => {
+                if (selectedCandidate) openEditModal(selectedCandidate);
+            });
+
+            [jobModal, editModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.classList.remove('active');
+                });
+            });
         }
 
-        function handleDrop(e) {
+        // ── File Handling ──────────────────────────────────────────
+
+        async function handleDrop(e) {
             e.preventDefault();
-            uploadZone.style.borderColor = 'var(--border-color)';
-            const files = e.dataTransfer.files;
-            processFiles(files);
+            uploadZone.classList.remove('dragover');
+
+            // Check if dropped items include directories (DataTransferItem API)
+            if (e.dataTransfer.items) {
+                const items = [...e.dataTransfer.items];
+                for (const item of items) {
+                    if (item.getAsFileSystemHandle) {
+                        try {
+                            const handle = await item.getAsFileSystemHandle();
+                            if (handle.kind === 'directory') {
+                                document.getElementById('folderPathInput').value = handle.name;
+                                await processDirectoryHandle(handle);
+                                return;
+                            }
+                        } catch (err) { /* fall through to file handling */ }
+                    }
+                    // webkitGetAsEntry fallback for folder drops
+                    if (item.webkitGetAsEntry) {
+                        const entry = item.webkitGetAsEntry();
+                        if (entry && entry.isDirectory) {
+                            document.getElementById('folderPathInput').value = entry.name;
+                            const files = await readDirectoryEntry(entry);
+                            if (files.length > 0) {
+                                processFiles(files);
+                            } else {
+                                showToast('No supported files found in folder', 'error');
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+
+            processFiles(e.dataTransfer.files);
+        }
+
+        function readDirectoryEntry(dirEntry) {
+            return new Promise((resolve) => {
+                const supportedExts = new Set(['pdf', 'csv', 'xlsx', 'xls', 'json']);
+                const files = [];
+                const reader = dirEntry.createReader();
+
+                function readEntries() {
+                    reader.readEntries(async (entries) => {
+                        if (entries.length === 0) {
+                            resolve(files);
+                            return;
+                        }
+                        for (const entry of entries) {
+                            if (entry.isFile) {
+                                const ext = entry.name.split('.').pop().toLowerCase();
+                                if (supportedExts.has(ext)) {
+                                    const file = await new Promise(r => entry.file(r));
+                                    files.push(file);
+                                }
+                            }
+                        }
+                        readEntries(); // Continue reading (batched results)
+                    });
+                }
+                readEntries();
+            });
         }
 
         function handleFileSelect(e) {
             processFiles(e.target.files);
+            e.target.value = '';
+        }
+
+        // ── Folder Handling ──────────────────────────────────────────
+
+        async function handleFolderPathOrPicker(path) {
+            if (path) {
+                // User typed a path — use File System Access API to open that directory
+                // The API doesn't support opening by path directly, so we open the picker
+                // pre-hinted, or if available use the native directory approach
+                await openFolderPicker(path);
+            } else {
+                // No path typed — open the folder picker
+                await openFolderPicker();
+            }
+        }
+
+        async function openFolderPicker(hintPath) {
+            // Try modern File System Access API first (Chrome/Edge)
+            if (window.showDirectoryPicker) {
+                try {
+                    const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
+                    const folderPathInput = document.getElementById('folderPathInput');
+                    folderPathInput.value = dirHandle.name;
+                    await processDirectoryHandle(dirHandle);
+                    return;
+                } catch (err) {
+                    if (err.name === 'AbortError') return; // User cancelled
+                    console.warn('showDirectoryPicker failed, falling back:', err);
+                }
+            }
+
+            // Fallback: use webkitdirectory file input
+            document.getElementById('folderInput').click();
+        }
+
+        async function processDirectoryHandle(dirHandle, depth) {
+            depth = depth || 0;
+            if (depth > 3) return; // Don't recurse too deep
+
+            const supportedExts = new Set(['pdf', 'csv', 'xlsx', 'xls', 'json']);
+            const files = [];
+
+            for await (const entry of dirHandle.values()) {
+                if (entry.kind === 'file') {
+                    const ext = entry.name.split('.').pop().toLowerCase();
+                    if (supportedExts.has(ext)) {
+                        const file = await entry.getFile();
+                        files.push(file);
+                    }
+                } else if (entry.kind === 'directory' && depth < 2) {
+                    // Recurse into subdirectories (max 2 levels)
+                    await processDirectoryHandle(entry, depth + 1);
+                }
+            }
+
+            if (files.length > 0) {
+                await processFiles(files);
+            } else if (depth === 0) {
+                showToast('No supported files found in folder (PDF, CSV, XLSX, JSON)', 'error');
+            }
+        }
+
+        function handleFolderSelect(e) {
+            // webkitdirectory fallback — gives us all files in the selected folder
+            const supportedExts = new Set(['pdf', 'csv', 'xlsx', 'xls', 'json']);
+            const files = Array.from(e.target.files).filter(f => {
+                const ext = f.name.split('.').pop().toLowerCase();
+                return supportedExts.has(ext);
+            });
+
+            const folderPathInput = document.getElementById('folderPathInput');
+            if (e.target.files.length > 0) {
+                // Extract folder name from webkitRelativePath
+                const rel = e.target.files[0].webkitRelativePath || '';
+                const folderName = rel.split('/')[0] || 'Selected folder';
+                folderPathInput.value = folderName;
+            }
+
+            if (files.length > 0) {
+                processFiles(files);
+            } else {
+                showToast('No supported files found in folder (PDF, CSV, XLSX, JSON)', 'error');
+            }
+            e.target.value = '';
         }
 
         async function processFiles(files) {
+            let added = 0;
             for (const file of files) {
-                const extension = file.name.split('.').pop().toLowerCase();
-
-                if (extension === 'pdf') {
-                    await parsePDF(file);
-                } else if (extension === 'csv') {
-                    await parseCSV(file);
-                } else if (['xlsx', 'xls'].includes(extension)) {
-                    await parseExcel(file);
+                const ext = file.name.split('.').pop().toLowerCase();
+                try {
+                    if (ext === 'pdf') { added += await parsePDF(file); }
+                    else if (ext === 'csv') { added += await parseCSV(file); }
+                    else if (ext === 'xlsx' || ext === 'xls') { added += await parseExcel(file); }
+                    else if (ext === 'json') { added += await parseJSON(file); }
+                    else { showToast('Unsupported file type: .' + ext, 'error'); }
+                } catch (err) {
+                    console.error('Error processing ' + file.name + ':', err);
+                    showToast('Error processing ' + file.name + ': ' + err.message, 'error');
                 }
             }
-            renderCandidates();
-            saveToStorage();
-            updateStats();
+            if (added > 0) {
+                renderCandidates();
+                saveToStorage();
+                updateStats();
+                showToast('Added ' + added + ' candidate' + (added > 1 ? 's' : ''), 'success');
+            }
         }
 
+        // ── PDF Parsing (LinkedIn profiles) ──────────────────────
+
         async function parsePDF(file) {
-            // For now, we'll create a basic candidate entry
-            // In production, this would call an API to parse the PDF
-            const candidate = {
-                id: Date.now().toString(),
-                name: file.name.replace('.pdf', '').replace(/_/g, ' '),
-                headline: 'LinkedIn Profile',
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+            let fullText = '';
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                // Group items by y-position to reconstruct lines
+                const items = content.items;
+                if (items.length === 0) continue;
+
+                // Sort by y (descending = top first) then x
+                items.sort((a, b) => {
+                    const dy = b.transform[5] - a.transform[5];
+                    if (Math.abs(dy) > 5) return dy;
+                    return a.transform[4] - b.transform[4];
+                });
+
+                let lastY = items[0].transform[5];
+                let line = '';
+                for (const item of items) {
+                    const y = item.transform[5];
+                    if (Math.abs(y - lastY) > 5) {
+                        fullText += line.trim() + '\n';
+                        line = '';
+                        lastY = y;
+                    }
+                    line += (line && !line.endsWith(' ') ? ' ' : '') + item.str;
+                }
+                fullText += line.trim() + '\n';
+            }
+
+            const candidate = parseLinkedInText(fullText, file.name);
+            candidates.push(candidate);
+            return 1;
+        }
+
+        function parseLinkedInText(text, filename) {
+            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+
+            // Extract name
+            let name = '';
+            for (const line of lines) {
+                const clean = line.replace(/\s+/g, ' ').trim();
+                if (clean.length > 2 && clean.length < 60 &&
+                    !/linkedin|contact|page|http|www\./i.test(clean) &&
+                    /^[A-Z]/.test(clean)) {
+                    name = clean;
+                    break;
+                }
+            }
+            if (!name) name = filename.replace('.pdf', '').replace(/[_-]/g, ' ');
+
+            // Find sections by common LinkedIn headings
+            const sectionRegex = /^(Experience|Education|Skills|About|Summary|Licenses & Certifications|Certifications|Volunteering|Languages|Interests|Honors & Awards|Projects|Publications|Recommendations|Contact)\s*$/i;
+            const sections = {};
+            let currentSection = 'header';
+            let currentLines = [];
+
+            for (const line of lines) {
+                if (sectionRegex.test(line.trim())) {
+                    sections[currentSection] = currentLines;
+                    currentSection = line.trim().toLowerCase();
+                    if (currentSection === 'summary') currentSection = 'about';
+                    currentLines = [];
+                } else {
+                    currentLines.push(line);
+                }
+            }
+            sections[currentSection] = currentLines;
+
+            // Headline from header section (line after name)
+            let headline = '';
+            const headerLines = sections['header'] || [];
+            const nameIdx = headerLines.indexOf(name);
+            if (nameIdx >= 0 && nameIdx + 1 < headerLines.length) {
+                headline = headerLines[nameIdx + 1];
+            }
+
+            // Location
+            let location = '';
+            for (const line of headerLines) {
+                if (/[A-Z][a-z]+.*,\s*[A-Z]{2}/.test(line) || /(?:area|metro|greater)/i.test(line)) {
+                    location = line;
+                    break;
+                }
+            }
+
+            // About
+            const about = (sections['about'] || []).join(' ').substring(0, 1000);
+
+            // Experience
+            const experience = parseExperienceSection(sections['experience'] || []);
+
+            // Education
+            const education = parseEducationSection(sections['education'] || []);
+
+            // Skills
+            let skills = (sections['skills'] || []).filter(s => s.length > 1 && s.length < 60 && !/^\d+$/.test(s));
+            // Remove endorsement counts
+            skills = skills.filter(s => !/^\d+ endorsement/.test(s));
+
+            // LinkedIn URL
+            let profileUrl = '';
+            const urlMatch = text.match(/(https?:\/\/(?:www\.)?linkedin\.com\/in\/[^\s)]+)/i);
+            if (urlMatch) profileUrl = urlMatch[1];
+
+            return {
+                id: genId(),
+                name,
+                headline,
+                location,
+                about,
+                currentTitle: headline,
+                currentCompany: experience[0]?.company || '',
+                experience,
+                education,
+                skills: [...new Set(skills)].slice(0, 40),
+                profileUrl,
+                source: 'PDF Upload',
+                addedAt: new Date().toISOString(),
+                fitScores: {},
+                comment: '',
+                score: null,
+                rawText: text.substring(0, 5000)
+            };
+        }
+
+        function parseExperienceSection(lines) {
+            const experience = [];
+            // LinkedIn PDFs typically have: Title, Company, Date Range, Location, Description
+            let current = null;
+
+            for (const line of lines) {
+                // Date patterns like "Jan 2020 - Present" or "2019 - 2021"
+                const isDate = /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d{4})\b.*(-|–|to)\s*(present|\d{4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(line);
+                const isDuration = /\b\d+\s*(yr|year|mo|month)/i.test(line);
+
+                if (isDate || isDuration) {
+                    if (current) current.duration = line;
+                } else if (line.length < 80 && /^[A-Z]/.test(line) && !current?.title) {
+                    // Likely a job title
+                    if (current && current.title) {
+                        experience.push(current);
+                    }
+                    current = { title: line, company: '', duration: '', description: '' };
+                } else if (current && !current.company && line.length < 80) {
+                    current.company = line;
+                } else if (current) {
+                    current.description += (current.description ? ' ' : '') + line;
+                }
+            }
+            if (current && current.title) experience.push(current);
+
+            return experience.slice(0, 10).map(e => ({
+                ...e,
+                description: (e.description || '').substring(0, 500)
+            }));
+        }
+
+        function parseEducationSection(lines) {
+            const education = [];
+            let current = null;
+
+            for (const line of lines) {
+                if (/university|college|institute|school|academy/i.test(line) && line.length < 100) {
+                    if (current) education.push(current);
+                    current = { school: line, degree: '' };
+                } else if (current && !current.degree && /bachelor|master|phd|doctor|associate|diploma|degree|b\.|m\.|mba/i.test(line)) {
+                    current.degree = line;
+                } else if (current) {
+                    if (!current.degree) current.degree = line;
+                } else {
+                    // First line might be the school even without university keyword
+                    if (line.length > 3 && line.length < 100 && /^[A-Z]/.test(line)) {
+                        current = { school: line, degree: '' };
+                    }
+                }
+            }
+            if (current) education.push(current);
+
+            return education.slice(0, 5);
+        }
+
+        // ── CSV Parsing (RFC 4180 compliant) ─────────────────────
+
+        function parseCSVText(text) {
+            const rows = [];
+            let current = '';
+            let inQuotes = false;
+            let row = [];
+
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i];
+                const next = text[i + 1];
+
+                if (inQuotes) {
+                    if (ch === '"' && next === '"') {
+                        current += '"';
+                        i++;
+                    } else if (ch === '"') {
+                        inQuotes = false;
+                    } else {
+                        current += ch;
+                    }
+                } else {
+                    if (ch === '"') {
+                        inQuotes = true;
+                    } else if (ch === ',') {
+                        row.push(current.trim());
+                        current = '';
+                    } else if (ch === '\n' || (ch === '\r' && next === '\n')) {
+                        row.push(current.trim());
+                        if (row.some(cell => cell.length > 0)) rows.push(row);
+                        row = [];
+                        current = '';
+                        if (ch === '\r') i++;
+                    } else {
+                        current += ch;
+                    }
+                }
+            }
+            row.push(current.trim());
+            if (row.some(cell => cell.length > 0)) rows.push(row);
+
+            return rows;
+        }
+
+        async function parseCSV(file) {
+            const text = await file.text();
+            const rows = parseCSVText(text);
+            if (rows.length < 2) return 0;
+
+            const headers = rows[0].map(h => h.toLowerCase().trim());
+            let added = 0;
+
+            for (let i = 1; i < rows.length; i++) {
+                const values = rows[i];
+                if (values.length < 1) continue;
+
+                const candidate = createEmptyCandidate();
+                candidate.source = 'CSV Import';
+
+                headers.forEach((header, idx) => {
+                    const val = (values[idx] || '').trim();
+                    if (!val) return;
+
+                    if (/^name$|^full.?name$|^candidate/i.test(header)) {
+                        candidate.name = val;
+                    } else if (/headline|title|position|role/i.test(header)) {
+                        candidate.headline = val;
+                        candidate.currentTitle = val;
+                    } else if (/location|city|region/i.test(header)) {
+                        candidate.location = val;
+                    } else if (/about|summary|bio/i.test(header)) {
+                        candidate.about = val;
+                    } else if (/company|employer|org/i.test(header)) {
+                        candidate.currentCompany = val;
+                    } else if (/skills?$/i.test(header)) {
+                        candidate.skills = val.split(/[;|]/).map(s => s.trim()).filter(Boolean);
+                    } else if (/url|link|linkedin|profile/i.test(header)) {
+                        candidate.profileUrl = val;
+                    } else if (/comment|notes?|review/i.test(header)) {
+                        candidate.comment = val;
+                    } else if (/^score$|^rating$|^rank$/i.test(header)) {
+                        const num = parseFloat(val);
+                        if (!isNaN(num)) candidate.score = num;
+                    } else if (/email/i.test(header)) {
+                        candidate.email = val;
+                    } else if (/phone/i.test(header)) {
+                        candidate.phone = val;
+                    }
+                });
+
+                if (!candidate.name) {
+                    candidate.name = values[0] || ('Candidate ' + i);
+                }
+
+                candidates.push(candidate);
+                added++;
+            }
+            return added;
+        }
+
+        // ── Excel Parsing ────────────────────────────────────────
+
+        async function parseExcel(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const csvText = XLSX.utils.sheet_to_csv(sheet);
+            const blob = new Blob([csvText], { type: 'text/csv' });
+            const csvFile = new File([blob], file.name.replace(/\.xlsx?$/, '.csv'));
+            return await parseCSV(csvFile);
+        }
+
+        // ── JSON Parsing ─────────────────────────────────────────
+
+        async function parseJSON(file) {
+            const text = await file.text();
+            const data = JSON.parse(text);
+            const items = Array.isArray(data) ? data : [data];
+            let added = 0;
+
+            for (const item of items) {
+                const candidate = createEmptyCandidate();
+                candidate.source = 'JSON Import';
+                candidate.name = item.name || item.fullName || 'Unknown';
+                candidate.headline = item.headline || item.title || '';
+                candidate.location = item.location || '';
+                candidate.about = item.about || item.summary || '';
+                candidate.currentTitle = item.currentTitle || item.title || '';
+                candidate.currentCompany = item.currentCompany || item.company || '';
+                candidate.skills = item.skills || [];
+                candidate.experience = item.experience || [];
+                candidate.education = item.education || [];
+                candidate.profileUrl = item.profileUrl || item.linkedinUrl || '';
+                candidates.push(candidate);
+                added++;
+            }
+            return added;
+        }
+
+        function createEmptyCandidate() {
+            return {
+                id: genId(),
+                name: '',
+                headline: '',
                 location: '',
                 about: '',
                 currentTitle: '',
@@ -1142,97 +1532,61 @@
                 education: [],
                 skills: [],
                 profileUrl: '',
-                source: 'PDF Upload',
+                source: '',
                 addedAt: new Date().toISOString(),
-                fitScores: {}
+                fitScores: {},
+                comment: '',
+                score: null,
+                email: '',
+                phone: ''
             };
-
-            // Try to send to backend for parsing
-            try {
-                const formData = new FormData();
-                formData.append('file', file);
-                formData.append('type', 'linkedin');
-
-                const response = await fetch(`${API}/parse-linkedin-pdf`, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    Object.assign(candidate, data);
-                }
-            } catch (err) {
-                console.log('PDF parsing API not available, using basic extraction');
-            }
-
-            candidates.push(candidate);
         }
 
-        async function parseCSV(file) {
-            const text = await file.text();
-            const lines = text.split('\n');
-            const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-
-            for (let i = 1; i < lines.length; i++) {
-                const values = lines[i].split(',');
-                if (values.length < 2) continue;
-
-                const candidate = {
-                    id: Date.now().toString() + i,
-                    name: '',
-                    headline: '',
-                    location: '',
-                    about: '',
-                    currentTitle: '',
-                    currentCompany: '',
-                    experience: [],
-                    education: [],
-                    skills: [],
-                    profileUrl: '',
-                    source: 'CSV Import',
-                    addedAt: new Date().toISOString(),
-                    fitScores: {}
-                };
-
-                headers.forEach((header, index) => {
-                    const value = values[index]?.trim().replace(/^"|"$/g, '') || '';
-
-                    if (header.includes('name')) candidate.name = value;
-                    else if (header.includes('headline') || header.includes('title')) candidate.headline = value;
-                    else if (header.includes('location')) candidate.location = value;
-                    else if (header.includes('about') || header.includes('summary')) candidate.about = value;
-                    else if (header.includes('company')) candidate.currentCompany = value;
-                    else if (header.includes('skills')) candidate.skills = value.split(';').map(s => s.trim());
-                    else if (header.includes('url') || header.includes('linkedin')) candidate.profileUrl = value;
-                });
-
-                if (candidate.name) {
-                    candidates.push(candidate);
-                }
-            }
+        function genId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
         }
 
-        async function parseExcel(file) {
-            // For Excel, we'd use a library like SheetJS
-            // For now, show a message
-            alert('Excel parsing requires the SheetJS library. Please export as CSV for now.');
-        }
+        // ── Rendering ────────────────────────────────────────────
 
         function renderCandidates() {
-            candidateList.innerHTML = candidates.map(c => `
-                <div class="candidate-card ${selectedCandidate?.id === c.id ? 'selected' : ''}"
-                     data-id="${c.id}" onclick="selectCandidate('${c.id}')">
-                    <div class="name">${escapeHtml(c.name)}</div>
-                    <div class="headline">${escapeHtml(c.headline || c.currentTitle || 'No headline')}</div>
-                    <div class="meta">
-                        <span>${escapeHtml(c.location || 'No location')}</span>
-                        ${c.fitScores && Object.keys(c.fitScores).length > 0 ?
-                            `<span class="score ${getScoreClass(getAvgScore(c.fitScores))}">${Math.round(getAvgScore(c.fitScores))}% fit</span>` :
-                            ''}
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('candidateCount').textContent = '(' + candidates.length + ')';
+            if (candidates.length === 0) {
+                candidateList.innerHTML = '<p style="color: var(--text-secondary); font-size: 13px; text-align: center; padding: 20px;">No candidates yet. Upload a file to get started.</p>';
+                return;
+            }
+
+            candidateList.innerHTML = candidates.map(c => {
+                const isSelected = selectedCandidate?.id === c.id;
+                const isCompare = compareCandidates.has(c.id);
+                const fitKeys = Object.keys(c.fitScores || {});
+                const avgScore = fitKeys.length > 0 ? getAvgScore(c.fitScores) : null;
+
+                return '<div class="candidate-card' + (isSelected ? ' selected' : '') + (isCompare ? ' compare-selected' : '') + '" data-id="' + c.id + '" onclick="handleCandidateClick(event, \'' + c.id + '\')">' +
+                    '<button class="delete-btn" onclick="event.stopPropagation(); deleteCandidate(\'' + c.id + '\')" title="Remove">&times;</button>' +
+                    '<div class="name">' + escapeHtml(c.name) + '</div>' +
+                    '<div class="headline">' + escapeHtml(c.headline || c.currentTitle || c.currentCompany || 'No headline') + '</div>' +
+                    '<div class="meta">' +
+                        (c.location ? '<span>' + escapeHtml(c.location) + '</span>' : '') +
+                        (c.score != null ? '<span class="score ' + (c.score >= 4 ? 'high' : c.score >= 3 ? 'medium' : 'low') + '">' + c.score + '/5</span>' : '') +
+                        (avgScore != null ? '<span class="score ' + getScoreClass(avgScore) + '">' + Math.round(avgScore) + '% fit</span>' : '') +
+                        '<span style="opacity:0.5">' + escapeHtml(c.source) + '</span>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function handleCandidateClick(event, id) {
+            if (event.shiftKey) {
+                if (compareCandidates.has(id)) {
+                    compareCandidates.delete(id);
+                } else if (compareCandidates.size < 4) {
+                    compareCandidates.add(id);
+                }
+                renderCandidates();
+                renderCompare();
+                return;
+            }
+            selectCandidate(id);
         }
 
         function selectCandidate(id) {
@@ -1240,6 +1594,18 @@
             renderCandidates();
             renderProfile();
             updateAnalyzeButton();
+        }
+
+        function deleteCandidate(id) {
+            candidates = candidates.filter(c => c.id !== id);
+            compareCandidates.delete(id);
+            if (selectedCandidate?.id === id) {
+                selectedCandidate = null;
+                renderProfile();
+            }
+            renderCandidates();
+            saveToStorage();
+            updateStats();
         }
 
         function renderProfile() {
@@ -1255,54 +1621,109 @@
             emptyState.style.display = 'none';
             profileView.style.display = 'block';
 
-            const initials = selectedCandidate.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-            document.getElementById('profileAvatar').textContent = initials;
-            document.getElementById('profileName').textContent = selectedCandidate.name;
-            document.getElementById('profileHeadline').textContent = selectedCandidate.headline || selectedCandidate.currentTitle || 'No headline';
-            document.getElementById('profileLocation').querySelector('span').textContent = selectedCandidate.location || 'No location';
+            const c = selectedCandidate;
+            const parts = c.name.split(' ').filter(Boolean);
+            const initials = parts.map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById('profileAvatar').textContent = initials || '?';
+            document.getElementById('profileName').textContent = c.name;
+            document.getElementById('profileHeadline').textContent = c.headline || c.currentTitle || 'No headline';
+            document.getElementById('profileLocation').querySelector('span').textContent = c.location || 'No location';
 
-            // Skills
+            const linkEl = document.getElementById('profileLink');
+            if (c.profileUrl) {
+                linkEl.href = c.profileUrl.startsWith('http') ? c.profileUrl : 'https://' + c.profileUrl;
+                linkEl.style.display = 'inline-block';
+            } else {
+                linkEl.style.display = 'none';
+            }
+
+            const commentSection = document.getElementById('profileComment');
+            if (c.comment) {
+                commentSection.style.display = 'block';
+                document.getElementById('profileCommentText').textContent = c.comment;
+            } else {
+                commentSection.style.display = 'none';
+            }
+
+            const scoreSection = document.getElementById('profileScoreSection');
+            if (c.score != null) {
+                scoreSection.style.display = 'block';
+                document.getElementById('profileScoreText').textContent = c.score + ' / 5';
+            } else {
+                scoreSection.style.display = 'none';
+            }
+
             const skillsContainer = document.getElementById('profileSkills');
-            skillsContainer.innerHTML = selectedCandidate.skills.length > 0 ?
-                selectedCandidate.skills.map(s => `<span class="skill-tag matched">${escapeHtml(s)}</span>`).join('') :
+            skillsContainer.innerHTML = c.skills.length > 0 ?
+                c.skills.map(s => '<span class="skill-tag neutral">' + escapeHtml(s) + '</span>').join('') :
                 '<span style="color: var(--text-secondary)">No skills listed</span>';
 
-            // Experience
             const expContainer = document.getElementById('profileExperience');
-            expContainer.innerHTML = selectedCandidate.experience.length > 0 ?
-                selectedCandidate.experience.map(e => `
-                    <div class="timeline-item">
-                        <h5>${escapeHtml(e.title)}</h5>
-                        <div class="company">${escapeHtml(e.company)}</div>
-                        <div class="duration">${escapeHtml(e.duration)}</div>
-                    </div>
-                `).join('') :
+            expContainer.innerHTML = c.experience.length > 0 ?
+                c.experience.map(e =>
+                    '<div class="timeline-item">' +
+                        '<h5>' + escapeHtml(e.title) + '</h5>' +
+                        '<div class="company">' + escapeHtml(e.company) + '</div>' +
+                        (e.duration ? '<div class="duration">' + escapeHtml(e.duration) + '</div>' : '') +
+                        (e.description ? '<div class="description">' + escapeHtml(e.description) + '</div>' : '') +
+                    '</div>'
+                ).join('') :
                 '<p style="color: var(--text-secondary)">No experience listed</p>';
 
-            // Education
             const eduContainer = document.getElementById('profileEducation');
-            eduContainer.innerHTML = selectedCandidate.education.length > 0 ?
-                selectedCandidate.education.map(e => `
-                    <div class="timeline-item">
-                        <h5>${escapeHtml(e.school)}</h5>
-                        <div class="company">${escapeHtml(e.degree)}</div>
-                    </div>
-                `).join('') :
+            eduContainer.innerHTML = c.education.length > 0 ?
+                c.education.map(e =>
+                    '<div class="timeline-item">' +
+                        '<h5>' + escapeHtml(e.school) + '</h5>' +
+                        '<div class="company">' + escapeHtml(e.degree) + '</div>' +
+                    '</div>'
+                ).join('') :
                 '<p style="color: var(--text-secondary)">No education listed</p>';
 
-            // About
-            document.getElementById('profileAbout').textContent = selectedCandidate.about || 'No summary available';
+            document.getElementById('profileAbout').textContent = c.about || 'No summary available';
         }
+
+        function openEditModal(c) {
+            document.getElementById('editName').value = c.name;
+            document.getElementById('editHeadline').value = c.headline || '';
+            document.getElementById('editLocation').value = c.location || '';
+            document.getElementById('editSkills').value = c.skills.join(', ');
+            document.getElementById('editAbout').value = c.about || '';
+            document.getElementById('editUrl').value = c.profileUrl || '';
+            editModal.classList.add('active');
+        }
+
+        function handleEditSubmit(e) {
+            e.preventDefault();
+            if (!selectedCandidate) return;
+
+            selectedCandidate.name = document.getElementById('editName').value;
+            selectedCandidate.headline = document.getElementById('editHeadline').value;
+            selectedCandidate.currentTitle = selectedCandidate.headline;
+            selectedCandidate.location = document.getElementById('editLocation').value;
+            selectedCandidate.skills = document.getElementById('editSkills').value.split(',').map(s => s.trim()).filter(Boolean);
+            selectedCandidate.about = document.getElementById('editAbout').value;
+            selectedCandidate.profileUrl = document.getElementById('editUrl').value;
+
+            editModal.classList.remove('active');
+            renderCandidates();
+            renderProfile();
+            saveToStorage();
+            showToast('Candidate updated', 'success');
+        }
+
+        // ── Jobs ─────────────────────────────────────────────────
 
         function handleJobSubmit(e) {
             e.preventDefault();
 
             const job = {
-                id: Date.now().toString(),
+                id: genId(),
                 title: document.getElementById('jobTitle').value,
                 company: document.getElementById('jobCompany').value,
                 description: document.getElementById('jobDescription').value,
                 requirements: document.getElementById('jobRequirements').value.split('\n').filter(r => r.trim()),
+                skills: document.getElementById('jobSkills').value.split(',').map(s => s.trim()).filter(Boolean),
                 addedAt: new Date().toISOString()
             };
 
@@ -1311,20 +1732,23 @@
             saveToStorage();
             jobModal.classList.remove('active');
             jobForm.reset();
+            updateAnalyzeButton();
+            showToast('Job added', 'success');
         }
 
         function renderJobs() {
-            jobList.innerHTML = jobs.map(j => `
-                <div class="job-card ${selectedJob?.id === j.id ? 'active' : ''}"
-                     data-id="${j.id}" onclick="selectJob('${j.id}')">
-                    <div class="title">${escapeHtml(j.title)}</div>
-                    <div class="company">${escapeHtml(j.company || 'No company')}</div>
-                </div>
-            `).join('');
-
             if (jobs.length === 0) {
                 jobList.innerHTML = '<p style="color: var(--text-secondary); font-size: 13px; text-align: center; padding: 20px;">No jobs added yet</p>';
+                return;
             }
+
+            jobList.innerHTML = jobs.map(j =>
+                '<div class="job-card' + (selectedJob?.id === j.id ? ' active' : '') + '" data-id="' + j.id + '" onclick="selectJob(\'' + j.id + '\')">' +
+                    '<button class="delete-btn" onclick="event.stopPropagation(); deleteJob(\'' + j.id + '\')" title="Remove">&times;</button>' +
+                    '<div class="title">' + escapeHtml(j.title) + '</div>' +
+                    '<div class="company">' + escapeHtml(j.company || 'No company') + '</div>' +
+                '</div>'
+            ).join('');
         }
 
         function selectJob(id) {
@@ -1332,23 +1756,31 @@
             renderJobs();
             updateAnalyzeButton();
 
-            // Show analysis tab if both candidate and job selected
             if (selectedCandidate && selectedJob) {
-                const noJobState = document.getElementById('noJobSelected');
-                const analysisView = document.getElementById('analysisView');
-                noJobState.style.display = 'none';
-                analysisView.style.display = 'block';
-
-                // Check if we have a cached analysis
-                if (selectedCandidate.fitScores && selectedCandidate.fitScores[selectedJob.id]) {
+                if (selectedCandidate.fitScores?.[selectedJob.id]) {
                     displayAnalysis(selectedCandidate.fitScores[selectedJob.id]);
+                } else {
+                    document.getElementById('noJobSelected').style.display = 'none';
+                    document.getElementById('analysisView').style.display = 'block';
                 }
             }
         }
 
+        function deleteJob(id) {
+            jobs = jobs.filter(j => j.id !== id);
+            if (selectedJob?.id === id) selectedJob = null;
+            candidates.forEach(c => { if (c.fitScores) delete c.fitScores[id]; });
+            renderJobs();
+            saveToStorage();
+            updateAnalyzeButton();
+        }
+
         function updateAnalyzeButton() {
             analyzeBtn.disabled = !(selectedCandidate && selectedJob);
+            analyzeAllBtn.disabled = !(candidates.length > 0 && selectedJob);
         }
+
+        // ── Analysis Engine ──────────────────────────────────────
 
         async function runAnalysis() {
             if (!selectedCandidate || !selectedJob) return;
@@ -1356,214 +1788,386 @@
             analyzeBtn.disabled = true;
             analyzeBtn.innerHTML = '<div class="spinner"></div> Analyzing...';
 
-            try {
-                // Try API call first
-                const response = await fetch(`${API}/analyze-candidate-fit`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        candidate: selectedCandidate,
-                        job: selectedJob
-                    })
-                });
+            // Small delay for UI feedback
+            await new Promise(r => setTimeout(r, 100));
 
-                let analysis;
-                if (response.ok) {
-                    analysis = await response.json();
-                } else {
-                    // Fallback to local analysis
-                    analysis = performLocalAnalysis(selectedCandidate, selectedJob);
-                }
+            const analysis = performLocalAnalysis(selectedCandidate, selectedJob);
+            if (!selectedCandidate.fitScores) selectedCandidate.fitScores = {};
+            selectedCandidate.fitScores[selectedJob.id] = analysis;
 
-                // Store the analysis
-                if (!selectedCandidate.fitScores) selectedCandidate.fitScores = {};
-                selectedCandidate.fitScores[selectedJob.id] = analysis;
-
-                displayAnalysis(analysis);
-                saveToStorage();
-                updateStats();
-                renderCandidates();
-
-            } catch (err) {
-                console.error('Analysis error:', err);
-                // Perform local analysis as fallback
-                const analysis = performLocalAnalysis(selectedCandidate, selectedJob);
-                if (!selectedCandidate.fitScores) selectedCandidate.fitScores = {};
-                selectedCandidate.fitScores[selectedJob.id] = analysis;
-                displayAnalysis(analysis);
-                saveToStorage();
-            }
+            displayAnalysis(analysis);
+            saveToStorage();
+            updateStats();
+            renderCandidates();
 
             analyzeBtn.disabled = false;
-            analyzeBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                Run AI Analysis
-            `;
+            analyzeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Run Analysis';
+        }
+
+        async function runAnalysisAll() {
+            if (!selectedJob || candidates.length === 0) return;
+
+            analyzeAllBtn.disabled = true;
+            analyzeAllBtn.innerHTML = '<div class="spinner"></div> Analyzing all...';
+
+            await new Promise(r => setTimeout(r, 50));
+
+            for (const c of candidates) {
+                const analysis = performLocalAnalysis(c, selectedJob);
+                if (!c.fitScores) c.fitScores = {};
+                c.fitScores[selectedJob.id] = analysis;
+            }
+
+            candidates.sort((a, b) => {
+                const sa = a.fitScores?.[selectedJob.id]?.overallScore || 0;
+                const sb = b.fitScores?.[selectedJob.id]?.overallScore || 0;
+                return sb - sa;
+            });
+
+            if (selectedCandidate?.fitScores?.[selectedJob.id]) {
+                displayAnalysis(selectedCandidate.fitScores[selectedJob.id]);
+            }
+
+            saveToStorage();
+            updateStats();
+            renderCandidates();
+
+            analyzeAllBtn.disabled = false;
+            analyzeAllBtn.textContent = 'Analyze All Candidates';
+            showToast('Analyzed ' + candidates.length + ' candidates', 'success');
         }
 
         function performLocalAnalysis(candidate, job) {
-            // Simple keyword matching for local analysis
             const jobText = (job.description + ' ' + job.requirements.join(' ')).toLowerCase();
-            const candidateText = (
-                candidate.about + ' ' +
-                candidate.skills.join(' ') + ' ' +
-                candidate.experience.map(e => e.title + ' ' + e.company).join(' ')
-            ).toLowerCase();
+            const jobSkills = (job.skills || []).map(s => s.toLowerCase().trim()).filter(Boolean);
 
-            // Extract keywords from job
-            const keywords = jobText.match(/\b\w+\b/g) || [];
-            const uniqueKeywords = [...new Set(keywords)].filter(k => k.length > 3);
+            const candidateSkills = candidate.skills.map(s => s.toLowerCase().trim());
+            const candidateText = [
+                candidate.about,
+                candidate.headline,
+                candidate.currentTitle,
+                candidate.currentCompany,
+                candidate.comment || '',
+                ...candidate.skills,
+                ...candidate.experience.map(e => [e.title, e.company, e.description || ''].join(' ')),
+                ...candidate.education.map(e => [e.school, e.degree].join(' ')),
+                candidate.rawText || ''
+            ].join(' ').toLowerCase();
 
-            // Count matches
-            let matches = 0;
+            const stopWords = new Set(['the','and','for','are','but','not','you','all','can','had','her','was','one','our','out','has','have','with','this','that','from','they','been','said','each','which','their','will','other','about','many','then','them','some','these','would','make','like','could','into','than','its','also','more','over','such','should','must','very','when','what','your','just','where','after','back','only','come','made','find','here','know','take','want','does','using','able','work','team','join','looking','strong','experience','years','ability','working','including','across','within','well','good','both','help','role','part','time','full','high','best','need','year','used','plus','new','may','day','long','own','same','most','much','those','being','before','between','under','through','because','great','while','around','given','provide','required','responsibilities','qualifications','requirements','description','apply','equal','opportunity','employer','benefits','salary','position','candidate','preferred','minimum']);
+
+            const jobKeywords = [...new Set(
+                (jobText.match(/\b[a-z][a-z+#.]+\b/g) || []).filter(w => w.length > 2 && !stopWords.has(w))
+            )];
+
+            // Skills matching
             let matchedSkills = [];
+            let partialSkills = [];
             let missingSkills = [];
 
-            uniqueKeywords.forEach(keyword => {
-                if (candidateText.includes(keyword)) {
-                    matches++;
-                    if (candidate.skills.some(s => s.toLowerCase().includes(keyword))) {
-                        matchedSkills.push(keyword);
-                    }
-                } else if (job.requirements.some(r => r.toLowerCase().includes(keyword))) {
-                    missingSkills.push(keyword);
-                }
-            });
+            const skillsToCheck = jobSkills.length > 0 ? jobSkills : extractTechTerms(jobText);
 
-            const fitScore = Math.min(100, Math.round((matches / Math.max(uniqueKeywords.length, 1)) * 150));
+            for (const jSkill of skillsToCheck) {
+                const jLower = jSkill.toLowerCase();
+                const exactMatch = candidateSkills.some(cs => cs === jLower || cs.includes(jLower) || jLower.includes(cs));
+                const textMatch = candidateText.includes(jLower);
+
+                if (exactMatch) matchedSkills.push(jSkill);
+                else if (textMatch) partialSkills.push(jSkill);
+                else missingSkills.push(jSkill);
+            }
+
+            // Keyword overlap
+            let keywordMatches = 0;
+            for (const kw of jobKeywords) {
+                if (candidateText.includes(kw)) keywordMatches++;
+            }
+            const keywordScore = jobKeywords.length > 0 ? (keywordMatches / jobKeywords.length) * 100 : 50;
+
+            // Skills score
+            const totalSkillsChecked = matchedSkills.length + partialSkills.length + missingSkills.length;
+            const skillsScore = totalSkillsChecked > 0 ?
+                Math.round(((matchedSkills.length + partialSkills.length * 0.5) / totalSkillsChecked) * 100) : 50;
+
+            // Experience score
+            let experienceScore = 40;
+            if (candidate.experience.length >= 4) experienceScore = 85;
+            else if (candidate.experience.length >= 2) experienceScore = 70;
+            else if (candidate.experience.length >= 1) experienceScore = 55;
+
+            const yearsMatch = jobText.match(/(\d+)\+?\s*years?\s/i);
+            if (yearsMatch) {
+                const reqYears = parseInt(yearsMatch[1]);
+                const estYears = candidate.experience.length * 2.5;
+                experienceScore = Math.min(100, Math.round((estYears / Math.max(reqYears, 1)) * 80));
+            }
+
+            // Education score
+            let educationScore = 40;
+            if (candidate.education.length > 0) {
+                educationScore = 65;
+                const eduText = candidate.education.map(e => e.school + ' ' + e.degree).join(' ').toLowerCase();
+                if (/phd|ph\.d|doctorate/i.test(eduText)) educationScore = 95;
+                else if (/master|mba|m\.s\.|ms\b/i.test(eduText)) educationScore = 85;
+                else if (/bachelor|b\.s\.|bs\b|b\.a\.|ba\b/i.test(eduText)) educationScore = 75;
+            }
+
+            const overallScore = Math.min(100, Math.round(
+                skillsScore * 0.40 +
+                keywordScore * 0.25 +
+                experienceScore * 0.25 +
+                educationScore * 0.10
+            ));
 
             return {
-                overallScore: fitScore,
-                skillsScore: Math.min(100, Math.round(matchedSkills.length / Math.max(candidate.skills.length, 1) * 100)),
-                experienceScore: candidate.experience.length > 0 ? 70 : 30,
-                educationScore: candidate.education.length > 0 ? 70 : 40,
-                matchedSkills: [...new Set(matchedSkills)].slice(0, 10),
-                missingSkills: [...new Set(missingSkills)].slice(0, 5),
-                recommendations: generateRecommendations(fitScore, matchedSkills.length, missingSkills.length),
+                overallScore,
+                skillsScore,
+                experienceScore,
+                educationScore,
+                keywordScore: Math.round(keywordScore),
+                matchedSkills: [...new Set(matchedSkills)].slice(0, 15),
+                partialSkills: [...new Set(partialSkills)].slice(0, 10),
+                missingSkills: [...new Set(missingSkills)].slice(0, 10),
+                recommendations: generateRecommendations(overallScore, matchedSkills, missingSkills, candidate),
                 analyzedAt: new Date().toISOString()
             };
         }
 
-        function generateRecommendations(score, matched, missing) {
+        function extractTechTerms(text) {
+            const patterns = [
+                /\b(python|java|javascript|typescript|c\+\+|c#|ruby|rust|golang|go|scala|kotlin|swift|php|perl|r\b|sql|html|css|sass)\b/gi,
+                /\b(react|angular|vue|svelte|node\.?js|express|django|flask|spring|rails|laravel|next\.?js|nuxt|gatsby)\b/gi,
+                /\b(aws|azure|gcp|docker|kubernetes|k8s|terraform|jenkins|ci\/cd|devops|git|linux|unix)\b/gi,
+                /\b(machine learning|deep learning|data science|data engineering|data analytics|artificial intelligence|nlp|computer vision)\b/gi,
+                /\b(postgresql|mysql|mongodb|redis|elasticsearch|dynamodb|cassandra|oracle|snowflake|bigquery|spark)\b/gi,
+                /\b(agile|scrum|kanban|jira|confluence|project management|team lead|management)\b/gi,
+                /\b(etl|bi|business intelligence|powerbi|power bi|tableau|looker|qlik|ssrs|ssis|ssas)\b/gi,
+                /\b(powershell|bash|api|rest|graphql|microservices|cloud|saas|reporting|analytics)\b/gi,
+                /\b(figma|sketch|adobe|photoshop|illustrator|ui|ux|design|wireframe)\b/gi,
+            ];
+
+            const terms = new Set();
+            for (const pattern of patterns) {
+                let m;
+                while ((m = pattern.exec(text)) !== null) {
+                    terms.add(m[0].toLowerCase());
+                }
+            }
+            return [...terms];
+        }
+
+        function generateRecommendations(score, matched, missing, candidate) {
             const recs = [];
 
-            if (score >= 80) {
-                recs.push('Strong candidate - consider for immediate interview');
-            } else if (score >= 60) {
-                recs.push('Good potential - may need skills assessment');
-            } else {
-                recs.push('May not be the best fit - review carefully');
+            if (score >= 80) recs.push('Strong candidate - prioritize for interview scheduling.');
+            else if (score >= 60) recs.push('Solid potential - consider a screening call to assess depth.');
+            else if (score >= 40) recs.push('Partial match - may need additional skills assessment before proceeding.');
+            else recs.push('Significant gaps detected - likely not the best fit for this specific role.');
+
+            if (missing.length > 0) {
+                recs.push('Key skills gap: ' + missing.slice(0, 5).join(', ') + '. Assess willingness to learn or transferable experience.');
             }
 
-            if (missing > 3) {
-                recs.push('Significant skills gap detected - discuss training potential');
+            if (matched.length >= 5) {
+                recs.push('Strong technical alignment across ' + matched.length + ' matching skills.');
             }
 
-            if (matched > 5) {
-                recs.push('Good skills alignment with job requirements');
+            if (candidate.experience.length === 0 && candidate.skills.length === 0) {
+                recs.push('Limited profile data available - request full resume for better assessment.');
+            }
+
+            if (candidate.comment) {
+                recs.push('Recruiter note: ' + candidate.comment);
             }
 
             return recs;
         }
 
         function displayAnalysis(analysis) {
-            // Update score circle
             const scoreCircle = document.getElementById('fitScoreCircle');
             const scoreValue = document.getElementById('fitScoreValue');
             const scoreLabel = document.getElementById('fitScoreLabel');
 
             scoreCircle.style.setProperty('--score', analysis.overallScore);
-            scoreCircle.className = `score-circle ${getScoreClass(analysis.overallScore)}`;
-            scoreValue.textContent = `${analysis.overallScore}%`;
+            scoreCircle.className = 'score-circle ' + getScoreClass(analysis.overallScore);
+            scoreValue.textContent = analysis.overallScore + '%';
             scoreLabel.textContent = getScoreLabel(analysis.overallScore);
 
-            // Skills match
             const skillsMatch = document.getElementById('skillsMatch');
-            skillsMatch.innerHTML = `
-                ${analysis.matchedSkills.map(s => `<span class="skill-tag matched">${escapeHtml(s)}</span>`).join('')}
-                ${analysis.missingSkills.map(s => `<span class="skill-tag missing">${escapeHtml(s)}</span>`).join('')}
-            `;
+            const tags = [
+                ...analysis.matchedSkills.map(s => '<span class="skill-tag matched">' + escapeHtml(s) + '</span>'),
+                ...(analysis.partialSkills || []).map(s => '<span class="skill-tag partial">' + escapeHtml(s) + '</span>'),
+                ...analysis.missingSkills.map(s => '<span class="skill-tag missing">' + escapeHtml(s) + '</span>'),
+            ];
+            skillsMatch.innerHTML = tags.length > 0 ? tags.join('') :
+                '<span style="color: var(--text-secondary)">Add required skills to the job description for detailed matching</span>';
 
-            // Detailed analysis
-            const detailedAnalysis = document.getElementById('detailedAnalysis');
-            detailedAnalysis.innerHTML = `
-                <div class="analysis-item">
-                    <div class="label">Skills Match</div>
-                    <div class="value">${analysis.skillsScore}%</div>
-                    <div class="bar"><div class="bar-fill" style="width: ${analysis.skillsScore}%; background: ${getScoreColor(analysis.skillsScore)}"></div></div>
-                </div>
-                <div class="analysis-item">
-                    <div class="label">Experience Relevance</div>
-                    <div class="value">${analysis.experienceScore}%</div>
-                    <div class="bar"><div class="bar-fill" style="width: ${analysis.experienceScore}%; background: ${getScoreColor(analysis.experienceScore)}"></div></div>
-                </div>
-                <div class="analysis-item">
-                    <div class="label">Education Match</div>
-                    <div class="value">${analysis.educationScore}%</div>
-                    <div class="bar"><div class="bar-fill" style="width: ${analysis.educationScore}%; background: ${getScoreColor(analysis.educationScore)}"></div></div>
-                </div>
-            `;
+            const metrics = [
+                { label: 'Skills Match', value: analysis.skillsScore },
+                { label: 'Keyword Relevance', value: analysis.keywordScore || 50 },
+                { label: 'Experience Depth', value: analysis.experienceScore },
+                { label: 'Education', value: analysis.educationScore },
+            ];
+            document.getElementById('detailedAnalysis').innerHTML = metrics.map(m =>
+                '<div class="analysis-item">' +
+                    '<div class="label">' + m.label + '</div>' +
+                    '<div class="value">' + m.value + '%</div>' +
+                    '<div class="bar"><div class="bar-fill" style="width: ' + m.value + '%; background: ' + getScoreColor(m.value) + '"></div></div>' +
+                '</div>'
+            ).join('');
 
-            // Recommendations
-            const aiRecommendations = document.getElementById('aiRecommendations');
-            aiRecommendations.innerHTML = analysis.recommendations.map(r => `
-                <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
-                    • ${escapeHtml(r)}
-                </p>
-            `).join('');
+            document.getElementById('aiRecommendations').innerHTML = analysis.recommendations.map(r =>
+                '<p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 10px; padding-left: 12px; border-left: 2px solid var(--border-color);">' +
+                    escapeHtml(r) +
+                '</p>'
+            ).join('');
 
-            // Show analysis view
             document.getElementById('noJobSelected').style.display = 'none';
             document.getElementById('analysisView').style.display = 'block';
-
-            // Switch to analysis tab
             switchTab('analysis');
         }
 
-        function switchTab(tabName) {
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        // ── Compare Tab ──────────────────────────────────────────
 
-            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-            document.getElementById(`${tabName}Tab`).style.display = 'block';
-        }
+        function renderCompare() {
+            const content = document.getElementById('compareContent');
+            const hint = document.getElementById('compareHint');
+            const compareIds = [...compareCandidates];
 
-        function exportToCSV() {
-            if (candidates.length === 0) {
-                alert('No candidates to export');
+            if (compareIds.length < 2) {
+                hint.style.display = 'block';
+                content.innerHTML = compareIds.length === 1 ?
+                    '<p style="color: var(--text-secondary); text-align: center; padding: 20px;">Select at least one more candidate (Shift+click)</p>' : '';
                 return;
             }
 
-            const headers = ['Name', 'Headline', 'Location', 'Current Title', 'Current Company', 'Skills', 'Profile URL', 'Added Date', 'Fit Scores'];
-            const rows = candidates.map(c => [
-                escapeCsvField(c.name),
-                escapeCsvField(c.headline),
-                escapeCsvField(c.location),
-                escapeCsvField(c.currentTitle),
-                escapeCsvField(c.currentCompany),
-                escapeCsvField(c.skills.join('; ')),
-                escapeCsvField(c.profileUrl),
-                escapeCsvField(c.addedAt),
-                escapeCsvField(Object.entries(c.fitScores || {}).map(([id, a]) => {
-                    const job = jobs.find(j => j.id === id);
-                    return job ? `${job.title}: ${a.overallScore}%` : '';
-                }).filter(Boolean).join('; '))
-            ]);
+            hint.innerHTML = 'Comparing <strong>' + compareIds.length + '</strong> candidates. Shift+click to add/remove.';
+            const compareCands = compareIds.map(id => candidates.find(c => c.id === id)).filter(Boolean);
 
-            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-            downloadFile(csv, `candidates_${formatDate(new Date())}.csv`, 'text/csv');
+            let html = '<div class="compare-grid">';
+
+            for (const c of compareCands) {
+                const parts = c.name.split(' ').filter(Boolean);
+                const initials = parts.map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                const fitScore = selectedJob && c.fitScores?.[selectedJob.id]?.overallScore;
+                const analysis = selectedJob && c.fitScores?.[selectedJob.id];
+
+                html += '<div class="compare-card">' +
+                    '<div class="compare-header">' +
+                        '<div class="compare-avatar">' + initials + '</div>' +
+                        '<h4>' + escapeHtml(c.name) + '</h4>' +
+                        '<div class="sub">' + escapeHtml(c.headline || c.currentTitle || 'No headline') + '</div>' +
+                    '</div>';
+
+                if (fitScore != null) {
+                    html += '<div class="compare-row"><span class="cr-label">Fit Score</span><span class="cr-value score ' + getScoreClass(fitScore) + '">' + fitScore + '%</span></div>';
+                }
+                if (c.score != null) {
+                    html += '<div class="compare-row"><span class="cr-label">Recruiter Score</span><span class="cr-value">' + c.score + '/5</span></div>';
+                }
+                html += '<div class="compare-row"><span class="cr-label">Skills</span><span class="cr-value">' + c.skills.length + '</span></div>';
+                html += '<div class="compare-row"><span class="cr-label">Experience</span><span class="cr-value">' + c.experience.length + ' roles</span></div>';
+                html += '<div class="compare-row"><span class="cr-label">Education</span><span class="cr-value">' + (c.education.length > 0 ? escapeHtml(c.education[0].degree || c.education[0].school) : 'N/A') + '</span></div>';
+                html += '<div class="compare-row"><span class="cr-label">Location</span><span class="cr-value">' + escapeHtml(c.location || 'N/A') + '</span></div>';
+
+                if (c.comment) {
+                    html += '<div style="margin-top: 10px; padding: 8px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">' + escapeHtml(c.comment) + '</div>';
+                }
+
+                if (analysis) {
+                    html += '<div style="margin-top: 10px;"><div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;">Matched Skills:</div>';
+                    html += analysis.matchedSkills.slice(0, 5).map(s =>
+                        '<span class="skill-tag matched" style="font-size:10px; padding: 3px 8px;">' + escapeHtml(s) + '</span>'
+                    ).join('');
+                    html += '</div>';
+                }
+
+                html += '</div>';
+            }
+
+            html += '</div>';
+
+            // Ranking table
+            if (selectedJob && compareCands.some(c => c.fitScores?.[selectedJob.id])) {
+                const ranked = [...compareCands]
+                    .filter(c => c.fitScores?.[selectedJob.id])
+                    .sort((a, b) => (b.fitScores[selectedJob.id].overallScore) - (a.fitScores[selectedJob.id].overallScore));
+
+                if (ranked.length >= 2) {
+                    html += '<div style="margin-top: 20px; background: var(--bg-input); border-radius: 12px; padding: 15px;">' +
+                        '<h4 style="margin-bottom: 10px; font-size: 14px;">Ranking for: ' + escapeHtml(selectedJob.title) + '</h4>';
+
+                    ranked.forEach((c, i) => {
+                        const score = c.fitScores[selectedJob.id].overallScore;
+                        html += '<div style="display: flex; align-items: center; gap: 10px; padding: 8px 0;' + (i < ranked.length - 1 ? ' border-bottom: 1px solid var(--border-color);' : '') + '">' +
+                            '<span style="font-weight: 700; color: ' + (i === 0 ? 'var(--success)' : 'var(--text-secondary)') + '; width: 24px;">#' + (i + 1) + '</span>' +
+                            '<span style="flex: 1;">' + escapeHtml(c.name) + '</span>' +
+                            '<span class="score ' + getScoreClass(score) + '">' + score + '%</span>' +
+                        '</div>';
+                    });
+
+                    html += '</div>';
+                }
+            }
+
+            content.innerHTML = html;
+        }
+
+        // ── Tab Switching ────────────────────────────────────────
+
+        function switchTab(tabName) {
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+            if (tabName === 'compare') renderCompare();
+        }
+
+        // ── Export ───────────────────────────────────────────────
+
+        function exportToCSV() {
+            if (candidates.length === 0) { showToast('No candidates to export', 'error'); return; }
+
+            const headers = ['Name', 'Headline', 'Location', 'Current Company', 'Skills', 'Score', 'Comment', 'LinkedIn URL', 'Source'];
+            jobs.forEach(j => headers.push('Fit: ' + j.title));
+
+            const rows = candidates.map(c => {
+                const row = [c.name, c.headline || c.currentTitle, c.location, c.currentCompany, c.skills.join('; '), c.score != null ? c.score : '', c.comment || '', c.profileUrl, c.source];
+                jobs.forEach(j => row.push(c.fitScores?.[j.id]?.overallScore ?? ''));
+                return row;
+            });
+
+            const csv = [headers.map(escapeCsvField).join(','), ...rows.map(r => r.map(escapeCsvField).join(','))].join('\n');
+            downloadFile(csv, 'candidates_' + formatDate(new Date()) + '.csv', 'text/csv');
+            showToast('CSV exported', 'success');
         }
 
         function exportToExcel() {
-            // For Excel export, we'd use SheetJS
-            // For now, export as CSV with .xlsx extension (can be opened in Excel)
-            exportToCSV();
+            if (candidates.length === 0) { showToast('No candidates to export', 'error'); return; }
+
+            const headers = ['Name', 'Headline', 'Location', 'Current Company', 'Skills', 'Score', 'Comment', 'LinkedIn URL', 'Source'];
+            jobs.forEach(j => headers.push('Fit: ' + j.title));
+
+            const data = [headers];
+            for (const c of candidates) {
+                const row = [c.name, c.headline || c.currentTitle, c.location, c.currentCompany, c.skills.join('; '), c.score != null ? c.score : '', c.comment || '', c.profileUrl, c.source];
+                jobs.forEach(j => row.push(c.fitScores?.[j.id]?.overallScore ?? ''));
+                data.push(row);
+            }
+
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
+            ws['!cols'] = headers.map((h, i) => ({
+                wch: Math.max(h.length, ...data.slice(1).map(r => String(r[i] || '').length).slice(0, 20), 10)
+            }));
+
+            XLSX.writeFile(wb, 'candidates_' + formatDate(new Date()) + '.xlsx');
+            showToast('Excel exported', 'success');
         }
 
-        // Utility functions
+        // ── Utilities ────────────────────────────────────────────
+
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text || '';
@@ -1579,9 +2183,7 @@
             return '"' + str + '"';
         }
 
-        function formatDate(date) {
-            return date.toISOString().split('T')[0];
-        }
+        function formatDate(date) { return date.toISOString().split('T')[0]; }
 
         function getScoreClass(score) {
             if (score >= 70) return 'high';
@@ -1620,12 +2222,30 @@
             URL.revokeObjectURL(url);
         }
 
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + (type || 'success') + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
         function saveToStorage() {
-            localStorage.setItem('candidateAnalyzer', JSON.stringify({
-                candidates,
-                jobs,
-                lastUpdated: new Date().toISOString()
-            }));
+            try {
+                const slimCandidates = candidates.map(c => {
+                    const copy = Object.assign({}, c);
+                    delete copy.rawText;
+                    return copy;
+                });
+                localStorage.setItem('candidateAnalyzer', JSON.stringify({
+                    candidates: slimCandidates,
+                    jobs: jobs,
+                    lastUpdated: new Date().toISOString()
+                }));
+            } catch (err) {
+                if (err.name === 'QuotaExceededError') {
+                    showToast('Storage full - consider clearing old data', 'error');
+                }
+            }
         }
 
         function loadFromStorage() {
@@ -1640,24 +2260,38 @@
             }
         }
 
-        function updateStats() {
-            const today = new Date().toDateString();
-            const analyzedToday = candidates.filter(c => {
-                const scores = Object.values(c.fitScores || {});
-                return scores.some(s => new Date(s.analyzedAt).toDateString() === today);
-            }).length;
+        function clearAllData() {
+            if (!confirm('Clear all candidates, jobs, and analysis data?')) return;
+            candidates = [];
+            jobs = [];
+            selectedCandidate = null;
+            selectedJob = null;
+            compareCandidates.clear();
+            localStorage.removeItem('candidateAnalyzer');
+            renderCandidates();
+            renderJobs();
+            renderProfile();
+            updateStats();
+            showToast('All data cleared', 'success');
+        }
 
+        function updateStats() {
             const allScores = candidates.flatMap(c => Object.values(c.fitScores || {}).map(s => s.overallScore));
+            const analyzed = candidates.filter(c => Object.keys(c.fitScores || {}).length > 0).length;
             const avgScore = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
 
             document.getElementById('statTotalCandidates').textContent = candidates.length;
-            document.getElementById('statAnalyzedToday').textContent = analyzedToday;
-            document.getElementById('statAvgScore').textContent = avgScore > 0 ? `${avgScore}%` : '-';
+            document.getElementById('statAnalyzedToday').textContent = analyzed;
+            document.getElementById('statAvgScore').textContent = avgScore > 0 ? avgScore + '%' : '-';
         }
 
-        // Global functions for onclick handlers
+        // Global handlers
         window.selectCandidate = selectCandidate;
         window.selectJob = selectJob;
+        window.deleteCandidate = deleteCandidate;
+        window.deleteJob = deleteJob;
+        window.handleCandidateClick = handleCandidateClick;
+        window.clearAllData = clearAllData;
     </script>
 </body>
 </html>
