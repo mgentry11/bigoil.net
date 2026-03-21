@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rungs — Demo Gallery</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0e17;
+  --bg-card: #111827;
+  --bg-card-hover: #162033;
+  --border: #1e293b;
+  --border-hover: #334155;
+  --accent: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.12);
+  --green: #10b981;
+  --green-dim: rgba(16, 185, 129, 0.1);
+  --red: #ef4444;
+  --red-dim: rgba(239, 68, 68, 0.1);
+  --amber: #f59e0b;
+  --amber-dim: rgba(245, 158, 11, 0.1);
+  --purple: #a855f7;
+  --purple-dim: rgba(168, 85, 247, 0.1);
+  --cyan: #06b6d4;
+  --cyan-dim: rgba(6, 182, 212, 0.1);
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+}
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.logo-accent { color: var(--accent); }
+.logo-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+.logo-sub {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.engine-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--green);
+}
+.engine-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+}
+.logout-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.logout-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* Stats bar */
+.stats-bar {
+  padding: 16px 40px;
+  display: flex;
+  gap: 32px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(17, 24, 39, 0.5);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Section headers */
+.section {
+  padding: 32px 40px 8px;
+}
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Demo grid */
+.demo-grid {
+  padding: 16px 40px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.demo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.demo-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.demo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+.demo-card.security::before { background: var(--red); }
+.demo-card.forensic::before { background: var(--amber); }
+.demo-card.compliance::before { background: var(--purple); }
+.demo-card.healthcare::before { background: var(--green); }
+.demo-card.finance::before { background: var(--cyan); }
+.demo-card.industrial::before { background: #f97316; }
+.demo-card.legal::before { background: var(--amber); }
+.demo-card.science::before { background: var(--accent); }
+
+.demo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.demo-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.demo-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-security { background: var(--red-dim); color: var(--red); }
+.badge-forensic { background: var(--amber-dim); color: var(--amber); }
+.badge-compliance { background: var(--purple-dim); color: var(--purple); }
+.badge-healthcare { background: var(--green-dim); color: var(--green); }
+.badge-finance { background: var(--cyan-dim); color: var(--cyan); }
+.badge-industrial { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+.badge-legal { background: var(--amber-dim); color: var(--amber); }
+.badge-science { background: var(--accent-glow); color: var(--accent); }
+
+.demo-scenario {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.demo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.demo-metric {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.demo-metric span {
+  color: var(--green);
+  font-weight: 600;
+}
+.demo-arrow {
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: transform 0.2s, color 0.2s;
+}
+.demo-card:hover .demo-arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
+/* Competitive analysis link */
+.comp-section {
+  padding: 0 40px 40px;
+}
+.comp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.comp-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+}
+.comp-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.comp-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.comp-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: 20px 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeIn 0.4s ease forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- Auth check -->
+<script>
+if (!localStorage.getItem('rungs_auth_token')) {
+  window.location.href = '/demos/login.html';
+}
+</script>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo">Rungs<span class="logo-accent">.</span></div>
+    <div class="logo-divider"></div>
+    <div class="logo-sub">Demo Gallery</div>
+  </div>
+  <div class="header-right">
+    <div class="engine-badge">
+      <div class="engine-dot"></div>
+      Engine Active &middot; Deterministic &middot; No LLM
+    </div>
+    <button class="logout-btn" onclick="localStorage.removeItem('rungs_auth_token'); sessionStorage.removeItem('rungs_auth'); window.location.href='/demos/login.html'">Sign Out</button>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-value">1.3ms</div>
+    <div class="stat-label">Full Pipeline</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">100%</div>
+    <div class="stat-label">GSM8K Accuracy</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">99.15%</div>
+    <div class="stat-label">CLadder (vs GPT-4: 70.4%)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">0</div>
+    <div class="stat-label">LLM / GPU Required</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">42</div>
+    <div class="stat-label">Benchmarks Passed</div>
+  </div>
+</div>
+
+<!-- Alvaka Live Demo -->
+<div class="section fade-in">
+  <div class="section-title">Alvaka Networks — Live Demo</div>
+  <div class="section-desc">Full interactive briefing prepared exclusively for Alvaka Networks leadership</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card security fade-in" href="/demos/alvaka.html" style="border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.05);">
+    <div class="demo-header">
+      <div class="demo-title" style="font-size:18px">Alvaka Networks Briefing</div>
+      <div class="demo-badge" style="background:rgba(59,130,246,0.12);color:#3b82f6">Live Demo</div>
+    </div>
+    <div class="demo-scenario">Full interactive walkthrough built for Oli Thordarson's team. Kill chain reconstruction of a ransomware attack, causal control testing, ROI simulator, and executive risk dashboard — all driven by the Rungs causal engine. No LLM. No guesswork.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">10 sections · Live intervention simulator · $4.81M ALE analysis</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- What Is Rungs — Business Overview -->
+<div class="section fade-in">
+  <div class="section-title">What Is Rungs — For Business Leaders</div>
+  <div class="section-desc">Plain English. No technical jargon. What it does, why it matters, and what nothing else can do.</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card science fade-in" href="/demos/rungs-for-business.html" style="border-color:rgba(108,99,255,0.4);background:rgba(108,99,255,0.06);">
+    <div class="demo-header">
+      <div class="demo-title" style="font-size:18px">Rungs — Plain English Business Overview</div>
+      <div class="demo-badge" style="background:rgba(108,99,255,0.12);color:#a78bfa">Start Here</div>
+    </div>
+    <div class="demo-scenario">Your analytics tells you what happened. Rungs tells you why — and what to do. Three questions no other tool can answer: Why did this happen? What will happen if we change X? What would have happened if we'd done Y? No math. No jargon. Just the business case.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">99.15% accuracy · Beats GPT-4 by 29 pts · $0/query · 1.3ms</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-mode1-vs-mode2.html" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.04);" style="animation-delay:0.05s">
+    <div class="demo-header">
+      <div class="demo-title">The LLM vs The Engine — Where Value Lives</div>
+      <div class="demo-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b">Mode 1 vs Mode 2</div>
+    </div>
+    <div class="demo-scenario">Direct answer to "97% of the value is in the LLM." Side-by-side comparison of Claude alone vs Rungs alone vs both together on the same question. Visual benchmark proof. Why the engine is the IP and the LLM is the front door.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Same question · 3 answers · Engine scores 9.74 pts above best LLM ever</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Rungs Math & Benchmarks -->
+<div class="section fade-in">
+  <div class="section-title">Rungs — Mathematics &amp; Benchmarks</div>
+  <div class="section-desc">12 mathematical fields, 20+ formulas, 7,733 benchmark problems — complete technical foundation</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card science fade-in" href="/demos/rungs-math.html" style="animation-delay: 0.05s">
+    <div class="demo-header">
+      <div class="demo-title">Math Foundations &amp; Results</div>
+      <div class="demo-badge badge-science">Research</div>
+    </div>
+    <div class="demo-scenario">12 mathematical fields · 20+ named formulas · 7 linguistic frameworks · 98.8% accuracy on 7,733 problems · beats GPT-4o, o3-mini, Claude Opus 4 on every dimension.</div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-vs-llms.html" style="animation-delay: 0.1s">
+    <div class="demo-header">
+      <div class="demo-title">Why LLMs Cannot Reason</div>
+      <div class="demo-badge badge-science">Research</div>
+    </div>
+    <div class="demo-scenario">3 controlled proof tests. A $0 regex parser outperforms GPT-4o by 18 points. DoVerifier (ETH Zürich, EACL 2026) compared. Why Claude's explanation of Rungs is still valid even though Claude can't reason.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Battery 2: 100% · Battery 4: 100% · Battery 5: +18pts over GPT-4o</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-vs-doverifier.html" style="animation-delay: 0.15s">
+    <div class="demo-header">
+      <div class="demo-title">Rungs vs. DoVerifier — Deep Report</div>
+      <div class="demo-badge badge-science">Research</div>
+    </div>
+    <div class="demo-scenario">13-section technical comparison against ETH Zürich's EACL 2026 paper. Architecture, benchmarks, complexity, NL parsing gap, the 3 tests DoVerifier cannot pass, and what the best LLM scaffolding result actually proves.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">arXiv:2601.21210 · All results from primary sources</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Understanding Rungs -->
+<div class="section fade-in">
+  <div class="section-title">Understanding Rungs</div>
+  <div class="section-desc">Three perspectives — for executives, business leaders, and engineers</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card science fade-in" href="/demos/rungs-why.html" style="animation-delay: 0.05s">
+    <div class="demo-header">
+      <div class="demo-title">Why Causation Matters</div>
+      <div class="demo-badge badge-science">Executive</div>
+    </div>
+    <div class="demo-scenario">For leaders and strategists. The 30-year unsolved problem in business intelligence. Why every major decision is a causation question — and why every current AI tool answers it wrong. No math required.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pearl's Ladder · 8 chapters · Business & philosophy</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-explained.html" style="animation-delay: 0.1s">
+    <div class="demo-header">
+      <div class="demo-title">Rungs Explained</div>
+      <div class="demo-badge badge-science">Plain English</div>
+    </div>
+    <div class="demo-scenario">How Rungs works, what the 99.15% score actually means, and what it costs to deploy at scale — explained without jargon. The 3 questions standard AI cannot answer. Real examples across 4 industries.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">99.15% CLadder · $958/mo at 100K users · No PhD required</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-cladder-99.html" style="animation-delay: 0.15s">
+    <div class="demo-header">
+      <div class="demo-title">Benchmark Report — 99.15%</div>
+      <div class="demo-badge badge-science">Technical</div>
+    </div>
+    <div class="demo-scenario">Full technical report: how we improved from 98.6% to 99.15% with three-pass verification, complete CLadder breakdown by rung and query type, LLM cost tables, scaling cost matrix (1K→1M users), and independent verification instructions.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">10,112 questions · All 8 query types · Full scaling cost matrix</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-new-capabilities.html" style="animation-delay: 0.2s">
+    <div class="demo-header">
+      <div class="demo-title">New Capabilities — March 2026</div>
+      <div class="demo-badge badge-science">Engineering Report</div>
+    </div>
+    <div class="demo-scenario">Competitive landscape analysis of the entire Pearl do-calculus open-source ecosystem, three capability gaps identified, and the engineering report showing how they were built: large graph support (variable elimination), causal discovery (PC algorithm), and hidden confounders (backdoor/front-door/ID algorithm). 15/15 tests pass. Zero external dependencies.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">15 tests · 3 new files · ~1,500 lines · 0 external deps</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/rungs-architecture-brief.html" style="animation-delay: 0.25s">
+    <div class="demo-header">
+      <div class="demo-title">Architecture Brief — Standalone vs. Hybrid</div>
+      <div class="demo-badge badge-science">Internal Brief</div>
+    </div>
+    <div class="demo-scenario">Addresses whether Rungs depends on Claude, what minimum LLM the NLP layer needs, and whether building a custom LLM makes sense. Includes live training status: 7,736 examples, fine-tuning Qwen2.5-1.5B with LoRA right now on Mac M-series. After training: $0/query, no API, full Rungs IP end-to-end. Covers two modes, 32-point benchmark lead over GPT-4, build-vs-borrow analysis, and full claim-by-claim verdict.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">⟳ Training in progress · 11 sections · $0/query after done</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Security & IR -->
+<div class="section fade-in">
+  <div class="section-title">Security & Incident Response</div>
+  <div class="section-desc">Deterministic root cause analysis, kill chain reconstruction, and counterfactual control testing</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card security fade-in" href="/demos/demo-pwc-ransomware.html" style="animation-delay: 0.05s">
+    <div class="demo-header">
+      <div class="demo-title">PwC: Ransomware IR</div>
+      <div class="demo-badge badge-security">Security</div>
+    </div>
+    <div class="demo-scenario">LockBit 3.0 attack on financial services firm. 847 endpoints encrypted, $2.8M ransom. Full kill chain traced through 15 events. $0 in policy changes would have prevented $20M+ in damages.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>2.3ms</span> &middot; 15 events &middot; 8 controls tested</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Forensic & Compliance -->
+<div class="section fade-in" style="animation-delay: 0.1s">
+  <div class="section-title">Forensic & Compliance</div>
+  <div class="section-desc">Fraud investigation, procurement integrity, SOX assurance, and regulatory compliance</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card forensic fade-in" href="/demos/demo-pwc-procurement-fraud.html" style="animation-delay: 0.15s">
+    <div class="demo-header">
+      <div class="demo-title">PwC: Procurement Fraud</div>
+      <div class="demo-badge badge-forensic">Forensic</div>
+    </div>
+    <div class="demo-scenario">$4.7M fictitious vendor scheme. Shell company, structured transactions below bid threshold, approval chain manipulation. Causal chain traces insider to shell entity in 12 events. $15K/year prevents $4.7M fraud (313x ROI).</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.8ms</span> &middot; 12 events &middot; 5 controls tested</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card compliance fade-in" href="/demos/demo-pwc-sox-controls.html" style="animation-delay: 0.2s">
+    <div class="demo-header">
+      <div class="demo-title">PwC: SOX Control Failure</div>
+      <div class="demo-badge badge-compliance">Audit</div>
+    </div>
+    <div class="demo-scenario">$38M revenue misstatement from cascading control failures in ASC 606 recognition. Material weakness traced through 10 events. $85K/year in controls prevents $305M total economic impact (3,588x ROI).</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.2ms</span> &middot; 10 events &middot; 6 controls tested</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Industry Verticals -->
+<div class="section fade-in" style="animation-delay: 0.25s">
+  <div class="section-title">Industry Verticals</div>
+  <div class="section-desc">Causal intelligence applied across healthcare, finance, manufacturing, legal, and more</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card healthcare fade-in" href="/demos/demo-healthcare.html" style="animation-delay: 0.3s">
+    <div class="demo-header">
+      <div class="demo-title">Healthcare</div>
+      <div class="demo-badge badge-healthcare">Clinical</div>
+    </div>
+    <div class="demo-scenario">Medication error causal chain leading to acute kidney injury. Lab alert + CPOE check ($40K/yr) prevents $2M adverse events.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card finance fade-in" href="/demos/demo-finance.html" style="animation-delay: 0.35s">
+    <div class="demo-header">
+      <div class="demo-title">Financial Intelligence</div>
+      <div class="demo-badge badge-finance">Finance</div>
+    </div>
+    <div class="demo-scenario">Insurance fraud detection via impossible causal chains. FAIR risk reduced from $4.2M to $800K through targeted controls.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card industrial fade-in" href="/demos/demo-manufacturing.html" style="animation-delay: 0.4s">
+    <div class="demo-header">
+      <div class="demo-title">Manufacturing</div>
+      <div class="demo-badge badge-industrial">Industrial</div>
+    </div>
+    <div class="demo-scenario">Semiconductor defect root cause. Correlation said HVAC; causation found CMP misalignment. 1,470x ROI.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card legal fade-in" href="/demos/demo-legal.html" style="animation-delay: 0.45s">
+    <div class="demo-header">
+      <div class="demo-title">Legal</div>
+      <div class="demo-badge badge-legal">Litigation</div>
+    </div>
+    <div class="demo-scenario">Defective hip implant. Suppressed metallurgy report establishes "but for" causation proof for product liability.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card legal fade-in" href="/demos/demo-legal-case.html" style="animation-delay: 0.48s">
+    <div class="demo-header">
+      <div class="demo-title">Criminal Case Analysis</div>
+      <div class="demo-badge badge-legal">Legal</div>
+    </div>
+    <div class="demo-scenario">State v. Howell drug case. 12 Rungs calls: proximate cause (3×Yes), modus ponens validity (3×Valid), ATE=+0.87, plea value=+0.30. Mode 2 live architecture.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/demo-pharma.html" style="animation-delay: 0.5s">
+    <div class="demo-header">
+      <div class="demo-title">Drug Discovery</div>
+      <div class="demo-badge badge-science">Pharma</div>
+    </div>
+    <div class="demo-scenario">CYP2C9 pathway drug interaction traced. $15K database check prevents dangerous Warfarin-Fluconazole bleeding events.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>0.7ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/demo-climate.html" style="animation-delay: 0.55s">
+    <div class="demo-header">
+      <div class="demo-title">Climate & Energy</div>
+      <div class="demo-badge badge-science">Energy</div>
+    </div>
+    <div class="demo-scenario">Texas grid failure. 80% gas infrastructure, not wind. $300M fix prevents $200B loss. Causal attribution overturns political narrative.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card science fade-in" href="/demos/demo-education.html" style="animation-delay: 0.6s">
+    <div class="demo-header">
+      <div class="demo-title">Education</div>
+      <div class="demo-badge badge-science">Policy</div>
+    </div>
+    <div class="demo-scenario">Program evaluation. $800K breakfast program (8% budget) outperformed $4.2M software (42%). Causal isolation prevents $4.2M misallocation.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>0.9ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card forensic fade-in" href="/demos/demo-investigations.html" style="animation-delay: 0.65s">
+    <div class="demo-header">
+      <div class="demo-title">Investigations</div>
+      <div class="demo-badge badge-forensic">Forensic</div>
+    </div>
+    <div class="demo-scenario">Follow-the-money corruption analysis. $350K donations traced to $134M in government contracts. 383x corruption ROI exposed.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>2.1ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card industrial fade-in" href="/demos/demo-autonomous-vehicles.html" style="animation-delay: 0.7s">
+    <div class="demo-header">
+      <div class="demo-title">Autonomous Vehicles</div>
+      <div class="demo-badge badge-industrial">Automotive</div>
+    </div>
+    <div class="demo-scenario">Sensor fusion failure. Camera confidence 0.43 counted as vote instead of abstention. V2V intervention proves collision prevention.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Pipeline: <span>1.3ms</span></div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Consumer Recovery Portfolio -->
+<div class="section fade-in" style="animation-delay: 0.1s">
+  <div class="section-title">Consumer Recovery Portfolio</div>
+  <div class="section-desc">8 domains targeting $30B+ in unclaimed consumer money — security deposits, medical billing, flight compensation, chargebacks, packages</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card legal fade-in" href="/demos/consumer-recovery.html" style="animation-delay: 0.15s; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.04);">
+    <div class="demo-header">
+      <div class="demo-title">Consumer Recovery — Portfolio Overview</div>
+      <div class="demo-badge" style="background:rgba(249,115,22,0.12);color:#f97316">8 Domains</div>
+    </div>
+    <div class="demo-scenario">8 registered domains targeting $30B+ in unclaimed consumer money per year. 2 sites live (getmydeposit.app, medicalbillerror.com). Market projections, competition analysis, and build priority for packageclaim.us, chargebackwin.us, airlineclaims.uk, flight-payout.com, getdepositback.us, and recoveryourfunds.us.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">200M+ Americans affected / yr &middot; Zero B2C tools in most categories</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Roadmap -->
+<div class="section fade-in" style="animation-delay: 0.1s">
+  <div class="section-title">Roadmap &amp; Strategy</div>
+  <div class="section-desc">Every planned, in-progress, and shipped improvement — plus go-to-market strategy for consumer recovery</div>
+</div>
+<div class="demo-grid">
+  <a class="demo-card science fade-in" href="/demos/rungs-roadmap.html" style="animation-delay: 0.15s; border-color: rgba(108,99,255,0.3); background: rgba(108,99,255,0.04);">
+    <div class="demo-header">
+      <div class="demo-title">Rungs Roadmap — What We're Building</div>
+      <div class="demo-badge" style="background:rgba(108,99,255,0.12);color:#a78bfa">Living Doc</div>
+    </div>
+    <div class="demo-scenario">8 shipped · 5 in progress · 17 planned. Three tracks: Rungs engine improvements, consumer recovery sites (8 domains), and exam prep apps (WhyLSAT · WhyMCAT · WhyGMAT). Updated as work ships.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">Updated Mar 2026 &middot; 30 items across 3 tracks</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+  <a class="demo-card legal fade-in" href="/demos/consumer-gtm.html" style="animation-delay: 0.2s; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.04);">
+    <div class="demo-header">
+      <div class="demo-title">Consumer Recovery — Go-To-Market Strategy</div>
+      <div class="demo-badge" style="background:rgba(249,115,22,0.12);color:#f97316">Strategy</div>
+    </div>
+    <div class="demo-scenario">Who to partner with for each of the 8 recovery domains. Partner analysis by vertical (packages, chargebacks, medical, flight, deposits), deal structures, priority matrix, organic SEO play, and what to pitch Brian.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">5 priority partners &middot; 3 GTM levers &middot; 6-month sequencing</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+
+  <a class="demo-card science fade-in" href="/demos/dayflow-analysis.html" style="animation-delay: 0.25s; border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.04);">
+    <div class="demo-header">
+      <div class="demo-title">Dayflow — Product &amp; Market Analysis</div>
+      <div class="demo-badge" style="background:rgba(167,139,250,0.12);color:#a78bfa">New App</div>
+    </div>
+    <div class="demo-scenario">AI-powered day/week/month organizer built on Rungs' causal reasoning engine. Understands task dependencies, cascades schedule changes, anchors to goals. $58B market, 200M target users. Thorough analysis: product vision, competitive landscape, revenue model, GTM strategy, market projections.</div>
+    <div class="demo-footer">
+      <div class="demo-metric">$58B TAM &middot; $72M ARR path &middot; UI: Stephen</div>
+      <div class="demo-arrow">&rarr;</div>
+    </div>
+  </a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div>Rungs Causal Intelligence Engine v3.2 &middot; Deterministic Causal Reasoning &middot; No LLM &middot; No GPU</div>
+  <div>42 benchmarks &middot; 41,373 test instances &middot; 99.5% aggregate accuracy</div>
+</div>
+
+<!-- Private trigger — invisible dot bottom-right -->
+<div id="pvtTrigger" onclick="togglePvt()" style="position:fixed;bottom:18px;right:18px;width:8px;height:8px;border-radius:50%;background:rgba(108,99,255,0.08);cursor:default;z-index:999;"></div>
+
+<div id="pvtPanel" style="display:none;position:fixed;bottom:34px;right:28px;background:#0f0f1a;border:1px solid #252538;border-radius:12px;padding:20px 24px;z-index:1000;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,0.6);">
+  <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8888aa;margin-bottom:14px;">Private</div>
+  <a href="/demos/ideas.html" style="display:block;color:#a78bfa;font-size:14px;font-weight:500;text-decoration:none;padding:6px 0;border-bottom:1px solid #252538;">Ideas Board</a>
+  <a href="/demos/rungs-expert-guide.html" style="display:block;color:#a78bfa;font-size:14px;font-weight:500;text-decoration:none;padding:6px 0;border-bottom:1px solid #252538;">Expert Guide</a>
+  <a href="/demos/rungs-roadmap.html" style="display:block;color:#a78bfa;font-size:14px;font-weight:500;text-decoration:none;padding:6px 0;">Roadmap</a>
+</div>
+
+<script>
+function togglePvt(){var p=document.getElementById('pvtPanel');p.style.display=p.style.display==='none'?'block':'none';}
+document.addEventListener('click',function(e){var p=document.getElementById('pvtPanel');var t=document.getElementById('pvtTrigger');if(p.style.display==='block'&&!p.contains(e.target)&&e.target!==t){p.style.display='none';}});
+</script>
+
+</body>
+</html>
